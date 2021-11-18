@@ -19,8 +19,8 @@
     <modules>
         <module>keqi-spring-boot-starter-parent</module>
         <module>keqi-spring-boot-starter-web</module>
-        <module>keqi-knife4j-spring-boot-starter</module>
-        <module>keqi-mybatis-plus-boot-starter</module>
+        <module>keqi-spring-boot-starter-knife4j</module>
+        <module>keqi-spring-boot-starter-mp</module>
         <module>keqi-spring-boot-starter-oss</module>
         <module>keqi-spring-boot-starter-email</module>
         <module>keqi-spring-boot-starter-system</module>
