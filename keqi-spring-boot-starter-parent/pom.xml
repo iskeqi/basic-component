@@ -17,10 +17,10 @@
     <packaging>pom</packaging>
 
     <dependencies>
-        <dependency>
-            <groupId>com.keqi</groupId>
-            <artifactId>keqi-spring-boot-starter-common</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.keqi</groupId>-->
+<!--            <artifactId>keqi-spring-boot-starter-common</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.keqi</groupId>
             <artifactId>keqi-spring-boot-starter-web</artifactId>
@@ -113,35 +113,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

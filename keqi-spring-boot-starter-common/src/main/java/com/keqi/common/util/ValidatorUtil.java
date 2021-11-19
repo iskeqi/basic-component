@@ -4,7 +4,6 @@ import com.keqi.common.exception.client.ParamIllegalException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
-import sun.security.validator.ValidatorException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -40,9 +39,9 @@ public class ValidatorUtil {
      * 校验指定对象（支持嵌套子对象的校验）
      *
      * @param object object
-     * @throws ValidatorException 如果不满足条件会抛出异常
+     * @throws ParamIllegalException 如果不满足条件会抛出异常
      */
-    public static void validate(Object object) throws ValidatorException {
+    public static void validate(Object object) throws ParamIllegalException {
         if (object == null) {
             throw new ParamIllegalException("param is null");
         }
