@@ -17,18 +17,10 @@
     <packaging>pom</packaging>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.keqi</groupId>-->
-<!--            <artifactId>keqi-spring-boot-starter-common</artifactId>-->
-<!--        </dependency>-->
-        <dependency>
-            <groupId>com.keqi</groupId>
-            <artifactId>keqi-spring-boot-starter-web</artifactId>
-        </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.7.6</version>
+            <version>5.7.16</version>
         </dependency>
         <dependency>
             <groupId>com.dtflys.forest</groupId>
@@ -56,6 +48,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 
@@ -114,4 +111,19 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
 </project>

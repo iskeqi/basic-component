@@ -10,11 +10,12 @@ public class ResultEntityBuilder {
     /**
      * 单个对象
      *
-     * @param body body
+     * @param data data
      * @return r 如果是一个空的List对象，那么 body 的值会是 []
      */
-    public static ResultEntity success(Object body) {
-        return new ResultEntity(ResultStatusEnum.SUCCESS.getCode(), ResultStatusEnum.SUCCESS.getCodeName(), body);
+    public static ResultEntity<?> success(Object data) {
+        return new ResultEntity<>(ResultStatusEnum.SUCCESS.getCode(),
+                ResultStatusEnum.SUCCESS.getCodeName(), data);
     }
 
     /**
@@ -22,47 +23,51 @@ public class ResultEntityBuilder {
      *
      * @return r
      */
-    public static ResultEntity success() {
-        return new ResultEntity(ResultStatusEnum.SUCCESS.getCode(), ResultStatusEnum.SUCCESS.getCodeName(), null);
-    }
-
-    /**
-     * 未登录
-     *
-     * @return r
-     */
-    public static ResultEntity noAuth(String message) {
-        return new ResultEntity(ResultStatusEnum.NO_AUTH.getCode(), message, null);
+    public static ResultEntity<?> success() {
+        return new ResultEntity<>(ResultStatusEnum.SUCCESS.getCode(),
+                ResultStatusEnum.SUCCESS.getCodeName(), null);
     }
 
     /**
      * 操作失败
      *
-     * @param msg msg
      * @return r
      */
-    public static ResultEntity failure(String msg) {
-        return new ResultEntity(ResultStatusEnum.SERVER_ERROR.getCode(), msg, null);
+    public static ResultEntity<?> failure() {
+        return new ResultEntity<>(ResultStatusEnum.SERVER_ERROR.getCode(),
+                ResultStatusEnum.SERVER_ERROR.getCodeName(), null);
     }
 
     /**
-     * 异常返回
+     * 操作失败
+     *
+     * @param message message
+     * @return r
+     */
+    public static ResultEntity<?> failure(String message) {
+        return new ResultEntity<>(ResultStatusEnum.SERVER_ERROR.getCode(), message, null);
+    }
+
+    /**
+     * 操作失败
      *
      * @param status  status
      * @param message message
      * @return r
      */
-    public static ResultEntity business(String status, String message) {
-        return new ResultEntity(status, message, null);
+    public static ResultEntity<?> failure(String status, String message) {
+        return new ResultEntity<>(status, message, null);
     }
 
     /**
-     * 参数错误
+     * 操作失败
      *
+     * @param status  status
      * @param message message
+     * @param data    data
      * @return r
      */
-    public static ResultEntity paramIllegal(String message) {
-        return new ResultEntity(ResultStatusEnum.PARAM_ILLEGAL.getCode(), message, null);
+    public static ResultEntity<?> failure(String status, String message, String data) {
+        return new ResultEntity<>(status, message, data);
     }
 }

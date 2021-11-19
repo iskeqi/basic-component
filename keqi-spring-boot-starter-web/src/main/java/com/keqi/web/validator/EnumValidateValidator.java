@@ -6,6 +6,11 @@ import com.keqi.web.validator.annotation.EnumValidate;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+/**
+ * EnumValidateValidator
+ *
+ * @author keqi
+ */
 public class EnumValidateValidator implements ConstraintValidator<EnumValidate, String> {
 
     private Class<?> clazz;

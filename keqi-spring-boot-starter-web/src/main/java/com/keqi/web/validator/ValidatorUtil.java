@@ -1,4 +1,4 @@
-package com.keqi.common.util;
+package com.keqi.web.validator;
 
 import com.keqi.common.exception.client.ParamIllegalException;
 import org.springframework.beans.factory.annotation.Autowired;

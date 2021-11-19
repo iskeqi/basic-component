@@ -6,9 +6,12 @@ import com.keqi.web.validator.annotation.DictValidate;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+/**
+ * DictValidateValidator
+ *
+ * @author keqi
+ */
 public class DictValidateValidator implements ConstraintValidator<DictValidate, String> {
-
-    private static final String BEAN_NAME = "dictItemService";
 
     private String typeCode;
     private BaseDictValidate validate;
@@ -17,9 +20,9 @@ public class DictValidateValidator implements ConstraintValidator<DictValidate, 
     public void initialize(DictValidate constraintAnnotation) {
         typeCode = constraintAnnotation.value();
 
-        validate = SpringUtil.getBean(BEAN_NAME);
+        validate = SpringUtil.getBean(BaseDictValidate.class);
         if (validate == null) {
-            throw new RuntimeException("名称为 " + BEAN_NAME + " 的 Bean 不存在");
+            throw new RuntimeException("未找到 BaseDictValidate 的实现类");
         }
     }
 
