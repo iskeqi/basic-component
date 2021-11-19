@@ -19,6 +19,7 @@
         <module>keqi-spring-boot-starter-system</module>
         <module>keqi-spring-boot-starter-websocket</module>
         <module>keqi-spring-boot-starter-sms</module>
+        <module>keqi-spring-boot-starter-common</module>
     </modules>
 
 </project>

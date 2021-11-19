@@ -1,0 +1,27 @@
+package com.keqi.common.exception.client;
+
+import com.keqi.common.exception.KeqiException;
+import com.keqi.common.response.ResultStatusEnum;
+
+/**
+ * 客户端错误时，抛出此异常
+ *
+ * @author keqi
+ */
+public class ClientErrorException extends KeqiException {
+
+    private static final long serialVersionUID = -7776560122489518092L;
+
+    /**
+     * 无更细致错误码时使用
+     *
+     * @param message message
+     */
+    public ClientErrorException(String message) {
+        super(ResultStatusEnum.CLINET_ERROR.getCode(), message);
+    }
+
+    public ClientErrorException(String status, String message) {
+        super(status, message);
+    }
+}
