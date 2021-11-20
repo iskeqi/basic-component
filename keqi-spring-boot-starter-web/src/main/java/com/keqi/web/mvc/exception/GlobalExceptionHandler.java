@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
      * @return r
      */
     @ExceptionHandler(value = KeqiException.class)
-    public ResultEntity<?> businessException(KeqiException e) {
+    public ResultEntity businessException(KeqiException e) {
         return ResultEntityBuilder.failure(e.getStatus(), e.getMessage());
     }
 
@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
      * @return r
      */
     @ExceptionHandler(Throwable.class)
-    public ResultEntity<?> throwable(Throwable e) {
+    public ResultEntity throwable(Throwable e) {
         for (ExceptionHandlerAdapter handlerAdapter : exceptionHandlerAdapterList) {
             if (handlerAdapter.supports(e)) {
                 return handlerAdapter.handle(e);
