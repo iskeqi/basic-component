@@ -67,7 +67,8 @@ public class DateUtil {
 	 * @param <T>      泛型对象
 	 * @return 补全后的对象列表
 	 */
-	public static <T> List<T> rangeDayFill(LocalDate begin, LocalDate end, Map<LocalDate, List<T>> dateMap, Function<LocalDate, T> function) {
+	public static <T> List<T> rangeDayFill(LocalDate begin, LocalDate end, Map<LocalDate, List<T>> dateMap,
+										   Function<LocalDate, T> function) {
 		long until = begin.until(end, ChronoUnit.DAYS) + 1;
 		List<T> r = new ArrayList<>((int) until);
 		for (int i = 1; i <= until; i++) {

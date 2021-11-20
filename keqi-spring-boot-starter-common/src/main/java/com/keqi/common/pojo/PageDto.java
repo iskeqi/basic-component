@@ -8,13 +8,13 @@ import java.util.List;
  *
  * @author keqi
  */
-public class PageVO<T> {
+public class PageDto<T> {
 
 	private long total;
 
 	private List<T> records = Collections.emptyList();
 
-	public PageVO(long total, List<T> list) {
+	public PageDto(long total, List<T> list) {
 		this.total = total;
 		if (list != null && list.size() > 0) {
 			this.records = list;

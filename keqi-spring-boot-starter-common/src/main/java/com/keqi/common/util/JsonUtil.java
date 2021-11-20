@@ -1,11 +1,10 @@
 package com.keqi.common.util;
 
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.StringUtils;
 
 /**
  * JSON 工具类，使用 jackson-bind 封装
@@ -14,7 +13,6 @@ import org.springframework.util.StringUtils;
  *
  * @author keqi
  */
-@Slf4j
 public class JsonUtil {
 
     private static final ObjectMapper objectMapper;
@@ -52,7 +50,7 @@ public class JsonUtil {
      */
     public static <T> T readValue(String content, Class<T> valueType) {
         T t = null;
-        if (StringUtils.hasText(content)) {
+        if (StrUtil.isNotBlank(content)) {
             try {
                 t = objectMapper.readValue(content, valueType);
             } catch (JsonProcessingException e) {
@@ -72,7 +70,7 @@ public class JsonUtil {
      */
     public static <T> T readValue(String content, TypeReference<T> valueTypeRef) {
         T t = null;
-        if (StringUtils.hasText(content)) {
+        if (StrUtil.isNotBlank(content)) {
             try {
                 t = objectMapper.readValue(content, valueTypeRef);
             } catch (JsonProcessingException e) {
