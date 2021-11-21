@@ -7,11 +7,15 @@ import com.keqi.common.exception.client.ParamIllegalException;
 import com.keqi.common.pojo.PageDto;
 import com.keqi.system.domain.db.ConfigDO;
 import com.keqi.system.mapper.ConfigMapper;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
 @Service
+@CacheConfig(cacheNames = "config")
 public class ConfigService {
 
     @Resource
@@ -26,10 +30,12 @@ public class ConfigService {
         configMapper.insert(param);
     }
 
+    @CacheEvict(key = "configKey")
     public void deleteByConfigKey(String configKey) {
         configMapper.delete(Wrappers.query(new ConfigDO().setConfigKey(configKey)));
     }
 
+    @CacheEvict(key = "param.configKey")
     public void updateByConfigKey(ConfigDO param) {
         ConfigDO t1 = this.getByConfigKey(param.getConfigKey());
         if (t1 == null) {
@@ -42,6 +48,7 @@ public class ConfigService {
         configMapper.update(t2, Wrappers.query(new ConfigDO().setConfigKey(param.getConfigKey())));
     }
 
+    @Cacheable(key = "#configKey")
     public ConfigDO getByConfigKey(String configKey) {
         return configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(configKey)));
     }

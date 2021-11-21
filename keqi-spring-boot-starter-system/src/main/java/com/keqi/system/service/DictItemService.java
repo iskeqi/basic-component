@@ -5,15 +5,24 @@ import com.keqi.system.domain.db.DictItemDO;
 import com.keqi.system.mapper.DictItemMapper;
 import com.keqi.web.validator.BaseDictValidate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.metadata.ItemMetadata;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.yaml.snakeyaml.events.Event;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
+@CacheConfig(cacheNames = "dictItem")
 public class DictItemService implements BaseDictValidate {
 
     @Autowired
     private DictItemMapper dictItemMapper;
+    @Autowired
+    private DictItemService dictItemService;
 
     public DictItemDO insert(DictItemDO dictItemDO) {
         dictItemMapper.insert(dictItemDO);
@@ -26,15 +35,10 @@ public class DictItemService implements BaseDictValidate {
 
     @Override
     public boolean existItemCode(String typeCode, String itemCode) {
-        DictItemDO param = new DictItemDO();
-        param.setTypeCode(typeCode);
-        param.setItemCode(itemCode);
-
-        DictItemDO t = dictItemMapper.selectOne(Wrappers.lambdaQuery(param));
-
-        return t != null;
+        return !Objects.isNull(dictItemService.getByTypeCodeAndItemCode(typeCode, itemCode));
     }
 
+    @CacheEvict(key = "#typeCode+'-'+#itemCode")
     public void delete(String typeCode, String itemCode) {
         DictItemDO t = new DictItemDO().setTypeCode(typeCode);
         if (itemCode != null) {
@@ -42,5 +46,14 @@ public class DictItemService implements BaseDictValidate {
         }
 
         dictItemMapper.delete(Wrappers.query(t));
+    }
+
+    @Cacheable(key = "#typeCode+'-'+#itemCode")
+    public DictItemDO getByTypeCodeAndItemCode(String typeCode, String itemCode) {
+        DictItemDO param = new DictItemDO();
+        param.setTypeCode(typeCode);
+        param.setItemCode(itemCode);
+
+        return dictItemMapper.selectOne(Wrappers.lambdaQuery(param));
     }
 }
