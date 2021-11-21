@@ -10,10 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * web mvc 配置类
  * <p>
- * (
- * 如果希望对此类进行扩展，但是又无法直接更改此类时，可以创建一个配置类继承 WebMvcConfig 重写本类中已经重写
- * 的方法，还可以实现 WebMvcConfigurer 接口中在本类没有实现的方法
- * )
+ * 如果希望对此类进行扩展，直接继续实现 WebMvcConfigurer 即可
+ * Spring 是支持同时存在多个实现类的，实现同一个方法的最终效果是叠加，并不会互相影响
  *
  * @author keqi
  */
