@@ -7,22 +7,23 @@ import com.keqi.common.exception.client.ParamIllegalException;
 import com.keqi.common.pojo.PageDto;
 import com.keqi.system.domain.db.ConfigDO;
 import com.keqi.system.mapper.ConfigMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-
 @Service
 @CacheConfig(cacheNames = "config")
 public class ConfigService {
 
-    @Resource
+    @Autowired
     private ConfigMapper configMapper;
+    @Autowired
+    private ConfigService configService;
 
     public void insert(ConfigDO param) {
-        ConfigDO t = this.getByConfigKey(param.getConfigKey());
+        ConfigDO t = configService.getByConfigKey(param.getConfigKey());
         if (t != null) {
             throw new ParamIllegalException("configKey：" + param.getConfigKey() + " 已经存在");
         }
