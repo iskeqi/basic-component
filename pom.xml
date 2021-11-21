@@ -16,23 +16,44 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>keqi-spring-boot-starter-common</module>
         <module>keqi-spring-boot-starter-web</module>
-        <module>keqi-spring-boot-starter-knife4j</module>
+        <module>keqi-spring-boot-starter-system</module>
+        <module>keqi-spring-boot-starter-rbac</module>
+        <module>keqi-spring-boot-starter-satoken</module>
+        <module>keqi-spring-boot-starter-security</module>
         <module>keqi-spring-boot-starter-mp</module>
+        <module>keqi-spring-boot-starter-knife4j</module>
         <module>keqi-spring-boot-starter-oss</module>
         <module>keqi-spring-boot-starter-mail</module>
-        <module>keqi-spring-boot-starter-system</module>
         <module>keqi-spring-boot-starter-websocket</module>
         <module>keqi-spring-boot-starter-sms</module>
-        <module>keqi-spring-boot-starter-common</module>
-        <module>keqi-spring-boot-starter-satoken</module>
-        <module>keqi-spring-boot-starter-rbac</module>
-        <module>keqi-spring-boot-starter-security</module>
         <module>keqi-spring-boot-starter-task</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.7.16</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dtflys.forest</groupId>
+                <artifactId>forest-spring-boot-starter</artifactId>
+                <version>1.5.13</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <version>1.28.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>2.0.8</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.keqi</groupId>
                 <artifactId>keqi-spring-boot-starter-web</artifactId>

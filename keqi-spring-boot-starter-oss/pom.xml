@@ -16,7 +16,6 @@
         <dependency>
             <groupId>com.keqi</groupId>
             <artifactId>keqi-spring-boot-starter-web</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>
