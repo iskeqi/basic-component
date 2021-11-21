@@ -18,5 +18,17 @@
             <artifactId>keqi-spring-boot-starter-web</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.keqi</groupId>
+            <artifactId>keqi-spring-boot-starter-mp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.keqi</groupId>
+            <artifactId>keqi-spring-boot-starter-knife4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.keqi</groupId>
+            <artifactId>keqi-spring-boot-starter-satoken</artifactId>
+        </dependency>
     </dependencies>
 </project>

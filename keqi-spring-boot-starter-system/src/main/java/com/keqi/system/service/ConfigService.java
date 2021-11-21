@@ -1,0 +1,53 @@
+package com.keqi.system.service;
+
+import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.keqi.common.exception.client.ParamIllegalException;
+import com.keqi.common.pojo.PageDto;
+import com.keqi.system.domain.db.ConfigDO;
+import com.keqi.system.mapper.ConfigMapper;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+
+@Service
+public class ConfigService {
+
+    @Resource
+    private ConfigMapper configMapper;
+
+    public void insert(ConfigDO param) {
+        ConfigDO t = this.getByConfigKey(param.getConfigKey());
+        if (t != null) {
+            throw new ParamIllegalException("configKey：" + param.getConfigKey() + " 已经存在");
+        }
+
+        configMapper.insert(param);
+    }
+
+    public void deleteByConfigKey(String configKey) {
+        configMapper.delete(Wrappers.query(new ConfigDO().setConfigKey(configKey)));
+    }
+
+    public void updateByConfigKey(ConfigDO param) {
+        ConfigDO t1 = this.getByConfigKey(param.getConfigKey());
+        if (t1 == null) {
+            throw new ParamIllegalException("configKey：" + param.getConfigKey() + " 不存在");
+        }
+
+        ConfigDO t2 = BeanUtil.copyProperties(param, ConfigDO.class);
+        // configKey 是不能修改的
+        t2.setConfigKey(null);
+        configMapper.update(t2, Wrappers.query(new ConfigDO().setConfigKey(param.getConfigKey())));
+    }
+
+    public ConfigDO getByConfigKey(String configKey) {
+        return configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(configKey)));
+    }
+
+    public PageDto<ConfigDO> page(Page<ConfigDO> param) {
+        Page<ConfigDO> page = configMapper.selectPage(param, Wrappers.query());
+        return new PageDto<>(page.getTotal(), page.getRecords());
+    }
+}
