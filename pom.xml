@@ -125,6 +125,11 @@
                 <artifactId>keqi-spring-boot-starter-task</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.keqi</groupId>
+                <artifactId>keqi-spring-boot-starter-quartz</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

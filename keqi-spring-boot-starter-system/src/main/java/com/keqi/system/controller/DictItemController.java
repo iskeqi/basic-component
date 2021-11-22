@@ -1,5 +1,9 @@
 package com.keqi.system.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.keqi.common.pojo.PageDto;
+import com.keqi.system.domain.db.ConfigDO;
 import com.keqi.system.domain.db.DictItemDO;
 import com.keqi.system.service.DictItemService;
 import io.swagger.annotations.Api;
@@ -28,6 +32,22 @@ public class DictItemController {
     @DeleteMapping("/{typeCode}/{itemCode}")
     public void delete(@PathVariable String typeCode, @PathVariable(required = false) String itemCode) {
         dictItemService.delete(typeCode, itemCode);
+    }
+
+    @ApiOperation("修改字典")
+    @PutMapping
+    public void updateByConfigKey(@Validated @RequestBody ConfigDO param) {
+        dictItemService.updateByConfigKey(param);
+    }
+
+    @ApiOperation("分页查询配置列表")
+    @ApiOperationSupport(ignoreParameters = {
+            "records", "total", "orders", "optimizeCountSql", "isSearchCount", "hitCount",
+            "countId", "maxLimit", "searchCount", "searchName", "orderFiled", "orderType",
+            "searchValue", "beginDate", "endDate", "beginTime", "endTime"})
+    @GetMapping("/page")
+    public PageDto<ConfigDO> page(Page<ConfigDO> param) {
+        return configService.page(param);
     }
 
     @ApiOperation("查询指定typeCode对应的配置项")

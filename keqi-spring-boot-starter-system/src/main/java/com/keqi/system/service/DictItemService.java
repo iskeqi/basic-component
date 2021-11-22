@@ -1,16 +1,12 @@
 package com.keqi.system.service;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.keqi.common.exception.client.ParamIllegalException;
 import com.keqi.system.domain.db.DictItemDO;
 import com.keqi.system.mapper.DictItemMapper;
 import com.keqi.web.validator.BaseDictValidate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.metadata.ItemMetadata;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.events.Event;
 
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +20,11 @@ public class DictItemService implements BaseDictValidate {
     private DictItemService dictItemService;
 
     public DictItemDO insert(DictItemDO dictItemDO) {
+        DictItemDO t = dictItemService.getByTypeCodeAndItemCode(dictItemDO.getTypeCode(), dictItemDO.getItemCode());
+        if (t != null) {
+            throw new ParamIllegalException("configKey：" + param.getConfigKey() + " 已经存在");
+        }
+
         dictItemMapper.insert(dictItemDO);
         return dictItemDO;
     }

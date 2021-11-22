@@ -38,7 +38,7 @@ public class ConfigService {
 
     @CacheEvict(key = "param.configKey")
     public void updateByConfigKey(ConfigDO param) {
-        ConfigDO t1 = this.getByConfigKey(param.getConfigKey());
+        ConfigDO t1 = configService.getByConfigKey(param.getConfigKey());
         if (t1 == null) {
             throw new ParamIllegalException("configKey：" + param.getConfigKey() + " 不存在");
         }

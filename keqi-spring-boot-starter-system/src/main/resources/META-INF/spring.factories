@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.hccake.starter.sms.SmsAutoConfiguration
+  com.keqi.system.SystemAutoConfiguration
