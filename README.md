@@ -8,3 +8,4 @@ quickly develop basic components for monolithic applications
 - [ ] 新增 pay starter（包括微信、支付宝）
 - [ ] 新增 doc 目录，包含总的文档，以及分模块的文档
 - [ ] system starter 中将配置和字典管理改成 spring cache 实现
+- [ ] 新增 quartz starter

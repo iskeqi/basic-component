@@ -29,6 +29,7 @@
         <module>keqi-spring-boot-starter-websocket</module>
         <module>keqi-spring-boot-starter-sms</module>
         <module>keqi-spring-boot-starter-task</module>
+        <module>keqi-spring-boot-starter-quartz</module>
     </modules>
 
     <dependencyManagement>
