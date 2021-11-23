@@ -2,6 +2,7 @@ package com.keqi.system.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.keqi.common.pojo.PageDto;
 import com.keqi.system.domain.db.ConfigDO;
 import com.keqi.system.domain.db.DictItemDO;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Api(tags = "字典管理")
+@ApiSupport(order = 2, author = "keqi")
 @RestController
 @RequestMapping("/sys/dict")
 public class DictItemController {
@@ -36,8 +38,8 @@ public class DictItemController {
 
     @ApiOperation("修改字典")
     @PutMapping
-    public void updateByConfigKey(@Validated @RequestBody ConfigDO param) {
-        dictItemService.updateByConfigKey(param);
+    public void updateByTypeCodeAndItemCode(@Validated @RequestBody DictItemDO param) {
+        dictItemService.updateByTypeCodeAndItemCode(param);
     }
 
     @ApiOperation("分页查询配置列表")
@@ -47,7 +49,8 @@ public class DictItemController {
             "searchValue", "beginDate", "endDate", "beginTime", "endTime"})
     @GetMapping("/page")
     public PageDto<ConfigDO> page(Page<ConfigDO> param) {
-        return configService.page(param);
+        // return configService.page(param);
+        return null;
     }
 
     @ApiOperation("查询指定typeCode对应的配置项")

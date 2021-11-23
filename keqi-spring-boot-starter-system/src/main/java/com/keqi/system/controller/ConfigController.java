@@ -2,6 +2,7 @@ package com.keqi.system.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.keqi.common.pojo.PageDto;
 import com.keqi.system.domain.db.ConfigDO;
 import com.keqi.system.service.ConfigService;
@@ -12,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "配置管理")
+@ApiSupport(order = 1, author = "keqi")
 @RestController
 @RequestMapping("/sys/config")
 public class ConfigController {

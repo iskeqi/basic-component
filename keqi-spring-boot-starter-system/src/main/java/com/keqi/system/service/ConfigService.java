@@ -31,12 +31,12 @@ public class ConfigService {
         configMapper.insert(param);
     }
 
-    @CacheEvict(key = "configKey")
+    @CacheEvict(key = "#configKey")
     public void deleteByConfigKey(String configKey) {
         configMapper.delete(Wrappers.query(new ConfigDO().setConfigKey(configKey)));
     }
 
-    @CacheEvict(key = "param.configKey")
+    @CacheEvict(key = "#param.configKey")
     public void updateByConfigKey(ConfigDO param) {
         ConfigDO t1 = configService.getByConfigKey(param.getConfigKey());
         if (t1 == null) {

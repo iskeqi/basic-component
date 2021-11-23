@@ -1,5 +1,6 @@
 package com.keqi.system.domain.db;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -34,4 +35,8 @@ public class DictItemDO {
     @NotNull
     @ApiModelProperty("排序字段")
     private Integer orderNum;
+
+    @ApiModelProperty("是否禁用[0 未禁用，1 已禁用]")
+    @TableField(value = "is_disable")
+    private String disable;
 }
