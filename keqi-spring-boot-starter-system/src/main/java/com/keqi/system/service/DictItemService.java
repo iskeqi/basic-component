@@ -1,8 +1,12 @@
 package com.keqi.system.service;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.keqi.common.exception.client.ParamIllegalException;
+import com.keqi.common.pojo.PageDto;
+import com.keqi.common.pojo.enums.DisableEnum;
 import com.keqi.system.domain.db.DictItemDO;
 import com.keqi.system.mapper.DictItemMapper;
 import com.keqi.web.validator.BaseDictValidate;
@@ -25,10 +29,23 @@ public class DictItemService implements BaseDictValidate {
     private DictItemService dictItemService;
 
     public DictItemDO insert(DictItemDO dictItemDO) {
-        DictItemDO t = dictItemService.getByTypeCodeAndItemCode(dictItemDO.getTypeCode(), dictItemDO.getItemCode());
-        if (t != null) {
+        DictItemDO t1 = dictItemMapper.selectOne(Wrappers.query(new DictItemDO()
+                .setTypeCode(dictItemDO.getTypeCode())
+                .setItemCode(dictItemDO.getItemCode())));
+        if (t1 != null) {
             throw new ParamIllegalException("typeCode -> " + dictItemDO.getTypeCode()
                     + " itemCode -> " + dictItemDO.getItemCode() + " 已存在");
+        }
+
+        List<DictItemDO> list = dictItemMapper.selectList(Wrappers.query(new DictItemDO()
+                .setTypeCode(dictItemDO.getTypeCode())));
+        if (list.size() == 0) {
+            // 当前 typeCode 的第一次新增，必须填写 typeName
+            if (StrUtil.isBlank(dictItemDO.getTypeName())) {
+                throw new ParamIllegalException("typeName 未必填项");
+            }
+        } else {
+            dictItemDO.setTypeName(list.get(0).getTypeName());
         }
 
         dictItemMapper.insert(dictItemDO);
@@ -47,31 +64,51 @@ public class DictItemService implements BaseDictValidate {
 
     @CacheEvict(key = "#param.typeCode.concat(#param.itemCode)")
     public void updateByTypeCodeAndItemCode(DictItemDO param) {
-        DictItemDO t = BeanUtil.copyProperties(param, DictItemDO.class);
-        t.setTypeCode(null);
-        t.setItemCode(null);
-        dictItemMapper.update(t, Wrappers.query(new DictItemDO()
+        DictItemDO t1 = dictItemMapper.selectOne(Wrappers.query(new DictItemDO()
                 .setTypeCode(param.getTypeCode())
                 .setItemCode(param.getItemCode())));
+        if (t1 == null) {
+            throw new ParamIllegalException("不存在对应的字典项");
+        }
+
+        DictItemDO t2 = BeanUtil.copyProperties(param, DictItemDO.class);
+        // typeCode 和 itemCode 不能修改
+        t2.setTypeCode(null);
+        t2.setItemCode(null);
+        dictItemMapper.update(t2, Wrappers.query(new DictItemDO()
+                .setTypeCode(param.getTypeCode())
+                .setItemCode(param.getItemCode())));
+
+        if (StrUtil.isNotBlank(param.getTypeName())) {
+            dictItemMapper.update(new DictItemDO().setTypeName(param.getTypeName()),
+                    Wrappers.query(new DictItemDO().setTypeCode(param.getTypeCode())));
+        }
+    }
+
+    public PageDto<DictItemDO> page(Page<DictItemDO> param) {
+        Page<DictItemDO> page = dictItemMapper.selectPage(param, Wrappers.query());
+        return new PageDto<>(page.getTotal(), page.getRecords());
     }
 
     @Cacheable(key = "#typeCode.concat(#itemCode)")
     public DictItemDO getByTypeCodeAndItemCode(String typeCode, String itemCode) {
-        DictItemDO param = new DictItemDO();
-        param.setTypeCode(typeCode);
-        param.setItemCode(itemCode);
-
-        return dictItemMapper.selectOne(Wrappers.lambdaQuery(param));
+        // 只返回启用状态的字典项
+        return dictItemMapper.selectOne(Wrappers.query(new DictItemDO()
+                .setTypeCode(typeCode)
+                .setItemCode(itemCode)
+                .setDisable(DisableEnum.ENABLE.getCode())));
     }
 
     public List<DictItemDO> listByTypeCode(String typeCode) {
-        return dictItemMapper.listByTypeCode(typeCode);
+        // 只返回启用状态的字典项
+        return dictItemMapper.selectList(Wrappers.query(new DictItemDO()
+                .setTypeCode(typeCode)
+                .setDisable(DisableEnum.ENABLE.getCode())));
     }
 
     @Override
     public boolean existItemCode(String typeCode, String itemCode) {
         return !Objects.isNull(dictItemService.getByTypeCodeAndItemCode(typeCode, itemCode));
     }
-
 
 }

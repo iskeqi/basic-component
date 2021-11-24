@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.keqi.common.exception.client.ParamIllegalException;
 import com.keqi.common.pojo.PageDto;
+import com.keqi.common.pojo.enums.DisableEnum;
 import com.keqi.system.domain.db.ConfigDO;
 import com.keqi.system.mapper.ConfigMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,10 @@ public class ConfigService {
 
     @Autowired
     private ConfigMapper configMapper;
-    @Autowired
-    private ConfigService configService;
 
     public void insert(ConfigDO param) {
-        ConfigDO t = configService.getByConfigKey(param.getConfigKey());
+        ConfigDO t = configMapper.selectOne(Wrappers.query(new ConfigDO()
+                .setConfigKey(param.getConfigKey())));
         if (t != null) {
             throw new ParamIllegalException("configKey：" + param.getConfigKey() + " 已经存在");
         }
@@ -38,20 +38,17 @@ public class ConfigService {
 
     @CacheEvict(key = "#param.configKey")
     public void updateByConfigKey(ConfigDO param) {
-        ConfigDO t1 = configService.getByConfigKey(param.getConfigKey());
-        if (t1 == null) {
-            throw new ParamIllegalException("configKey：" + param.getConfigKey() + " 不存在");
-        }
-
-        ConfigDO t2 = BeanUtil.copyProperties(param, ConfigDO.class);
+        ConfigDO t1 = BeanUtil.copyProperties(param, ConfigDO.class);
         // configKey 是不能修改的
-        t2.setConfigKey(null);
-        configMapper.update(t2, Wrappers.query(new ConfigDO().setConfigKey(param.getConfigKey())));
+        t1.setConfigKey(null);
+        configMapper.update(t1, Wrappers.query(new ConfigDO().setConfigKey(param.getConfigKey())));
     }
 
     @Cacheable(key = "#configKey")
     public ConfigDO getByConfigKey(String configKey) {
-        return configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(configKey)));
+        // 只返回启用状态的配置，已经禁用的 configKey 是不会查询出来的
+        return configMapper.selectOne(Wrappers.query(new ConfigDO()
+                .setConfigKey(configKey).setDisable(DisableEnum.ENABLE.getCode())));
     }
 
     public PageDto<ConfigDO> page(Page<ConfigDO> param) {

@@ -24,7 +24,6 @@ public class DictItemDO {
     @ApiModelProperty("字典项编码")
     private String itemCode;
 
-    @NotNull
     @ApiModelProperty("字典类型名称")
     private String typeName;
 
@@ -36,7 +35,7 @@ public class DictItemDO {
     @ApiModelProperty("排序字段")
     private Integer orderNum;
 
-    @ApiModelProperty("是否禁用[0 未禁用，1 已禁用]")
+    @ApiModelProperty("是否禁用[0 启用，1 禁用]")
     @TableField(value = "is_disable")
-    private String disable;
+    private Integer disable;
 }

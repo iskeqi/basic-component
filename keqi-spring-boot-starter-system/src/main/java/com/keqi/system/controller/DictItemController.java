@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.keqi.common.pojo.PageDto;
-import com.keqi.system.domain.db.ConfigDO;
 import com.keqi.system.domain.db.DictItemDO;
 import com.keqi.system.service.DictItemService;
 import io.swagger.annotations.Api;
@@ -48,9 +47,8 @@ public class DictItemController {
             "countId", "maxLimit", "searchCount", "searchName", "orderFiled", "orderType",
             "searchValue", "beginDate", "endDate", "beginTime", "endTime"})
     @GetMapping("/page")
-    public PageDto<ConfigDO> page(Page<ConfigDO> param) {
-        // return configService.page(param);
-        return null;
+    public PageDto<DictItemDO> page(Page<DictItemDO> param) {
+        return dictItemService.page(param);
     }
 
     @ApiOperation("查询指定typeCode对应的配置项")
