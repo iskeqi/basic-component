@@ -109,7 +109,14 @@ public class DictItemService implements BaseDictValidate {
     }
 
     public void updateTypeNameByTypeCode(String typeCode, String typeName) {
-        dictItemMapper.update(new DictItemDO().setTypeName(typeName),
-                Wrappers.query(new DictItemDO().setTypeCode(typeCode)));
+        List<DictItemDO> dictItemDOList =
+                dictItemMapper.selectList(Wrappers.query(new DictItemDO().setTypeCode(typeCode)));
+        for (DictItemDO dictItemDO : dictItemDOList) {
+            DictItemDO t = new DictItemDO();
+            t.setTypeCode(dictItemDO.getTypeCode());
+            t.setItemCode(dictItemDO.getItemCode());
+            t.setTypeName(typeName);
+            dictItemService.updateByTypeCodeAndItemCode(t);
+        }
     }
 }

@@ -41,6 +41,12 @@ public class DictItemController {
         dictItemService.updateByTypeCodeAndItemCode(param);
     }
 
+    @ApiOperation("查询字典")
+    @GetMapping
+    public DictItemDO getByTypeCodeAndItemCode(String typeCode, String itemCode) {
+        return dictItemService.getByTypeCodeAndItemCode(typeCode, itemCode);
+    }
+
     @ApiOperation("分页查询配置列表")
     @ApiOperationSupport(ignoreParameters = {
             "records", "total", "orders", "optimizeCountSql", "isSearchCount", "hitCount",
