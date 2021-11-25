@@ -15,7 +15,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
-@CacheConfig(cacheNames = "config")
+@CacheConfig(cacheNames = "sys:config")
 public class ConfigService {
 
     @Autowired

@@ -3,6 +3,7 @@ package com.keqi.system.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.keqi.common.exception.client.ParamIllegalException;
 import com.keqi.common.pojo.PageDto;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@CacheConfig(cacheNames = "dictItem")
+@CacheConfig(cacheNames = "sys:dictItem")
 public class DictItemService implements BaseDictValidate {
 
     @Autowired
@@ -78,15 +79,11 @@ public class DictItemService implements BaseDictValidate {
         dictItemMapper.update(t2, Wrappers.query(new DictItemDO()
                 .setTypeCode(param.getTypeCode())
                 .setItemCode(param.getItemCode())));
-
-        if (StrUtil.isNotBlank(param.getTypeName())) {
-            dictItemMapper.update(new DictItemDO().setTypeName(param.getTypeName()),
-                    Wrappers.query(new DictItemDO().setTypeCode(param.getTypeCode())));
-        }
     }
 
     public PageDto<DictItemDO> page(Page<DictItemDO> param) {
-        Page<DictItemDO> page = dictItemMapper.selectPage(param, Wrappers.query());
+        Page<DictItemDO> page = dictItemMapper.selectPage(param, Wrappers.lambdaQuery(DictItemDO.class)
+                .orderByAsc((SFunction<DictItemDO, Integer>) DictItemDO::getOrderNum));
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 
@@ -101,9 +98,9 @@ public class DictItemService implements BaseDictValidate {
 
     public List<DictItemDO> listByTypeCode(String typeCode) {
         // 只返回启用状态的字典项
-        return dictItemMapper.selectList(Wrappers.query(new DictItemDO()
-                .setTypeCode(typeCode)
-                .setDisable(DisableEnum.ENABLE.getCode())));
+        return dictItemMapper.selectList(Wrappers.lambdaQuery(DictItemDO.class)
+                .setEntity(new DictItemDO().setTypeCode(typeCode).setDisable(DisableEnum.ENABLE.getCode()))
+                .orderByAsc((SFunction<DictItemDO, Integer>) DictItemDO::getOrderNum));
     }
 
     @Override
@@ -111,4 +108,8 @@ public class DictItemService implements BaseDictValidate {
         return !Objects.isNull(dictItemService.getByTypeCodeAndItemCode(typeCode, itemCode));
     }
 
+    public void updateTypeNameByTypeCode(String typeCode, String typeName) {
+        dictItemMapper.update(new DictItemDO().setTypeName(typeName),
+                Wrappers.query(new DictItemDO().setTypeCode(typeCode)));
+    }
 }

@@ -45,7 +45,7 @@ public class DictItemController {
     @ApiOperationSupport(ignoreParameters = {
             "records", "total", "orders", "optimizeCountSql", "isSearchCount", "hitCount",
             "countId", "maxLimit", "searchCount", "searchName", "orderFiled", "orderType",
-            "searchValue", "beginDate", "endDate", "beginTime", "endTime"})
+            "searchValue", "beginDate", "endDate", "beginTime", "endTime", "pages"})
     @GetMapping("/page")
     public PageDto<DictItemDO> page(Page<DictItemDO> param) {
         return dictItemService.page(param);
@@ -55,5 +55,11 @@ public class DictItemController {
     @GetMapping("/{typeCode}")
     public List<DictItemDO> listByTypeCode(@PathVariable String typeCode) {
         return dictItemService.listByTypeCode(typeCode);
+    }
+
+    @ApiOperation("修改指定typeCode对应的typeName")
+    @PutMapping("/{typeCode}/{typeName}")
+    public void updateTypeNameByTypeCode(@PathVariable String typeCode, @PathVariable String typeName) {
+        dictItemService.updateTypeNameByTypeCode(typeCode, typeName);
     }
 }
