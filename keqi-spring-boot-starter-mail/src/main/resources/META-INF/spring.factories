@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.keqi.sms.SmsAutoConfiguration
+  com.keqi.mail.EmailAutoConfiguration
