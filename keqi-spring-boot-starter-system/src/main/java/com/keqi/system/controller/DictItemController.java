@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Api(tags = "字典管理")
-@ApiSupport(order = 2, author = "keqi")
+@ApiSupport(order = 1, author = "keqi")
 @RestController
 @RequestMapping("/sys/dict")
 public class DictItemController {

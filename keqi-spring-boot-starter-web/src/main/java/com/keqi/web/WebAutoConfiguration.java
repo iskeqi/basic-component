@@ -36,7 +36,8 @@ public class WebAutoConfiguration {
      * @return r
      */
     @Bean
-    @ConditionalOnProperty(prefix = "keqi.web", name = "mappingJackson2HttpMessageConverter", havingValue = "true")
+    @ConditionalOnProperty(prefix = "keqi.web", name = "mappingJackson2HttpMessageConverter",
+            havingValue = "true", matchIfMissing = true)
     public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 
@@ -71,7 +72,8 @@ public class WebAutoConfiguration {
      * Spring 是支持同时存在多个实现类的，实现同一个方法的最终效果是叠加，并不会互相影响
      */
     @Bean
-    @ConditionalOnProperty(prefix = "keqi.web", name = "myStringToLocalDateConverter", havingValue = "true")
+    @ConditionalOnProperty(prefix = "keqi.web", name = "myStringToLocalDateConverter",
+            havingValue = "true", matchIfMissing = true)
     public WebMvcConfigurer myStringToLocalDateConverter() {
         return new WebMvcConfigurer() {
             @Override
@@ -88,7 +90,8 @@ public class WebAutoConfiguration {
      * Spring 是支持同时存在多个实现类的，实现同一个方法的最终效果是叠加，并不会互相影响
      */
     @Bean
-    @ConditionalOnProperty(prefix = "keqi.web", name = "myStringToLocalDateTimeConverter", havingValue = "true")
+    @ConditionalOnProperty(prefix = "keqi.web", name = "myStringToLocalDateTimeConverter",
+            havingValue = "true", matchIfMissing = true)
     public WebMvcConfigurer myStringToLocalDateTimeConverter() {
         return new WebMvcConfigurer() {
             @Override
@@ -105,7 +108,8 @@ public class WebAutoConfiguration {
      * Spring 是支持同时存在多个实现类的，实现同一个方法的最终效果是叠加，并不会互相影响
      */
     @Bean
-    @ConditionalOnProperty(prefix = "keqi.web", name = "myStringToNumberConverterFactory", havingValue = "true")
+    @ConditionalOnProperty(prefix = "keqi.web", name = "myStringToNumberConverterFactory",
+            havingValue = "true", matchIfMissing = true)
     public WebMvcConfigurer myStringToNumberConverterFactory() {
         return new WebMvcConfigurer() {
             @Override

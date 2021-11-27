@@ -13,7 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "配置管理")
-@ApiSupport(order = 1, author = "keqi")
+@ApiSupport(order = 2, author = "keqi")
 @RestController
 @RequestMapping("/sys/config")
 public class ConfigController {
