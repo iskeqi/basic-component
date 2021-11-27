@@ -1,6 +1,5 @@
 package com.keqi.web.mvc.result;
 
-import cn.hutool.core.util.StrUtil;
 import com.keqi.common.response.ResultEntity;
 import com.keqi.common.response.ResultEntityBuilder;
 import org.springframework.core.MethodParameter;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
 import java.util.Objects;
 
 /**

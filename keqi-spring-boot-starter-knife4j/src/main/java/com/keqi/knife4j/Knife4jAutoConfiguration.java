@@ -1,10 +1,13 @@
 package com.keqi.knife4j;
 
-import org.springframework.context.annotation.ComponentScan;
+import com.keqi.knife4j.config.Knife4jConfig;
+import org.springframework.context.annotation.Import;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 /**
  * @author keqi
  */
-@ComponentScan("com.keqi.knife4j")
+@Import(Knife4jConfig.class)
+@EnableSwagger2WebMvc
 public class Knife4jAutoConfiguration {
 }

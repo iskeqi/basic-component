@@ -9,9 +9,15 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+import com.keqi.web.mvc.converter.MyStringToLocalDateConverter;
+import com.keqi.web.mvc.converter.MyStringToLocalDateTimeConverter;
+import com.keqi.web.mvc.converter.MyStringToNumberConverterFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,6 +36,7 @@ public class WebAutoConfiguration {
      * @return r
      */
     @Bean
+    @ConditionalOnProperty(prefix = "keqi.web", name = "mappingJackson2HttpMessageConverter", havingValue = "true")
     public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 
@@ -55,5 +62,56 @@ public class WebAutoConfiguration {
 
         converter.setObjectMapper(objectMapper);
         return converter;
+    }
+
+    /**
+     * 配置 MyStringToLocalDateConverter 对象
+     * <p>
+     * 如果希望对 WebMvcConfigurer 进行扩展，直接继续实现 WebMvcConfigurer 即可
+     * Spring 是支持同时存在多个实现类的，实现同一个方法的最终效果是叠加，并不会互相影响
+     */
+    @Bean
+    @ConditionalOnProperty(prefix = "keqi.web", name = "myStringToLocalDateConverter", havingValue = "true")
+    public WebMvcConfigurer myStringToLocalDateConverter() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addFormatters(FormatterRegistry registry) {
+                registry.addConverter(new MyStringToLocalDateConverter());
+            }
+        };
+    }
+
+    /**
+     * 配置 MyStringToLocalDateTimeConverter 对象
+     * <p>
+     * 如果希望对 WebMvcConfigurer 进行扩展，直接继续实现 WebMvcConfigurer 即可
+     * Spring 是支持同时存在多个实现类的，实现同一个方法的最终效果是叠加，并不会互相影响
+     */
+    @Bean
+    @ConditionalOnProperty(prefix = "keqi.web", name = "myStringToLocalDateTimeConverter", havingValue = "true")
+    public WebMvcConfigurer myStringToLocalDateTimeConverter() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addFormatters(FormatterRegistry registry) {
+                registry.addConverter(new MyStringToLocalDateTimeConverter());
+            }
+        };
+    }
+
+    /**
+     * 配置 MyStringToNumberConverterFactory 对象
+     * <p>
+     * 如果希望对 WebMvcConfigurer 进行扩展，直接继续实现 WebMvcConfigurer 即可
+     * Spring 是支持同时存在多个实现类的，实现同一个方法的最终效果是叠加，并不会互相影响
+     */
+    @Bean
+    @ConditionalOnProperty(prefix = "keqi.web", name = "myStringToNumberConverterFactory", havingValue = "true")
+    public WebMvcConfigurer myStringToNumberConverterFactory() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addFormatters(FormatterRegistry registry) {
+                registry.addConverterFactory(new MyStringToNumberConverterFactory());
+            }
+        };
     }
 }
