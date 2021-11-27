@@ -4,9 +4,7 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.apache.ibatis.reflection.MetaObject;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDateTime;
 
@@ -15,8 +13,6 @@ import java.time.LocalDateTime;
  *
  * @author keqi
  */
-@MapperScan("com.keqi")
-@Configuration
 public class MyBatisPlusConfig implements MetaObjectHandler {
 
 	/**

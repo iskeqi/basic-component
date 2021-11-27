@@ -1,10 +1,13 @@
 package com.keqi.mp;
 
-import org.springframework.context.annotation.ComponentScan;
+import com.keqi.mp.config.MyBatisPlusConfig;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author keqi
  */
-@ComponentScan("com.keqi.mp")
+@MapperScan("com.keqi")
+@Import(MyBatisPlusConfig.class)
 public class MpAutoConfiguration {
 }
