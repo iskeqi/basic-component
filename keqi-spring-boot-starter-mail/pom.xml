@@ -17,6 +17,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.keqi</groupId>
+            <artifactId>keqi-spring-boot-starter-mp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.keqi</groupId>
+            <artifactId>keqi-spring-boot-starter-web</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
