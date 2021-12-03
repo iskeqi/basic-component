@@ -1,12 +1,14 @@
 package com.keqi.mail.service;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.keqi.common.exception.client.ParamIllegalException;
 import com.keqi.common.pojo.PageDto;
 import com.keqi.common.pojo.enums.DisableEnum;
 import com.keqi.common.util.JsonUtil;
 import com.keqi.mail.domain.db.MailDO;
+import com.keqi.mail.domain.enums.ConnectEnum;
 import com.keqi.mail.mapper.MailMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +16,13 @@ import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.mail.MessagingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
@@ -40,7 +42,7 @@ public class MailService {
     @Autowired
     private MailService mailService;
 
-    private static final Map<String, JavaMailSender> JAVA_MAIL_SENDERS = new ConcurrentHashMap<>();
+    public static final Map<String, JavaMailSenderImpl> JAVA_MAIL_SENDERS = new ConcurrentHashMap<>();
 
     public MailDO insert(MailDO param) {
         MailDO t = mailMapper.selectOne(Wrappers.query(new MailDO().setIdentifier(param.getIdentifier())));
@@ -55,6 +57,8 @@ public class MailService {
     @CacheEvict(key = "#identifier")
     public void deleteByIdentifier(String identifier) {
         mailMapper.delete(Wrappers.query(new MailDO().setIdentifier(identifier)));
+
+        JAVA_MAIL_SENDERS.remove(identifier);
     }
 
     @CacheEvict(key = "#param.identifier")
@@ -64,6 +68,8 @@ public class MailService {
         param.setId(null);
         param.setIdentifier(null);
         mailMapper.update(param, Wrappers.query(t));
+
+        JAVA_MAIL_SENDERS.remove(param.getIdentifier());
     }
 
     @Cacheable(key = "#identifier")
@@ -74,12 +80,13 @@ public class MailService {
     }
 
     public PageDto<MailDO> page(Page<MailDO> param) {
-        Page<MailDO> page = mailMapper.selectPage(param, Wrappers.query());
+        Page<MailDO> page = mailMapper.selectPage(param, Wrappers.lambdaQuery(MailDO.class)
+                .orderByDesc((SFunction<MailDO, Object>) MailDO::getPriority));
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 
     public MailDO isConnect(String identifier) {
-        JavaMailSenderImpl javaMailSender = this.initJavaMailSender(identifier);
+        JavaMailSenderImpl javaMailSender = this.getOneByIdentifier(identifier);
 
         boolean isConnect = true;
         try {
@@ -89,14 +96,14 @@ public class MailService {
             log.error("Mail server is not available " + e.getMessage(), e);
         }
 
-//        mailService.updateByIdentifier(new MailDO()
-//                .setConnect(isConnect ? ConnectEnum.CONNECT.getCode() : ConnectEnum.NOT_CONNECT.getCode())
-//                .setIdentifier(identifier));
+        mailService.updateByIdentifier(new MailDO()
+                .setConnect(isConnect ? ConnectEnum.CONNECT.getCode() : ConnectEnum.NOT_CONNECT.getCode())
+                .setIdentifier(identifier));
 
         return mailService.getByIdentifier(identifier);
     }
 
-    public JavaMailSenderImpl initJavaMailSender(String identifier) {
+    public JavaMailSenderImpl createJavaMailSender(String identifier) {
         MailDO mailDO = mailMapper.selectOne(Wrappers.query(new MailDO().setIdentifier(identifier)));
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
@@ -123,7 +130,25 @@ public class MailService {
         return javaMailSender;
     }
 
-    public JavaMailSenderImpl getOneByIdentifiers(String... identifiers) {
+    public JavaMailSenderImpl getOneByIdentifier(String identifier) {
+        JavaMailSenderImpl javaMailSender = JAVA_MAIL_SENDERS.get(identifier);
+        if (javaMailSender == null) {
+            javaMailSender = this.createJavaMailSender(identifier);
+            JAVA_MAIL_SENDERS.put(identifier, javaMailSender);
+        }
+
+        return javaMailSender;
+    }
+
+    public String getOneByPriority() {
+        List<MailDO> mailDOList = mailMapper.selectList(Wrappers.lambdaQuery(MailDO.class)
+                .orderByDesc((SFunction<MailDO, Integer>) MailDO::getPriority));
+        for (MailDO mailDO : mailDOList) {
+            MailDO connect = isConnect(mailDO.getIdentifier());
+            if (ConnectEnum.CONNECT.getCode().equals(connect.getConnect())) {
+                return mailDO.getIdentifier();
+            }
+        }
         return null;
     }
 }

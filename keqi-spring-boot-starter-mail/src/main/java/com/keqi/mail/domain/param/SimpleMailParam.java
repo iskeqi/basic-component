@@ -6,6 +6,8 @@ import lombok.experimental.Accessors;
 import java.util.Date;
 
 /**
+ * SimpleMailParam
+ *
  * @author keqi
  */
 @Data
@@ -23,7 +25,7 @@ public class SimpleMailParam {
     private String subject;
 
     /**
-     * 邮件正文（只支持文本）
+     * 邮件正文（只支持文本，HTML 也是文本）
      */
     private String text;
 

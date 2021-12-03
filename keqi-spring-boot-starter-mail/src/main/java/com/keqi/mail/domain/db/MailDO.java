@@ -10,6 +10,8 @@ import lombok.experimental.Accessors;
 
 
 /**
+ * MailDO
+ *
  * @author keqi
  */
 @EqualsAndHashCode(callSuper = true)
@@ -35,6 +37,9 @@ public class MailDO extends BaseDO {
 
     @ApiModelProperty("额外属性(以JSON字符串方式填写)")
     private String properties;
+
+    @ApiModelProperty("优先级(数组越大，优先级越高)")
+    private Integer priority;
 
     @ApiModelProperty("是否可连接[0 不可连接，1 连接]")
     @TableField(value = "is_connect")
