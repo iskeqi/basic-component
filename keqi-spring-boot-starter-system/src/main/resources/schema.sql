@@ -1,8 +1,7 @@
 -- ----------------------------
 -- Table structure for sys_config
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_config`;
-CREATE TABLE `sys_config`
+CREATE TABLE IF NOT EXISTS `sys_config`
 (
     `config_key`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '配置项key',
     `config_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '配置项value',
@@ -18,8 +17,7 @@ CREATE TABLE `sys_config`
 -- ----------------------------
 -- Table structure for sys_dict_item
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_dict_item`;
-CREATE TABLE `sys_dict_item`
+CREATE TABLE IF NOT EXISTS `sys_dict_item`
 (
     `type_code`  varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '字典类型编码',
     `type_name`  varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典类型名称',
