@@ -1,5 +1,7 @@
-package com.keqi.websocket;
+package com.keqi.websocket.config;
 
+import com.keqi.websocket.auth.WebSocketInterceptor;
+import com.keqi.websocket.handle.WebSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;

@@ -1,4 +1,4 @@
-package com.keqi.websocket;
+package com.keqi.websocket.auth;
 
 import com.keqi.common.util.JsonUtil;
 import org.slf4j.Logger;
@@ -33,13 +33,13 @@ public class WebSocketInterceptor extends HttpSessionHandshakeInterceptor {
         HttpServletRequest httpServletRequest = ((ServletServerHttpRequest) request).getServletRequest();
 
         // authentication
-        String userIdentifier = webSocketAuth.auth(httpServletRequest);
-        if (userIdentifier == null) {
+        WebSocketAuthDto webSocketAuthDto = webSocketAuth.auth(httpServletRequest);
+        if (webSocketAuthDto.getUserIdentifier() == null) {
             log.info("websocket authentication failed，request params : {}", JsonUtil.writeValueAsString(httpServletRequest));
             return false;
         }
 
-        attributes.put("userIdentifier", userIdentifier);
+        attributes.put("userIdentifier", webSocketAuthDto.getUserIdentifier());
         return super.beforeHandshake(request, response, wsHandler, attributes);
     }
 
