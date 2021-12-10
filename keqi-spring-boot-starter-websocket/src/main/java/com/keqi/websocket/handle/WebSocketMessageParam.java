@@ -15,22 +15,22 @@ public class WebSocketMessageParam {
     /**
      * which page is the current websocket connection
      */
-    private String page;
+    protected String page;
 
     /**
      * The type of push message in the specified page in the current WebSocket connection
      */
-    private String type;
+    protected String type;
 
     /**
      * request unique id
      */
-    private String requestId;
+    protected String requestId;
 
     /**
      * request params
      */
-    private Map<String, Object> params;
+    protected Map<String, Object> params;
 
     public String getPage() {
         return page;
