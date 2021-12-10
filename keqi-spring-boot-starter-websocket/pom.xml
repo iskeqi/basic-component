@@ -17,6 +17,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.keqi</groupId>
+            <artifactId>keqi-spring-boot-starter-common</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
