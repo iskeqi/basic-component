@@ -1,7 +1,5 @@
 package com.keqi.websocket.handle;
 
-import lombok.Data;
-
 import java.util.Map;
 
 /**
@@ -9,7 +7,6 @@ import java.util.Map;
  *
  * @author keqi
  */
-@Data
 public class WebSocketMessageParam {
 
     /**
@@ -31,6 +28,16 @@ public class WebSocketMessageParam {
      * request params
      */
     protected Map<String, Object> params;
+
+    public WebSocketMessageDto transfer(Map<String, Object> data) {
+        WebSocketMessageDto r = new WebSocketMessageDto();
+        r.setPage(this.getPage());
+        r.setType(this.getType());
+        r.setRequestId(this.getRequestId());
+        r.setParams(this.getParams());
+        r.setData(data);
+        return r;
+    }
 
     public String getPage() {
         return page;

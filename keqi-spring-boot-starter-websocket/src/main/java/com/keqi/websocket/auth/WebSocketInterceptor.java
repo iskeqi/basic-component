@@ -27,6 +27,8 @@ public class WebSocketInterceptor extends HttpSessionHandshakeInterceptor {
     @Autowired
     private WebSocketAuth webSocketAuth;
 
+    public static final String USER_IDENTIFIER = "userIdentifier";
+
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response,
                                    WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
@@ -34,12 +36,12 @@ public class WebSocketInterceptor extends HttpSessionHandshakeInterceptor {
 
         // authentication
         WebSocketAuthDto webSocketAuthDto = webSocketAuth.auth(httpServletRequest);
-        if (webSocketAuthDto.getUserIdentifier() == null) {
+        if (webSocketAuthDto.getAuthenticate()) {
             log.info("websocket authentication failed，request params : {}", JsonUtil.writeValueAsString(httpServletRequest));
             return false;
         }
 
-        attributes.put("userIdentifier", webSocketAuthDto.getUserIdentifier());
+        attributes.put(USER_IDENTIFIER, webSocketAuthDto.getUserIdentifier());
         return super.beforeHandshake(request, response, wsHandler, attributes);
     }
 
