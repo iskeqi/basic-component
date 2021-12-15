@@ -1,9 +1,10 @@
 package com.keqi.websocket.handle;
 
 import com.keqi.common.util.JsonUtil;
-import com.keqi.websocket.WebSocketSessionWrapper;
-import com.keqi.websocket.WebSocketUtil;
 import com.keqi.websocket.auth.WebSocketInterceptor;
+import com.keqi.websocket.handle.adapter.HandleTextMessageAdapter;
+import com.keqi.websocket.handle.domain.WebSocketMessageDto;
+import com.keqi.websocket.handle.domain.WebSocketMessageParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,13 +52,14 @@ public class WebSocketHandler extends TextWebSocketHandler {
      */
     @Override
     public void handleTextMessage(WebSocketSession webSocketSession, TextMessage textMessage) {
+        WebSocketMessageParam param = null;
         try {
-            WebSocketMessageParam param = JsonUtil.readValue(textMessage.getPayload(), WebSocketMessageParam.class);
-            // todo update page
+            param = JsonUtil.readValue(textMessage.getPayload(), WebSocketMessageParam.class);
             boolean flag = true;
             for (HandleTextMessageAdapter messageAdapter : handleTextMessageAdapters) {
                 if (messageAdapter.supports(param.getPage(), param.getType())) {
                     flag = false;
+                    // todo update page
                     WebSocketMessageDto dto = messageAdapter.handle(param);
                     WebSocketUtil.sendByWebSocketSessionId(webSocketSession.getId(), dto);
                 }
@@ -67,7 +69,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
                 log.info("no match messageAdapter, page {}, type {} ", param.getPage(), param.getType());
             }
         } catch (Throwable e) {
-            log.error("an error occurred (message event), request params : {} ", "a", e);
+            log.error("an error occurred (message event), request params : {} ", JsonUtil.writeValueAsString(param));
+            log.error(e.getMessage(), e);
         }
     }
 

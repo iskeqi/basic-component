@@ -1,4 +1,4 @@
-package com.keqi.websocket.handle;
+package com.keqi.websocket.handle.domain;
 
 import java.util.Map;
 

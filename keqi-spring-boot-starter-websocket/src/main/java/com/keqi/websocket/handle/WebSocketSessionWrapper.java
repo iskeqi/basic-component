@@ -1,4 +1,4 @@
-package com.keqi.websocket;
+package com.keqi.websocket.handle;
 
 import org.springframework.web.socket.WebSocketSession;
 

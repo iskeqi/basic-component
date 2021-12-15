@@ -1,5 +1,7 @@
-package com.keqi.websocket.handle;
+package com.keqi.websocket.handle.adapter;
 
+import com.keqi.websocket.handle.domain.WebSocketMessageDto;
+import com.keqi.websocket.handle.domain.WebSocketMessageParam;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -12,12 +14,12 @@ import java.util.Collections;
 @Component
 public class HeartbeatMessageAdapter implements HandleTextMessageAdapter {
 
-    private static final String PAGE = "COMMON";
-    private static final String TYPE = "HEARTBEAT";
+    public static final String GLOBAL = "GLOBAL";
+    public static final String HEARTBEAT = "HEARTBEAT";
 
     @Override
     public String getPageType() {
-        return this.concatPageAndType(PAGE, TYPE);
+        return this.concatPageAndType(GLOBAL, HEARTBEAT);
     }
 
     @Override

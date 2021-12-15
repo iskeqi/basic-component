@@ -1,4 +1,7 @@
-package com.keqi.websocket.handle;
+package com.keqi.websocket.handle.adapter;
+
+import com.keqi.websocket.handle.domain.WebSocketMessageDto;
+import com.keqi.websocket.handle.domain.WebSocketMessageParam;
 
 /**
  * HandleTextMessageAdapter
