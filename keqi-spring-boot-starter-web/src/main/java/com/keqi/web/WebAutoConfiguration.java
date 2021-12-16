@@ -45,7 +45,7 @@ public class WebAutoConfiguration {
         FilterRegistrationBean<CorsFilter> filter = new FilterRegistrationBean<>();
         filter.setName("CorsFilter");
         filter.setFilter(new CorsFilter());
-        filter.setOrder(Integer.MIN_VALUE);
+        filter.setOrder(Integer.MAX_VALUE);
         return filter;
     }
 
