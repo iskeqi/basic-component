@@ -13,6 +13,8 @@ import com.keqi.web.mvc.converter.MyStringToLocalDateConverter;
 import com.keqi.web.mvc.converter.MyStringToLocalDateTimeConverter;
 import com.keqi.web.mvc.converter.MyStringToNumberConverterFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.format.FormatterRegistry;
@@ -27,8 +29,25 @@ import java.time.format.DateTimeFormatter;
 /**
  * @author keqi
  */
+@ServletComponentScan
 @ComponentScan("com.keqi.web")
 public class WebAutoConfiguration {
+
+    /**
+     * 配置允许跨域的过滤器
+     *
+     * @return r
+     */
+    @Bean
+    @ConditionalOnProperty(prefix = "keqi.web", name = "cors",
+            havingValue = "true", matchIfMissing = true)
+    public FilterRegistrationBean<CorsFilter> orderFilter() {
+        FilterRegistrationBean<CorsFilter> filter = new FilterRegistrationBean<>();
+        filter.setName("CorsFilter");
+        filter.setFilter(new CorsFilter());
+        filter.setOrder(Integer.MIN_VALUE);
+        return filter;
+    }
 
     /**
      * 替换掉 SpringBoot 默认配置的 MappingJackson2HttpMessageConverter 对象
