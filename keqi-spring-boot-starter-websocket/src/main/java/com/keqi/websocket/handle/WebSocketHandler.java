@@ -3,6 +3,7 @@ package com.keqi.websocket.handle;
 import com.keqi.common.util.JsonUtil;
 import com.keqi.websocket.auth.WebSocketInterceptor;
 import com.keqi.websocket.handle.adapter.HandleTextMessageAdapter;
+import com.keqi.websocket.handle.adapter.HeartbeatMessageAdapter;
 import com.keqi.websocket.handle.domain.WebSocketMessageDto;
 import com.keqi.websocket.handle.domain.WebSocketMessageParam;
 import org.slf4j.Logger;
@@ -55,18 +56,18 @@ public class WebSocketHandler extends TextWebSocketHandler {
         WebSocketMessageParam param = null;
         try {
             param = JsonUtil.readValue(textMessage.getPayload(), WebSocketMessageParam.class);
-            boolean flag = true;
+            log.info("receive message : {}", JsonUtil.writeValueAsString(param));
+
+            // update the page value where the current connection is located
+            if (!HeartbeatMessageAdapter.GLOBAL.equals(param.getPage())) {
+                WebSocketUtil.updatePageByWebSocketSessionId(webSocketSession.getId(), param.getPage());
+            }
+
             for (HandleTextMessageAdapter messageAdapter : handleTextMessageAdapters) {
                 if (messageAdapter.supports(param.getPage(), param.getType())) {
-                    flag = false;
-                    // todo update page
                     WebSocketMessageDto dto = messageAdapter.handle(param);
                     WebSocketUtil.sendByWebSocketSessionId(webSocketSession.getId(), dto);
                 }
-            }
-
-            if (flag) {
-                log.info("no match messageAdapter, page {}, type {} ", param.getPage(), param.getType());
             }
         } catch (Throwable e) {
             log.error("an error occurred (message event), request params : {} ", JsonUtil.writeValueAsString(param));

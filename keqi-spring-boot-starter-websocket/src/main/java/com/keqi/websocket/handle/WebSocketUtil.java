@@ -29,27 +29,17 @@ public class WebSocketUtil {
      *
      * @param dto dto
      */
-    public static void broadcast(WebSocketMessageDto dto) {
-        if (HeartbeatMessageAdapter.GLOBAL.equals(dto.getPage())) {
-            // global message, no matter which page the current connection is on, it will be sent
-            WRAPPER_SET.forEach(wrapper -> send(wrapper, dto));
-        } else {
-            // other messages will only be sent to the specified page
-            WRAPPER_SET.forEach(wrapper -> {
-                if (Objects.equals(wrapper.getPage(), dto.getPage())) {
-                    send(wrapper, dto);
-                }
-            });
-        }
+    public void broadcast(WebSocketMessageDto dto) {
+        WRAPPER_SET.forEach(wrapper -> send(wrapper, dto));
     }
 
     /**
      * send a message to the specified user
      *
      * @param userIdentifier userIdentifier
-     * @param dto dto
+     * @param dto            dto
      */
-    public static void sendByUserIdentifier(String userIdentifier, WebSocketMessageDto dto) {
+    public void sendByUserIdentifier(String userIdentifier, WebSocketMessageDto dto) {
         WRAPPER_SET.forEach(wrapper -> {
             if (Objects.equals(wrapper.getUserIdentifier(), userIdentifier)) {
                 send(wrapper, dto);
@@ -71,6 +61,8 @@ public class WebSocketUtil {
     }
 
     private synchronized static void send(WebSocketSessionWrapper wrapper, WebSocketMessageDto dto) {
+        // global message, no matter which page the current connection is on, it will be sent
+        // other messages will only be sent to the specified page
         if (Objects.equals(wrapper.getPage(), dto.getPage()) ||
                 HeartbeatMessageAdapter.GLOBAL.equals(dto.getPage())) {
             WebSocketSession webSocketSession = wrapper.getWebSocketSession();
@@ -112,5 +104,13 @@ public class WebSocketUtil {
             }
         });
         log.info("number of established websocket connections currently {} ", WRAPPER_SET.size());
+    }
+
+    public synchronized static void updatePageByWebSocketSessionId(String id, String page) {
+        WRAPPER_SET.forEach(webSocketSessionWrapper -> {
+            if (Objects.equals(id, webSocketSessionWrapper.getWebSocketSession().getId())) {
+                webSocketSessionWrapper.setPage(page);
+            }
+        });
     }
 }
