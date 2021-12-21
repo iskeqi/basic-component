@@ -2,6 +2,7 @@ package com.keqi.task;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
@@ -23,6 +24,7 @@ public class TaskAutoConfiguration {
      *
      * @return r
      */
+    @Bean
     public SchedulingConfigurer schedulingConfiguration() {
         return taskRegistrar -> {
             ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
