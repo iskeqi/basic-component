@@ -1,16 +1,10 @@
 package com.keqi.task;
 
-import org.graalvm.compiler.nodes.memory.ReadNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
-import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.config.CronTask;
-import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.swing.plaf.PanelUI;
-import java.time.Instant;
 import java.util.Date;
 import java.util.concurrent.ScheduledFuture;
 
@@ -25,19 +19,13 @@ import java.util.concurrent.ScheduledFuture;
 public class SpringTaskService {
 
     @Autowired
-    private ScheduledTaskRegistrar taskRegistrar;
     private TaskScheduler taskScheduler;
-
-    @PostConstruct
-    public void init() {
-        taskScheduler = taskRegistrar.getScheduler();
-    }
 
     public ScheduledFuture schedule(Runnable task, Date startTime) {
         return taskScheduler.schedule(task, startTime);
     }
 
-    public ScheduledFuture addFixedRateTask(Runnable task, long period) {
+    public ScheduledFuture scheduleAtFixedRate(Runnable task, long period) {
         return taskScheduler.scheduleAtFixedRate(task, period);
     }
 
