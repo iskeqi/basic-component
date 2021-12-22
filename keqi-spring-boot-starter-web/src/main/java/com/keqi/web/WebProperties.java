@@ -32,6 +32,11 @@ public class WebProperties {
      */
     private boolean myStringToNumberConverterFactory = true;
 
+    /**
+     * 是否使用内置的 CorsFilter 对象进行跨域配置
+     */
+    private boolean cors = true;
+
     public boolean isMappingJackson2HttpMessageConverter() {
         return mappingJackson2HttpMessageConverter;
     }
@@ -62,5 +67,13 @@ public class WebProperties {
 
     public void setMyStringToNumberConverterFactory(boolean myStringToNumberConverterFactory) {
         this.myStringToNumberConverterFactory = myStringToNumberConverterFactory;
+    }
+
+    public boolean isCors() {
+        return cors;
+    }
+
+    public void setCors(boolean cors) {
+        this.cors = cors;
     }
 }
