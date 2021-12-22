@@ -17,5 +17,9 @@
             <groupId>com.keqi</groupId>
             <artifactId>keqi-spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.keqi</groupId>
+            <artifactId>keqi-spring-boot-starter-mp</artifactId>
+        </dependency>
     </dependencies>
 </project>
