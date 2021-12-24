@@ -1,9 +1,10 @@
 package com.keqi.oss.controller;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.keqi.oss.domain.dto.DownloadInfoDto;
+import com.keqi.oss.domain.dto.UploadInfoDto;
+import com.keqi.oss.service.UploadFileService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * UploadFileController
@@ -14,13 +15,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/upload")
 public class UploadFileController {
 
-    // 文件上传
+    @Autowired
+    private UploadFileService uploadFileService;
 
-    // 文件下载
+    /**
+     * 获取文件上传信息
+     *
+     * @param fileName fileName
+     * @return r
+     */
+    @PostMapping("/{fileName}")
+    public UploadInfoDto uploadFile(@PathVariable String fileName) {
+        return uploadFileService.uploadFile(fileName);
+    }
 
-    // 文件删除
+    /**
+     * 获取文件下载链接
+     *
+     * @param fileName fileName
+     * @return r
+     */
+    @PostMapping("/info/{fileName}")
+    public DownloadInfoDto getDownloadInfo(@PathVariable String fileName) {
+        return uploadFileService.getDownloadInfo(fileName);
+    }
+
+    /**
+     * 删除文件
+     *
+     * @param fileName fileName
+     */
     @DeleteMapping("/{fileName}")
-    public void delete(@PathVariable String fileName) {
-
+    public void deleteFile(@PathVariable String fileName) {
+        uploadFileService.deleteFile(fileName);
     }
 }
