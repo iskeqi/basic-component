@@ -1,5 +1,6 @@
 package com.keqi.oss.controller;
 
+import com.keqi.oss.domain.db.UploadFileDO;
 import com.keqi.oss.domain.dto.DownloadInfoDto;
 import com.keqi.oss.domain.dto.UploadInfoDto;
 import com.keqi.oss.service.UploadFileService;
@@ -48,5 +49,15 @@ public class UploadFileController {
     @DeleteMapping("/{fileName}")
     public void deleteFile(@PathVariable String fileName) {
         uploadFileService.deleteFile(fileName);
+    }
+
+    /**
+     * 接收文件上传成功的通知
+     *
+     * @param param param
+     */
+    @PostMapping("/notification")
+    public void notification(@RequestBody UploadFileDO param) {
+        uploadFileService.notification(param);
     }
 }

@@ -12,7 +12,7 @@ public class UploadInfoDto {
     @ApiModelProperty("文件名称")
     private String fileName;
 
-    @ApiModelProperty("文件下载url")
+    @ApiModelProperty("文件上传url")
     private String uploadUrl;
 
     public String getFileName() {

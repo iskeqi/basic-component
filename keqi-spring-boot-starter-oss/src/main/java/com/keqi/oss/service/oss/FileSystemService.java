@@ -11,7 +11,7 @@ public class FileSystemService implements OssService {
 
     @Override
     public String fileStorageType() {
-        return FileStorageType.FILE_SYSTEM.getCode();
+        return FileStorageType.LOCAL_FILE_SYSTEM.getCode();
     }
 
     @Override
