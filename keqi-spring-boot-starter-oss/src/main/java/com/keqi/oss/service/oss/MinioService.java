@@ -1,6 +1,7 @@
 package com.keqi.oss.service.oss;
 
-import com.keqi.oss.domain.enums.FileStorageType;
+import com.keqi.oss.domain.dto.DownloadInfoDto;
+import com.keqi.oss.domain.dto.UploadInfoDto;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,12 +13,17 @@ import org.springframework.stereotype.Service;
 public class MinioService implements OssService {
 
     @Override
-    public String fileStorageType() {
-        return FileStorageType.MINIO.getCode();
+    public void deleteByName(String fileName) {
+
     }
 
     @Override
-    public void deleteByName(String name) {
+    public DownloadInfoDto getDownloadInfo(String fileName) {
+        return null;
+    }
 
+    @Override
+    public UploadInfoDto uploadFile(String fileName) {
+        return null;
     }
 }

@@ -7,8 +7,15 @@ package com.keqi.oss.domain.enums;
  */
 public enum FileStorageType {
 
-    LOCAL_FILE_SYSTEM("localFileSystem", "存储在应用程序所在的本地文件系统中"),
-    MINIO("minio", "存储在 MINIO 文件系统中");
+    /**
+     * 存储在应用程序所在的本地文件系统中
+     */
+    LOCAL_FILE_SYSTEM("localFileSystem", "1"),
+
+    /**
+     * 存储在 MINIO 文件系统中
+     */
+    MINIO("minio", "2");
 
     private final String code;
     private final String codeName;

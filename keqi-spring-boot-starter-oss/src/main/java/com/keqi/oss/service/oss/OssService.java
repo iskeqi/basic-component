@@ -1,5 +1,8 @@
 package com.keqi.oss.service.oss;
 
+import com.keqi.oss.domain.dto.DownloadInfoDto;
+import com.keqi.oss.domain.dto.UploadInfoDto;
+
 /**
  * OssService
  *
@@ -7,7 +10,9 @@ package com.keqi.oss.service.oss;
  */
 public interface OssService {
 
-    String fileStorageType();
+    void deleteByName(String fileName);
 
-    void deleteByName(String name);
+    DownloadInfoDto getDownloadInfo(String fileName);
+
+    UploadInfoDto uploadFile(String fileName);
 }

@@ -6,6 +6,7 @@ import com.keqi.oss.domain.db.UploadFileDO;
 import com.keqi.oss.domain.dto.DownloadInfoDto;
 import com.keqi.oss.domain.dto.UploadInfoDto;
 import com.keqi.oss.mapper.UploadFileMapper;
+import com.keqi.oss.service.oss.OssService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,24 +20,25 @@ public class UploadFileService {
 
     @Autowired
     private UploadFileMapper uploadFileMapper;
+    @Autowired
+    private OssService ossService;
+
+    public UploadInfoDto uploadFile(String fileName) {
+        return ossService.uploadFile(fileName);
+    }
+
+    public DownloadInfoDto getDownloadInfo(String fileName) {
+        return ossService.getDownloadInfo(fileName);
+    }
 
     public void deleteFile(String fileName) {
-        // 删除文件 todo
-
+        ossService.deleteByName(fileName);
 
         UploadFileDO entity = new UploadFileDO();
         entity.setDeleted(DeletedEnum.DISABLE.getCode());
         UploadFileDO updateWrapper = new UploadFileDO();
         updateWrapper.setName(fileName);
         uploadFileMapper.update(entity, Wrappers.query(updateWrapper));
-    }
-
-    public DownloadInfoDto getDownloadInfo(String fileName) {
-        return null;
-    }
-
-    public UploadInfoDto uploadFile(String fileName) {
-        return null;
     }
 
     public void notification(UploadFileDO param) {

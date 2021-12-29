@@ -1,6 +1,7 @@
 package com.keqi.oss.service.oss;
 
-import com.keqi.oss.domain.enums.FileStorageType;
+import com.keqi.oss.domain.dto.DownloadInfoDto;
+import com.keqi.oss.domain.dto.UploadInfoDto;
 
 /**
  * FileSystemService
@@ -10,12 +11,17 @@ import com.keqi.oss.domain.enums.FileStorageType;
 public class FileSystemService implements OssService {
 
     @Override
-    public String fileStorageType() {
-        return FileStorageType.LOCAL_FILE_SYSTEM.getCode();
+    public void deleteByName(String fileName) {
+
     }
 
     @Override
-    public void deleteByName(String name) {
+    public DownloadInfoDto getDownloadInfo(String fileName) {
+        return null;
+    }
 
+    @Override
+    public UploadInfoDto uploadFile(String fileName) {
+        return null;
     }
 }

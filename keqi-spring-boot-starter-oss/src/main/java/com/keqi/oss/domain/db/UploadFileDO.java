@@ -35,6 +35,12 @@ public class UploadFileDO extends BaseDO {
 	private Long size;
 
 	/**
+	 * 存储类型[1 本地文件系统，2 MINIO]
+	 */
+	@TableField(value = "storage_type")
+	private Integer storageType;
+
+	/**
 	 * 逻辑删除字段（0 未删除，1 已删除）
 	 */
 	@TableField(value = "is_deleted")
@@ -70,6 +76,14 @@ public class UploadFileDO extends BaseDO {
 
 	public void setSize(Long size) {
 		this.size = size;
+	}
+
+	public Integer getStorageType() {
+		return storageType;
+	}
+
+	public void setStorageType(Integer storageType) {
+		this.storageType = storageType;
 	}
 
 	public Integer getDeleted() {
