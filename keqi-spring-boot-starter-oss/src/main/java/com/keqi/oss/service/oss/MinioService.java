@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit;
  * @author keqi
  */
 @Service
+//@ConditionalOnProperty(prefix = "keqi.oss", name = "fileStorageType", havingValue = "minio")
 public class MinioService implements OssService {
 
     private static final Logger log = LoggerFactory.getLogger(MinioService.class);

@@ -8,6 +8,8 @@ import com.keqi.oss.domain.dto.UploadInfoDto;
  *
  * @author keqi
  */
+//@Service
+//@ConditionalOnProperty(prefix = "keqi.oss", name = "fileStorageType", havingValue = "localFileSystem")
 public class FileSystemService implements OssService {
 
     @Override
