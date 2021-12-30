@@ -56,7 +56,7 @@ public class UploadFileController {
      *
      * @param param param
      */
-    @PostMapping("/notification")
+    @GetMapping("/notification")
     public void notification(@RequestBody UploadFileDO param) {
         uploadFileService.notification(param);
     }
