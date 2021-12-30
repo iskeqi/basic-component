@@ -2,14 +2,14 @@ package com.keqi.oss.service.oss;
 
 import com.keqi.oss.domain.dto.DownloadInfoDto;
 import com.keqi.oss.domain.dto.UploadInfoDto;
+import org.springframework.stereotype.Service;
 
 /**
  * FileSystemService
  *
  * @author keqi
  */
-//@Service
-//@ConditionalOnProperty(prefix = "keqi.oss", name = "fileStorageType", havingValue = "localFileSystem")
+@Service
 public class FileSystemService implements OssService {
 
     @Override

@@ -4,6 +4,7 @@ import com.keqi.common.exception.third.ThirdServiceErrorException;
 import com.keqi.oss.OssProperties;
 import com.keqi.oss.domain.dto.DownloadInfoDto;
 import com.keqi.oss.domain.dto.UploadInfoDto;
+import com.keqi.oss.domain.enums.FileStorageType;
 import io.minio.*;
 import io.minio.http.Method;
 import org.slf4j.Logger;
@@ -12,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -22,7 +21,6 @@ import java.util.concurrent.TimeUnit;
  * @author keqi
  */
 @Service
-//@ConditionalOnProperty(prefix = "keqi.oss", name = "fileStorageType", havingValue = "minio")
 public class MinioService implements OssService {
 
     private static final Logger log = LoggerFactory.getLogger(MinioService.class);
@@ -33,6 +31,10 @@ public class MinioService implements OssService {
 
     @PostConstruct
     public void init() {
+        if (!FileStorageType.MINIO.getCode().equals(ossProperties.getFileStorageType())) {
+            return;
+        }
+
         OssProperties.Minio propertiesMinio = ossProperties.getMinio();
 
         minioClient = MinioClient.builder()
@@ -71,9 +73,6 @@ public class MinioService implements OssService {
 
     @Override
     public DownloadInfoDto getDownloadInfo(String fileName) {
-        Map<String, String> reqParams = new HashMap<>();
-        reqParams.put("response-content-type", "application/json");
-
         String url;
         try {
             url = minioClient.getPresignedObjectUrl(
@@ -82,7 +81,6 @@ public class MinioService implements OssService {
                             .bucket(ossProperties.getMinio().getDefaultBucket())
                             .object(fileName)
                             .expiry(2, TimeUnit.MINUTES)
-                            .extraQueryParams(reqParams)
                             .build());
         } catch (Throwable e) {
             log.error("minio has an error", e);
