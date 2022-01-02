@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class OssProperties {
 
     /**
-     * 文件存储类型[localFileSystem,minio]
+     * 文件存储类型 [localFileSystem,minio]
      */
     private String fileStorageType = "localFileSystem";
 
@@ -23,12 +23,25 @@ public class OssProperties {
     private Minio minio = new Minio();
 
     public static class Minio {
+
+        /**
+         * MINIO URL
+         */
         private String endpoint;
 
+        /**
+         * MINIO accessKey
+         */
         private String accessKey;
 
+        /**
+         * MINIO secretKey
+         */
         private String secretKey;
 
+        /**
+         * MINIO defaultBucket
+         */
         private String defaultBucket;
 
         public String getEndpoint() {

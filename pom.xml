@@ -28,6 +28,7 @@
         <module>keqi-spring-boot-starter-websocket</module>
         <module>keqi-spring-boot-starter-task</module>
         <module>keqi-spring-boot-starter-quartz</module>
+        <module>keqi-spring-boot-starter-tdengine</module>
     </modules>
 
     <dependencyManagement>
@@ -116,6 +117,11 @@
             <dependency>
                 <groupId>com.keqi</groupId>
                 <artifactId>keqi-spring-boot-starter-quartz</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.keqi</groupId>
+                <artifactId>keqi-spring-boot-starter-tdengine</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
