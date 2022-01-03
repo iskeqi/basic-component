@@ -1,4 +1,4 @@
-package com.keqi.satoken.domain.param;
+package com.keqi.tdengine.domain.param;
 
 /**
  * CreateDbParam
@@ -15,7 +15,7 @@ public class CreateDbParam {
     /**
      * 数据保存时长(单位：天)
      */
-    private Integer keep = 365;
+    private Integer keep = 3650;
 
     /**
      * 每多少天一个数据文件

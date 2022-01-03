@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.keqi.satoken.TDengineAutoConfiguration
+  com.keqi.tdengine.TDengineAutoConfiguration

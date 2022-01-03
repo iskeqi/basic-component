@@ -1,5 +1,6 @@
-package com.keqi.satoken;
+package com.keqi.tdengine;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -7,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
  *
  * @author keqi
  */
+@MapperScan("com.keqi")
 @ComponentScan("com.keqi.tdengine")
 public class TDengineAutoConfiguration {
 }
