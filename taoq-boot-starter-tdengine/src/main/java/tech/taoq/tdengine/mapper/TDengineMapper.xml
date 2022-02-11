@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.taoq.tdengine.mapper.TDengineMapper">
+    <update id="createStable">
+        create stable if not exists #{dbName}.#{stableName}
+        <foreach collection="fieldList" open="(" close=")" item="item" separator=",">
+            #{item.fieldName} #{item.fieldType}
+        </foreach>
+        tags
+        <foreach collection="tagList" open="(" close=")" item="item" separator=",">
+            #{item.tagName} #{item.tagType}
+        </foreach>
+    </update>
+
+    <update id="createTable">
+        create table if not exists #{tableName} using #{stableName}
+        <foreach collection="tagList" open="(" close=")" separator="," item="item">
+            #{item.tagName}
+        </foreach>
+        tags
+        <foreach collection="tagList" open="(" close=")" separator="," item="item">
+            #{item.tagValue}
+        </foreach>
+    </update>
+</mapper>
