@@ -21,15 +21,14 @@
         <module>taoq-boot-starter-system</module>
         <module>taoq-boot-starter-rbac</module>
         <module>taoq-boot-starter-satoken</module>
-        <module>taoq-boot-starter-security</module>
         <module>taoq-boot-starter-mp</module>
         <module>taoq-boot-starter-knife4j</module>
         <module>taoq-boot-starter-oss</module>
         <module>taoq-boot-starter-mail</module>
         <module>taoq-boot-starter-websocket</module>
-        <module>taoq-boot-starter-sms</module>
         <module>taoq-boot-starter-task</module>
         <module>taoq-boot-starter-quartz</module>
+        <module>taoq-boot-starter-tdengine</module>
     </modules>
 
     <dependencyManagement>
@@ -61,73 +60,68 @@
             </dependency>
 
             <dependency>
-                <groupId>com.keqi</groupId>
-                <artifactId>keqi-spring-boot-starter-web</artifactId>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.keqi</groupId>
-                <artifactId>keqi-spring-boot-starter-knife4j</artifactId>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-knife4j</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.keqi</groupId>
-                <artifactId>keqi-spring-boot-starter-mp</artifactId>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-mp</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.keqi</groupId>
-                <artifactId>keqi-spring-boot-starter-oss</artifactId>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-oss</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.keqi</groupId>
-                <artifactId>keqi-spring-boot-starter-mail</artifactId>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-mail</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.keqi</groupId>
-                <artifactId>keqi-spring-boot-starter-system</artifactId>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-system</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.keqi</groupId>
-                <artifactId>keqi-spring-boot-starter-websocket</artifactId>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-websocket</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.keqi</groupId>
-                <artifactId>keqi-spring-boot-starter-sms</artifactId>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.keqi</groupId>
-                <artifactId>keqi-spring-boot-starter-common</artifactId>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-satoken</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.keqi</groupId>
-                <artifactId>keqi-spring-boot-starter-satoken</artifactId>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-rbac</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.keqi</groupId>
-                <artifactId>keqi-spring-boot-starter-rbac</artifactId>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-task</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.keqi</groupId>
-                <artifactId>keqi-spring-boot-starter-security</artifactId>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-quartz</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.keqi</groupId>
-                <artifactId>keqi-spring-boot-starter-task</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.keqi</groupId>
-                <artifactId>keqi-spring-boot-starter-quartz</artifactId>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-tdengine</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
