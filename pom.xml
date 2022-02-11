@@ -10,26 +10,26 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.keqi</groupId>
-    <artifactId>keqi-basic-components</artifactId>
-    <version>2.0.1</version>
+    <groupId>tech.taoq</groupId>
+    <artifactId>taoq-boot</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>keqi-spring-boot-starter-common</module>
-        <module>keqi-spring-boot-starter-web</module>
-        <module>keqi-spring-boot-starter-system</module>
-        <module>keqi-spring-boot-starter-rbac</module>
-        <module>keqi-spring-boot-starter-satoken</module>
-        <module>keqi-spring-boot-starter-security</module>
-        <module>keqi-spring-boot-starter-mp</module>
-        <module>keqi-spring-boot-starter-knife4j</module>
-        <module>keqi-spring-boot-starter-oss</module>
-        <module>keqi-spring-boot-starter-mail</module>
-        <module>keqi-spring-boot-starter-websocket</module>
-        <module>keqi-spring-boot-starter-sms</module>
-        <module>keqi-spring-boot-starter-task</module>
-        <module>keqi-spring-boot-starter-quartz</module>
+        <module>taoq-boot-starter-common</module>
+        <module>taoq-boot-starter-web</module>
+        <module>taoq-boot-starter-system</module>
+        <module>taoq-boot-starter-rbac</module>
+        <module>taoq-boot-starter-satoken</module>
+        <module>taoq-boot-starter-security</module>
+        <module>taoq-boot-starter-mp</module>
+        <module>taoq-boot-starter-knife4j</module>
+        <module>taoq-boot-starter-oss</module>
+        <module>taoq-boot-starter-mail</module>
+        <module>taoq-boot-starter-websocket</module>
+        <module>taoq-boot-starter-sms</module>
+        <module>taoq-boot-starter-task</module>
+        <module>taoq-boot-starter-quartz</module>
     </modules>
 
     <dependencyManagement>
