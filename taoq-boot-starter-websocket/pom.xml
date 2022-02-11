@@ -3,14 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>keqi-basic-components</artifactId>
+        <artifactId>taoq-boot</artifactId>
         <groupId>tech.taoq</groupId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>keqi-spring-boot-starter-websocket</artifactId>
+    <artifactId>taoq-boot-starter-websocket</artifactId>
 
     <dependencies>
         <dependency>
@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>tech.taoq</groupId>
-            <artifactId>keqi-spring-boot-starter-common</artifactId>
+            <artifactId>taoq-boot-starter-common</artifactId>
         </dependency>
     </dependencies>
 
