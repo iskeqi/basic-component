@@ -19,7 +19,7 @@ quickly develop basic components for monolithic applications
   - [ ] taoq-boot-starter-satoken		-- 对 Sa-Token 的封装
   - [ ] taoq-boot-starter-security	    -- 对 Spring Security 的封装
 - taoq-boot-job			            -- 定时任务模块
-  - taoq-boot-starter-task		        -- 基于 JDK 线程池封装的定时任务
+  - [ ] taoq-boot-starter-task		        -- 基于 JDK 线程池封装的定时任务
   - [ ] taoq-boot-starter-quartz		-- 基于 Quartz 封装的定时任务
   - [ ] taoq-boot-starter-xxljob		-- 基于 xxl-job 封装的定时任务
   - [ ] taoq-boot-starter-powerjob	-- 基于 PowerJob 封装的定时任务
