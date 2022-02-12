@@ -23,7 +23,7 @@ public class Knife4jConfig {
                 .useDefaultResponseMessages(false)
                 .apiInfo(new ApiInfoBuilder()
                         .description("restful api")
-                        .termsOfServiceUrl("https://www.keqi.com/")
+                        .termsOfServiceUrl("https://www.taoq.tech/")
                         .version("1.0")
                         .build())
                 .groupName("default group")
