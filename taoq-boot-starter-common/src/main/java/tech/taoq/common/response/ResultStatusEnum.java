@@ -11,8 +11,8 @@ public enum ResultStatusEnum {
 
     // 用户端错误
     CLINET_ERROR("A0001", "用户端错误"),
-    NO_AUTH("A0001", "token错误或失效"),
-    PARAM_ILLEGAL("A0002", "参数错误"),
+    NO_AUTH("A0002", "token错误或失效"),
+    PARAM_ILLEGAL("A0003", "参数错误"),
 
     // 服务端错误
     SERVER_ERROR("B0001", "系统繁忙，请稍后重试"),

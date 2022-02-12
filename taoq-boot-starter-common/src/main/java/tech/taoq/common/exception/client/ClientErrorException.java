@@ -1,6 +1,6 @@
 package tech.taoq.common.exception.client;
 
-import tech.taoq.common.exception.KeqiException;
+import tech.taoq.common.exception.TaoqException;
 import tech.taoq.common.response.ResultStatusEnum;
 
 /**
@@ -8,7 +8,7 @@ import tech.taoq.common.response.ResultStatusEnum;
  *
  * @author keqi
  */
-public class ClientErrorException extends KeqiException {
+public class ClientErrorException extends TaoqException {
 
     private static final long serialVersionUID = -7776560122489518092L;
 
