@@ -28,11 +28,11 @@ public class ScheduleConfigurer implements SchedulingConfigurer {
     public ThreadPoolTaskScheduler myThreadPoolTaskScheduler() {
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
         scheduler.setPoolSize(taskProperties.getPoolSize());
-        // if there is a task in execution, wait until the task is executed and then close the thread pool
+        // 如果有任务在执行，等到任务执行完毕再关闭线程池
         scheduler.setWaitForTasksToCompleteOnShutdown(taskProperties.isWaitForTasksToCompleteOnShutdown());
-        // if there are still unfinished tasks after x seconds, it is also forced to close
+        // 如果 x 秒后还有未完成的任务，也强制关闭
         scheduler.setAwaitTerminationMillis(taskProperties.getAwaitTerminationMillis());
-        // after the task is canceled, the task will be deleted
+        // 任务取消后，任务将被删除
         scheduler.setRemoveOnCancelPolicy(taskProperties.isRemoveOnCancelPolicy());
         scheduler.setThreadNamePrefix(taskProperties.getThreadNamePrefix());
         scheduler.setErrorHandler(t -> log.error("an error occurred in the spirng task thread pool", t));
