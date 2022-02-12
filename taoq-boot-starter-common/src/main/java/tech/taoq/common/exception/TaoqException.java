@@ -1,11 +1,11 @@
 package tech.taoq.common.exception;
 
 /**
- * KeqiException
+ * TaoqException
  *
  * @author keqi
  */
-public abstract class KeqiException extends RuntimeException {
+public abstract class TaoqException extends RuntimeException {
 
     private static final long serialVersionUID = 3267680643599580436L;
 
@@ -14,7 +14,7 @@ public abstract class KeqiException extends RuntimeException {
      */
     private String status;
 
-    public KeqiException(String status, String message) {
+    public TaoqException(String status, String message) {
         super(message);
         this.status = status;
     }
