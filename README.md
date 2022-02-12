@@ -3,7 +3,7 @@ quickly develop basic components for monolithic applications
 
 # architecture
 - [ ] |-- taoq-boot-common			   -- 常用的基础公用组件
-- [x] |   |-- taoq-boot-starter-common		-- 公共依赖
+- [x] |&emsp;|-- taoq-boot-starter-common		-- 公共依赖
 - [x] |   |-- taoq-boot-starter-web		    -- 对 SpringMVC 的封装
 - [x] |   |-- taoq-boot-starter-knife4j		-- 对于 knife4j 的封装
 - [x] |   |-- taoq-boot-starter-oss		    -- 对于本地文件上传/MinIO/第三方对象存储服务的封装
