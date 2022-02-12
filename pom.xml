@@ -12,23 +12,22 @@
 
     <groupId>tech.taoq</groupId>
     <artifactId>taoq-boot</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
+    <properties>
+        <revision>1.0-SNAPSHOT</revision>
+    </properties>
+
     <modules>
-        <module>taoq-boot-starter-common</module>
-        <module>taoq-boot-starter-web</module>
-        <module>taoq-boot-starter-system</module>
-        <module>taoq-boot-starter-rbac</module>
-        <module>taoq-boot-starter-satoken</module>
-        <module>taoq-boot-starter-mp</module>
-        <module>taoq-boot-starter-knife4j</module>
-        <module>taoq-boot-starter-oss</module>
-        <module>taoq-boot-starter-mail</module>
-        <module>taoq-boot-starter-websocket</module>
-        <module>taoq-boot-starter-task</module>
-        <module>taoq-boot-starter-quartz</module>
-        <module>taoq-boot-starter-tdengine</module>
+        <module>taoq-boot-common</module>
+        <module>taoq-boot-extends</module>
+        <module>taoq-boot-job</module>
+        <module>taoq-boot-mq</module>
+        <module>taoq-boot-orm</module>
+        <module>taoq-boot-push</module>
+        <module>taoq-boot-samples</module>
+        <module>taoq-boot-security</module>
     </modules>
 
     <dependencyManagement>
