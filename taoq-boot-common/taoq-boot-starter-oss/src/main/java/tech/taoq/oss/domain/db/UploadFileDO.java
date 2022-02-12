@@ -38,13 +38,13 @@ public class UploadFileDO extends BaseDO {
 	 * 存储类型[1 本地文件系统，2 MINIO]
 	 */
 	@TableField(value = "storage_type")
-	private Integer storageType;
+	private String storageType;
 
 	/**
 	 * 逻辑删除字段（0 未删除，1 已删除）
 	 */
 	@TableField(value = "is_deleted")
-	private Integer deleted;
+	private String deleted;
 
 	public String getName() {
 		return name;
@@ -78,19 +78,19 @@ public class UploadFileDO extends BaseDO {
 		this.size = size;
 	}
 
-	public Integer getStorageType() {
+	public String getStorageType() {
 		return storageType;
 	}
 
-	public void setStorageType(Integer storageType) {
+	public void setStorageType(String storageType) {
 		this.storageType = storageType;
 	}
 
-	public Integer getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
 
-	public void setDeleted(Integer deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 }

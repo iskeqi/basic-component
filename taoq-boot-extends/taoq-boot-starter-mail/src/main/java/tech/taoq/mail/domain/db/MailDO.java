@@ -47,5 +47,5 @@ public class MailDO extends BaseDO {
 
     @ApiModelProperty("是否禁用[0 启用，1 禁用]")
     @TableField(value = "is_disable")
-    private Integer disable;
+    private String disable;
 }
