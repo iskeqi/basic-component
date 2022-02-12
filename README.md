@@ -2,6 +2,7 @@
 quickly develop basic components for monolithic applications
 
 # architecture
+```
 - [ ] |-- taoq-boot-common			-- 常用的基础公用组件
 - [x] |   |-- taoq-boot-starter-common		-- 公共依赖
 - [x] |   |-- taoq-boot-starter-web		    -- 对 SpringMVC 的封装
@@ -38,4 +39,4 @@ quickly develop basic components for monolithic applications
 - [ ] |   |-- taoq-boot-starter-xss			-- xss 防注入相关
 - [ ] |   |-- taoq-boot-starter-pay			-- 支付模块
 - [ ] |   |-- taoq-boot-starter-robot		-- 对钉钉/企业微信/飞书的一些操作封装
-
+```
