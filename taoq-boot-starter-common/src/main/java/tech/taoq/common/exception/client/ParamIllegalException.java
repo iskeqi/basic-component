@@ -1,6 +1,6 @@
 package tech.taoq.common.exception.client;
 
-import tech.taoq.common.exception.KeqiException;
+import tech.taoq.common.exception.TaoqException;
 import tech.taoq.common.response.ResultStatusEnum;
 
 /**
@@ -8,7 +8,7 @@ import tech.taoq.common.response.ResultStatusEnum;
  *
  * @author keqi
  */
-public class ParamIllegalException extends KeqiException {
+public class ParamIllegalException extends TaoqException {
 
     private static final long serialVersionUID = 3104400640505573074L;
 

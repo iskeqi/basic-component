@@ -1,6 +1,6 @@
 package tech.taoq.web.mvc.exception;
 
-import tech.taoq.common.exception.KeqiException;
+import tech.taoq.common.exception.TaoqException;
 import tech.taoq.common.response.ResultEntity;
 import tech.taoq.common.response.ResultEntityBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +26,8 @@ public class GlobalExceptionHandler {
      * @param e KeqiException
      * @return r
      */
-    @ExceptionHandler(value = KeqiException.class)
-    public ResultEntity businessException(KeqiException e) {
+    @ExceptionHandler(value = TaoqException.class)
+    public ResultEntity businessException(TaoqException e) {
         return ResultEntityBuilder.failure(e.getStatus(), e.getMessage());
     }
 
