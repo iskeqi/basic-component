@@ -5,23 +5,20 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.common.pojo.PageDto;
 import tech.taoq.common.pojo.enums.DisableEnum;
 import tech.taoq.system.domain.db.DictItemDO;
 import tech.taoq.system.mapper.DictItemMapper;
 import tech.taoq.web.validator.BaseDictValidate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 
 @Service
-@CacheConfig(cacheNames = "sys:dictItem")
+//@CacheConfig(cacheNames = "sys:dictItem")
 public class DictItemService implements BaseDictValidate {
 
     @Autowired
@@ -53,7 +50,7 @@ public class DictItemService implements BaseDictValidate {
         return dictItemDO;
     }
 
-    @CacheEvict(key = "#typeCode.concat(#itemCode)")
+//    @CacheEvict(key = "#typeCode.concat(#itemCode)")
     public void delete(String typeCode, String itemCode) {
         DictItemDO t = new DictItemDO().setTypeCode(typeCode);
         if (itemCode != null) {
@@ -63,7 +60,7 @@ public class DictItemService implements BaseDictValidate {
         dictItemMapper.delete(Wrappers.query(t));
     }
 
-    @CacheEvict(key = "#param.typeCode.concat(#param.itemCode)")
+//    @CacheEvict(key = "#param.typeCode.concat(#param.itemCode)")
     public void updateByTypeCodeAndItemCode(DictItemDO param) {
         DictItemDO t1 = dictItemMapper.selectOne(Wrappers.query(new DictItemDO()
                 .setTypeCode(param.getTypeCode())
@@ -87,7 +84,7 @@ public class DictItemService implements BaseDictValidate {
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 
-    @Cacheable(key = "#typeCode.concat(#itemCode)")
+//    @Cacheable(key = "#typeCode.concat(#itemCode)")
     public DictItemDO getByTypeCodeAndItemCode(String typeCode, String itemCode) {
         // 只返回启用状态的字典项
         return dictItemMapper.selectOne(Wrappers.query(new DictItemDO()

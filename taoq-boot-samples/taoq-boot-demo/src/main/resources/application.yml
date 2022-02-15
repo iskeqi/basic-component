@@ -5,6 +5,10 @@ spring:
         active: local-dev
     main:
         banner-mode: off
+#    cache:
+#        type: ehcache
+#        ehcache:
+#            config: classpath:/ehcache.xml
 #    servlet:
 #        multipart:
 #            max-file-size: 20MB

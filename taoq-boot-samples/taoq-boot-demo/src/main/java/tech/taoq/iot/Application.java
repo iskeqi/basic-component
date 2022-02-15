@@ -17,7 +17,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
 
         if (log.isDebugEnabled()) {
-            log.debug("http://localhost:9100/seed/doc.html");
+            log.debug("http://localhost:9100/iot/doc.html");
         }
     }
 }

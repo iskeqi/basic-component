@@ -3,19 +3,16 @@ package tech.taoq.system.service;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.common.pojo.PageDto;
 import tech.taoq.common.pojo.enums.DisableEnum;
 import tech.taoq.system.domain.db.ConfigDO;
 import tech.taoq.system.mapper.ConfigMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
 
 @Service
-@CacheConfig(cacheNames = "sys:config")
+//@CacheConfig(cacheNames = "sys:config")
 public class ConfigService {
 
     @Autowired
@@ -31,12 +28,12 @@ public class ConfigService {
         configMapper.insert(param);
     }
 
-    @CacheEvict(key = "#configKey")
+//    @CacheEvict(key = "#configKey")
     public void deleteByConfigKey(String configKey) {
         configMapper.delete(Wrappers.query(new ConfigDO().setConfigKey(configKey)));
     }
 
-    @CacheEvict(key = "#param.configKey")
+//    @CacheEvict(key = "#param.configKey")
     public void updateByConfigKey(ConfigDO param) {
         ConfigDO t1 = BeanUtil.copyProperties(param, ConfigDO.class);
         // configKey 是不能修改的
@@ -44,7 +41,7 @@ public class ConfigService {
         configMapper.update(t1, Wrappers.query(new ConfigDO().setConfigKey(param.getConfigKey())));
     }
 
-    @Cacheable(key = "#configKey")
+//    @Cacheable(key = "#configKey")
     public ConfigDO getByConfigKey(String configKey) {
         // 只返回启用状态的配置，已经禁用的 configKey 是不会查询出来的
         return configMapper.selectOne(Wrappers.query(new ConfigDO()
