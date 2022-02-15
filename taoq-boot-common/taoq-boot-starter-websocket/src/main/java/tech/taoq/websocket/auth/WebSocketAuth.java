@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface WebSocketAuth {
 
     /**
-     * Authentication before websocket connection is established
+     * 建立 websocket 连接之前的身份验证
      *
      * @param httpServletRequest httpServletRequest
      * @return r

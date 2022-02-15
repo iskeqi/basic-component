@@ -25,7 +25,7 @@ public class WebSocketUtil {
     public static final Set<WebSocketSessionWrapper> WRAPPER_SET = new ConcurrentHashSet<>();
 
     /**
-     * broadcast(contains global messages and specific page messages)
+     * 广播（包含全局消息和特定页面消息）
      *
      * @param dto dto
      */
@@ -34,7 +34,7 @@ public class WebSocketUtil {
     }
 
     /**
-     * send a message to the specified user
+     * 向指定用户发送消息
      *
      * @param userIdentifier userIdentifier
      * @param dto            dto
@@ -48,7 +48,7 @@ public class WebSocketUtil {
     }
 
     /**
-     * send a message to the specified webSocketSessionId
+     * 向指定的 webSocketSessionId 发送消息
      *
      * @param dto dto
      */
@@ -61,8 +61,8 @@ public class WebSocketUtil {
     }
 
     private synchronized static void send(WebSocketSessionWrapper wrapper, WebSocketMessageDto dto) {
-        // global message, no matter which page the current connection is on, it will be sent
-        // other messages will only be sent to the specified page
+        // 全局消息，无论当前连接在哪个页面，都会发送
+        // 其他消息只会发送到指定页面
         if (Objects.equals(wrapper.getPage(), dto.getPage()) ||
                 HeartbeatMessageAdapter.GLOBAL.equals(dto.getPage())) {
             WebSocketSession webSocketSession = wrapper.getWebSocketSession();

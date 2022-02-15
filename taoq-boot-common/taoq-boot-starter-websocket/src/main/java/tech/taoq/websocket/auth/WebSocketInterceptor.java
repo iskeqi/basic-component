@@ -34,10 +34,10 @@ public class WebSocketInterceptor extends HttpSessionHandshakeInterceptor {
                                    WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
         HttpServletRequest httpServletRequest = ((ServletServerHttpRequest) request).getServletRequest();
 
-        // authentication
+        // 认证
         WebSocketAuthDto webSocketAuthDto = webSocketAuth.auth(httpServletRequest);
         if (webSocketAuthDto.getAuthenticate()) {
-            log.info("websocket authentication failed，request params : {}", JsonUtil.writeValueAsString(httpServletRequest));
+            log.info("websocket authentication failed,request params : {}", JsonUtil.writeValueAsString(httpServletRequest));
             return false;
         }
 

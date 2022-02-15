@@ -15,12 +15,12 @@ public class WebSocketSessionWrapper {
     private WebSocketSession webSocketSession;
 
     /**
-     * which page is the current websocket connection
+     * 当前 websocket 连接处于哪个页面上
      */
     private String page;
 
     /**
-     * which user the current connection belongs to
+     * 当前连接属于哪个用户
      */
     private String userIdentifier;
 

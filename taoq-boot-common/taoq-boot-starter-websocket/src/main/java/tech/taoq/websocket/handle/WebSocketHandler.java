@@ -58,7 +58,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
             param = JsonUtil.readValue(textMessage.getPayload(), WebSocketMessageParam.class);
             log.info("receive message : {}", JsonUtil.writeValueAsString(param));
 
-            // update the page value where the current connection is located
+            // 更新当前连接所在的页面值
             if (!HeartbeatMessageAdapter.GLOBAL.equals(param.getPage())) {
                 WebSocketUtil.updatePageByWebSocketSessionId(webSocketSession.getId(), param.getPage());
             }

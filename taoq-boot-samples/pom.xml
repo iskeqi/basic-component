@@ -13,4 +13,8 @@
     <artifactId>taoq-boot-samples</artifactId>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>taoq-boot-demo</module>
+    </modules>
+
 </project>

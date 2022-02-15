@@ -55,9 +55,9 @@ public class WebAutoConfiguration {
      * @return r
      */
     @Bean
-    @ConditionalOnProperty(prefix = "keqi.web", name = "mappingJackson2HttpMessageConverter",
+    @ConditionalOnProperty(prefix = "keqi.web", name = "myMappingJackson2HttpMessageConverter",
             havingValue = "true", matchIfMissing = true)
-    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+    public MappingJackson2HttpMessageConverter myMappingJackson2HttpMessageConverter() {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 
         ObjectMapper objectMapper = new ObjectMapper();

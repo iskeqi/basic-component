@@ -10,22 +10,22 @@ import java.util.Map;
 public class WebSocketMessageParam {
 
     /**
-     * which page is the current websocket connection
+     * 当前 websocket 连接代表哪个页面
      */
     protected String page;
 
     /**
-     * The type of push message in the specified page in the current WebSocket connection
+     * 当前WebSocket连接中指定页面的推送消息类型
      */
     protected String type;
 
     /**
-     * request unique id
+     * 请求唯一 ID
      */
     protected String requestId;
 
     /**
-     * request params
+     * request param
      */
     protected Map<String, Object> params;
 

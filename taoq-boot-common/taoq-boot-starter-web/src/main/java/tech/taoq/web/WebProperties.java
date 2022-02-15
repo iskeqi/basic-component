@@ -15,7 +15,7 @@ public class WebProperties {
     /**
      * 是否使用内置的 MappingJackson2HttpMessageConverter 对象
      */
-    private boolean mappingJackson2HttpMessageConverter = true;
+    private boolean myMappingJackson2HttpMessageConverter = true;
 
     /**
      * 是否使用内置的 MyStringToLocalDateConverter 对象
@@ -37,12 +37,12 @@ public class WebProperties {
      */
     private boolean cors = true;
 
-    public boolean isMappingJackson2HttpMessageConverter() {
-        return mappingJackson2HttpMessageConverter;
+    public boolean isMyMappingJackson2HttpMessageConverter() {
+        return myMappingJackson2HttpMessageConverter;
     }
 
-    public void setMappingJackson2HttpMessageConverter(boolean mappingJackson2HttpMessageConverter) {
-        this.mappingJackson2HttpMessageConverter = mappingJackson2HttpMessageConverter;
+    public void setMyMappingJackson2HttpMessageConverter(boolean myMappingJackson2HttpMessageConverter) {
+        this.myMappingJackson2HttpMessageConverter = myMappingJackson2HttpMessageConverter;
     }
 
     public boolean isMyStringToLocalDateConverter() {

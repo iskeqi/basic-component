@@ -1,11 +1,12 @@
 package tech.taoq.web.mvc.exception;
 
-import tech.taoq.common.exception.TaoqException;
-import tech.taoq.common.response.ResultEntity;
-import tech.taoq.common.response.ResultEntityBuilder;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import tech.taoq.common.exception.TaoqException;
+import tech.taoq.common.response.ResultEntity;
+import tech.taoq.common.response.ResultEntityBuilder;
 
 import java.util.List;
 
@@ -17,17 +18,20 @@ import java.util.List;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(DefaultExceptionHandlerAdapter.class);
+
     @Autowired
     private List<ExceptionHandlerAdapter> exceptionHandlerAdapterList;
 
     /**
-     * KeqiException
+     * TaoqException
      *
-     * @param e KeqiException
+     * @param e TaoqException
      * @return r
      */
     @ExceptionHandler(value = TaoqException.class)
     public ResultEntity businessException(TaoqException e) {
+        log.error(e.getStatus() + " : " + e.getMessage());
         return ResultEntityBuilder.failure(e.getStatus(), e.getMessage());
     }
 

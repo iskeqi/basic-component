@@ -11,14 +11,14 @@ import tech.taoq.websocket.handle.domain.WebSocketMessageParam;
 public interface HandleTextMessageAdapter {
 
     /**
-     * get page and type value, eg: page-type
+     * 获取页面和类型值，例如：page-type
      *
      * @return r
      */
     String getPageType();
 
     /**
-     * Message processing logic
+     * 消息处理逻辑
      *
      * @param param param
      * @return r
@@ -26,7 +26,7 @@ public interface HandleTextMessageAdapter {
     WebSocketMessageDto handle(WebSocketMessageParam param);
 
     /**
-     * whether it can handle the current type of message
+     * 是否可以处理当前的消息类型
      *
      * @param page page
      * @param type type
@@ -37,7 +37,7 @@ public interface HandleTextMessageAdapter {
     }
 
     /**
-     * provide a unified splicing method
+     * 提供统一的拼接方法
      *
      * @param page page
      * @param type type
