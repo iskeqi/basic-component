@@ -3,7 +3,7 @@ create table sys_upload_file
 (
     id           bigint unsigned not null auto_increment comment '',
     name         varchar(512) comment '文件名称',
-    path         text comment '文件存储路径[相对路径]',
+    path         varchar(512) comment '文件存储路径[相对路径]',
     type         varchar(128) comment '文件类型',
     size         int comment '文件大小[单位:字节]',
     storage_type tinyint unsigned comment '存储类型[1:本地文件系统 2:minio]',

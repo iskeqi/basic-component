@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "3.5.7",
   "createdTime": "2022-2-15 09:34:26",
-  "updatedTime": "2022-2-15 10:46:59",
+  "updatedTime": "2022-2-15 10:52:31",
   "profile": {
     "default": {
       "db": "760A2AB7-4872-46B8-B7BB-B271131278AC",
@@ -781,7 +781,7 @@
           "defKey": "path",
           "defName": "文件存储路径[相对路径]",
           "comment": "",
-          "domain": "CB376752-4143-4613-9B72-B09F5DFC91BF",
+          "domain": "BCA7F5C1-B5CA-43CA-85CF-5B4ED7179B75",
           "type": "",
           "len": "",
           "scale": "",
