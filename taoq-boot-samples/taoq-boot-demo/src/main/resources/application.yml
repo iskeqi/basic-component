@@ -5,6 +5,9 @@ spring:
         active: local-dev
     main:
         banner-mode: off
+#    jackson:
+#        date-format: yyyy-MM-dd HH:mm:ss
+#        allow-bean-definition-overriding: true
 #    cache:
 #        type: ehcache
 #        ehcache:

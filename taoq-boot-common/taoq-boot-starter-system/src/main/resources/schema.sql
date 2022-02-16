@@ -1,13 +1,16 @@
-drop table if exists sys_config;
-create table sys_config
+DROP TABLE IF EXISTS sys_config;
+CREATE TABLE sys_config
 (
-    config_key   varchar(32) not null comment '配置项key',
-    config_value varchar(32) comment '配置项value',
-    note         varchar(128) comment '配置项描述信息',
-    extra        varchar(128) comment '扩展字段',
-    is_disable   tinyint unsigned default 0 comment '是否禁用[0:未禁用 1:已禁用]',
-    primary key (config_key)
-) comment = '系统配置表';
+    id           bigint unsigned NOT NULL COMMENT '主键id',
+    config_key   varchar(32) COMMENT '配置项key',
+    config_value varchar(32) COMMENT '配置项value',
+    note         varchar(128) COMMENT '配置项描述信息',
+    extra        varchar(128) COMMENT '扩展字段',
+    is_disable   tinyint unsigned DEFAULT 0 COMMENT '是否禁用[0:未禁用 1:已禁用]',
+    create_time  datetime COMMENT '创建时间',
+    update_time  datetime COMMENT '修改时间',
+    PRIMARY KEY (id)
+) COMMENT = '系统配置表';
 
 drop table if exists sys_dict_item;
 create table sys_dict_item

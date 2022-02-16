@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @author keqi
  */
 @Component
-@ConfigurationProperties(prefix = "keqi.web")
+@ConfigurationProperties(prefix = "taoq.web")
 public class WebProperties {
 
     /**

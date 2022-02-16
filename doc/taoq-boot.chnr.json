@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "3.5.7",
   "createdTime": "2022-2-15 09:34:26",
-  "updatedTime": "2022-2-15 10:53:19",
+  "updatedTime": "2022-2-16 10:05:42",
   "profile": {
     "default": {
       "db": "760A2AB7-4872-46B8-B7BB-B271131278AC",
@@ -287,6 +287,22 @@
       "properties": {},
       "fields": [
         {
+          "defKey": "id",
+          "defName": "主键id",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "67D5547C-7C33-4831-9CD4-73854792F4E0",
+          "id": "9B80FC37-C1F9-4460-A47A-41DC72985267"
+        },
+        {
           "rowNo": 1,
           "defKey": "config_key",
           "defName": "配置项key",
@@ -295,8 +311,8 @@
           "type": "",
           "len": "",
           "scale": "",
-          "primaryKey": true,
-          "notNull": true,
+          "primaryKey": false,
+          "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": false,
@@ -390,28 +406,41 @@
           "autoIncrementName": "",
           "refDict": "",
           "id": "EEC4A314-B9EC-4AA6-BE10-31D301629210"
-        }
-      ],
-      "indexes": [
+        },
         {
-          "defKey": "PRIMARY",
-          "unique": true,
-          "defName": null,
+          "defKey": "create_time",
+          "defName": "创建时间",
           "comment": "",
-          "fields": [
-            {
-              "ascOrDesc": "A",
-              "id": "380822C0-7A41-4FAE-9026-FE7A0BCBD025",
-              "fieldDefKey": "AD7BF182-2856-47AD-8F97-BC50AB3E841F"
-            },
-            {
-              "ascOrDesc": "A",
-              "id": "1CABF422-74C6-43CF-BB23-9B105EE6DE6D"
-            }
-          ],
-          "id": "66283777-38BD-4DC5-AC6D-69A2C0B3B4A1"
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "AE783FB7-26EF-4FA2-8B57-71DC8DC30FF9",
+          "id": "FFCA299B-0AF5-4BA4-9D14-E81AF948A0F6"
+        },
+        {
+          "defKey": "update_time",
+          "defName": "修改时间",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "AE783FB7-26EF-4FA2-8B57-71DC8DC30FF9",
+          "id": "4F0CF1A0-CADE-4174-9C43-405A7CF09B6E"
         }
       ],
+      "indexes": [],
       "nameTemplate": "{defKey}[{defName}]",
       "headers": [
         {
@@ -624,6 +653,22 @@
           "autoIncrementName": "",
           "refDict": "",
           "id": "943CBED9-24B4-4B67-9C7A-AA4F0A14251F"
+        },
+        {
+          "defKey": "id",
+          "defName": "主键id",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "6B2CEB2F-789A-46B8-A01E-480827A12F84",
+          "id": "8FD4F745-DF53-44FD-A5C5-2CCB2835C171"
         }
       ],
       "indexes": [

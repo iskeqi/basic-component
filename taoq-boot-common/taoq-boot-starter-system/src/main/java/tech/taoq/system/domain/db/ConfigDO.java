@@ -4,14 +4,17 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import tech.taoq.mp.pojo.BaseDO;
 
 import javax.validation.constraints.NotBlank;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
 @TableName(value = "sys_config")
-public class ConfigDO {
+public class ConfigDO extends BaseDO {
 
     @NotBlank
     @ApiModelProperty("配置项key")

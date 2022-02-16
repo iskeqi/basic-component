@@ -26,3 +26,4 @@ hs_err_pid*
 .idea
 **/target
 taoq-boot-backup-*.chnr.json
+logs
