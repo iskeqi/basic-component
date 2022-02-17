@@ -54,6 +54,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
     @Override
     public void handleTextMessage(WebSocketSession webSocketSession, TextMessage textMessage) {
         WebSocketMessageParam param = null;
+        boolean isReply = false;
         try {
             param = JsonUtil.readValue(textMessage.getPayload(), WebSocketMessageParam.class);
             log.info("receive message : {}", JsonUtil.writeValueAsString(param));
@@ -67,7 +68,11 @@ public class WebSocketHandler extends TextWebSocketHandler {
                 if (messageAdapter.supports(param.getPage(), param.getType())) {
                     WebSocketMessageDto dto = messageAdapter.handle(param);
                     WebSocketUtil.sendByWebSocketSessionId(webSocketSession.getId(), dto);
+                    isReply = true;
                 }
+            }
+            if (!isReply) {
+                log.info("no reply, request id is {}", param.getRequestId());
             }
         } catch (Throwable e) {
             log.error("an error occurred (message event), request params : {} ", JsonUtil.writeValueAsString(param));

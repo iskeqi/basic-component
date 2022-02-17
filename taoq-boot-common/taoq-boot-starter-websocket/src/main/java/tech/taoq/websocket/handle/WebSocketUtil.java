@@ -71,6 +71,7 @@ public class WebSocketUtil {
                 TextMessage textMessage = new TextMessage(value);
                 try {
                     webSocketSession.sendMessage(textMessage);
+                    log.info("send message : {}", value);
                 } catch (IOException e) {
                     log.error("message send error, msg {}", value);
                     log.error(e.getMessage(), e);
