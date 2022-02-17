@@ -26,4 +26,11 @@ public class WebSocketAuthDto {
     public void setUserIdentifier(String userIdentifier) {
         this.userIdentifier = userIdentifier;
     }
+
+    public static WebSocketAuthDto build(Boolean authenticate, String userIdentifier) {
+        WebSocketAuthDto dto = new WebSocketAuthDto();
+        dto.setAuthenticate(authenticate);
+        dto.setUserIdentifier(userIdentifier);
+        return dto;
+    }
 }

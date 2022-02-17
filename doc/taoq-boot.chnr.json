@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "3.5.7",
   "createdTime": "2022-2-15 09:34:26",
-  "updatedTime": "2022-2-16 10:05:42",
+  "updatedTime": "2022-2-17 11:54:00",
   "profile": {
     "default": {
       "db": "760A2AB7-4872-46B8-B7BB-B271131278AC",
@@ -440,7 +440,22 @@
           "id": "4F0CF1A0-CADE-4174-9C43-405A7CF09B6E"
         }
       ],
-      "indexes": [],
+      "indexes": [
+        {
+          "defKey": "uk_config_key",
+          "defName": null,
+          "unique": true,
+          "comment": "",
+          "fields": [
+            {
+              "fieldDefKey": "AD7BF182-2856-47AD-8F97-BC50AB3E841F",
+              "ascOrDesc": "A",
+              "id": "4363ACB6-30DF-46CE-97E3-585323203ECC"
+            }
+          ],
+          "id": "85CE2A8D-0593-493F-9382-F472AB518FDB"
+        }
+      ],
       "nameTemplate": "{defKey}[{defName}]",
       "headers": [
         {
@@ -529,6 +544,22 @@
       "properties": {},
       "fields": [
         {
+          "defKey": "id",
+          "defName": "主键id",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "67D5547C-7C33-4831-9CD4-73854792F4E0",
+          "id": "8FD4F745-DF53-44FD-A5C5-2CCB2835C171"
+        },
+        {
           "rowNo": 1,
           "defKey": "type_code",
           "defName": "字典类型编码",
@@ -537,8 +568,8 @@
           "type": "",
           "len": "",
           "scale": "",
-          "primaryKey": true,
-          "notNull": true,
+          "primaryKey": false,
+          "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": false,
@@ -579,8 +610,8 @@
           "type": "",
           "len": "",
           "scale": "",
-          "primaryKey": true,
-          "notNull": true,
+          "primaryKey": false,
+          "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": false,
@@ -655,8 +686,8 @@
           "id": "943CBED9-24B4-4B67-9C7A-AA4F0A14251F"
         },
         {
-          "defKey": "id",
-          "defName": "主键id",
+          "defKey": "create_time",
+          "defName": "创建时间",
           "comment": "",
           "type": "",
           "len": "",
@@ -667,29 +698,45 @@
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
-          "domain": "6B2CEB2F-789A-46B8-A01E-480827A12F84",
-          "id": "8FD4F745-DF53-44FD-A5C5-2CCB2835C171"
+          "domain": "AE783FB7-26EF-4FA2-8B57-71DC8DC30FF9",
+          "id": "5D0CFA35-0BA7-4661-8986-3D62313C0BB9"
+        },
+        {
+          "defKey": "update_time",
+          "defName": "修改时间",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "AE783FB7-26EF-4FA2-8B57-71DC8DC30FF9",
+          "id": "812B17C1-8054-4A0B-91C4-2BF2F4BFCC43"
         }
       ],
       "indexes": [
         {
-          "defKey": "PRIMARY",
-          "unique": true,
+          "defKey": "uk_type_item",
           "defName": null,
+          "unique": true,
           "comment": "",
           "fields": [
             {
+              "fieldDefKey": "B69126C1-4D7D-4850-B32E-ED518DF82647",
               "ascOrDesc": "A",
-              "id": "2E1160F6-51C4-455C-9F74-CD29370AFD5D",
-              "fieldDefKey": "B69126C1-4D7D-4850-B32E-ED518DF82647"
+              "id": "6C4E1C1C-95EF-40D6-B7F1-81E06F742F91"
             },
             {
+              "fieldDefKey": "1EEC2A18-D8FE-47D3-9D3B-4C5F5155B6F2",
               "ascOrDesc": "A",
-              "id": "2182FEB1-E611-4061-BD1B-22F7B228651F",
-              "fieldDefKey": "1EEC2A18-D8FE-47D3-9D3B-4C5F5155B6F2"
+              "id": "2E5D4780-3F15-46A7-939E-1619BA11705A"
             }
           ],
-          "id": "6DB8AADA-928C-49EC-BACD-88A6B9D66D28"
+          "id": "0A5EB7C2-2041-4982-98EB-03F3929D6506"
         }
       ],
       "nameTemplate": "{defKey}[{defName}]",

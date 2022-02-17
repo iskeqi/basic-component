@@ -24,9 +24,9 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(webSocketHandler, "/") // configure webSocketHandler
-                .addInterceptors(webSocketInterceptor) // configure HandshakeInterceptor
-                .setAllowedOrigins("*"); // allow cross-domain access
+        registry.addHandler(webSocketHandler, "/ws") // 配置 webSocketHandler
+                .addInterceptors(webSocketInterceptor) // 配置握手拦截器
+                .setAllowedOrigins("*"); // 允许跨域访问
     }
 
 }

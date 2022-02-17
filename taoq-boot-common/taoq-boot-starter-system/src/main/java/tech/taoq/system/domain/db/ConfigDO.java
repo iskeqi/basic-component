@@ -31,7 +31,7 @@ public class ConfigDO extends BaseDO {
     @ApiModelProperty("扩展字段")
     private String extra;
 
-    @ApiModelProperty("是否禁用[0 启用，1 禁用]")
+    @ApiModelProperty("是否禁用[0:未禁用 1:已禁用]")
     @TableField(value = "is_disable")
     private String disable;
 }

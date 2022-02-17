@@ -40,7 +40,7 @@ public class DictItemService implements BaseDictValidate {
         if (list.size() == 0) {
             // 当前 typeCode 的第一次新增，必须填写 typeName
             if (StrUtil.isBlank(dictItemDO.getTypeName())) {
-                throw new ParamIllegalException("typeName 未必填项");
+                throw new ParamIllegalException("typeName 为必填项");
             }
         } else {
             dictItemDO.setTypeName(list.get(0).getTypeName());

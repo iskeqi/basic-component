@@ -1,6 +1,5 @@
 package tech.taoq.websocket.auth;
 
-import tech.taoq.common.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +35,10 @@ public class WebSocketInterceptor extends HttpSessionHandshakeInterceptor {
 
         // 认证
         WebSocketAuthDto webSocketAuthDto = webSocketAuth.auth(httpServletRequest);
-        if (webSocketAuthDto.getAuthenticate()) {
-            log.info("websocket authentication failed,request params : {}", JsonUtil.writeValueAsString(httpServletRequest));
+        if (!webSocketAuthDto.getAuthenticate()) {
+            StringBuffer requestURL = httpServletRequest.getRequestURL().append('?');
+            String queryString = httpServletRequest.getQueryString();
+            log.info("websocket authentication failed,request params : {}", requestURL.append(queryString));
             return false;
         }
 
