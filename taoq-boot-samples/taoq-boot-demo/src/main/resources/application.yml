@@ -1,32 +1,34 @@
 # 公共环境配置可以放在此文件中
 
 spring:
-    profiles:
-        active: local-dev
-    main:
-        banner-mode: off
-#    jackson:
-#        date-format: yyyy-MM-dd HH:mm:ss
-#        allow-bean-definition-overriding: true
-#    cache:
-#        type: ehcache
-#        ehcache:
-#            config: classpath:/ehcache.xml
-#    servlet:
-#        multipart:
-#            max-file-size: 20MB
-#            max-request-size: 30MB
+  profiles:
+    active: local-dev
+  main:
+    banner-mode: off
+  #    jackson:
+  #        date-format: yyyy-MM-dd HH:mm:ss
+  #        allow-bean-definition-overriding: true
+  #    cache:
+  #        type: ehcache
+  #        ehcache:
+  #            config: classpath:/ehcache.xml
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 30MB
+#  resources:
+#    static-locations: file:///D:/upload/
 
 # 配置端口号和应用路径
 server:
-    port: 9100
-    servlet:
-        context-path: /iot
+  port: 9100
+  servlet:
+    context-path: /iot
 
 # 日志相关配置
 logging:
-    file:
-        name: logs/app.log
+  file:
+    name: logs/app.log
 
 # sa-token 相关配置
 #sa-token:
@@ -41,8 +43,8 @@ logging:
 
 # 配置 MyBatisPlus 日志和别名包
 mybatis-plus:
-    config-location:
-        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-        type-aliases-package: com.keqi.seed.core.typeHandler
-    global-config:
-        banner: false
+  config-location:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    type-aliases-package: com.keqi.seed.core.typeHandler
+  global-config:
+    banner: false

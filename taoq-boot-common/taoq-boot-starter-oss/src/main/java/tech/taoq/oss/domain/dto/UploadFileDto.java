@@ -1,18 +1,25 @@
 package tech.taoq.oss.domain.dto;
 
-import io.swagger.annotations.ApiModelProperty;
-
 /**
  * UploadInfoDto
  *
  * @author keqi
  */
-public class UploadInfoDto {
+public class UploadFileDto {
 
-    @ApiModelProperty("文件名称")
+    /**
+     * 存储类型[1:本地文件系统 2:minio]
+     */
+    private String storageType;
+
+    /**
+     * 文件名称
+     */
     private String fileName;
 
-    @ApiModelProperty("文件上传url")
+    /**
+     * 文件上传url
+     */
     private String uploadUrl;
 
     public String getFileName() {
@@ -29,5 +36,13 @@ public class UploadInfoDto {
 
     public void setUploadUrl(String uploadUrl) {
         this.uploadUrl = uploadUrl;
+    }
+
+    public String getStorageType() {
+        return storageType;
+    }
+
+    public void setStorageType(String storageType) {
+        this.storageType = storageType;
     }
 }

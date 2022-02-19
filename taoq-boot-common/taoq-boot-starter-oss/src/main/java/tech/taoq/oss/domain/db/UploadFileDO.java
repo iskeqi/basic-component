@@ -10,87 +10,116 @@ import tech.taoq.mp.pojo.BaseDO;
 @TableName(value = "sys_upload_file")
 public class UploadFileDO extends BaseDO {
 
-	/**
-	 * 文件名称
-	 */
-	@TableField(value = "name")
-	private String name;
+    /**
+     * 文件名称
+     */
+    @TableField(value = "name")
+    private String name;
 
-	/**
-	 * 文件存储路径（相对路径）
-	 */
-	@TableField(value = "path")
-	private String path;
+    /**
+     * 文件存储路径[相对路径]
+     */
+    @TableField(value = "path")
+    private String path;
 
-	/**
-	 * 文件类型
-	 */
-	@TableField(value = "type")
-	private String type;
+    /**
+     * 文件类型[Content-Type]
+     */
+    @TableField(value = "type")
+    private String type;
 
-	/**
-	 * 文件大小（单位：字节）
-	 */
-	@TableField(value = "size")
-	private Long size;
+    /**
+     * 文件大小[单位:字节]
+     */
+    @TableField(value = "size")
+    private Long size;
 
-	/**
-	 * 存储类型[1 本地文件系统，2 MINIO]
-	 */
-	@TableField(value = "storage_type")
-	private String storageType;
+    /**
+     * 存储类型[1:本地文件系统 2:minio]
+     */
+    @TableField(value = "storage_type")
+    private String storageType;
 
-	/**
-	 * 逻辑删除字段（0 未删除，1 已删除）
-	 */
-	@TableField(value = "is_deleted")
-	private String deleted;
+    /**
+     * 是否删除[0:未删除 1:已删除]
+     */
+    @TableField(value = "is_deleted")
+    private String deleted;
 
-	public String getName() {
-		return name;
-	}
+    public enum StorageType {
 
-	public void setName(String name) {
-		this.name = name;
-	}
+        /**
+         * 存储在应用程序所在的本地文件系统中
+         */
+        LOCAL_FILE_SYSTEM("1", "localFileSystem"),
 
-	public String getPath() {
-		return path;
-	}
+        /**
+         * 存储在 MINIO 文件系统中
+         */
+        MINIO("2", "minio");
 
-	public void setPath(String path) {
-		this.path = path;
-	}
+        private final String code;
+        private final String codeName;
 
-	public String getType() {
-		return type;
-	}
+        StorageType(String code, String codeName) {
+            this.code = code;
+            this.codeName = codeName;
+        }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+        public String getCode() {
+            return code;
+        }
 
-	public Long getSize() {
-		return size;
-	}
+        public String getCodeName() {
+            return codeName;
+        }
+    }
 
-	public void setSize(Long size) {
-		this.size = size;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getStorageType() {
-		return storageType;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setStorageType(String storageType) {
-		this.storageType = storageType;
-	}
+    public String getPath() {
+        return path;
+    }
 
-	public String getDeleted() {
-		return deleted;
-	}
+    public void setPath(String path) {
+        this.path = path;
+    }
 
-	public void setDeleted(String deleted) {
-		this.deleted = deleted;
-	}
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
+    }
+
+    public String getStorageType() {
+        return storageType;
+    }
+
+    public void setStorageType(String storageType) {
+        this.storageType = storageType;
+    }
+
+    public String getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
+    }
 }

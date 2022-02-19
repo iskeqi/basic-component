@@ -1,11 +1,14 @@
 package tech.taoq.oss.controller;
 
-import tech.taoq.oss.domain.db.UploadFileDO;
-import tech.taoq.oss.domain.dto.DownloadInfoDto;
-import tech.taoq.oss.domain.dto.UploadInfoDto;
-import tech.taoq.oss.service.UploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tech.taoq.oss.domain.dto.DownloadInfoDto;
+import tech.taoq.oss.domain.dto.NotificationDto;
+import tech.taoq.oss.domain.dto.UploadFileDto;
+import tech.taoq.oss.domain.param.*;
+import tech.taoq.oss.service.UploadFileService;
+
+import java.io.IOException;
 
 /**
  * UploadFileController
@@ -22,33 +25,33 @@ public class UploadFileController {
     /**
      * 获取文件上传信息
      *
-     * @param fileName fileName
+     * @param param param
      * @return r
      */
-    @PostMapping("/{fileName}")
-    public UploadInfoDto uploadFile(@PathVariable String fileName) {
-        return uploadFileService.uploadFile(fileName);
+    @PostMapping
+    public UploadFileDto uploadFile(@RequestBody UploadFileParam param) {
+        return uploadFileService.uploadFile(param.getFileName());
     }
 
     /**
      * 获取文件下载链接
      *
-     * @param fileName fileName
+     * @param param param
      * @return r
      */
-    @PostMapping("/info/{fileName}")
-    public DownloadInfoDto getDownloadInfo(@PathVariable String fileName) {
-        return uploadFileService.getDownloadInfo(fileName);
+    @PostMapping("/downloadInfo")
+    public DownloadInfoDto downloadInfo(@RequestBody DownloadInfoParam param) {
+        return uploadFileService.downloadInfo(param.getFileName());
     }
 
     /**
      * 删除文件
      *
-     * @param fileName fileName
+     * @param param param
      */
-    @DeleteMapping("/{fileName}")
-    public void deleteFile(@PathVariable String fileName) {
-        uploadFileService.deleteFile(fileName);
+    @DeleteMapping
+    public void deleteFile(@RequestBody DeleteFileParam param) {
+        uploadFileService.deleteFile(param.getId());
     }
 
     /**
@@ -56,8 +59,19 @@ public class UploadFileController {
      *
      * @param param param
      */
-    @GetMapping("/notification")
-    public void notification(@RequestBody UploadFileDO param) {
-        uploadFileService.notification(param);
+    @PostMapping("/notification")
+    public NotificationDto notification(@RequestBody NotificationParam param) {
+        return uploadFileService.notification(param);
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param param param
+     * @throws IOException IOException
+     */
+    @PostMapping("/upload")
+    public void upload(UploadParam param) throws IOException {
+        uploadFileService.upload(param);
     }
 }

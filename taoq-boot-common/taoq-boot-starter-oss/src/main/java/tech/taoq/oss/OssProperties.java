@@ -9,18 +9,25 @@ import org.springframework.stereotype.Component;
  * @author keqi
  */
 @Component
-@ConfigurationProperties(prefix = "keqi.oss")
+@ConfigurationProperties(prefix = "taoq.oss")
 public class OssProperties {
 
     /**
      * 文件存储类型 [localFileSystem,minio]
      */
-    private String fileStorageType = "localFileSystem";
+    private String storageType = "localFileSystem";
+
+    /**
+     * 是否配置 /oss 为前缀的静态资源文件映射
+     */
+    private Boolean resourceHandlers = true;
 
     /**
      * Minio 相关属性
      */
     private Minio minio = new Minio();
+
+    private LocalFileSystem localFileSystem = new LocalFileSystem();
 
     public static class Minio {
 
@@ -77,12 +84,28 @@ public class OssProperties {
         }
     }
 
-    public String getFileStorageType() {
-        return fileStorageType;
+    public static class LocalFileSystem {
+
+        /**
+         * 本地文件系统根路径
+         */
+        private String rootPath;
+
+        public String getRootPath() {
+            return rootPath;
+        }
+
+        public void setRootPath(String rootPath) {
+            this.rootPath = rootPath;
+        }
     }
 
-    public void setFileStorageType(String fileStorageType) {
-        this.fileStorageType = fileStorageType;
+    public String getStorageType() {
+        return storageType;
+    }
+
+    public void setStorageType(String storageType) {
+        this.storageType = storageType;
     }
 
     public Minio getMinio() {
@@ -91,5 +114,21 @@ public class OssProperties {
 
     public void setMinio(Minio minio) {
         this.minio = minio;
+    }
+
+    public LocalFileSystem getLocalFileSystem() {
+        return localFileSystem;
+    }
+
+    public void setLocalFileSystem(LocalFileSystem localFileSystem) {
+        this.localFileSystem = localFileSystem;
+    }
+
+    public Boolean getResourceHandlers() {
+        return resourceHandlers;
+    }
+
+    public void setResourceHandlers(Boolean resourceHandlers) {
+        this.resourceHandlers = resourceHandlers;
     }
 }

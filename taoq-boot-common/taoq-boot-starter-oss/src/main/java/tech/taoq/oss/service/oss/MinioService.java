@@ -1,16 +1,16 @@
 package tech.taoq.oss.service.oss;
 
-import tech.taoq.common.exception.third.ThirdServiceErrorException;
-import tech.taoq.oss.OssProperties;
-import tech.taoq.oss.domain.dto.DownloadInfoDto;
-import tech.taoq.oss.domain.dto.UploadInfoDto;
-import tech.taoq.oss.domain.enums.FileStorageType;
 import io.minio.*;
 import io.minio.http.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.taoq.common.exception.third.ThirdServiceErrorException;
+import tech.taoq.oss.OssProperties;
+import tech.taoq.oss.domain.db.UploadFileDO;
+import tech.taoq.oss.domain.dto.DownloadInfoDto;
+import tech.taoq.oss.domain.dto.UploadFileDto;
 
 import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
@@ -31,7 +31,7 @@ public class MinioService implements OssService {
 
     @PostConstruct
     public void init() {
-        if (!FileStorageType.MINIO.getCode().equals(ossProperties.getFileStorageType())) {
+        if (!UploadFileDO.StorageType.MINIO.getCodeName().equals(ossProperties.getStorageType())) {
             return;
         }
 
@@ -94,7 +94,7 @@ public class MinioService implements OssService {
     }
 
     @Override
-    public UploadInfoDto uploadFile(String fileName) {
+    public UploadFileDto uploadFile(String fileName) {
         String url;
         try {
             url = minioClient.getPresignedObjectUrl(
@@ -109,9 +109,15 @@ public class MinioService implements OssService {
             throw new ThirdServiceErrorException("minio has an error");
         }
 
-        UploadInfoDto dto = new UploadInfoDto();
+        UploadFileDto dto = new UploadFileDto();
+        dto.setStorageType(getStorageType());
         dto.setFileName(fileName);
         dto.setUploadUrl(url);
         return dto;
+    }
+
+    @Override
+    public String getStorageType() {
+        return UploadFileDO.StorageType.MINIO.getCode();
     }
 }

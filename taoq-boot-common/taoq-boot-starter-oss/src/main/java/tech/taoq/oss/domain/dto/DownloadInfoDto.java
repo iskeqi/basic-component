@@ -1,7 +1,5 @@
 package tech.taoq.oss.domain.dto;
 
-import io.swagger.annotations.ApiModelProperty;
-
 /**
  * DownloadInfoDto
  *
@@ -9,10 +7,14 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class DownloadInfoDto {
 
-    @ApiModelProperty("文件名称")
+    /**
+     * 文件名称
+     */
     private String fileName;
 
-    @ApiModelProperty("文件下载url")
+    /**
+     * 文件下载url
+     */
     private String downloadUrl;
 
     public String getFileName() {

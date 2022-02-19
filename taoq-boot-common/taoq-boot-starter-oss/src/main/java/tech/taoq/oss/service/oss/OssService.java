@@ -1,7 +1,7 @@
 package tech.taoq.oss.service.oss;
 
 import tech.taoq.oss.domain.dto.DownloadInfoDto;
-import tech.taoq.oss.domain.dto.UploadInfoDto;
+import tech.taoq.oss.domain.dto.UploadFileDto;
 
 /**
  * OssService
@@ -14,5 +14,7 @@ public interface OssService {
 
     DownloadInfoDto getDownloadInfo(String fileName);
 
-    UploadInfoDto uploadFile(String fileName);
+    UploadFileDto uploadFile(String fileName);
+
+    String getStorageType();
 }
