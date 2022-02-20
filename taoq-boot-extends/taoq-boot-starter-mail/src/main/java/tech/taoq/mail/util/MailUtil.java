@@ -32,7 +32,7 @@ public class MailUtil {
     }
 
     /**
-     * send simple text mail
+     * 发送简单的文本邮件
      *
      * @param simpleMailParam simpleMailParam
      */
@@ -46,7 +46,7 @@ public class MailUtil {
     }
 
     /**
-     * send simple text mail
+     * 发送简单的文本邮件
      *
      * @param simpleMailParam simpleMailParam
      * @param identifier      identifiers
@@ -67,7 +67,7 @@ public class MailUtil {
     }
 
     /**
-     * send a simple text email with attachments
+     * 发送带有附件的简单文本电子邮件
      *
      * @param attachmentMailParam attachmentMailParam
      */
@@ -81,7 +81,7 @@ public class MailUtil {
     }
 
     /**
-     * send a simple text email with attachments
+     * 发送带有附件的简单文本电子邮件
      *
      * @param attachmentMailParam attachmentMailParam
      * @param identifier          identifier
@@ -128,7 +128,7 @@ public class MailUtil {
     }
 
     /**
-     * send a simple text email with attachments and inline file
+     * 发送带有附件和内联文件的简单文本电子邮件
      *
      * @param inlineMailParam inlineMailParam
      */
@@ -142,7 +142,7 @@ public class MailUtil {
     }
 
     /**
-     * send a simple text email with attachments and inline file
+     * 发送带有附件和内联文件的简单文本电子邮件
      *
      * @param inlineMailParam inlineMailParam
      * @param identifier      identifier

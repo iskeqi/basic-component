@@ -3,6 +3,12 @@ package tech.taoq.mail.service;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.mail.MailProperties;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.common.pojo.PageDto;
 import tech.taoq.common.pojo.enums.DisableEnum;
@@ -10,15 +16,6 @@ import tech.taoq.common.util.JsonUtil;
 import tech.taoq.mail.domain.db.MailDO;
 import tech.taoq.mail.domain.enums.ConnectEnum;
 import tech.taoq.mail.mapper.MailMapper;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.mail.MailProperties;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.mail.MessagingException;
 import java.util.HashMap;
@@ -34,7 +31,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Slf4j
 @Service
-@CacheConfig(cacheNames = "sys:mail")
+//@CacheConfig(cacheNames = "sys:mail")
 public class MailService {
 
     @Autowired
@@ -54,14 +51,14 @@ public class MailService {
         return param;
     }
 
-    @CacheEvict(key = "#identifier")
+    // @CacheEvict(key = "#identifier")
     public void deleteByIdentifier(String identifier) {
         mailMapper.delete(Wrappers.query(new MailDO().setIdentifier(identifier)));
 
         JAVA_MAIL_SENDERS.remove(identifier);
     }
 
-    @CacheEvict(key = "#param.identifier")
+    // @CacheEvict(key = "#param.identifier")
     public void updateByIdentifier(MailDO param) {
         MailDO t = new MailDO().setIdentifier(param.getIdentifier());
 
@@ -72,7 +69,7 @@ public class MailService {
         JAVA_MAIL_SENDERS.remove(param.getIdentifier());
     }
 
-    @Cacheable(key = "#identifier")
+    // @Cacheable(key = "#identifier")
     public MailDO getByIdentifier(String identifier) {
         return mailMapper.selectOne(Wrappers.query(new MailDO()
                 .setIdentifier(identifier)

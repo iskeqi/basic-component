@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @author keqi
  */
 @Component
-@ConfigurationProperties(prefix = "keqi.task")
+@ConfigurationProperties(prefix = "taoq.task")
 public class TaskProperties {
 
     /**
@@ -20,7 +20,7 @@ public class TaskProperties {
     /**
      * 程序停止时，是否等待线程池内的任务执行完成再关闭
      */
-    private boolean waitForTasksToCompleteOnShutdown = true;
+    private Boolean waitForTasksToCompleteOnShutdown = true;
 
     /**
      * 最多等待 5 秒后，就关闭线程池
@@ -30,7 +30,7 @@ public class TaskProperties {
     /**
      * 取消任务后，是否在线程池中自动移除该任务
      */
-    private boolean removeOnCancelPolicy = true;
+    private Boolean removeOnCancelPolicy = true;
 
     /**
      * 线程池内线程名称前缀
@@ -45,11 +45,11 @@ public class TaskProperties {
         this.poolSize = poolSize;
     }
 
-    public boolean isWaitForTasksToCompleteOnShutdown() {
+    public Boolean getWaitForTasksToCompleteOnShutdown() {
         return waitForTasksToCompleteOnShutdown;
     }
 
-    public void setWaitForTasksToCompleteOnShutdown(boolean waitForTasksToCompleteOnShutdown) {
+    public void setWaitForTasksToCompleteOnShutdown(Boolean waitForTasksToCompleteOnShutdown) {
         this.waitForTasksToCompleteOnShutdown = waitForTasksToCompleteOnShutdown;
     }
 
@@ -61,11 +61,11 @@ public class TaskProperties {
         this.awaitTerminationMillis = awaitTerminationMillis;
     }
 
-    public boolean isRemoveOnCancelPolicy() {
+    public Boolean getRemoveOnCancelPolicy() {
         return removeOnCancelPolicy;
     }
 
-    public void setRemoveOnCancelPolicy(boolean removeOnCancelPolicy) {
+    public void setRemoveOnCancelPolicy(Boolean removeOnCancelPolicy) {
         this.removeOnCancelPolicy = removeOnCancelPolicy;
     }
 
