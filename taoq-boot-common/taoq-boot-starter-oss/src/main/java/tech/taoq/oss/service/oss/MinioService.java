@@ -5,6 +5,7 @@ import io.minio.http.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import tech.taoq.common.exception.third.ThirdServiceErrorException;
 import tech.taoq.oss.OssProperties;
@@ -21,6 +22,7 @@ import java.util.concurrent.TimeUnit;
  * @author keqi
  */
 @Service
+@ConditionalOnProperty(name = "taos.oss.storage-type", havingValue = "minio")
 public class MinioService implements OssService {
 
     private static final Logger log = LoggerFactory.getLogger(MinioService.class);

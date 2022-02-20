@@ -25,6 +25,12 @@ taoq:
     local-file-system:
       # 前面后面都需要加上 '/'
       root-path: /D:/upload/
+    resource-handlers: false
+  web:
+    my-mapping-jackson2-http-message-converter: true
+    my-string-to-local-date-converter: true
+    my-string-to-local-date-time-converter: true
+    my-string-to-number-converter-factory: true
 #    resource-handlers: false
 #    minio:
 #      endpoint: http://172.29.143.35:9000

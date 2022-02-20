@@ -29,8 +29,8 @@ public class UploadFileController {
      * @return r
      */
     @PostMapping
-    public UploadFileDto uploadFile(@RequestBody UploadFileParam param) {
-        return uploadFileService.uploadFile(param.getFileName());
+    public UploadFileDto uploadFileInfo(@RequestBody UploadFileParam param) {
+        return uploadFileService.uploadFileInfo(param.getFileName());
     }
 
     /**
@@ -71,7 +71,7 @@ public class UploadFileController {
      * @throws IOException IOException
      */
     @PostMapping("/upload")
-    public void upload(UploadParam param) throws IOException {
-        uploadFileService.upload(param);
+    public void uploadFile(UploadParam param) throws IOException {
+        uploadFileService.uploadFile(param);
     }
 }

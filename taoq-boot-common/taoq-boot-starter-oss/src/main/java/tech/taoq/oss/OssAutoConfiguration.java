@@ -20,13 +20,12 @@ public class OssAutoConfiguration {
     private OssProperties ossProperties;
 
     /**
-     * 配置 myResourceHandlers 对象
+     * 配置 myResourceHandlers 对象handlers
      * <p>
      * 直接利用 Servlet 容器作为一个 web 服务器，提供文件下载的功能
      */
     @Bean
-    @ConditionalOnProperty(prefix = "taoq.oss", name = "resourceHandlers",
-            havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "taoq.oss", value = "resource-handlers", matchIfMissing = true)
     public WebMvcConfigurer myResourceHandlers() {
         return new WebMvcConfigurer() {
             @Override

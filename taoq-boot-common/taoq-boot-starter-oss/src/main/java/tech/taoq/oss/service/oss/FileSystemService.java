@@ -2,6 +2,7 @@ package tech.taoq.oss.service.oss;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import tech.taoq.oss.OssProperties;
 import tech.taoq.oss.domain.db.UploadFileDO;
@@ -16,6 +17,7 @@ import java.io.File;
  * @author keqi
  */
 @Service
+@ConditionalOnProperty(name = "taos.oss.storage-type", havingValue = "localFileSystem", matchIfMissing = true)
 public class FileSystemService implements OssService {
 
     @Autowired

@@ -20,13 +20,16 @@ public class OssProperties {
     /**
      * 是否配置 /oss 为前缀的静态资源文件映射
      */
-    private Boolean resourceHandlers = true;
+    private Boolean resourceHandlers;
 
     /**
      * Minio 相关属性
      */
     private Minio minio = new Minio();
 
+    /**
+     * 本地文件系统相关属性
+     */
     private LocalFileSystem localFileSystem = new LocalFileSystem();
 
     public static class Minio {

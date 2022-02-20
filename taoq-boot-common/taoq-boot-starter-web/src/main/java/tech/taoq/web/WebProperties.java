@@ -15,65 +15,65 @@ public class WebProperties {
     /**
      * 是否使用内置的 MappingJackson2HttpMessageConverter 对象
      */
-    private boolean myMappingJackson2HttpMessageConverter = true;
+    private Boolean myMappingJackson2HttpMessageConverter;
 
     /**
      * 是否使用内置的 MyStringToLocalDateConverter 对象
      */
-    private boolean myStringToLocalDateConverter = true;
+    private Boolean myStringToLocalDateConverter;
 
     /**
      * 是否使用内置的 MyStringToLocalDateTimeConverter 对象
      */
-    private boolean myStringToLocalDateTimeConverter = true;
+    private Boolean myStringToLocalDateTimeConverter;
 
     /**
      * 是否使用内置的 MyStringToNumberConverterFactory 对象
      */
-    private boolean myStringToNumberConverterFactory = true;
+    private Boolean myStringToNumberConverterFactory;
 
     /**
      * 是否使用内置的 CorsFilter 对象进行跨域配置
      */
-    private boolean cors = true;
+    private Boolean cors;
 
-    public boolean isMyMappingJackson2HttpMessageConverter() {
+    public Boolean getMyMappingJackson2HttpMessageConverter() {
         return myMappingJackson2HttpMessageConverter;
     }
 
-    public void setMyMappingJackson2HttpMessageConverter(boolean myMappingJackson2HttpMessageConverter) {
+    public void setMyMappingJackson2HttpMessageConverter(Boolean myMappingJackson2HttpMessageConverter) {
         this.myMappingJackson2HttpMessageConverter = myMappingJackson2HttpMessageConverter;
     }
 
-    public boolean isMyStringToLocalDateConverter() {
+    public Boolean getMyStringToLocalDateConverter() {
         return myStringToLocalDateConverter;
     }
 
-    public void setMyStringToLocalDateConverter(boolean myStringToLocalDateConverter) {
+    public void setMyStringToLocalDateConverter(Boolean myStringToLocalDateConverter) {
         this.myStringToLocalDateConverter = myStringToLocalDateConverter;
     }
 
-    public boolean isMyStringToLocalDateTimeConverter() {
+    public Boolean getMyStringToLocalDateTimeConverter() {
         return myStringToLocalDateTimeConverter;
     }
 
-    public void setMyStringToLocalDateTimeConverter(boolean myStringToLocalDateTimeConverter) {
+    public void setMyStringToLocalDateTimeConverter(Boolean myStringToLocalDateTimeConverter) {
         this.myStringToLocalDateTimeConverter = myStringToLocalDateTimeConverter;
     }
 
-    public boolean isMyStringToNumberConverterFactory() {
+    public Boolean getMyStringToNumberConverterFactory() {
         return myStringToNumberConverterFactory;
     }
 
-    public void setMyStringToNumberConverterFactory(boolean myStringToNumberConverterFactory) {
+    public void setMyStringToNumberConverterFactory(Boolean myStringToNumberConverterFactory) {
         this.myStringToNumberConverterFactory = myStringToNumberConverterFactory;
     }
 
-    public boolean isCors() {
+    public Boolean getCors() {
         return cors;
     }
 
-    public void setCors(boolean cors) {
+    public void setCors(Boolean cors) {
         this.cors = cors;
     }
 }

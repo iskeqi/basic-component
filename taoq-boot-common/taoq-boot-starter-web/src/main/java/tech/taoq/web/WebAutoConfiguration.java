@@ -41,8 +41,7 @@ public class WebAutoConfiguration {
      * @return r
      */
     @Bean
-    @ConditionalOnProperty(prefix = "taoq.web", name = "cors",
-            havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "taoq.web", value = "cors", matchIfMissing = true)
     public FilterRegistrationBean<CorsFilter> orderFilter() {
         FilterRegistrationBean<CorsFilter> filter = new FilterRegistrationBean<>();
         filter.setName("CorsFilter");
@@ -57,8 +56,8 @@ public class WebAutoConfiguration {
      * @return r
      */
     @Bean
-    @ConditionalOnProperty(prefix = "taoq.web", name = "myMappingJackson2HttpMessageConverter",
-            havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "taoq.web", value = "my-mapping-jackson2-http-message-converter",
+            matchIfMissing = true)
     public WebMvcConfigurer myMappingJackson2HttpMessageConverter() {
         return new WebMvcConfigurer() {
             @Override
@@ -99,8 +98,8 @@ public class WebAutoConfiguration {
      * Spring 是支持同时存在多个实现类的，实现同一个方法的最终效果是叠加，并不会互相影响
      */
     @Bean
-    @ConditionalOnProperty(prefix = "taoq.web", name = "myStringToLocalDateConverter",
-            havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "taoq.web", value = "my-string-to-local-date-converter",
+            matchIfMissing = true)
     public WebMvcConfigurer myStringToLocalDateConverter() {
         return new WebMvcConfigurer() {
             @Override
@@ -117,8 +116,8 @@ public class WebAutoConfiguration {
      * Spring 是支持同时存在多个实现类的，实现同一个方法的最终效果是叠加，并不会互相影响
      */
     @Bean
-    @ConditionalOnProperty(prefix = "taoq.web", name = "myStringToLocalDateTimeConverter",
-            havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "taoq.web", value = "my-string-to-local-date-time-converter",
+            matchIfMissing = true)
     public WebMvcConfigurer myStringToLocalDateTimeConverter() {
         return new WebMvcConfigurer() {
             @Override
@@ -135,8 +134,8 @@ public class WebAutoConfiguration {
      * Spring 是支持同时存在多个实现类的，实现同一个方法的最终效果是叠加，并不会互相影响
      */
     @Bean
-    @ConditionalOnProperty(prefix = "taoq.web", name = "myStringToNumberConverterFactory",
-            havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "taoq.web", value = "my-string-to-number-converter-factory",
+            matchIfMissing = true)
     public WebMvcConfigurer myStringToNumberConverterFactory() {
         return new WebMvcConfigurer() {
             @Override

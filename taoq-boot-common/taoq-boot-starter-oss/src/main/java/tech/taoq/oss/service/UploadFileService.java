@@ -1,7 +1,6 @@
 package tech.taoq.oss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import tech.taoq.common.pojo.enums.DeletedEnum;
 import tech.taoq.oss.OssProperties;
@@ -12,11 +11,8 @@ import tech.taoq.oss.domain.dto.UploadFileDto;
 import tech.taoq.oss.domain.param.NotificationParam;
 import tech.taoq.oss.domain.param.UploadParam;
 import tech.taoq.oss.mapper.UploadFileMapper;
-import tech.taoq.oss.service.oss.FileSystemService;
-import tech.taoq.oss.service.oss.MinioService;
 import tech.taoq.oss.service.oss.OssService;
 
-import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -35,19 +31,9 @@ public class UploadFileService {
     @Autowired
     private OssProperties ossProperties;
     @Autowired
-    private ApplicationContext applicationContext;
     private OssService ossService;
 
-    @PostConstruct
-    public void init() {
-        if (UploadFileDO.StorageType.MINIO.getCodeName().equals(ossProperties.getStorageType())) {
-            ossService = applicationContext.getBean(MinioService.class);
-        } else {
-            ossService = applicationContext.getBean(FileSystemService.class);
-        }
-    }
-
-    public UploadFileDto uploadFile(String fileName) {
+    public UploadFileDto uploadFileInfo(String fileName) {
         // 重命名文件名[文件模板为：/当天日期/UUID-真实文件名称，如 /2022-02-19/1bf7b69f9fb0a79ac611acb6bd8fa4c1-readme.md]
         fileName = "/" + LocalDate.now() + "/"
                 + UUID.randomUUID().toString().replace("-", "") + "-" + fileName;
@@ -87,7 +73,7 @@ public class UploadFileService {
      *
      * @param param param
      */
-    public void upload(UploadParam param) throws IOException {
+    public void uploadFile(UploadParam param) throws IOException {
         String rootPath = ossProperties.getLocalFileSystem().getRootPath();
         File file = new File(rootPath + param.getFileName());
         if (!file.exists()) {
