@@ -150,7 +150,6 @@
             </resource>
         </resources>
         <plugins>
-            <!--打包生成源码插件-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
