@@ -6,7 +6,6 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.5.5</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -16,7 +15,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <revision>1.0-SNAPSHOT</revision>
+        <revision>1.0.0</revision>
     </properties>
 
     <modules>
@@ -26,7 +25,7 @@
         <module>taoq-boot-mq</module>
         <module>taoq-boot-orm</module>
         <module>taoq-boot-push</module>
-        <module>taoq-boot-samples</module>
+<!--        <module>taoq-boot-samples</module>-->
         <module>taoq-boot-security</module>
     </modules>
 
@@ -166,5 +165,16 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>maven-releases</id>
+            <url>http://114.132.245.130:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven-snapshots</id>
+            <url>http://114.132.245.130:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

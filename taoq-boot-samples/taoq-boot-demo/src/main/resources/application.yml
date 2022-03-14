@@ -45,6 +45,6 @@ logging:
 mybatis-plus:
   config-location:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    type-aliases-package: com.keqi.seed.core.typeHandler
+    type-aliases-package: tech.taoq.mp.typeHandler
   global-config:
     banner: false

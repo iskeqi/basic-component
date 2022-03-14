@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * JSON 类型转换器（支持 array 类型的）
- *
+ * MP 的 JacksonTypeHandler 更加优秀，需要指定 @TableName 注解的 autoResultMap 属性值为 true
  * @author keqi
  */
 @Alias("JsonListMapHandler")

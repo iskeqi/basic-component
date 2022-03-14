@@ -2,9 +2,9 @@ package tech.taoq.iot.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import tech.taoq.iot.mapper.TestDataTypeMapper;
+import tech.taoq.iot.test.TestDataType;
 import tech.taoq.task.SpringTaskService;
 
 import java.util.Date;
@@ -20,6 +20,8 @@ public class TaskController {
 
     @Autowired
     private SpringTaskService springTaskService;
+    @Autowired
+    private TestDataTypeMapper testDataTypeMapper;
 
     @GetMapping("/test1")
     public void test1() {
@@ -34,5 +36,13 @@ public class TaskController {
         springTaskService.schedule(() -> log.info("schedule cron"), "*/10 * * * * ?");
 
         schedule_ones.cancel(true);
+    }
+
+    @PostMapping("/test2")
+    public TestDataType test2(@RequestBody TestDataType param) {
+        testDataTypeMapper.insert(param);
+
+        TestDataType r = testDataTypeMapper.selectById(param.getId());
+        return r;
     }
 }
