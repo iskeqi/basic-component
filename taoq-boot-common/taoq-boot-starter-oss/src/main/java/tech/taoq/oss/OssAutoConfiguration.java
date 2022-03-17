@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import tech.taoq.oss.domain.db.UploadFileDO;
@@ -13,6 +14,7 @@ import tech.taoq.oss.domain.db.UploadFileDO;
  *
  * @author keqi
  */
+@Component
 @ComponentScan("tech.taoq.oss")
 public class OssAutoConfiguration {
 
