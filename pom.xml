@@ -74,67 +74,67 @@
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-web</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-knife4j</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-mp</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-oss</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-mail</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-system</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-websocket</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-common</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-satoken</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-rbac</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-task</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-quartz</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-tdengine</artifactId>
-                <version>${project.version}</version>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

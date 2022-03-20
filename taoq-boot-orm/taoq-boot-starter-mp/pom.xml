@@ -11,6 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>taoq-boot-starter-mp</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
