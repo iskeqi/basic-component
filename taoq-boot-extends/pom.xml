@@ -15,6 +15,5 @@
 
     <modules>
         <module>taoq-boot-starter-mail</module>
-        <module>taoq-boot-starter-tdengine</module>
     </modules>
 </project>

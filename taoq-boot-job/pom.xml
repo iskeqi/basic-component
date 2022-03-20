@@ -14,7 +14,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>taoq-boot-starter-quartz</module>
         <module>taoq-boot-starter-task</module>
     </modules>
 </project>
