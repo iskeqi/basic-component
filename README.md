@@ -8,7 +8,7 @@ quickly develop basic components for monolithic applications
   - [x] taoq-boot-starter-knife4j		-- 对于 knife4j 的封装
   - [x] taoq-boot-starter-oss		    -- 对于本地文件上传/MinIO/第三方对象存储服务的封装
   - [x] taoq-boot-starter-system		-- 提供字典、参数配置管理等基础功能
-  - [x] taoq-boot-starter-rbac		    -- 提供用户、角色、权限等基础功能
+  - [ ] taoq-boot-starter-rbac		    -- 提供用户、角色、权限等基础功能
   - [x] taoq-boot-starter-websocket	    -- 基于 spring websocket 的封装
 - taoq-boot-orm			            -- orm 模块
   - [x] taoq-boot-starter-mp			-- 对 MyBatisPlus 的封装
