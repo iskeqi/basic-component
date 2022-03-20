@@ -31,11 +31,11 @@ quickly develop basic components for monolithic applications
   - [ ] taoq-boot-starter-getui		    -- 对个推推送的封装
   - [ ] taoq-boot-starter-jpush	        -- 对极光推送的封装
 - taoq-boot-extends			        -- 第三方扩展模块
-  - [ ] taoq-boot-starter-redis		    -- 对 Redis 的封装
   - [x] taoq-boot-starter-mail		    -- 对于发送邮件的封装
-  - [ ] taoq-boot-starter-sms		    -- 短信发送模块
+  - [ ] taoq-boot-starter-redis		    -- 对 Redis 的封装
   - [ ] taoq-boot-starter-xss			-- xss 防注入相关
   - [ ] taoq-boot-starter-pay			-- 支付模块
-  - [ ] taoq-boot-starter-robot		-- 对钉钉/企业微信/飞书的一些操作封装
   - [ ] taoq-boot-starter-tdengine		-- 对 TDengine 的封装
+  - [ ] taoq-boot-starter-sms		    -- 短信发送模块
+  - [ ] taoq-boot-starter-robot		-- 对钉钉/企业微信/飞书的一些操作封装 
 - taoq-boot-samples			        -- taoq boot 使用例子

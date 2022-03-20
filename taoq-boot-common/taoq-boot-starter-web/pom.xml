@@ -5,23 +5,31 @@
     <parent>
         <artifactId>taoq-boot</artifactId>
         <groupId>tech.taoq</groupId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>1.2.4.RELEASE</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>taoq-boot-starter-websocket</artifactId>
+    <artifactId>taoq-boot-starter-web</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>tech.taoq</groupId>
             <artifactId>taoq-boot-starter-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
 </project>

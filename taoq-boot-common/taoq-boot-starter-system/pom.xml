@@ -5,26 +5,30 @@
     <parent>
         <artifactId>taoq-boot</artifactId>
         <groupId>tech.taoq</groupId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>1.2.4.RELEASE</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>taoq-boot-starter-mp</artifactId>
+    <artifactId>taoq-boot-starter-system</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>p6spy</groupId>
-            <artifactId>p6spy</artifactId>
+            <groupId>tech.taoq</groupId>
+            <artifactId>taoq-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>tech.taoq</groupId>
-            <artifactId>taoq-boot-starter-common</artifactId>
+            <artifactId>taoq-boot-starter-mp</artifactId>
         </dependency>
+        <dependency>
+            <groupId>tech.taoq</groupId>
+            <artifactId>taoq-boot-starter-knife4j</artifactId>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-cache</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 </project>

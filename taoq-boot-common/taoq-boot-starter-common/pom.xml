@@ -5,8 +5,8 @@
     <parent>
         <artifactId>taoq-boot</artifactId>
         <groupId>tech.taoq</groupId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>1.2.4.RELEASE</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

@@ -5,23 +5,26 @@
     <parent>
         <artifactId>taoq-boot</artifactId>
         <groupId>tech.taoq</groupId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>1.2.4.RELEASE</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>taoq-boot-starter-knife4j</artifactId>
+    <artifactId>taoq-boot-starter-mp</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-            <scope>provided</scope>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tech.taoq</groupId>
+            <artifactId>taoq-boot-starter-common</artifactId>
         </dependency>
     </dependencies>
 </project>
