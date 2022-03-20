@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <revision>1.0.0</revision>
+        <revision>1.0.1</revision>
     </properties>
 
     <modules>
@@ -25,7 +25,6 @@
         <module>taoq-boot-mq</module>
         <module>taoq-boot-orm</module>
         <module>taoq-boot-push</module>
-<!--        <module>taoq-boot-samples</module>-->
         <module>taoq-boot-security</module>
     </modules>
 
@@ -50,6 +49,11 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>5.7.16</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.76</version>
             </dependency>
             <dependency>
                 <groupId>com.dtflys.forest</groupId>

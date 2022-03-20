@@ -17,7 +17,6 @@
         <module>taoq-boot-starter-common</module>
         <module>taoq-boot-starter-knife4j</module>
         <module>taoq-boot-starter-oss</module>
-        <module>taoq-boot-starter-rbac</module>
         <module>taoq-boot-starter-system</module>
         <module>taoq-boot-starter-web</module>
         <module>taoq-boot-starter-websocket</module>
