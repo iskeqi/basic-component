@@ -15,17 +15,19 @@
     <packaging>pom</packaging>
 
     <properties>
-        <revision>1.0.2</revision>
+        <revision>1.0.3</revision>
     </properties>
 
     <modules>
-        <module>taoq-boot-common</module>
-        <module>taoq-boot-extends</module>
-        <module>taoq-boot-job</module>
-        <module>taoq-boot-mq</module>
-        <module>taoq-boot-orm</module>
-        <module>taoq-boot-push</module>
-        <module>taoq-boot-security</module>
+        <module>taoq-boot-starter-common</module>
+        <module>taoq-boot-starter-knife4j</module>
+        <module>taoq-boot-starter-oss</module>
+        <module>taoq-boot-starter-system</module>
+        <module>taoq-boot-starter-web</module>
+        <module>taoq-boot-starter-websocket</module>
+        <module>taoq-boot-starter-mail</module>
+        <module>taoq-boot-starter-task</module>
+        <module>taoq-boot-starter-mp</module>
     </modules>
 
     <dependencyManagement>
@@ -108,32 +110,7 @@
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
-                <artifactId>taoq-boot-starter-common</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>tech.taoq</groupId>
-                <artifactId>taoq-boot-starter-satoken</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>tech.taoq</groupId>
-                <artifactId>taoq-boot-starter-rbac</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-task</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>tech.taoq</groupId>
-                <artifactId>taoq-boot-starter-quartz</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>tech.taoq</groupId>
-                <artifactId>taoq-boot-starter-tdengine</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>
