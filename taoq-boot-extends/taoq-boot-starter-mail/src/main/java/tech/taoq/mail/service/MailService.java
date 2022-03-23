@@ -8,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.common.pojo.PageDto;
 import tech.taoq.common.pojo.enums.DisableEnum;
 import tech.taoq.common.util.JsonUtil;
 import tech.taoq.mail.domain.db.MailDO;
-import tech.taoq.mail.domain.enums.ConnectEnum;
 import tech.taoq.mail.mapper.MailMapper;
 
 import javax.mail.MessagingException;
@@ -82,6 +80,12 @@ public class MailService {
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 
+    /**
+     * 判断指定标识符对应的邮件服务是否可连接
+     *
+     * @param identifier identifier
+     * @return r
+     */
     public MailDO isConnect(String identifier) {
         JavaMailSenderImpl javaMailSender = this.getOneByIdentifier(identifier);
 
@@ -94,12 +98,34 @@ public class MailService {
         }
 
         mailService.updateByIdentifier(new MailDO()
-                .setConnect(isConnect ? ConnectEnum.CONNECT.getCode() : ConnectEnum.NOT_CONNECT.getCode())
+                .setConnect(isConnect ? MailDO.Connect.CONNECT.getCode() : MailDO.Connect.NOT_CONNECT.getCode())
                 .setIdentifier(identifier));
 
         return mailService.getByIdentifier(identifier);
     }
 
+    /**
+     * 根据 identifier 找到对应的 JavaMailSenderImpl 对象
+     *
+     * @param identifier identifier
+     * @return r
+     */
+    public JavaMailSenderImpl getOneByIdentifier(String identifier) {
+        JavaMailSenderImpl javaMailSender = JAVA_MAIL_SENDERS.get(identifier);
+        if (javaMailSender == null) {
+            javaMailSender = this.createJavaMailSender(identifier);
+            JAVA_MAIL_SENDERS.put(identifier, javaMailSender);
+        }
+
+        return javaMailSender;
+    }
+
+    /**
+     * 创建 JavaMailSenderImpl 对象
+     *
+     * @param identifier identifier
+     * @return r
+     */
     public JavaMailSenderImpl createJavaMailSender(String identifier) {
         MailDO mailDO = mailMapper.selectOne(Wrappers.query(new MailDO().setIdentifier(identifier)));
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
@@ -118,31 +144,26 @@ public class MailService {
         javaMailSender.setPassword(mailProperties.getPassword());
         javaMailSender.setProtocol(mailProperties.getProtocol());
         javaMailSender.setDefaultEncoding(mailProperties.getDefaultEncoding().name());
-        if (StringUtils.hasText(mailDO.getProperties())) {
+        if (mailDO.getProperties() != null) {
             Properties properties = new Properties();
-            properties.putAll(JsonUtil.readValue(mailDO.getProperties(), HashMap.class));
+            properties.putAll(JsonUtil.readValue(JsonUtil.writeValueAsString(mailDO.getProperties()), HashMap.class));
             javaMailSender.setJavaMailProperties(properties);
         }
 
         return javaMailSender;
     }
 
-    public JavaMailSenderImpl getOneByIdentifier(String identifier) {
-        JavaMailSenderImpl javaMailSender = JAVA_MAIL_SENDERS.get(identifier);
-        if (javaMailSender == null) {
-            javaMailSender = this.createJavaMailSender(identifier);
-            JAVA_MAIL_SENDERS.put(identifier, javaMailSender);
-        }
-
-        return javaMailSender;
-    }
-
+    /**
+     * 将系统中存在的所有邮件服务提供商，按照优先级从高到低进行排序，找出优先级最高且可以使用的邮件服务提供商对应的标识符
+     *
+     * @return r
+     */
     public String getOneByPriority() {
         List<MailDO> mailDOList = mailMapper.selectList(Wrappers.lambdaQuery(MailDO.class)
                 .orderByDesc((SFunction<MailDO, Integer>) MailDO::getPriority));
         for (MailDO mailDO : mailDOList) {
             MailDO connect = isConnect(mailDO.getIdentifier());
-            if (ConnectEnum.CONNECT.getCode().equals(connect.getConnect())) {
+            if (MailDO.Connect.CONNECT.getCode().equals(connect.getConnect())) {
                 return mailDO.getIdentifier();
             }
         }

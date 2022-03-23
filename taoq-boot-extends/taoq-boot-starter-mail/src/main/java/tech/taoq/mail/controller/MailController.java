@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "邮箱服务管理")
 @RestController
-@RequestMapping("/sys/config")
+@RequestMapping("/sys/mail")
 public class MailController {
 
     @Autowired
@@ -59,7 +59,7 @@ public class MailController {
     }
 
     @ApiOperation("测试是否可连接")
-    @PostMapping
+    @PostMapping("/isConnect")
     public MailDO isConnect(String identifier) {
         return mailService.isConnect(identifier);
     }
