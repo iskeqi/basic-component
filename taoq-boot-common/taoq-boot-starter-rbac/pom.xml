@@ -6,20 +6,21 @@
         <artifactId>taoq-boot</artifactId>
         <groupId>tech.taoq</groupId>
         <version>1.2.4.RELEASE</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>taoq-boot-common</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>taoq-boot-starter-rabc</artifactId>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>taoq-boot-starter-common</module>
-        <module>taoq-boot-starter-knife4j</module>
-        <module>taoq-boot-starter-oss</module>
-        <module>taoq-boot-starter-system</module>
-        <module>taoq-boot-starter-web</module>
-        <module>taoq-boot-starter-websocket</module>
-        <module>taoq-boot-starter-rbac</module>
-    </modules>
-
+    <dependencies>
+        <dependency>
+            <groupId>tech.taoq</groupId>
+            <artifactId>taoq-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tech.taoq</groupId>
+            <artifactId>taoq-boot-starter-mp</artifactId>
+        </dependency>
+    </dependencies>
 </project>
