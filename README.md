@@ -10,6 +10,8 @@ quickly develop basic components for monolithic applications
   - [x] taoq-boot-starter-system		-- 提供字典、参数配置管理等基础功能
   - [ ] taoq-boot-starter-rbac		    -- 提供角色、菜单管理功能
   - [x] taoq-boot-starter-websocket	    -- 基于 spring websocket 的封装
+  - [ ] taoq-boot-starter-auth	        -- 提供用户管理，登录功能
+  - [ ] taoq-boot-starter-log	        -- 提供日志记录功能
 - taoq-boot-orm			            -- orm 模块
   - [x] taoq-boot-starter-mp			-- 对 MyBatisPlus 的封装
   - [ ] taoq-boot-starter-mybatis		-- 对 MyBatis 的封装
@@ -37,5 +39,5 @@ quickly develop basic components for monolithic applications
   - [ ] taoq-boot-starter-pay			-- 支付模块
   - [ ] taoq-boot-starter-tdengine		-- 对 TDengine 的封装
   - [ ] taoq-boot-starter-sms		    -- 短信发送模块
-  - [ ] taoq-boot-starter-robot		-- 对钉钉/企业微信/飞书的一些操作封装 
+  - [ ] taoq-boot-starter-robot		    -- 对钉钉/企业微信/飞书的一些操作封装 
 - taoq-boot-samples			        -- taoq boot 使用例子
