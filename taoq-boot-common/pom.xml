@@ -19,6 +19,7 @@
         <module>taoq-boot-starter-system</module>
         <module>taoq-boot-starter-web</module>
         <module>taoq-boot-starter-websocket</module>
+        <module>taoq-boot-starter-rbac</module>
     </modules>
 
 </project>
