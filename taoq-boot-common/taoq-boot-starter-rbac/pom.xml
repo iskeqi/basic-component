@@ -5,12 +5,12 @@
     <parent>
         <artifactId>taoq-boot</artifactId>
         <groupId>tech.taoq</groupId>
-        <version>1.2.4.RELEASE</version>
+        <version>1.2.6.RELEASE</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>taoq-boot-starter-rabc</artifactId>
+    <artifactId>taoq-boot-starter-rbac</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>

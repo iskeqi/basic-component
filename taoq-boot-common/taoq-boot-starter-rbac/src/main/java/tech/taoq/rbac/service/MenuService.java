@@ -1,8 +1,10 @@
 package tech.taoq.rbac.service;
 
-import org.springframework.stereotype.Service;
+import tech.taoq.rbac.domain.db.MenuDO;
 
-@Service
-public class MenuService {
+import java.util.List;
 
+public interface MenuService {
+
+    List<MenuDO> listByRoleId(String roleId);
 }
