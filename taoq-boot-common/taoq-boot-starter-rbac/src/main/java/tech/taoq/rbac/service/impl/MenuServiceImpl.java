@@ -12,7 +12,6 @@ import tech.taoq.rbac.domain.dto.MenuDto;
 import tech.taoq.rbac.domain.dto.MenuRoleDto;
 import tech.taoq.rbac.mapper.AccountRoleMapper;
 import tech.taoq.rbac.mapper.MenuMapper;
-import tech.taoq.rbac.mapper.RoleMapper;
 import tech.taoq.rbac.mapper.RoleMenuMapper;
 import tech.taoq.rbac.service.MenuService;
 
@@ -25,13 +24,14 @@ public class MenuServiceImpl implements MenuService {
     private static final String ROOT_ID = "0";
 
     @Autowired
-    private RoleMapper roleMapper;
-    @Autowired
     private RoleMenuMapper roleMenuMapper;
     @Autowired
     private AccountRoleMapper accountRoleMapper;
     @Autowired
     private MenuMapper menuMapper;
+
+    public MenuServiceImpl() {
+    }
 
     @Override
     public List<MenuRoleDto> listByRoleId(String roleId) {
