@@ -18,17 +18,11 @@ import lombok.experimental.Accessors;
 @TableName(value = "sys_account_role")
 public class AccountRoleDO {
 
-    /**
-     * 用户唯一标识符
-     */
-    @ApiModelProperty("是否占用[Y:占用 N:未占用]")
+    @ApiModelProperty("用户唯一标识符")
     @TableField(value = "account_id")
     private String accountId;
 
-    /**
-     * 角色id
-     */
-    @ApiModelProperty("是否占用[Y:占用 N:未占用]")
+    @ApiModelProperty("角色id")
     @TableField(value = "role_id")
     private String roleId;
 }

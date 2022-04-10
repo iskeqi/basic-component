@@ -13,11 +13,11 @@ import java.util.List;
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class MenuRoleDto extends MenuDO {
+public class MenuAccountDto extends MenuDO {
 
     @ApiModelProperty("是否占用[true:占用 false:未占用]")
     private Boolean occupy;
 
     @ApiModelProperty("子级菜单列表")
-    private List<MenuRoleDto> childList;
+    private List<MenuAccountDto> childList;
 }
