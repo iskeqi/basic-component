@@ -17,7 +17,7 @@ create table `sys_menu`  (
   `icon` varchar(32)  default null comment 'icon图标',
   `type` char(1)  default null comment '菜单类型[C:目录 M:菜单 B:按钮]',
   `permiss` varchar(256)  default null comment '权限标识',
-  `parent_id` bigint null default null comment '父级id',
+  `parent_id` bigint null default null comment '父级id[根节点parent_id为0]',
   `order_num` int null default null comment '排序字段',
   `create_time` datetime  default null comment '创建时间',
   `update_time` datetime  default null comment '修改时间',

@@ -48,14 +48,10 @@ public class RoleServiceImpl implements RoleService {
         roleMapper.deleteById(id);
 
         // 删除角色-菜单关联记录
-        RoleMenuDO t1 = new RoleMenuDO();
-        t1.setRoleId(id);
-        roleMenuMapper.deleteById(t1);
+        roleMenuMapper.delete(Wrappers.query(new RoleMenuDO().setRoleId(id)));
 
         // 删除用户-角色关联记录
-        AccountRoleDO t2 = new AccountRoleDO();
-        t2.setRoleId(id);
-        accountRoleMapper.deleteById(t2);
+        accountRoleMapper.delete(Wrappers.query(new AccountRoleDO().setRoleId(id)));
     }
 
     @Override

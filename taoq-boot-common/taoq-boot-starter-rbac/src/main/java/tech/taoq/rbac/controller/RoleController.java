@@ -1,6 +1,7 @@
 package tech.taoq.rbac.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +12,7 @@ import tech.taoq.rbac.service.RoleService;
 
 import java.util.List;
 
-/**
- * RoleController
- *
- * @author keqi
- */
+@Api(tags = "角色管理")
 @RestController
 @RequestMapping("/sys/role")
 public class RoleController {

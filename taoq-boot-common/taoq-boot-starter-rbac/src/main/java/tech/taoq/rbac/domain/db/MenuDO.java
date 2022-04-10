@@ -41,7 +41,7 @@ public class MenuDO extends BaseDO {
     @TableField(value = "permiss")
     private String permiss;
 
-    @ApiModelProperty("父级id")
+    @ApiModelProperty("父级id[根节点parent_id为0]")
     @TableField(value = "parent_id")
     private String parentId;
 
