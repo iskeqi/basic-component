@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = TaoqException.class)
     public ResultEntity businessException(TaoqException e) {
-        log.error(e.getStatus() + " : " + e.getMessage());
+        log.error("status={},message={}", e.getStatus(), e.getMessage());
         return ResultEntityBuilder.failure(e.getStatus(), e.getMessage());
     }
 

@@ -2,11 +2,20 @@ package tech.taoq.oss.domain.db;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import tech.taoq.mp.pojo.BaseDO;
 
 /**
  * 文件表
  */
+
+@Data
+@Accessors(chain = true)
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @TableName(value = "sys_upload_file")
 public class UploadFileDO extends BaseDO {
 
@@ -44,7 +53,7 @@ public class UploadFileDO extends BaseDO {
      * 是否删除[0:未删除 1:已删除]
      */
     @TableField(value = "is_deleted")
-    private String deleted;
+    private Boolean deleted;
 
     public enum StorageType {
 
@@ -73,53 +82,5 @@ public class UploadFileDO extends BaseDO {
         public String getCodeName() {
             return codeName;
         }
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Long getSize() {
-        return size;
-    }
-
-    public void setSize(Long size) {
-        this.size = size;
-    }
-
-    public String getStorageType() {
-        return storageType;
-    }
-
-    public void setStorageType(String storageType) {
-        this.storageType = storageType;
-    }
-
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
     }
 }

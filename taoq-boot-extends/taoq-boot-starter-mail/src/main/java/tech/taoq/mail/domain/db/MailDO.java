@@ -49,9 +49,9 @@ public class MailDO extends BaseDO {
     @TableField(value = "is_connect")
     private String connect;
 
-    @ApiModelProperty("是否禁用[0:未禁用 1:已禁用]")
+    @ApiModelProperty("是否禁用[false:未禁用 true:已禁用]")
     @TableField(value = "is_disable")
-    private String disable;
+    private Boolean disable;
 
     @Getter
     @AllArgsConstructor

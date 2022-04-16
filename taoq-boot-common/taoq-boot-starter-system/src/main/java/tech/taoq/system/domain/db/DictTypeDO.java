@@ -5,26 +5,28 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import tech.taoq.mp.pojo.BaseDO;
 
+/**
+ * 字典类型表
+ */
 @Data
 @Accessors(chain = true)
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_config")
-public class ConfigDO extends BaseDO {
+@TableName(value = "sys_dict_type")
+public class DictTypeDO extends BaseDO {
 
-    @ApiModelProperty("配置项key")
-    private String configKey;
+    @ApiModelProperty("字典名称")
+    private String name;
 
-    @ApiModelProperty("配置项value")
-    private String configValue;
+    @ApiModelProperty("字典类型")
+    private String type;
 
-    @ApiModelProperty("配置项描述信息")
+    @ApiModelProperty("备注")
     private String note;
-
-    @ApiModelProperty("扩展字段")
-    private String extra;
 
     @ApiModelProperty("是否禁用[false:未禁用 true:已禁用]")
     @TableField(value = "is_disable")

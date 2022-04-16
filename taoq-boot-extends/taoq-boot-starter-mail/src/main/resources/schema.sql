@@ -11,7 +11,7 @@ create table if not exists `sys_mail`
     `properties`  json         default null comment '额外属性[以json字符串方式填写]',
     `priority`    int          default '0' comment '优先级[数字越大,优先级越高]',
     `is_connect`  tinyint      default '0' comment '是否可连接[0:不可连接 1:可连接]',
-    `is_disable`  tinyint      default '0' comment '是否禁用[0:未禁用 1:已禁用]',
+    `is_disable`  tinyint      default '0' comment '是否禁用[false:未禁用 true:已禁用]',
     `create_time` datetime     default null comment '创建时间',
     `update_time` datetime     default null comment '修改时间',
     primary key (`id`),

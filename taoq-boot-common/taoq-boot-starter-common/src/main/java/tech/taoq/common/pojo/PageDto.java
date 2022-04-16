@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 分页响应VO（命名和 MyBatisPlus 保持一致）
+ * 分页响应Dto
  *
  * @author keqi
  */

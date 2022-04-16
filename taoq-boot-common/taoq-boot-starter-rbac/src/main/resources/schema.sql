@@ -1,6 +1,6 @@
 drop table if exists `sys_role`;
 create table `sys_role`  (
-  `id` bigint unsigned not null comment '角色id',
+  `id` bigint unsigned not null auto_increment comment '角色id',
   `name` varchar(32)  default null comment '角色名称',
   `permiss` varchar(32)   default null comment '权限标识',
   `type` char(1)  default null comment '角色类型[N:内置 Z:自定义]',
@@ -11,7 +11,7 @@ create table `sys_role`  (
 
 drop table if exists `sys_menu`;
 create table `sys_menu`  (
-  `id` bigint unsigned not null comment '菜单id',
+  `id` bigint unsigned not null auto_increment comment '菜单id',
   `name` varchar(32)  default null comment '名称',
   `url` varchar(256)  default null comment '请求url地址',
   `icon` varchar(32)  default null comment 'icon图标',

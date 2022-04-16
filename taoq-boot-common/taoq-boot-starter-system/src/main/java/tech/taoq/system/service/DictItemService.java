@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.common.pojo.PageDto;
-import tech.taoq.common.pojo.enums.DisableEnum;
 import tech.taoq.system.domain.db.DictItemDO;
 import tech.taoq.system.mapper.DictItemMapper;
 import tech.taoq.web.validator.BaseDictValidate;
@@ -90,13 +89,13 @@ public class DictItemService implements BaseDictValidate {
         return dictItemMapper.selectOne(Wrappers.query(new DictItemDO()
                 .setTypeCode(typeCode)
                 .setItemCode(itemCode)
-                .setDisable(DisableEnum.ENABLE.getCode())));
+                .setDisable(null)));
     }
 
     public List<DictItemDO> listByTypeCode(String typeCode) {
         // 只返回启用状态的字典项
         return dictItemMapper.selectList(Wrappers.lambdaQuery(DictItemDO.class)
-                .setEntity(new DictItemDO().setTypeCode(typeCode).setDisable(DisableEnum.ENABLE.getCode()))
+                .setEntity(new DictItemDO().setTypeCode(typeCode).setDisable(null))
                 .orderByAsc((SFunction<DictItemDO, Integer>) DictItemDO::getOrderNum));
     }
 

@@ -38,7 +38,7 @@ public class DictItemDO extends BaseDO {
     @ApiModelProperty("排序字段")
     private Integer orderNum;
 
-    @ApiModelProperty("是否禁用[0:未禁用 1:已禁用]")
+    @ApiModelProperty("是否禁用[false:未禁用 true:已禁用]")
     @TableField(value = "is_disable")
     private String disable;
 }
