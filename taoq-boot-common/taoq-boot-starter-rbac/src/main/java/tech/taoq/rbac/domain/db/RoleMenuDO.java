@@ -1,6 +1,5 @@
 package tech.taoq.rbac.domain.db;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -19,10 +18,8 @@ import lombok.experimental.Accessors;
 public class RoleMenuDO {
 
     @ApiModelProperty("角色id")
-    @TableField(value = "role_id")
     private String roleId;
 
     @ApiModelProperty("菜单id")
-    @TableField(value = "menu_id")
     private String menuId;
 }

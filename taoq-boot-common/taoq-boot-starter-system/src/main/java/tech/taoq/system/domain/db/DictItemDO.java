@@ -8,37 +8,34 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import tech.taoq.mp.pojo.BaseDO;
 
-import javax.validation.constraints.NotNull;
-
 /**
  * 字典表
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
 @TableName(value = "sys_dict_item")
 public class DictItemDO extends BaseDO {
 
-    @NotNull
-    @ApiModelProperty("字典类型编码")
-    private String typeCode;
-
-    @NotNull
     @ApiModelProperty("字典项编码")
     private String itemCode;
 
-    @ApiModelProperty("字典类型名称")
-    private String typeName;
-
-    @NotNull
-    @ApiModelProperty("字典项值")
+    @ApiModelProperty("字典项名称")
     private String itemName;
 
-    @NotNull
+    @ApiModelProperty("字典项值")
+    private String itemValue;
+
+    @ApiModelProperty("字典类型")
+    private String dictType;
+
+    @ApiModelProperty("备注")
+    private String note;
+
     @ApiModelProperty("排序字段")
     private Integer orderNum;
 
     @ApiModelProperty("是否禁用[false:未禁用 true:已禁用]")
     @TableField(value = "is_disable")
-    private String disable;
+    private Boolean disable;
 }

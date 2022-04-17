@@ -1,6 +1,5 @@
 package tech.taoq.system.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +30,9 @@ public class DictTypeServiceImpl implements DictTypeService {
     }
 
     public void updateById(DictTypeDO param) {
-        DictTypeDO t1 = BeanUtil.copyProperties(param, DictTypeDO.class);
         // configKey 是不能修改的
-        t1.setType(null);
-        t1.setCreateTime(null);
+        param.setType(null);
+        param.setCreateTime(null);
         dictTypeMapper.updateById(param);
     }
 
