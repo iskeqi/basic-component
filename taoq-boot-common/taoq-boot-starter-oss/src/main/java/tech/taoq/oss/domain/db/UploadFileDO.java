@@ -2,16 +2,14 @@ package tech.taoq.oss.domain.db;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
 import lombok.experimental.Accessors;
 import tech.taoq.mp.pojo.BaseDO;
 
 /**
  * 文件表
  */
-
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
@@ -19,42 +17,28 @@ import tech.taoq.mp.pojo.BaseDO;
 @TableName(value = "sys_upload_file")
 public class UploadFileDO extends BaseDO {
 
-    /**
-     * 文件名称
-     */
-    @TableField(value = "name")
+    @ApiModelProperty("文件名称")
     private String name;
 
-    /**
-     * 文件存储路径[相对路径]
-     */
+    @ApiModelProperty("文件存储路径[相对路径]")
     @TableField(value = "path")
     private String path;
 
-    /**
-     * 文件类型[Content-Type]
-     */
-    @TableField(value = "type")
+    @ApiModelProperty("文件类型[Content-Type]")
     private String type;
 
-    /**
-     * 文件大小[单位:字节]
-     */
-    @TableField(value = "size")
+    @ApiModelProperty("文件大小[单位:字节]")
     private Long size;
 
-    /**
-     * 存储类型[1:本地文件系统 2:minio]
-     */
-    @TableField(value = "storage_type")
+    @ApiModelProperty("存储类型[1:本地文件系统 2:minio]")
     private String storageType;
 
-    /**
-     * 是否删除[0:未删除 1:已删除]
-     */
+    @ApiModelProperty("是否删除[false:未删除 true:已删除]")
     @TableField(value = "is_deleted")
     private Boolean deleted;
 
+    @Getter
+    @AllArgsConstructor
     public enum StorageType {
 
         /**
@@ -69,18 +53,5 @@ public class UploadFileDO extends BaseDO {
 
         private final String code;
         private final String codeName;
-
-        StorageType(String code, String codeName) {
-            this.code = code;
-            this.codeName = codeName;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
-        public String getCodeName() {
-            return codeName;
-        }
     }
 }

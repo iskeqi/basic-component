@@ -1,37 +1,19 @@
 package tech.taoq.oss.domain.param;
 
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- * UploadParam
- *
- * @author keqi
- */
+@Data
+@Accessors(chain = true)
+@NoArgsConstructor
 public class UploadParam {
 
-    /**
-     * 上传文件名称[包含路径]
-     */
+    @ApiModelProperty("上传文件名称[包含路径]")
     private String fileName;
 
-    /**
-     * 文件
-     */
+    @ApiModelProperty("文件")
     private MultipartFile uploadFile;
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public MultipartFile getUploadFile() {
-        return uploadFile;
-    }
-
-    public void setUploadFile(MultipartFile uploadFile) {
-        this.uploadFile = uploadFile;
-    }
 }

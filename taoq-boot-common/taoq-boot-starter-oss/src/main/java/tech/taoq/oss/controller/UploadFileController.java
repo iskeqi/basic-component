@@ -1,5 +1,7 @@
 package tech.taoq.oss.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.taoq.oss.domain.dto.DownloadInfoDto;
@@ -10,11 +12,7 @@ import tech.taoq.oss.service.UploadFileService;
 
 import java.io.IOException;
 
-/**
- * UploadFileController
- *
- * @author keqi
- */
+@Api(tags = "文件管理")
 @RestController
 @RequestMapping("/sys/upload")
 public class UploadFileController {
@@ -22,54 +20,31 @@ public class UploadFileController {
     @Autowired
     private UploadFileService uploadFileService;
 
-    /**
-     * 获取文件上传信息
-     *
-     * @param param param
-     * @return r
-     */
+    @ApiOperation("获取文件上传信息")
     @PostMapping
     public UploadFileDto uploadFileInfo(@RequestBody UploadFileParam param) {
         return uploadFileService.uploadFileInfo(param.getFileName());
     }
 
-    /**
-     * 获取文件下载链接
-     *
-     * @param param param
-     * @return r
-     */
+    @ApiOperation("获取文件下载链接")
     @PostMapping("/downloadInfo")
     public DownloadInfoDto downloadInfo(@RequestBody DownloadInfoParam param) {
         return uploadFileService.downloadInfo(param.getFileName());
     }
 
-    /**
-     * 删除文件
-     *
-     * @param param param
-     */
+    @ApiOperation("删除文件")
     @DeleteMapping
     public void deleteFile(@RequestBody DeleteFileParam param) {
         uploadFileService.deleteFile(param.getId());
     }
 
-    /**
-     * 接收文件上传成功的通知
-     *
-     * @param param param
-     */
+    @ApiOperation("接收文件上传成功的通知")
     @PostMapping("/notification")
     public NotificationDto notification(@RequestBody NotificationParam param) {
         return uploadFileService.notification(param);
     }
 
-    /**
-     * 文件上传
-     *
-     * @param param param
-     * @throws IOException IOException
-     */
+    @ApiOperation("文件上传")
     @PostMapping("/upload")
     public void uploadFile(UploadParam param) throws IOException {
         uploadFileService.uploadFile(param);

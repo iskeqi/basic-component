@@ -42,5 +42,9 @@
             <groupId>tech.taoq</groupId>
             <artifactId>taoq-boot-starter-knife4j</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
     </dependencies>
 </project>
