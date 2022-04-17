@@ -2,7 +2,6 @@ package tech.taoq.oss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.taoq.common.pojo.enums.DeletedEnum;
 import tech.taoq.oss.OssProperties;
 import tech.taoq.oss.domain.db.UploadFileDO;
 import tech.taoq.oss.domain.dto.DownloadInfoDto;
@@ -49,7 +48,7 @@ public class UploadFileService {
         // ossService.deleteByName(fileName);
 
         UploadFileDO entity = new UploadFileDO();
-        entity.setDeleted(DeletedEnum.DISABLE.getCode());
+        entity.setDeleted(false);
         entity.setId(id);
         uploadFileMapper.updateById(entity);
     }

@@ -1,35 +1,18 @@
 package tech.taoq.oss.domain.dto;
 
-/**
- * DownloadInfoDto
- *
- * @author keqi
- */
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+
+@Data
+@Accessors(chain = true)
+@NoArgsConstructor
 public class DownloadInfoDto {
 
-    /**
-     * 文件名称
-     */
+    @ApiModelProperty("文件名称")
     private String fileName;
 
-    /**
-     * 文件下载url
-     */
+    @ApiModelProperty("文件下载url")
     private String downloadUrl;
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public String getDownloadUrl() {
-        return downloadUrl;
-    }
-
-    public void setDownloadUrl(String downloadUrl) {
-        this.downloadUrl = downloadUrl;
-    }
 }

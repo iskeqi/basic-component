@@ -1,48 +1,21 @@
 package tech.taoq.oss.domain.dto;
 
-/**
- * UploadInfoDto
- *
- * @author keqi
- */
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+
+@Data
+@Accessors(chain = true)
+@NoArgsConstructor
 public class UploadFileDto {
 
-    /**
-     * 存储类型[1:本地文件系统 2:minio]
-     */
+    @ApiModelProperty("存储类型[1:本地文件系统 2:minio]")
     private String storageType;
 
-    /**
-     * 文件名称
-     */
+    @ApiModelProperty("文件名称")
     private String fileName;
 
-    /**
-     * 文件上传url
-     */
+    @ApiModelProperty("文件上传url")
     private String uploadUrl;
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public String getUploadUrl() {
-        return uploadUrl;
-    }
-
-    public void setUploadUrl(String uploadUrl) {
-        this.uploadUrl = uploadUrl;
-    }
-
-    public String getStorageType() {
-        return storageType;
-    }
-
-    public void setStorageType(String storageType) {
-        this.storageType = storageType;
-    }
 }

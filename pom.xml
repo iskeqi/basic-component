@@ -14,7 +14,7 @@
 <!--    更新版本步骤：-->
 <!--        1、全局替换 taoq-boot 相关依赖的版本号(不要替换错了)-->
 <!--        2、执行 mvn install/deploy 命令-->
-    <version>1.2.4.RELEASE</version>
+    <version>1.2.9.RELEASE</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -71,47 +71,52 @@
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-web</artifactId>
-                <version>1.2.4.RELEASE</version>
+                <version>1.2.9.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-knife4j</artifactId>
-                <version>1.2.4.RELEASE</version>
+                <version>1.2.9.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-mp</artifactId>
-                <version>1.2.4.RELEASE</version>
+                <version>1.2.9.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-oss</artifactId>
-                <version>1.2.4.RELEASE</version>
+                <version>1.2.9.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-mail</artifactId>
-                <version>1.2.4.RELEASE</version>
+                <version>1.2.9.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-system</artifactId>
-                <version>1.2.4.RELEASE</version>
+                <version>1.2.9.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-websocket</artifactId>
-                <version>1.2.4.RELEASE</version>
+                <version>1.2.9.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-rbac</artifactId>
+                <version>1.2.9.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-task</artifactId>
-                <version>1.2.4.RELEASE</version>
+                <version>1.2.9.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>tech.taoq</groupId>
                 <artifactId>taoq-boot-starter-common</artifactId>
-                <version>1.2.4.RELEASE</version>
+                <version>1.2.9.RELEASE</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
