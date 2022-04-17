@@ -27,7 +27,7 @@ create table if not exists `sys_dict_type`
     unique key `dict_type` (`type`)
 ) engine=innodb default charset=utf8mb4 collate=utf8mb4_0900_ai_ci comment='字典类型表';
 
-create table `sys_dict_item`
+create table if not exists `sys_dict_item`
 (
     `id`          bigint unsigned not null auto_increment comment '主键id',
     `item_code`   varchar(32)  default null comment '字典项编码',

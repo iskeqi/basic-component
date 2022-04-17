@@ -1,5 +1,6 @@
-drop table if exists `sys_role`;
-create table `sys_role`  (
+create database if not exists `taoq-boot` default charset utf8mb4 collate utf8mb4_0900_ai_ci;
+
+create table if not exists `sys_role`  (
   `id` bigint unsigned not null auto_increment comment '角色id',
   `name` varchar(32)  default null comment '角色名称',
   `permiss` varchar(32)   default null comment '权限标识',
@@ -9,8 +10,7 @@ create table `sys_role`  (
   primary key (`id`)
 ) engine = innodb character set = utf8mb4 collate = utf8mb4_0900_ai_ci comment = '角色表';
 
-drop table if exists `sys_menu`;
-create table `sys_menu`  (
+create table if not exists `sys_menu`  (
   `id` bigint unsigned not null auto_increment comment '菜单id',
   `name` varchar(32)  default null comment '名称',
   `url` varchar(256)  default null comment '请求url地址',
@@ -24,15 +24,13 @@ create table `sys_menu`  (
   primary key (`id`)
 ) engine = innodb character set = utf8mb4 collate = utf8mb4_0900_ai_ci comment = '菜单权限表';
 
-drop table if exists `sys_role_menu`;
-create table `sys_role_menu`  (
+create table if not exists `sys_role_menu`  (
   `role_id` bigint unsigned not null comment '角色id',
   `menu_id` bigint unsigned not null comment '菜单id',
   primary key (`role_id`, `menu_id`)
 ) engine = innodb character set = utf8mb4 collate = utf8mb4_0900_ai_ci comment = '角色-菜单关联表';
 
-drop table if exists `sys_account_role`;
-create table `sys_account_role`  (
+create table if not exists `sys_account_role`  (
   `account_id` varchar(32)  not null comment '用户唯一标识符',
   `role_id` bigint unsigned not null comment '角色id',
   primary key (`account_id`, `role_id`)
