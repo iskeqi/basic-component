@@ -31,15 +31,19 @@ logging:
     name: logs/app.log
 
 # sa-token 相关配置
-#sa-token:
-#    # 关闭 logo
-#    is-print: false
-#    # 关闭默认的 cookie 机制
-#    is-read-cookie: false
-#    token-style: tik
-#    # 不允许同一账号并发登录
-#    is-concurrent: false
-#    token-name: token
+sa-token:
+    # 关闭 logo
+    is-print: true
+    # 关闭默认的 cookie 机制
+    is-read-cookie: false
+    token-style: tik
+    # 不允许同一账号并发登录
+    is-concurrent: false
+    token-name: token
+    sso:
+      isSlo: true
+      isHttp: true
+      secretkey: kQwIOrYvnXmSDkwEiFngrKidMcdrgKor
 
 # 配置 MyBatisPlus 日志和别名包
 mybatis-plus:
