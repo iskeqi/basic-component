@@ -17,6 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import tech.taoq.web.mvc.converter.MyStringToLocalDateConverter;
 import tech.taoq.web.mvc.converter.MyStringToLocalDateTimeConverter;
@@ -29,8 +30,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
+ * WebAutoConfiguration
+ *
  * @author keqi
  */
+@EnableWebMvc
 @ServletComponentScan
 @ComponentScan("tech.taoq.web")
 public class WebAutoConfiguration {
