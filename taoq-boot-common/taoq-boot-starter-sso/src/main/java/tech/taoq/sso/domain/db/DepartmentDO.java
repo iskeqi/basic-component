@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import tech.taoq.mp.pojo.BaseDO;
 
+import java.util.List;
+
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
@@ -34,4 +36,8 @@ public class DepartmentDO extends BaseDO {
     @ApiModelProperty("是否禁用[false:未禁用 true:已禁用]")
     @TableField(value = "is_disable")
     private Boolean disable;
+
+    @ApiModelProperty("子级列表")
+    @TableField(exist = false)
+    private List<DepartmentDO> childList;
 }
