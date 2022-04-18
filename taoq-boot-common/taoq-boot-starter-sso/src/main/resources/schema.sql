@@ -31,7 +31,7 @@ create table if not exists `sys_account` (
   `name` varchar(32) default null comment '用户昵称',
   `phone` varchar(32) default null comment '手机号码',
   `email` varchar(64) default null comment '邮箱',
-  `gender` char(3) default null comment '性别[MAN:男性 WOMEN:女性]',
+  `gender` char(1) default null comment '性别[M:男性 F:女性]',
   `note` varchar(32) default null comment '备注',
   `is_disable` tinyint default '0' comment '是否禁用[false:未禁用 true:已禁用]',
   `create_time` datetime default null comment '创建时间',
