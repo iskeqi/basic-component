@@ -66,11 +66,11 @@ create table if not exists `sys_application` (
 
 create table `sys_login_log` (
   `id` bigint unsigned not null auto_increment comment '主键id',
-  `account_name` varchar(32) character set utf8mb4 collate utf8mb4_0900_ai_ci default null comment '用户名称',
-  `account_id` varchar(32) character set utf8mb4 collate utf8mb4_0900_ai_ci default null comment '用户id',
+  `account_name` varchar(32) default null comment '用户名称',
+  `account_id` varchar(32) default null comment '用户id',
   `login_ip` varchar(32) default null comment '登录ip',
-  `type` char(3) character set utf8mb4 collate utf8mb4_0900_ai_ci default 'Z' comment '日志类型[IN:登录 OUT:退出]',
-  `useragent` varchar(512) character set utf8mb4 collate utf8mb4_0900_ai_ci default null comment 'useragent',
+  `type` char(3) default 'z' comment '日志类型[IN:登录 OUT:退出]',
+  `useragent` varchar(512) default null comment 'useragent',
   `is_login_error` tinyint default '0' comment '是否登录失败[false:登录成功 true:登录失败]',
   `create_time` datetime default null comment '创建时间',
   `update_time` datetime default null comment '修改时间',
