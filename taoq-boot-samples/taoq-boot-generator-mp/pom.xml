@@ -10,17 +10,22 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>taoq-boot-starter-generator</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>taoq-boot-generator-mp</artifactId>
+    <version>1.0.0</version>
 
     <dependencies>
         <dependency>
             <groupId>tech.taoq</groupId>
-            <artifactId>taoq-boot-starter-mp</artifactId>
+            <artifactId>taoq-boot-starter-system</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.5.2</version>
         </dependency>
     </dependencies>
 </project>

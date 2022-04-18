@@ -21,7 +21,6 @@
         <module>taoq-boot-starter-websocket</module>
         <module>taoq-boot-starter-rbac</module>
         <module>taoq-boot-starter-sso</module>
-        <module>taoq-boot-starter-generator</module>
     </modules>
 
 </project>

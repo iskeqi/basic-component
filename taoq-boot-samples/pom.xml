@@ -14,7 +14,7 @@
 
     <modules>
         <module>taoq-boot-demo</module>
-        <module>taoq-boot-generator</module>
+        <module>taoq-boot-generator-mp</module>
     </modules>
 
 </project>
