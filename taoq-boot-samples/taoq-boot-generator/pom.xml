@@ -3,18 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>taoq-boot</artifactId>
+        <artifactId>taoq-boot-samples</artifactId>
         <groupId>tech.taoq</groupId>
         <version>1.2.9.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>taoq-boot-samples</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>taoq-boot-generator</artifactId>
 
-    <modules>
-        <module>taoq-boot-demo</module>
-        <module>taoq-boot-generator</module>
-    </modules>
-
+    <dependencies>
+        <dependency>
+            <groupId>tech.taoq</groupId>
+            <artifactId>taoq-boot-starter-generator</artifactId>
+        </dependency>
+    </dependencies>
 </project>

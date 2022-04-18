@@ -13,6 +13,7 @@ quickly develop basic components for monolithic applications
   - [ ] taoq-boot-starter-auth	        -- 提供用户管理，登录功能
   - [ ] taoq-boot-starter-log	        -- 提供日志记录功能
   - [ ] taoq-boot-starter-sso	        -- 提供单点登录功能
+  - [ ] taoq-boot-starter-generator	    -- 提供代码生成功能
 - taoq-boot-orm			            -- orm 模块
   - [x] taoq-boot-starter-mp			-- 对 MyBatisPlus 的封装
   - [ ] taoq-boot-starter-mybatis		-- 对 MyBatis 的封装
