@@ -25,10 +25,10 @@ public class DepartmentDO extends BaseDO {
     private String code;
 
     @ApiModelProperty("上级部门id")
-    private String parent_id;
+    private String parentId;
 
     @ApiModelProperty("负责人id")
-    private String head_id;
+    private String headId;
 
     @ApiModelProperty("排序字段")
     private Integer orderNum;

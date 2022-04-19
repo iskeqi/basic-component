@@ -15,62 +15,68 @@ import tech.taoq.sso.mapper.AccountDepartmentMapper;
 import tech.taoq.sso.mapper.AccountJobMapper;
 import tech.taoq.sso.mapper.AccountMapper;
 
+/**
+ * 用户管理
+ *
+ * @author keqi
+ */
 @Service
 public class AccountService {
 
-	@Autowired
-	private AccountMapper accountMapper;
-	@Autowired
-	private AccountJobMapper accountJobMapper;
-	@Autowired
-	private AccountDepartmentMapper accountDepartmentMapper;
-	@Autowired
-	private AccountService accountService;
+    @Autowired
+    private AccountMapper accountMapper;
+    @Autowired
+    private AccountJobMapper accountJobMapper;
+    @Autowired
+    private AccountDepartmentMapper accountDepartmentMapper;
+    @Autowired
+    private AccountService accountService;
 
-	@Transactional
-	public void insert(AccountParam param) {
-		accountMapper.insert(param);
+    @Transactional
+    public void insert(AccountParam param) {
+        accountMapper.insert(param);
 
-		accountService.insertAssociations(param);
-	}
+        accountService.insertAssociations(param);
+    }
 
-	@Transactional
-	public void deleteById(String id) {
-		accountMapper.deleteById(id);
+    @Transactional
+    public void deleteById(String id) {
+        accountMapper.deleteById(id);
 
-		accountService.deleteAssociations(id);
-	}
+        accountService.deleteAssociations(id);
+    }
 
-	@Transactional
-	public void updateById(AccountParam param) {
-		accountService.deleteAssociations(param.getId());
+    @Transactional
+    public void updateById(AccountParam param) {
+        accountService.deleteAssociations(param.getId());
 
-		accountMapper.updateById(param);
-		accountService.insertAssociations(param);
-	}
+        param.setAccount(null);
+        accountMapper.updateById(param);
 
-	public PageDto<AccountDO> page(AccountPageParam param) {
-		// todo 必须手写sql来完成某些需求
-		Page<AccountDO> page = accountMapper.selectPage(param,
-				Wrappers.query(new AccountDO().setAccount(param.getAccount())
-						.setPhone(param.getPhone())
-						.setDisable(param.getDisable())));
-		return new PageDto<>(page.getTotal(), page.getRecords());
-	}
+        accountService.insertAssociations(param);
+    }
 
-	private void deleteAssociations(String id) {
-		accountJobMapper.delete(Wrappers.query(new AccountJobDO().setAccountId(id)));
-		accountDepartmentMapper.delete(Wrappers.query(new AccountDepartmentDO().setAccountId(id)));
-	}
+    public PageDto<AccountDO> page(AccountPageParam param) {
+        // todo 必须手写sql来完成某些需求
+        Page<AccountDO> page = accountMapper.selectPage(param, Wrappers.query(new AccountDO().setAccount(param.getAccount()).setPhone(param.getPhone()).setDisable(param.getDisable())));
+        return new PageDto<>(page.getTotal(), page.getRecords());
+    }
 
-	private void insertAssociations(AccountParam param) {
-		for (String jobId : param.getJobIdList()) {
-			accountJobMapper.insert(new AccountJobDO().setAccountId(param.getId()).setJobId(jobId));
-		}
+    public void deleteAssociations(String id) {
+        accountJobMapper.delete(Wrappers.query(new AccountJobDO().setAccountId(id)));
+        accountDepartmentMapper.delete(Wrappers.query(new AccountDepartmentDO().setAccountId(id)));
+    }
 
-		for (String departmentId : param.getDepartmentIdList()) {
-			accountDepartmentMapper.insert(
-					new AccountDepartmentDO().setAccountId(param.getId()).setDepartmentId(departmentId));
-		}
-	}
+    public void insertAssociations(AccountParam param) {
+        if (param.getJobIdList() != null) {
+            for (String jobId : param.getJobIdList()) {
+                accountJobMapper.insert(new AccountJobDO().setAccountId(param.getId()).setJobId(jobId));
+            }
+        }
+        if (param.getDepartmentIdList() != null) {
+            for (String departmentId : param.getDepartmentIdList()) {
+                accountDepartmentMapper.insert(new AccountDepartmentDO().setAccountId(param.getId()).setDepartmentId(departmentId));
+            }
+        }
+    }
 }

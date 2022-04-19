@@ -13,6 +13,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * 部门管理
+ *
+ * @author keqi
+ */
 @Service
 public class DepartmentService {
 
@@ -23,15 +28,15 @@ public class DepartmentService {
 
 	@Transactional
 	public void insert(DepartmentDO param) {
-		if (param.getParent_id() == null) {
-			param.setParent_id(ROOT_ID);
+		if (param.getParentId() == null) {
+			param.setParentId(ROOT_ID);
 		}
 		departmentMapper.insert(param);
 	}
 
 	@Transactional
 	public void deleteById(String id) {
-		Long count = departmentMapper.selectCount(Wrappers.query(new DepartmentDO().setParent_id(id)));
+		Long count = departmentMapper.selectCount(Wrappers.query(new DepartmentDO().setParentId(id)));
 		if (count > 0) {
 			throw new ParamIllegalException("当前部门下存在下属部门,不可直接被删除");
 		}
@@ -51,12 +56,12 @@ public class DepartmentService {
 		// 构造树形列表
 		List<DepartmentDO> treeList = new ArrayList<>();
 		for (DepartmentDO first : departmentDOList) {
-			if (ROOT_ID.equals(first.getParent_id())) {
+			if (ROOT_ID.equals(first.getParentId())) {
 				treeList.add(first);
 			}
 
 			for (DepartmentDO t : departmentDOList) {
-				if (Objects.equals(first.getId(), t.getParent_id())) {
+				if (Objects.equals(first.getId(), t.getParentId())) {
 					if (first.getChildList() == null) {
 						first.setChildList(new ArrayList<>());
 					}

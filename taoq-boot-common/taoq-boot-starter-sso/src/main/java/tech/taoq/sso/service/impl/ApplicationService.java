@@ -10,6 +10,11 @@ import tech.taoq.mp.pojo.QueryBaseParam;
 import tech.taoq.sso.domain.db.ApplicationDO;
 import tech.taoq.sso.mapper.ApplicationMapper;
 
+/**
+ * 应用管理
+ *
+ * @author keqi
+ */
 @Service
 public class ApplicationService {
 

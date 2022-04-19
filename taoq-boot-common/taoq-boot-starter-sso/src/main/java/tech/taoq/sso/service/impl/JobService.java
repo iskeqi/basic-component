@@ -10,6 +10,11 @@ import tech.taoq.mp.pojo.QueryBaseParam;
 import tech.taoq.sso.domain.db.JobDO;
 import tech.taoq.sso.mapper.JobMapper;
 
+/**
+ * 岗位管理
+ *
+ * @author keqi
+ */
 @Service
 public class JobService {
 
@@ -32,7 +37,8 @@ public class JobService {
 	}
 
 	public PageDto<JobDO> page(QueryBaseParam<JobDO> param) {
-		Page<JobDO> page = jobMapper.selectPage(param, Wrappers.query());
+		Page<JobDO> page = jobMapper.selectPage(param,
+				Wrappers.lambdaQuery(JobDO.class).orderByDesc(JobDO::getOrderNum));
 		return new PageDto<>(page.getTotal(), page.getRecords());
 	}
 }
