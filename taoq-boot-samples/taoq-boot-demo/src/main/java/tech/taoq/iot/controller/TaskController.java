@@ -1,5 +1,6 @@
 package tech.taoq.iot.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,10 @@ public class TaskController {
 
     @PostMapping("/test2")
     public TestDataType test2(@RequestBody TestDataType param) {
+        if (StpUtil.hasPermission("user-add")) {
+            log.info("有 user-add 权限");
+        }
+
         testDataTypeMapper.insert(param);
 
         TestDataType r = testDataTypeMapper.selectById(param.getId());
