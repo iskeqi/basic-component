@@ -26,8 +26,8 @@ public class DictItemDO extends BaseDO {
     @ApiModelProperty("字典项值")
     private String itemValue;
 
-    @ApiModelProperty("字典类型")
-    private String dictType;
+    @ApiModelProperty("字典类型id")
+    private String dictTypeId;
 
     @ApiModelProperty("备注")
     private String note;

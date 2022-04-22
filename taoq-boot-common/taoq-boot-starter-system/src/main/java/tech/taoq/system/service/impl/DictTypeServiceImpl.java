@@ -30,9 +30,6 @@ public class DictTypeServiceImpl implements DictTypeService {
     }
 
     public void updateById(DictTypeDO param) {
-        // configKey 是不能修改的
-        param.setType(null);
-        param.setCreateTime(null);
         dictTypeMapper.updateById(param);
     }
 

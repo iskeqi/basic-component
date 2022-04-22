@@ -51,8 +51,8 @@ public class DictItemController {
     }
 
     @ApiOperation("查询指定dictType下所有的字典项")
-    @PostMapping("/{dictType}")
-    public List<DictItemDO> listByDictType(@PathVariable String dictType) {
-        return dictItemService.listByDictType(dictType);
+    @PostMapping("/{dictTypeId}")
+    public List<DictItemDO> listByDictTypeId(@PathVariable String dictType) {
+        return dictItemService.listByDictTypeId(dictType);
     }
 }
