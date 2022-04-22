@@ -10,17 +10,13 @@ quickly develop basic components for monolithic applications
   - [x] taoq-boot-starter-system		-- 提供字典、参数配置管理等基础功能
   - [ ] taoq-boot-starter-rbac		    -- 提供角色、菜单管理功能
   - [x] taoq-boot-starter-websocket	    -- 基于 spring websocket 的封装
-  - [ ] taoq-boot-starter-auth	        -- 提供用户管理，登录功能
   - [ ] taoq-boot-starter-log	        -- 提供日志记录功能
-  - [ ] taoq-boot-starter-sso	        -- 提供单点登录功能
+  - [ ] taoq-boot-starter-sso	        -- 提供用户管理、单点登录功能
   - [ ] taoq-boot-starter-generator	    -- 提供代码生成功能
 - taoq-boot-orm			            -- orm 模块
   - [x] taoq-boot-starter-mp			-- 对 MyBatisPlus 的封装
   - [ ] taoq-boot-starter-mybatis		-- 对 MyBatis 的封装
   - [ ] taoq-boot-starter-jpa			-- 对 SpringDataJPA 的封装
-- taoq-boot-security		        -- security 模块
-  - [ ] taoq-boot-starter-satoken		-- 对 Sa-Token 的封装
-  - [ ] taoq-boot-starter-security	    -- 对 Spring Security 的封装
 - taoq-boot-job			            -- 定时任务模块
   - [x] taoq-boot-starter-task		    -- 基于 JDK 线程池封装的定时任务
   - [ ] taoq-boot-starter-quartz		-- 基于 Quartz 封装的定时任务
