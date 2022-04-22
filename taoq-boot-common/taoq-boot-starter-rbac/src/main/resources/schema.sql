@@ -19,6 +19,7 @@ create table if not exists `sys_menu`  (
   `permiss` varchar(256)  default null comment '权限标识',
   `parent_id` bigint null default null comment '父级id[根节点parent_id为0]',
   `order_num` int null default null comment '排序字段',
+  `func_type` char(1)  default 'N' comment '菜单功能类型[N:内置 Z:自定义]',
   `create_time` datetime  default null comment '创建时间',
   `update_time` datetime  default null comment '修改时间',
   primary key (`id`)
