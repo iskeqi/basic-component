@@ -33,7 +33,7 @@ create table if not exists `sys_dict_item`
     `item_code`   varchar(32)  default null comment '字典项编码',
     `item_name`   varchar(32)  default '' comment '字典项名称',
     `item_value`  varchar(32)  default '' comment '字典项值',
-    `dict_type`   varchar(32)  default '' comment '字典类型',
+    `dict_type_id`   varchar(32)  default '' comment '字典类型id',
     `note`        varchar(512) default null comment '备注',
     `order_num`   int          default '0' comment '字典排序',
     `is_disable`  tinyint unsigned default '0' comment '是否禁用[false:未禁用 true:已禁用]',
