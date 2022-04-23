@@ -5,10 +5,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.common.pojo.PageDto;
+import tech.taoq.rbac.constant.RbacConstant;
 import tech.taoq.rbac.domain.db.FuncFieldDO;
+import tech.taoq.rbac.domain.db.MenuDO;
+import tech.taoq.rbac.mapper.FuncFieldDataMapper;
 import tech.taoq.rbac.mapper.FuncFieldMapper;
+import tech.taoq.rbac.mapper.MenuMapper;
 
 import java.util.Comparator;
 import java.util.List;
@@ -18,21 +21,57 @@ public class FuncFieldService {
 
     @Autowired
     private FuncFieldMapper funcFieldMapper;
+    @Autowired
+    private FuncFieldDataMapper funcFieldDataMapper;
+    @Autowired
+    private MenuMapper menuMapper;
 
     @Transactional
     public void insert(FuncFieldDO param) {
-        FuncFieldDO funcFieldDO = funcFieldMapper.selectOne(
-                Wrappers.query(new FuncFieldDO().setMenuId(param.getMenuId()).setCode(param.getCode())));
-        if (funcFieldDO != null) {
-            throw new ParamIllegalException("字段编码不得重复");
+        Long count = funcFieldMapper.selectCount(Wrappers.query(new FuncFieldDO().setMenuId(param.getMenuId())));
+        MenuDO menuDO = menuMapper.selectById(param.getMenuId());
+        if (count == 0) {
+            // 创建表
+            funcFieldDataMapper.createTable(menuDO.getPermiss(), menuDO.getName());
+            // 新增3个字段
+            FuncFieldDO id = new FuncFieldDO()
+                    .setName(RbacConstant.ID)
+                    .setCode(RbacConstant.ID)
+                    .setMenuId(param.getMenuId())
+                    .setType(FuncFieldDO.Type.NUMBER.name())
+                    .setOrderNum(0);
+            funcFieldMapper.insert(id);
+            FuncFieldDO createTime = new FuncFieldDO()
+                    .setName(RbacConstant.CREATE_TIME)
+                    .setCode(RbacConstant.CREATE_TIME)
+                    .setMenuId(param.getMenuId())
+                    .setType(FuncFieldDO.Type.DATETIME.name())
+                    .setOrderNum(Integer.MAX_VALUE - 2);
+            funcFieldMapper.insert(createTime);
+            FuncFieldDO updateTime = new FuncFieldDO()
+                    .setName(RbacConstant.UPDATE_TIME)
+                    .setCode(RbacConstant.UPDATE_TIME)
+                    .setMenuId(param.getMenuId())
+                    .setType(FuncFieldDO.Type.DATETIME.name())
+                    .setOrderNum(Integer.MAX_VALUE - 1);
+            funcFieldMapper.insert(updateTime);
         }
+
+        // 新增字段
+        param.setCode("v" + ++count);
+        funcFieldDataMapper.addColumn(menuDO.getPermiss(), param.getCode(), param.getName());
 
         funcFieldMapper.insert(param);
     }
 
     @Transactional
     public void deleteById(String id) {
+        FuncFieldDO funcFieldDO = funcFieldMapper.selectById(id);
+        MenuDO menuDO = menuMapper.selectById(funcFieldDO.getMenuId());
+
         funcFieldMapper.deleteById(id);
+
+        funcFieldDataMapper.dropColumn(menuDO.getPermiss(), funcFieldDO.getCode());
     }
 
     @Transactional

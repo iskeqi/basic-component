@@ -11,7 +11,6 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@AllArgsConstructor
 public class AuthorizeMenuParam {
 
     @ApiModelProperty("角色id")

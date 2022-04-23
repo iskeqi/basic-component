@@ -19,6 +19,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import tech.taoq.common.util.DateUtil;
 import tech.taoq.web.mvc.converter.MyStringToLocalDateConverter;
 import tech.taoq.web.mvc.converter.MyStringToLocalDateTimeConverter;
 import tech.taoq.web.mvc.converter.MyStringToNumberConverterFactory;
@@ -75,17 +76,17 @@ public class WebAutoConfiguration {
                 // Java8 日期时间处理(此处刻意不对 java.util.Date 做配置，程序中能不用这个类就不用)
                 JavaTimeModule javaTimeModule = new JavaTimeModule();
                 javaTimeModule.addSerializer(LocalDateTime.class,
-                        new LocalDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                        new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DateUtil.LOCAL_DATE_TIME)));
                 javaTimeModule.addSerializer(LocalDate.class,
-                        new LocalDateSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                        new LocalDateSerializer(DateTimeFormatter.ofPattern(DateUtil.LOCAL_DATE)));
                 javaTimeModule.addSerializer(LocalTime.class,
-                        new LocalTimeSerializer(DateTimeFormatter.ofPattern("HH:mm:ss")));
+                        new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateUtil.LOCAL_TIME)));
                 javaTimeModule.addDeserializer(LocalDateTime.class,
-                        new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                        new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DateUtil.LOCAL_DATE_TIME)));
                 javaTimeModule.addDeserializer(LocalDate.class,
-                        new LocalDateDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                        new LocalDateDeserializer(DateTimeFormatter.ofPattern(DateUtil.LOCAL_DATE)));
                 javaTimeModule.addDeserializer(LocalTime.class,
-                        new LocalTimeDeserializer(DateTimeFormatter.ofPattern("HH:mm:ss")));
+                        new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateUtil.LOCAL_TIME)));
                 objectMapper.registerModule(javaTimeModule);
 
                 converter.setObjectMapper(objectMapper);

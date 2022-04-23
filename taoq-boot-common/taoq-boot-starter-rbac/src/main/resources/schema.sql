@@ -1,7 +1,7 @@
 create database if not exists `taoq-boot` default charset utf8mb4 collate utf8mb4_0900_ai_ci;
 
 create table if not exists `sys_role`  (
-  `id` bigint unsigned not null auto_increment comment '角色id',
+  `id` bigint unsigned not null auto_increment comment '主键id',
   `name` varchar(32)  default null comment '角色名称',
   `permiss` varchar(32)   default null comment '权限标识',
   `type` char(1)  default null comment '角色类型[N:内置 Z:自定义]',
@@ -11,7 +11,7 @@ create table if not exists `sys_role`  (
 ) engine = innodb character set = utf8mb4 collate = utf8mb4_0900_ai_ci comment = '角色表';
 
 create table if not exists `sys_menu`  (
-  `id` bigint unsigned not null auto_increment comment '菜单id',
+  `id` bigint unsigned not null auto_increment comment '主键id',
   `name` varchar(32)  default null comment '名称',
   `url` varchar(256)  default null comment '请求url地址',
   `icon` varchar(32)  default null comment 'icon图标',
@@ -49,5 +49,6 @@ create table `sys_func_field` (
   `create_time` datetime default null comment '创建时间',
   `update_time` datetime default null comment '修改时间',
   primary key (`id`)
+  unique key `uk_menu_id_code` (`menu_id`,`code`) using btree
 ) engine=innodb default charset=utf8mb4 collate=utf8mb4_0900_ai_ci comment='功能字段表';
 
