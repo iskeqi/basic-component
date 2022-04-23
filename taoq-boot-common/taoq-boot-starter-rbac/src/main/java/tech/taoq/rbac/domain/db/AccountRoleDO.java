@@ -6,11 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-/**
- * 用户-角色关联表
- *
- * @author keqi
- */
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor

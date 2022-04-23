@@ -37,3 +37,17 @@ create table if not exists `sys_account_role`  (
   primary key (`account_id`, `role_id`)
 ) engine = innodb character set = utf8mb4 collate = utf8mb4_0900_ai_ci comment = '用户-角色关联表';
 
+create table `sys_func_field` (
+  `id` bigint unsigned not null auto_increment comment '主键id',
+  `name` varchar(32) character set utf8mb4 collate utf8mb4_0900_ai_ci default null comment '字段名称',
+  `code` varchar(32) character set utf8mb4 collate utf8mb4_0900_ai_ci default null comment '字段编码',
+  `menu_id` bigint unsigned default null comment '菜单id',
+  `type` varchar(32) character set utf8mb4 collate utf8mb4_0900_ai_ci default null comment '字段类型[INPUT:文本 NUMBER:数值 BOOL:开关 DATE:日期 DATETIME:日期时间 TIME:时间 SDICT:单字典 MDICT:多字典]',
+  `dict_type_id` bigint unsigned default null comment '字典类型id',
+  `order_num` int default null comment '排序字段',
+  `is_disable` tinyint default null comment '是否禁用[false:未禁用 true:已禁用]',
+  `create_time` datetime default null comment '创建时间',
+  `update_time` datetime default null comment '修改时间',
+  primary key (`id`)
+) engine=innodb default charset=utf8mb4 collate=utf8mb4_0900_ai_ci comment='功能字段表';
+

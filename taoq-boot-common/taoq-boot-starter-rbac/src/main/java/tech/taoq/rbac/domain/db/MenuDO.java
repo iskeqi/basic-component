@@ -8,11 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import tech.taoq.mp.pojo.BaseDO;
 
-/**
- * 菜单权限表
- *
- * @author keqi
- */
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
