@@ -19,5 +19,5 @@ public interface DictItemService extends BaseDictValidate {
 
     PageDto<DictItemDO> page(Page<DictItemDO> param);
 
-    List<DictItemDO> listByDictTypeId(String dictType);
+    List<DictItemDO> listByDictTypeId(String dictTypeId);
 }

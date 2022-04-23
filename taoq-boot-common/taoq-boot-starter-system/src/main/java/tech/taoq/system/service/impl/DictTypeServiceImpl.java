@@ -30,6 +30,7 @@ public class DictTypeServiceImpl implements DictTypeService {
     }
 
     public void updateById(DictTypeDO param) {
+        param.setType(null);
         dictTypeMapper.updateById(param);
     }
 
