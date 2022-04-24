@@ -37,7 +37,7 @@ create table if not exists `sys_account_role`  (
   primary key (`account_id`, `role_id`)
 ) engine = innodb character set = utf8mb4 collate = utf8mb4_0900_ai_ci comment = '用户-角色关联表';
 
-create table `sys_func_field` (
+create table if not exists `sys_func_field` (
   `id` bigint unsigned not null auto_increment comment '主键id',
   `name` varchar(32) character set utf8mb4 collate utf8mb4_0900_ai_ci default null comment '字段名称',
   `code` varchar(32) character set utf8mb4 collate utf8mb4_0900_ai_ci default null comment '字段编码',
