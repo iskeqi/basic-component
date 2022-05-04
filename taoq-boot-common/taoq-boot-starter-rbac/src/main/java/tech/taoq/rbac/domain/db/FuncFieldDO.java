@@ -38,10 +38,6 @@ public class FuncFieldDO extends BaseDO {
 	@ApiModelProperty("排序字段")
 	private Integer orderNum;
 
-	@ApiModelProperty("是否禁用[false:未禁用 true:已禁用]")
-	@TableField(value = "is_disable")
-	private Boolean disable;
-
 	public enum Type {
 		INPUT, NUMBER, BOOL, DATE, DATETIME, TIME, SDICT, MDICT
 	}
