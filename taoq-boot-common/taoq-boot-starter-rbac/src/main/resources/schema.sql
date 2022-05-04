@@ -39,13 +39,14 @@ create table if not exists `sys_account_role`  (
 
 create table if not exists `sys_func_field` (
   `id` bigint unsigned not null auto_increment comment '主键id',
-  `name` varchar(32) character set utf8mb4 collate utf8mb4_0900_ai_ci default null comment '字段名称',
-  `code` varchar(32) character set utf8mb4 collate utf8mb4_0900_ai_ci default null comment '字段编码',
+  `name` varchar(32)  default null comment '字段名称',
+  `code` varchar(32)  default null comment '字段编码',
   `menu_id` bigint unsigned default null comment '菜单id',
-  `type` varchar(32) character set utf8mb4 collate utf8mb4_0900_ai_ci default null comment '字段类型[INPUT:文本 NUMBER:数值 BOOL:开关 DATE:日期 DATETIME:日期时间 TIME:时间 SDICT:单字典 MDICT:多字典]',
+  `type` varchar(32) default null comment '字段类型[INPUT:文本 NUMBER:数值 BOOL:开关 DATE:日期 DATETIME:日期时间 TIME:时间 SDICT:单字典 MDICT:多字典]',
+  `is_query` varchar(32) default null comment '是否支持查询[false:不支持 true:支持]',
   `dict_type_id` bigint unsigned default null comment '字典类型id',
   `order_num` int default null comment '排序字段',
-  `is_disable` tinyint default null comment '是否禁用[false:未禁用 true:已禁用]',
+  `is_disable` tinyint default '0' comment '是否禁用[false:未禁用 true:已禁用]',
   `create_time` datetime default null comment '创建时间',
   `update_time` datetime default null comment '修改时间',
   primary key (`id`),
