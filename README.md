@@ -39,3 +39,6 @@ quickly develop basic components for monolithic applications
   - [ ] taoq-boot-starter-sms		    -- 短信发送模块
   - [ ] taoq-boot-starter-robot		    -- 对钉钉/企业微信/飞书的一些操作封装 
 - taoq-boot-samples			        -- taoq boot 使用例子
+
+# todo
+- 功能字段数据管理分页查询接口，使用 Bean Searcher 实现，并新增查询类型
