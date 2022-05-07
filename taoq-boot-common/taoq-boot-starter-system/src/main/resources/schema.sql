@@ -33,12 +33,12 @@ create table if not exists `sys_dict_item`
     `item_code`   varchar(32)  default null comment '字典项编码',
     `item_name`   varchar(32)  default '' comment '字典项名称',
     `item_value`  varchar(32)  default '' comment '字典项值',
-    `dict_type_id`   varchar(32)  default '' comment '字典类型id',
+    `dict_type_id` bigint unsigned not null comment '字典类型id',
     `note`        varchar(512) default null comment '备注',
     `order_num`   int          default '0' comment '字典排序',
     `is_internal`  tinyint unsigned default '0' comment '是否系统内置[false:否 true:是]',
     `create_time` datetime     default null comment '创建时间',
     `update_time` datetime     default null comment '更新时间',
     primary key (`id`) using btree,
-    unique key `uk_dict_type_item_code` (`item_code`,`dict_type`)
+    unique key `uk_dict_type_item_code` (`dict_type_id`,`item_code`)
 ) engine=innodb default charset=utf8mb4 collate=utf8mb4_0900_ai_ci comment='字典数据表';
