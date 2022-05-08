@@ -1,11 +1,13 @@
 package tech.taoq.common.response;
 
+import tech.taoq.common.pojo.IResultStatusEnum;
+
 /**
  * ResponseStatusEnum
  *
  * @author keqi
  */
-public enum ResultStatusEnum {
+public enum ResultStatusEnum implements IResultStatusEnum {
 
     SUCCESS("00000", "success"),
 
