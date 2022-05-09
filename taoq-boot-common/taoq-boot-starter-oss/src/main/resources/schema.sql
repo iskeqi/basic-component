@@ -1,5 +1,4 @@
-drop table if exists sys_upload_file;
-create table `sys_upload_file`
+create table if not exists `sys_upload_file`
 (
     `id`           bigint unsigned not null auto_increment,
     `name`         varchar(512)     default null comment '文件名称',

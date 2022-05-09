@@ -7,9 +7,6 @@ import lombok.*;
 import lombok.experimental.Accessors;
 import tech.taoq.mp.pojo.BaseDO;
 
-/**
- * 文件表
- */
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
