@@ -6,7 +6,7 @@ create table `sys_operate_log` (
   `biz_id` varchar(256) not null comment '业务唯一id',
   `biz_type` varchar(256) not null comment '业务类型',
   `exception` varchar(256) not null comment '函数执行失败时写入的异常信息',
-  `operate_Date` datetime default null comment '操作时间',
+  `operate_date` datetime default null comment '操作时间',
   `success` varchar(256) not null comment '函数是否执行成功',
   `msg` varchar(256) not null comment '操作日志主体信息',
   `tag` varchar(256) not null comment '用户自定义标签',
