@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  tech.taoq.knife4j.LogAutoConfiguration
+  tech.taoq.log.LogAutoConfiguration
