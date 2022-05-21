@@ -6,4 +6,6 @@ package tech.taoq.common.pojo;
  * @author keqi
  */
 public interface IResultStatusEnum {
+
+    String DELIMITER = ",";
 }

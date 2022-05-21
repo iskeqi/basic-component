@@ -42,3 +42,14 @@ create table if not exists `sys_dict_item`
     primary key (`id`) using btree,
     unique key `uk_dict_type_item_code` (`dict_type_id`,`item_code`)
 ) engine=innodb default charset=utf8mb4 collate=utf8mb4_0900_ai_ci comment='字典数据表';
+
+create table if not exists `sys_result_code`
+(
+    `id`          bigint unsigned not null auto_increment comment '主键id',
+    `code`   varchar(32)  default null comment '状态码',
+    `code_name`   varchar(32)  default '' comment '状态码描述',
+    `create_time` datetime     default null comment '创建时间',
+    `update_time` datetime     default null comment '更新时间',
+    primary key (`id`) using btree,
+    unique key `uk_code` (`code`)
+) engine=innodb default charset=utf8mb4 collate=utf8mb4_0900_ai_ci comment='响应状态码表';

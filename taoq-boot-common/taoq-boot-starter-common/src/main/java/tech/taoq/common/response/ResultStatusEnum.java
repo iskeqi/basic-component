@@ -1,12 +1,16 @@
 package tech.taoq.common.response;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import tech.taoq.common.pojo.IResultStatusEnum;
 
 /**
- * ResponseStatusEnum
+ * 全局响应状态码
  *
  * @author keqi
  */
+@Getter
+@AllArgsConstructor
 public enum ResultStatusEnum implements IResultStatusEnum {
 
     SUCCESS("00000", "success"),
@@ -27,27 +31,12 @@ public enum ResultStatusEnum implements IResultStatusEnum {
     // 第三方服务错误
     THIRD_SERVICE_ERROR("C0001", "error in third party service");
 
-    /**
-     * 状态码
-     */
     private final String code;
 
-    /**
-     * 状态码对应描述信息
-     */
     private final String codeName;
 
-    ResultStatusEnum(String code, String codeName) {
-        this.code = code;
-        this.codeName = codeName;
+    @Override
+    public String toString() {
+        return code + IResultStatusEnum.DELIMITER + codeName;
     }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getCodeName() {
-        return codeName;
-    }
-
 }

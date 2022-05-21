@@ -8,9 +8,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import tech.taoq.mp.pojo.BaseDO;
 
-/**
- * 字典表
- */
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
