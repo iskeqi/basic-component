@@ -7,8 +7,8 @@ create table if not exists `sys_upload_file`
     `size`         int              default null comment '文件大小[单位:字节]',
     `storage_type` tinyint unsigned default null comment '存储类型[1:本地文件系统 2:minio]',
     `is_deleted`   tinyint unsigned default '0' comment '是否删除[false:未删除 true:已删除]',
-    `create_time`  datetime         default null comment '创建时间',
-    `update_time`  datetime         default null comment '修改时间',
+    `create_time` datetime     default current_timestamp comment '创建时间',
+    `update_time` datetime     default current_timestamp on update current_timestamp comment '更新时间',
     primary key (`id`),
     unique key `uk_path` (`path`)
 ) engine = innodb

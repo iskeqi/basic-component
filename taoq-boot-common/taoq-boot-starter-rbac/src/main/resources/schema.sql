@@ -5,8 +5,8 @@ create table if not exists `sys_role`  (
   `name` varchar(32)  default null comment '角色名称',
   `permiss` varchar(32)   default null comment '权限标识',
   `type` char(1)  default null comment '角色类型[N:内置 Z:自定义]',
-  `create_time` datetime  default null comment '创建时间',
-  `update_time` datetime  default null comment '修改时间',
+    `create_time` datetime     default current_timestamp comment '创建时间',
+    `update_time` datetime     default current_timestamp on update current_timestamp comment '更新时间',
   primary key (`id`)
 ) engine = innodb character set = utf8mb4 collate = utf8mb4_0900_ai_ci comment = '角色表';
 
@@ -20,8 +20,8 @@ create table if not exists `sys_menu`  (
   `parent_id` bigint null default null comment '父级id[根节点parent_id为0]',
   `order_num` int null default null comment '排序字段',
   `func_type` char(1)  default 'N' comment '菜单功能类型[N:内置 Z:自定义]',
-  `create_time` datetime  default null comment '创建时间',
-  `update_time` datetime  default null comment '修改时间',
+    `create_time` datetime     default current_timestamp comment '创建时间',
+    `update_time` datetime     default current_timestamp on update current_timestamp comment '更新时间',
   primary key (`id`)
 ) engine = innodb character set = utf8mb4 collate = utf8mb4_0900_ai_ci comment = '菜单权限表';
 
@@ -47,8 +47,8 @@ create table `sys_func_field` (
   `is_disable`   tinyint unsigned default '0' comment '是否禁用[false:未禁用 true:已禁用]',
   `dict_type_id` bigint unsigned default null comment '字典类型id',
   `order_num` int default null comment '排序字段',
-  `create_time` datetime default null comment '创建时间',
-  `update_time` datetime default null comment '修改时间',
+    `create_time` datetime     default current_timestamp comment '创建时间',
+    `update_time` datetime     default current_timestamp on update current_timestamp comment '更新时间',
   primary key (`id`),
   unique key `uk_menu_id_code` (`menu_id`,`code`) using btree
 ) engine=innodb auto_increment=8 default charset=utf8mb4 collate=utf8mb4_0900_ai_ci comment='功能字段表';
