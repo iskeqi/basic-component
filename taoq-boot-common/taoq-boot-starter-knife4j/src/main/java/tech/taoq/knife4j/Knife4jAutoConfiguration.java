@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Import;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 /**
+ * Knife4jAutoConfiguration
+ *
  * @author keqi
  */
 @Import(Knife4jConfig.class)
