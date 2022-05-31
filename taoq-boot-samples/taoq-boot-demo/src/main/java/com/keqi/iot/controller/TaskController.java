@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.keqi.iot.mapper.TestDataTypeMapper;
 import com.keqi.iot.test.TestDataType;
+import tech.taoq.common.response.ResultEntity;
+import tech.taoq.common.response.ResultEntityBuilder;
 import tech.taoq.task.SpringTaskService;
 
 import java.util.Date;
@@ -65,7 +67,7 @@ public class TaskController {
     }
 
     @PostMapping("/test4")
-    public CallbackParamDO test4() {
-        return callbackParamMapper.selectById("1531595820796977154");
+    public ResultEntity<CallbackParamDO> test4() {
+        return ResultEntityBuilder.success(callbackParamMapper.selectById("1531595820796977154"));
     }
 }
