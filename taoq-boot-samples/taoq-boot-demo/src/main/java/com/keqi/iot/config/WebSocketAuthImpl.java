@@ -1,4 +1,4 @@
-package tech.taoq.iot.config;
+package com.keqi.iot.config;
 
 import org.springframework.stereotype.Component;
 import tech.taoq.websocket.auth.WebSocketAuth;

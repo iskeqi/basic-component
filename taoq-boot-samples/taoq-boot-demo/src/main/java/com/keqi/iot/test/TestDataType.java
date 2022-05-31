@@ -1,4 +1,4 @@
-package tech.taoq.iot.test;
+package com.keqi.iot.test;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;

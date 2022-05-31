@@ -1,4 +1,4 @@
-package tech.taoq.iot.controller;
+package com.keqi.iot.controller;
 
 import cn.dev33.satoken.config.SaTokenConfig;
 import cn.dev33.satoken.sso.SaSsoHandle;

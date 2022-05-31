@@ -1,14 +1,17 @@
-package tech.taoq.iot.controller;
+package com.keqi.iot.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.keqi.iot.domain.CallbackParamDO;
+import com.keqi.iot.mapper.CallbackParamMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tech.taoq.iot.mapper.TestDataTypeMapper;
-import tech.taoq.iot.test.TestDataType;
+import com.keqi.iot.mapper.TestDataTypeMapper;
+import com.keqi.iot.test.TestDataType;
 import tech.taoq.task.SpringTaskService;
 
 import java.util.Date;
+import java.util.UUID;
 import java.util.concurrent.ScheduledFuture;
 
 /**
@@ -23,6 +26,8 @@ public class TaskController {
     private SpringTaskService springTaskService;
     @Autowired
     private TestDataTypeMapper testDataTypeMapper;
+    @Autowired
+    private CallbackParamMapper callbackParamMapper;
 
     @GetMapping("/test1")
     public void test1() {
@@ -49,5 +54,13 @@ public class TaskController {
 
         TestDataType r = testDataTypeMapper.selectById(param.getId());
         return r;
+    }
+
+    @PostMapping("/test3")
+    public void test3() {
+        CallbackParamDO paramDO = new CallbackParamDO();
+        paramDO.setType(UUID.randomUUID().toString());
+
+        callbackParamMapper.insert(paramDO);
     }
 }

@@ -1,7 +1,7 @@
-package tech.taoq.iot.mapper;
+package com.keqi.iot.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import tech.taoq.iot.test.TestDataType;
+import com.keqi.iot.test.TestDataType;
 
 /**
  * @author keqi

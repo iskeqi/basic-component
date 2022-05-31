@@ -1,6 +1,7 @@
-package tech.taoq.iot;
+package com.keqi.iot;
 
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,14 +11,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author keqi
  */
 @Slf4j
+@MapperScan("com.keqi.**.mapper")
 @SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
 
-        if (log.isDebugEnabled()) {
+//        if (log.isDebugEnabled()) {
             log.debug("http://localhost:9100/iot/doc.html");
-        }
+//        }
     }
 }

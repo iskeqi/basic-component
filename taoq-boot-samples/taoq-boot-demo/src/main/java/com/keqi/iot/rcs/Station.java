@@ -1,4 +1,4 @@
-package tech.taoq.iot.rcs;
+package com.keqi.iot.rcs;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

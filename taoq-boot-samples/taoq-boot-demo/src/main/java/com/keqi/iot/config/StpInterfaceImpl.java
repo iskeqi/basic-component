@@ -1,4 +1,4 @@
-package tech.taoq.iot.config;
+package com.keqi.iot.config;
 
 import cn.dev33.satoken.stp.StpInterface;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
