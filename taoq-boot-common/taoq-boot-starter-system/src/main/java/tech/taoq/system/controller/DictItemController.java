@@ -7,7 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.taoq.common.pojo.PageDto;
 import tech.taoq.mp.pojo.QueryBaseParam;
-import tech.taoq.system.domain.db.DictItemDO;
+import tech.taoq.system.domain.DictItemDO;
 import tech.taoq.system.service.DictItemService;
 
 import java.util.List;

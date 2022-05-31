@@ -5,10 +5,11 @@ import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.taoq.common.exception.client.ClientErrorException;
 import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.common.pojo.PageDto;
-import tech.taoq.system.domain.db.DictItemDO;
-import tech.taoq.system.domain.db.DictTypeDO;
+import tech.taoq.system.domain.DictItemDO;
+import tech.taoq.system.domain.DictTypeDO;
 import tech.taoq.system.mapper.DictItemMapper;
 import tech.taoq.system.mapper.DictTypeMapper;
 import tech.taoq.system.service.DictItemService;
@@ -36,6 +37,10 @@ public class DictItemServiceImpl implements DictItemService {
     }
 
     public void deleteById(String id) {
+        DictItemDO dictItemDO = dictItemMapper.selectById(id);
+        if (dictItemDO.getInternal()) {
+            throw new ClientErrorException("内置记录不允许被删除");
+        }
         dictItemMapper.deleteById(id);
     }
 

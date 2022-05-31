@@ -2,7 +2,7 @@ package tech.taoq.system.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import tech.taoq.common.pojo.PageDto;
-import tech.taoq.system.domain.db.ConfigDO;
+import tech.taoq.system.domain.ConfigDO;
 
 public interface ConfigService {
 

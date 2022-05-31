@@ -1,4 +1,4 @@
-package tech.taoq.system.domain.db;
+package tech.taoq.system.domain;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;

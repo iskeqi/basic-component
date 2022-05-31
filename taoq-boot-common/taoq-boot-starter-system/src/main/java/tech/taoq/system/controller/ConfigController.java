@@ -7,7 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.taoq.common.pojo.PageDto;
 import tech.taoq.mp.pojo.QueryBaseParam;
-import tech.taoq.system.domain.db.ConfigDO;
+import tech.taoq.system.domain.ConfigDO;
 import tech.taoq.system.service.ConfigService;
 
 @Api(tags = "配置管理")

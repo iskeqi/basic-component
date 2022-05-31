@@ -1,5 +1,6 @@
-create table if not exists `sys_upload_file`
-(
+create database if not exists `taoq-boot` default charset utf8mb4 collate utf8mb4_0900_ai_ci;
+
+create table if not exists `sys_upload_file` (
     `id`           bigint unsigned not null auto_increment,
     `name`         varchar(512)     default null comment '文件名称',
     `path`         varchar(512)     default null comment '文件存储路径[相对路径]',
@@ -11,6 +12,4 @@ create table if not exists `sys_upload_file`
     `update_time` datetime     default current_timestamp on update current_timestamp comment '更新时间',
     primary key (`id`),
     unique key `uk_path` (`path`)
-) engine = innodb
-  default charset = utf8mb4
-  collate = utf8mb4_0900_ai_ci comment ='文件表';
+) engine = innodb default charset = utf8mb4 collate = utf8mb4_0900_ai_ci comment ='文件表';

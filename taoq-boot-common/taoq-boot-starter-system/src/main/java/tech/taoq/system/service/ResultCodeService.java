@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import tech.taoq.common.pojo.IResultStatusEnum;
-import tech.taoq.system.domain.db.ResultCodeDO;
+import tech.taoq.system.domain.ResultCodeDO;
 import tech.taoq.system.mapper.ResultCodeMapper;
 
 import javax.annotation.PostConstruct;

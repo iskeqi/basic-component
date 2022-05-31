@@ -1,20 +1,6 @@
 create database if not exists `taoq-boot` default charset utf8mb4 collate utf8mb4_0900_ai_ci;
 
-create table if not exists `sys_config`
-(
-    `id`           bigint unsigned not null auto_increment comment '主键id',
-    `config_key`   varchar(32)  default null comment '配置项key',
-    `config_value` varchar(32)  default null comment '配置项value',
-    `note`         varchar(128) default null comment '配置项描述信息',
-    `extra`        varchar(128) default null comment '扩展字段',
-    `is_disable`   tinyint unsigned default '0' comment '是否禁用[false:未禁用 true:已禁用]',
-    `create_time` datetime     default current_timestamp comment '创建时间',
-    `update_time` datetime     default current_timestamp on update current_timestamp comment '更新时间',
-    primary key (`id`),
-    unique key `uk_config_key` (`config_key`)
-) engine=innodb default charset=utf8mb4 collate=utf8mb4_0900_ai_ci comment='配置表';
-
-create table `fms_config` (
+create table `sys_config` (
   `id` int not null comment '主键id[自行填写,取值范围为101-999]',
   `category_name` varchar(32) default null comment '分类名称',
   `config_key` varchar(32) default null comment '配置key',
@@ -25,7 +11,7 @@ create table `fms_config` (
   `default_value` varchar(512) default null comment '配置默认值',
   `value_unit` varchar(32) default null comment '配置值单位',
   `value_range` varchar(521) default null comment '配置值取值范围',
-  `is_deleted` int default '0' comment '是否删除[0:未删除 1:已删除]',
+  `is_internal` tinyint unsigned default '0' comment '是否系统内置[false:否 true:是]',
   `create_time` datetime default current_timestamp comment '创建时间',
   `update_time` datetime default current_timestamp on update current_timestamp comment '修改时间',
   primary key (`id`)

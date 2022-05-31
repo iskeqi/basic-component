@@ -7,7 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.taoq.common.pojo.PageDto;
 import tech.taoq.mp.pojo.QueryBaseParam;
-import tech.taoq.system.domain.db.DictTypeDO;
+import tech.taoq.system.domain.DictTypeDO;
 import tech.taoq.system.service.DictTypeService;
 
 @Api(tags = "字典类型管理")

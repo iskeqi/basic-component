@@ -9,4 +9,5 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @ComponentScan("tech.taoq.websocket")
 public class WebSocketAutoConfiguration {
+
 }

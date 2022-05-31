@@ -5,9 +5,10 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.taoq.common.exception.client.ClientErrorException;
 import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.common.pojo.PageDto;
-import tech.taoq.system.domain.db.ConfigDO;
+import tech.taoq.system.domain.ConfigDO;
 import tech.taoq.system.mapper.ConfigMapper;
 import tech.taoq.system.service.ConfigService;
 
@@ -28,6 +29,10 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     public void deleteById(String id) {
+        ConfigDO configDO = configMapper.selectById(id);
+        if (configDO.getInternal()) {
+            throw new ClientErrorException("内置记录不允许被删除");
+        }
         configMapper.deleteById(id);
     }
 

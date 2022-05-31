@@ -63,4 +63,9 @@ public class TaskController {
 
         callbackParamMapper.insert(paramDO);
     }
+
+    @PostMapping("/test4")
+    public CallbackParamDO test4() {
+        return callbackParamMapper.selectById("1531595820796977154");
+    }
 }

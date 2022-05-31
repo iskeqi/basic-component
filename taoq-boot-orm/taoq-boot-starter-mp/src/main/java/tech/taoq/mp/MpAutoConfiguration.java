@@ -12,4 +12,5 @@ import org.springframework.context.annotation.Import;
 @MapperScan("tech.taoq.**.mapper")
 @Import(MyBatisPlusConfig.class)
 public class MpAutoConfiguration {
+
 }

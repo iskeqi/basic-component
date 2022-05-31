@@ -2,10 +2,6 @@ package tech.taoq.mp.pojo;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,10 +11,6 @@ import java.time.LocalDateTime;
  *
  * @author keqi
  */
-@Data
-@Accessors(chain = true)
-@NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class QueryBaseParam<T> extends Page<T> {
 
     @ApiModelProperty("搜索字段名称")
@@ -44,4 +36,72 @@ public class QueryBaseParam<T> extends Page<T> {
 
     @ApiModelProperty("排序类型[升序:asc 降序:desc]")
     protected String orderType;
+
+    public QueryBaseParam() {
+
+    }
+
+    public String getSearchName() {
+        return searchName;
+    }
+
+    public void setSearchName(String searchName) {
+        this.searchName = searchName;
+    }
+
+    public String getSearchValue() {
+        return searchValue;
+    }
+
+    public void setSearchValue(String searchValue) {
+        this.searchValue = searchValue;
+    }
+
+    public LocalDate getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(LocalDate beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public LocalDateTime getBeginTime() {
+        return beginTime;
+    }
+
+    public void setBeginTime(LocalDateTime beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getOrderFiled() {
+        return orderFiled;
+    }
+
+    public void setOrderFiled(String orderFiled) {
+        this.orderFiled = orderFiled;
+    }
+
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
+    }
 }
