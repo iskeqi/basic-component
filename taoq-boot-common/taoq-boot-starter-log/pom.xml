@@ -17,7 +17,10 @@
         <dependency>
             <groupId>cn.monitor4all</groupId>
             <artifactId>log-record-starter</artifactId>
-            <version>1.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yomahub</groupId>
+            <artifactId>tlog-web-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>tech.taoq</groupId>
