@@ -4,15 +4,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tech.taoq.common.pojo.PageDto;
-import tech.taoq.sso.domain.db.AccountDO;
 import tech.taoq.sso.domain.dto.AuthenticateDto;
 import tech.taoq.sso.domain.dto.LoginDto;
-import tech.taoq.sso.domain.param.AccountPageParam;
-import tech.taoq.sso.domain.param.AccountParam;
 import tech.taoq.sso.domain.param.AuthenticateParam;
 import tech.taoq.sso.domain.param.LoginParam;
-import tech.taoq.sso.service.impl.AuthService;
+import tech.taoq.sso.service.AuthService;
 
 @Api(tags = "认证管理")
 @RestController

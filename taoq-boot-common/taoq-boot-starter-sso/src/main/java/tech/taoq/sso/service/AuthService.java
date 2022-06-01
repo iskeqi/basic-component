@@ -1,4 +1,4 @@
-package tech.taoq.sso.service.impl;
+package tech.taoq.sso.service;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;

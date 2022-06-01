@@ -11,6 +11,7 @@ import tech.taoq.rbac.domain.db.AccountRoleDO;
 import tech.taoq.rbac.domain.db.RoleDO;
 import tech.taoq.rbac.domain.db.RoleMenuDO;
 import tech.taoq.rbac.domain.param.AuthorizeMenuParam;
+import tech.taoq.rbac.domain.param.AuthorizeRoleParam;
 import tech.taoq.rbac.mapper.AccountRoleMapper;
 import tech.taoq.rbac.mapper.RoleMapper;
 import tech.taoq.rbac.mapper.RoleMenuMapper;
@@ -88,5 +89,14 @@ public class RoleServiceImpl implements RoleService {
         Collection<String> roleIdList = list.stream().map(AccountRoleDO::getRoleId).collect(Collectors.toList());
 
         return roleMapper.selectBatchIds(roleIdList);
+    }
+
+    @Override
+    public void authorizeRole(AuthorizeRoleParam param) {
+        for (String roleId : param.getRoleIdList()) {
+            accountRoleMapper.insert(new AccountRoleDO()
+                    .setAccountId(param.getAccountId())
+                    .setRoleId(roleId));
+        }
     }
 }

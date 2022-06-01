@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import tech.taoq.common.pojo.PageDto;
 import tech.taoq.rbac.domain.db.RoleDO;
 import tech.taoq.rbac.domain.param.AuthorizeMenuParam;
+import tech.taoq.rbac.domain.param.AuthorizeRoleParam;
 import tech.taoq.rbac.service.RoleService;
 
 import java.util.List;
@@ -48,6 +49,12 @@ public class RoleController {
     @PostMapping("/authorizeMenu")
     public void authorizeMenu(@RequestBody AuthorizeMenuParam param) {
         roleService.authorizeMenu(param);
+    }
+
+    @ApiOperation("给指定用户赋予角色")
+    @PostMapping("/authorizeRole")
+    public void authorizeRole(@RequestBody AuthorizeRoleParam param) {
+        roleService.authorizeRole(param);
     }
 
     @ApiOperation("查询指定用户关联的角色")

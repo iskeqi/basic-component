@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.taoq.sso.domain.db.DepartmentDO;
-import tech.taoq.sso.service.impl.DepartmentService;
+import tech.taoq.sso.service.DepartmentService;
 
 import java.util.List;
 

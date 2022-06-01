@@ -8,7 +8,7 @@ import tech.taoq.common.pojo.PageDto;
 import tech.taoq.sso.domain.db.AccountDO;
 import tech.taoq.sso.domain.param.AccountPageParam;
 import tech.taoq.sso.domain.param.AccountParam;
-import tech.taoq.sso.service.impl.AccountService;
+import tech.taoq.sso.service.AccountService;
 
 @Api(tags = "用户管理")
 @RestController

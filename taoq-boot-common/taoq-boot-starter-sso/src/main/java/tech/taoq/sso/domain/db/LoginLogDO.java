@@ -17,7 +17,7 @@ import tech.taoq.mp.pojo.BaseDO;
 public class LoginLogDO extends BaseDO {
 
     @ApiModelProperty("用户名称")
-    private String account_name;
+    private String accountName;
 
     @ApiModelProperty("用户id")
     private String accountId;

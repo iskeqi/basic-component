@@ -1,4 +1,4 @@
-package tech.taoq.sso.service.impl;
+package tech.taoq.sso.service;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import tech.taoq.common.pojo.PageDto;
 import tech.taoq.mp.pojo.QueryBaseParam;
 import tech.taoq.sso.domain.db.ApplicationDO;
-import tech.taoq.sso.service.impl.ApplicationService;
+import tech.taoq.sso.service.ApplicationService;
 
 @Api(tags = "应用管理")
 @RestController
