@@ -22,6 +22,7 @@
         <module>taoq-boot-starter-rbac</module>
         <module>taoq-boot-starter-sso</module>
         <module>taoq-boot-starter-log</module>
+        <module>taoq-boot-starter-mp</module>
     </modules>
 
 </project>
