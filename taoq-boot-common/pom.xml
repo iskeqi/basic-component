@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>taoq-boot</artifactId>
         <groupId>tech.taoq</groupId>
+        <artifactId>taoq-boot</artifactId>
         <version>1.2.9.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -15,14 +15,12 @@
     <modules>
         <module>taoq-boot-starter-common</module>
         <module>taoq-boot-starter-knife4j</module>
-        <module>taoq-boot-starter-oss</module>
-        <module>taoq-boot-starter-system</module>
-        <module>taoq-boot-starter-web</module>
-        <module>taoq-boot-starter-websocket</module>
-        <module>taoq-boot-starter-rbac</module>
-        <module>taoq-boot-starter-sso</module>
         <module>taoq-boot-starter-log</module>
         <module>taoq-boot-starter-mp</module>
+        <module>taoq-boot-starter-rbac</module>
+        <module>taoq-boot-starter-sso</module>
+        <module>taoq-boot-starter-system</module>
+        <module>taoq-boot-starter-web</module>
     </modules>
 
 </project>
