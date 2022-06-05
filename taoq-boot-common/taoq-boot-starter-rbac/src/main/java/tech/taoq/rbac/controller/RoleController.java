@@ -1,6 +1,7 @@
 package tech.taoq.rbac.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,10 @@ public class RoleController {
     }
 
     @ApiOperation("分页查询角色列表")
+    @ApiOperationSupport(ignoreParameters = {
+            "records", "total", "orders", "optimizeCountSql", "optimizeJoinOfCountSql", "hitCount",
+            "pages", "countId", "maxLimit", "searchCount", "searchName", "orderFiled", "orderType",
+            "searchValue", "beginDate", "endDate", "beginTime", "endTime"})
     @GetMapping("/page")
     public PageDto<RoleDO> page(Page<RoleDO> param) {
         return roleService.page(param);

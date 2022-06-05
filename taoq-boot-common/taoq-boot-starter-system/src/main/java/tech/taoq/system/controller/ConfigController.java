@@ -1,5 +1,6 @@
 package tech.taoq.system.controller;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,10 @@ public class ConfigController {
     }
 
     @ApiOperation("分页查询配置列表")
+    @ApiOperationSupport(ignoreParameters = {
+            "records", "total", "orders", "optimizeCountSql", "optimizeJoinOfCountSql", "hitCount",
+            "pages", "countId", "maxLimit", "searchCount", "searchName", "orderFiled", "orderType",
+            "searchValue", "beginDate", "endDate", "beginTime", "endTime"})
     @PostMapping("/page")
     public PageDto<ConfigDO> page(@RequestBody QueryBaseParam<ConfigDO> param) {
         return configService.page(param);

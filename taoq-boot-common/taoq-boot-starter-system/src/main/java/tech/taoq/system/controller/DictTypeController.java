@@ -1,5 +1,6 @@
 package tech.taoq.system.controller;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,10 @@ public class DictTypeController {
     }
 
     @ApiOperation("分页查询字典类型列表")
+    @ApiOperationSupport(ignoreParameters = {
+            "records", "total", "orders", "optimizeCountSql", "optimizeJoinOfCountSql", "hitCount",
+            "pages", "countId", "maxLimit", "searchCount", "searchName", "orderFiled", "orderType",
+            "searchValue", "beginDate", "endDate", "beginTime", "endTime"})
     @PostMapping("/page")
     public PageDto<DictTypeDO> page(@RequestBody QueryBaseParam<DictTypeDO> param) {
         return dictTypeService.page(param);
