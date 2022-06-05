@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tech.taoq.common.pojo.PageDto;
-import tech.taoq.mp.pojo.QueryBaseParam;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.sso.domain.db.ApplicationDO;
 import tech.taoq.sso.mapper.ApplicationMapper;
 
@@ -36,8 +36,8 @@ public class ApplicationService {
 		applicationMapper.updateById(param);
 	}
 
-	public PageDto<ApplicationDO> page(QueryBaseParam<ApplicationDO> param) {
-		Page<ApplicationDO> page = applicationMapper.selectPage(param, Wrappers.query());
+	public PageDto<ApplicationDO> page(PageParam<ApplicationDO> param) {
+		Page<ApplicationDO> page = applicationMapper.selectPage(param.toPage(), Wrappers.query());
 		return new PageDto<>(page.getTotal(), page.getRecords());
 	}
 }

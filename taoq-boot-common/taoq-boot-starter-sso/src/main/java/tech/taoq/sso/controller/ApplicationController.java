@@ -1,12 +1,11 @@
 package tech.taoq.sso.controller;
 
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tech.taoq.common.pojo.PageDto;
-import tech.taoq.mp.pojo.QueryBaseParam;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.sso.domain.db.ApplicationDO;
 import tech.taoq.sso.service.ApplicationService;
 
@@ -37,12 +36,8 @@ public class ApplicationController {
 	}
 
 	@ApiOperation("分页查询应用列表")
-	@ApiOperationSupport(ignoreParameters = {
-			"records", "total", "orders", "optimizeCountSql", "optimizeJoinOfCountSql", "hitCount",
-			"pages", "countId", "maxLimit", "searchCount", "searchName", "orderFiled", "orderType",
-			"searchValue", "beginDate", "endDate", "beginTime", "endTime"})
-	@PostMapping("/page")
-	public PageDto<ApplicationDO> page(@RequestBody QueryBaseParam<ApplicationDO> param) {
+	@GetMapping
+	public PageDto<ApplicationDO> page(PageParam<ApplicationDO> param) {
 		return applicationService.page(param);
 	}
 

@@ -2,7 +2,7 @@ package tech.taoq.mail.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import tech.taoq.common.pojo.PageDto;
+import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.mail.domain.db.MailDO;
 import tech.taoq.mail.service.MailService;
 import io.swagger.annotations.Api;

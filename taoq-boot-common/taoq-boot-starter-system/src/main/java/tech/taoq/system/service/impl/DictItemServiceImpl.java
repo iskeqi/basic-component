@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.taoq.common.exception.client.ClientErrorException;
 import tech.taoq.common.exception.client.ParamIllegalException;
-import tech.taoq.common.pojo.PageDto;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.system.domain.DictItemDO;
 import tech.taoq.system.domain.DictTypeDO;
 import tech.taoq.system.mapper.DictItemMapper;
@@ -53,8 +54,8 @@ public class DictItemServiceImpl implements DictItemService {
         return dictItemMapper.selectById(id);
     }
 
-    public PageDto<DictItemDO> page(Page<DictItemDO> param) {
-        Page<DictItemDO> page = dictItemMapper.selectPage(param, Wrappers.lambdaQuery(DictItemDO.class)
+    public PageDto<DictItemDO> page(PageParam<DictItemDO> param) {
+        Page<DictItemDO> page = dictItemMapper.selectPage(param.toPage(), Wrappers.lambdaQuery(DictItemDO.class)
                 .orderByAsc((SFunction<DictItemDO, Integer>) DictItemDO::getOrderNum));
         return new PageDto<>(page.getTotal(), page.getRecords());
     }

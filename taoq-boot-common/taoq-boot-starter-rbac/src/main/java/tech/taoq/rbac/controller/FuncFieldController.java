@@ -1,14 +1,11 @@
 package tech.taoq.rbac.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.dtflys.forest.annotation.Get;
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tech.taoq.common.pojo.PageDto;
-import tech.taoq.mp.pojo.QueryBaseParam;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.rbac.domain.db.FuncFieldDO;
 import tech.taoq.rbac.service.FuncFieldService;
 
@@ -41,12 +38,8 @@ public class FuncFieldController {
     }
 
     @ApiOperation("分页查询功能字段列表")
-    @ApiOperationSupport(ignoreParameters = {
-            "records", "total", "orders", "optimizeCountSql", "optimizeJoinOfCountSql", "hitCount",
-            "pages", "countId", "maxLimit", "searchCount", "searchName", "orderFiled", "orderType",
-            "searchValue", "beginDate", "endDate", "beginTime", "endTime"})
-    @PostMapping("/page")
-    public PageDto<FuncFieldDO> page(@RequestBody QueryBaseParam<FuncFieldDO> param) {
+    @GetMapping
+    public PageDto<FuncFieldDO> page(PageParam<FuncFieldDO> param) {
         return funcFieldService.page(param);
     }
 

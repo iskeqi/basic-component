@@ -1,4 +1,6 @@
-package tech.taoq.common.pojo;
+package tech.taoq.mp.pojo;
+
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Collections;
 import java.util.List;
@@ -10,8 +12,10 @@ import java.util.List;
  */
 public class PageDto<T> {
 
+	@ApiModelProperty("总页数")
 	private long total;
 
+	@ApiModelProperty("数据列表")
 	private List<T> records = Collections.emptyList();
 
 	public PageDto(long total, List<T> list) {

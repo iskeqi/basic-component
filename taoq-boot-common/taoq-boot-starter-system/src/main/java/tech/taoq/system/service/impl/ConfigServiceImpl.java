@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.taoq.common.exception.client.ClientErrorException;
 import tech.taoq.common.exception.client.ParamIllegalException;
-import tech.taoq.common.pojo.PageDto;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.system.domain.ConfigDO;
 import tech.taoq.system.mapper.ConfigMapper;
 import tech.taoq.system.service.ConfigService;
@@ -48,8 +49,8 @@ public class ConfigServiceImpl implements ConfigService {
         return configMapper.selectById(id);
     }
 
-    public PageDto<ConfigDO> page(Page<ConfigDO> param) {
-        Page<ConfigDO> page = configMapper.selectPage(param, Wrappers.query());
+    public PageDto<ConfigDO> page(PageParam<ConfigDO> param) {
+        Page<ConfigDO> page = configMapper.selectPage(param.toPage(), Wrappers.query());
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 }

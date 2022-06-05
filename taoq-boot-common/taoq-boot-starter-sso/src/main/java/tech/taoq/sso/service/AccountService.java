@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tech.taoq.common.pojo.PageDto;
+import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.sso.domain.db.AccountDO;
 import tech.taoq.sso.domain.db.AccountDepartmentDO;
 import tech.taoq.sso.domain.db.AccountJobDO;
@@ -58,7 +58,7 @@ public class AccountService {
 
     public PageDto<AccountDO> page(AccountPageParam param) {
         // todo 必须手写sql来完成某些需求
-        Page<AccountDO> page = accountMapper.selectPage(param, Wrappers.query(new AccountDO().setAccount(param.getAccount()).setPhone(param.getPhone()).setDisable(param.getDisable())));
+        Page<AccountDO> page = accountMapper.selectPage(param.toPage(), Wrappers.query(new AccountDO().setAccount(param.getAccount()).setPhone(param.getPhone()).setDisable(param.getDisable())));
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 

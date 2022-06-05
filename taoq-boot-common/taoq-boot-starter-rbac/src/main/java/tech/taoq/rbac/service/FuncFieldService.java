@@ -5,9 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tech.taoq.common.pojo.PageDto;
-import tech.taoq.mp.pojo.QueryBaseParam;
-import tech.taoq.rbac.constant.RbacConstant;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
+import tech.taoq.rbac.domain.constant.RbacConstant;
 import tech.taoq.rbac.domain.db.FuncFieldDO;
 import tech.taoq.rbac.domain.db.MenuDO;
 import tech.taoq.rbac.mapper.FuncFieldDataMapper;
@@ -81,8 +81,8 @@ public class FuncFieldService {
         funcFieldMapper.updateById(param);
     }
 
-    public PageDto<FuncFieldDO> page(QueryBaseParam<FuncFieldDO> param) {
-        Page<FuncFieldDO> page = funcFieldMapper.selectPage(param, null);
+    public PageDto<FuncFieldDO> page(PageParam<FuncFieldDO> param) {
+        Page<FuncFieldDO> page = funcFieldMapper.selectPage(param.toPage(), null);
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 

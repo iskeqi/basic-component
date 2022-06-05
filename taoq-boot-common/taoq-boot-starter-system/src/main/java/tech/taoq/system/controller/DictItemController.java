@@ -1,13 +1,12 @@
 package tech.taoq.system.controller;
 
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tech.taoq.common.pojo.PageDto;
-import tech.taoq.mp.pojo.QueryBaseParam;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.system.domain.DictItemDO;
 import tech.taoq.system.service.DictItemService;
 
@@ -46,12 +45,8 @@ public class DictItemController {
     }
 
     @ApiOperation("分页查询字典项列表")
-    @ApiOperationSupport(ignoreParameters = {
-            "records", "total", "orders", "optimizeCountSql", "optimizeJoinOfCountSql", "hitCount",
-            "pages", "countId", "maxLimit", "searchCount", "searchName", "orderFiled", "orderType",
-            "searchValue", "beginDate", "endDate", "beginTime", "endTime"})
-    @PostMapping("/page")
-    public PageDto<DictItemDO> page(@RequestBody QueryBaseParam<DictItemDO> param) {
+    @GetMapping
+    public PageDto<DictItemDO> page(PageParam<DictItemDO> param) {
         return dictItemService.page(param);
     }
 

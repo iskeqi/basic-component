@@ -5,14 +5,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import tech.taoq.mp.pojo.QueryBaseParam;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.sso.domain.db.AccountDO;
 
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class AccountPageParam extends QueryBaseParam<AccountDO> {
+public class AccountPageParam extends PageParam<AccountDO> {
 
 	@ApiModelProperty("用户名")
 	private String account;

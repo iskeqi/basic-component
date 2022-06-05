@@ -1,13 +1,12 @@
 package tech.taoq.system.controller;
 
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tech.taoq.common.pojo.PageDto;
-import tech.taoq.mp.pojo.QueryBaseParam;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.system.domain.ConfigDO;
 import tech.taoq.system.service.ConfigService;
 
@@ -38,18 +37,14 @@ public class ConfigController {
     }
 
     @ApiOperation("查询配置详情")
-    @GetMapping
-    public ConfigDO getById(String id) {
+    @GetMapping("/{id}")
+    public ConfigDO getById(@PathVariable String id) {
         return configService.getById(id);
     }
 
     @ApiOperation("分页查询配置列表")
-    @ApiOperationSupport(ignoreParameters = {
-            "records", "total", "orders", "optimizeCountSql", "optimizeJoinOfCountSql", "hitCount",
-            "pages", "countId", "maxLimit", "searchCount", "searchName", "orderFiled", "orderType",
-            "searchValue", "beginDate", "endDate", "beginTime", "endTime"})
-    @PostMapping("/page")
-    public PageDto<ConfigDO> page(@RequestBody QueryBaseParam<ConfigDO> param) {
+    @GetMapping
+    public PageDto<ConfigDO> page(PageParam<ConfigDO> param) {
         return configService.page(param);
     }
 }

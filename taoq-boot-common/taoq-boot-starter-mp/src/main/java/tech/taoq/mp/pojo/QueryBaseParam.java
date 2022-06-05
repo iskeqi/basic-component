@@ -1,6 +1,5 @@
 package tech.taoq.mp.pojo;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.time.LocalDate;
@@ -11,7 +10,7 @@ import java.time.LocalDateTime;
  *
  * @author keqi
  */
-public class QueryBaseParam<T> extends Page<T> {
+public class QueryBaseParam<T> extends PageParam<T> {
 
     @ApiModelProperty("搜索字段名称")
     protected String searchName;

@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 import tech.taoq.common.exception.client.ParamIllegalException;
-import tech.taoq.common.pojo.PageDto;
+import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.common.util.JsonUtil;
 import tech.taoq.mail.domain.db.MailDO;
 import tech.taoq.mail.mapper.MailMapper;

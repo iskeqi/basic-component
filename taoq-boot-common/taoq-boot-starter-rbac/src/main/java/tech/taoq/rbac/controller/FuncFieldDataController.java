@@ -1,11 +1,10 @@
 package tech.taoq.rbac.controller;
 
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tech.taoq.common.pojo.PageDto;
+import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.rbac.domain.param.FuncFieldDataPageParam;
 import tech.taoq.rbac.domain.param.FuncFieldDataParam;
 import tech.taoq.rbac.service.FuncFieldDataService;
@@ -39,12 +38,8 @@ public class FuncFieldDataController {
     }
 
     @ApiOperation("分页查询功能字段数据列表")
-    @ApiOperationSupport(ignoreParameters = {
-            "records", "total", "orders", "optimizeCountSql", "optimizeJoinOfCountSql", "hitCount",
-            "pages", "countId", "maxLimit", "searchCount", "searchName", "orderFiled", "orderType",
-            "searchValue", "beginDate", "endDate", "beginTime", "endTime"})
-    @PostMapping("/page")
-    public PageDto<List<FuncFieldDataParam>> page(@RequestBody FuncFieldDataPageParam param) {
+    @GetMapping
+    public PageDto<List<FuncFieldDataParam>> page(FuncFieldDataPageParam param) {
         return funcFieldDataService.page(param);
     }
 }

@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.taoq.common.exception.client.ParamIllegalException;
-import tech.taoq.common.pojo.PageDto;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.rbac.domain.db.AccountRoleDO;
 import tech.taoq.rbac.domain.db.RoleDO;
 import tech.taoq.rbac.domain.db.RoleMenuDO;
@@ -67,8 +68,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public PageDto<RoleDO> page(Page<RoleDO> param) {
-        Page<RoleDO> page = roleMapper.selectPage(param, Wrappers.query());
+    public PageDto<RoleDO> page(PageParam<RoleDO> param) {
+        Page<RoleDO> page = roleMapper.selectPage(param.toPage(), Wrappers.query());
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 

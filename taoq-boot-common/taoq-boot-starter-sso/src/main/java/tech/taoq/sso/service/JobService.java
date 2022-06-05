@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tech.taoq.common.pojo.PageDto;
-import tech.taoq.mp.pojo.QueryBaseParam;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.sso.domain.db.JobDO;
 import tech.taoq.sso.mapper.JobMapper;
 
@@ -36,8 +36,8 @@ public class JobService {
 		jobMapper.updateById(param);
 	}
 
-	public PageDto<JobDO> page(QueryBaseParam<JobDO> param) {
-		Page<JobDO> page = jobMapper.selectPage(param,
+	public PageDto<JobDO> page(PageParam<JobDO> param) {
+		Page<JobDO> page = jobMapper.selectPage(param.toPage(),
 				Wrappers.lambdaQuery(JobDO.class).orderByDesc(JobDO::getOrderNum));
 		return new PageDto<>(page.getTotal(), page.getRecords());
 	}

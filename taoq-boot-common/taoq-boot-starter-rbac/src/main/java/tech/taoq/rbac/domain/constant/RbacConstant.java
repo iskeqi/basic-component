@@ -1,4 +1,4 @@
-package tech.taoq.rbac.constant;
+package tech.taoq.rbac.domain.constant;
 
 public class RbacConstant {
 
