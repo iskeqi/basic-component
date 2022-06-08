@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.taoq.task.SpringTaskService;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.ScheduledFuture;
@@ -21,6 +23,16 @@ import java.util.concurrent.ScheduledFuture;
 @RestController
 @RequestMapping("/test/task")
 public class TaskController {
+
+    @PostConstruct
+    public void init() {
+        log.info("init...");
+    }
+
+    @PreDestroy
+    public void destroy() {
+        log.info("destroy...");
+    }
 
     @Autowired
     private SpringTaskService springTaskService;
