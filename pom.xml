@@ -33,7 +33,7 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>3.4.3.4</version>
+                <version>3.5.2</version>
             </dependency>
             <dependency>
                 <groupId>p6spy</groupId>
@@ -63,7 +63,7 @@
             <dependency>
                 <groupId>com.dtflys.forest</groupId>
                 <artifactId>forest-spring-boot-starter</artifactId>
-                <version>1.5.13</version>
+                <version>1.5.22</version>
             </dependency>
             <dependency>
                 <groupId>cn.dev33</groupId>
