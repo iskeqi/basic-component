@@ -26,7 +26,7 @@ public class PageDto<T> {
 		}
 	}
 
-	public PageDto build(Page<T> page) {
+	public static <T> PageDto build(Page<T> page) {
 		return new PageDto<>(page.getTotal(), page.getRecords());
 	}
 
