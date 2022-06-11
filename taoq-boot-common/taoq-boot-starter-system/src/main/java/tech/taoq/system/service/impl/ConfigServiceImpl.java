@@ -53,4 +53,10 @@ public class ConfigServiceImpl implements ConfigService {
         Page<ConfigDO> page = configMapper.selectPage(param.toPage(), Wrappers.query());
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
+
+    @Override
+    public String getByConfigKey(String configKey) {
+        ConfigDO configDO = configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(configKey)));
+        return configDO != null ? configDO.getConfigValue() : null;
+    }
 }

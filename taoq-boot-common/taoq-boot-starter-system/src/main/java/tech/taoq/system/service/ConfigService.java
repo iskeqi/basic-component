@@ -15,4 +15,6 @@ public interface ConfigService {
     ConfigDO getById(String id);
 
     PageDto<ConfigDO> page(PageParam<ConfigDO> param);
+
+    String getByConfigKey(String configKey);
 }
