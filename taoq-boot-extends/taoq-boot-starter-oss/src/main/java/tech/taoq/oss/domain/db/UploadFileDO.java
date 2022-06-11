@@ -11,7 +11,7 @@ import tech.taoq.mp.pojo.BaseDO;
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_upload_file")
+@TableName("sys_upload_file")
 public class UploadFileDO extends BaseDO {
 
     @ApiModelProperty("文件名称")

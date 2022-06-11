@@ -13,7 +13,7 @@ import tech.taoq.mp.pojo.BaseDO;
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_login_log")
+@TableName("sys_login_log")
 public class LoginLogDO extends BaseDO {
 
     @ApiModelProperty("用户名称")

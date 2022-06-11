@@ -11,7 +11,7 @@ import tech.taoq.mp.pojo.BaseDO;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_config")
+@TableName("sys_config")
 public class ConfigDO extends BaseDO {
 
     @ApiModelProperty("分类名称")

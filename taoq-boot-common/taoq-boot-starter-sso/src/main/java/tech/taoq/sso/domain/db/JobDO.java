@@ -13,7 +13,7 @@ import tech.taoq.mp.pojo.BaseDO;
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_job")
+@TableName("sys_job")
 public class JobDO extends BaseDO {
 
     @ApiModelProperty("岗位名称")

@@ -10,7 +10,7 @@ import tech.taoq.mp.pojo.BaseDO;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_result_code")
+@TableName("sys_result_code")
 public class ResultCodeDO extends BaseDO {
 
     @ApiModelProperty("状态码")

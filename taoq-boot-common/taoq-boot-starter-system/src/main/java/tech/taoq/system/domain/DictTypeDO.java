@@ -16,7 +16,7 @@ import tech.taoq.mp.pojo.BaseDO;
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_dict_type")
+@TableName("sys_dict_type")
 public class DictTypeDO extends BaseDO {
 
     @ApiModelProperty("字典名称")

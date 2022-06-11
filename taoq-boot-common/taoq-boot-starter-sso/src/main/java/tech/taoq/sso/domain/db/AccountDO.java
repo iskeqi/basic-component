@@ -14,7 +14,7 @@ import tech.taoq.mp.pojo.BaseDO;
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_account")
+@TableName("sys_account")
 public class AccountDO extends BaseDO {
 
     @ApiModelProperty("用户名")

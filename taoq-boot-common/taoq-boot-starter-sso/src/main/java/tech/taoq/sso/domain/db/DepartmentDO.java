@@ -15,7 +15,7 @@ import java.util.List;
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_department")
+@TableName("sys_department")
 public class DepartmentDO extends BaseDO {
 
     @ApiModelProperty("部门名称")

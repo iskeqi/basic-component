@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@TableName(value = "sys_account_role")
+@TableName("sys_account_role")
 public class AccountRoleDO {
 
     @ApiModelProperty("用户唯一标识符")

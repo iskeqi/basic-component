@@ -11,6 +11,6 @@ import tech.taoq.mp.pojo.BaseDO;
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_operate_log")
+@TableName("sys_operate_log")
 public class OperateLogDO extends BaseDO {
 }

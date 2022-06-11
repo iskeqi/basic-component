@@ -13,7 +13,7 @@ import tech.taoq.mp.pojo.BaseDO;
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_func_field")
+@TableName("sys_func_field")
 public class FuncFieldDO extends BaseDO {
 
     @ApiModelProperty("字段名称")

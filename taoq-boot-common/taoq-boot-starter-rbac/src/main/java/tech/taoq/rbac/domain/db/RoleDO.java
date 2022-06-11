@@ -12,7 +12,7 @@ import tech.taoq.mp.pojo.BaseDO;
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_role")
+@TableName("sys_role")
 public class RoleDO extends BaseDO {
 
     @ApiModelProperty("角色名称")

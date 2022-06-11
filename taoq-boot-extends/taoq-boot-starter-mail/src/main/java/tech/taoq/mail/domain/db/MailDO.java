@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
-@TableName(value = "sys_mail")
+@TableName("sys_mail")
 public class MailDO extends BaseDO {
 
     @ApiModelProperty("邮件服务商标识")

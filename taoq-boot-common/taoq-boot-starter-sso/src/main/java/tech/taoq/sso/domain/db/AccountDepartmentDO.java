@@ -12,7 +12,7 @@ import tech.taoq.mp.pojo.BaseDO;
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_account_department")
+@TableName("sys_account_department")
 public class AccountDepartmentDO extends BaseDO {
 
     @ApiModelProperty("用户id")

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@TableName(value = "test_data_type", autoResultMap = true)
+@TableName("test_data_type", autoResultMap = true)
 public class TestDataType {
 
     private String id;

@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@TableName(value = "sys_role_menu")
+@TableName("sys_role_menu")
 public class RoleMenuDO {
 
     @ApiModelProperty("角色id")

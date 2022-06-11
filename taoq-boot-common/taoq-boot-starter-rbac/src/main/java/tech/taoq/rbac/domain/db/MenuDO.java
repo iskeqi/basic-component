@@ -12,7 +12,7 @@ import tech.taoq.mp.pojo.BaseDO;
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_menu")
+@TableName("sys_menu")
 public class MenuDO extends BaseDO {
 
     @ApiModelProperty("名称")
