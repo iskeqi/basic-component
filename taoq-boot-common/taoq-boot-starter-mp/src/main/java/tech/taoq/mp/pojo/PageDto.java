@@ -1,5 +1,6 @@
 package tech.taoq.mp.pojo;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Collections;
@@ -23,6 +24,10 @@ public class PageDto<T> {
 		if (list != null && list.size() > 0) {
 			this.records = list;
 		}
+	}
+
+	public PageDto build(Page<T> page) {
+		return new PageDto<>(page.getTotal(), page.getRecords());
 	}
 
 	public long getTotal() {
