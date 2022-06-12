@@ -19,7 +19,7 @@ public class AuthController {
 	private AuthService authService;
 
 	@ApiOperation("登录")
-	@PostMapping("/login")
+	@PostMapping("/login/p")
 	public LoginDto login(@RequestBody LoginParam param) {
 		return authService.login(param);
 	}

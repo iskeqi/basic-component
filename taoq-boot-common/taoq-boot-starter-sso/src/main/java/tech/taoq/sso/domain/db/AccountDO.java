@@ -2,7 +2,6 @@ package tech.taoq.sso.domain.db;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,7 +20,6 @@ public class AccountDO extends BaseDO {
     private String account;
 
     @ApiModelProperty("密码")
-    @JsonIgnore
     private String password;
 
     @ApiModelProperty("用户昵称")
