@@ -27,7 +27,7 @@ public class ConfigDO extends BaseDO {
     private String displayDescription;
 
     @ApiModelProperty("配置值类型[INPUT:文本 NUMBER:数值 BOOL:开关 DATE:日期 DATETIME:日期时间 TIME:时间 SDICT:单字典 MDICT:多字典 HTTP:接口]")
-    private Boolean valueType;
+    private String valueType;
 
     @ApiModelProperty("配置值")
     private String configValue;
