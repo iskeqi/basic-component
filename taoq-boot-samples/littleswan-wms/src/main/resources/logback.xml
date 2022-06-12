@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <!-- 增加如下的TLog MDC Listener -->
+    <contextListener class="com.yomahub.tlog.core.enhance.logback.TLogLogbackTTLMdcListener"/>
+    <!-- 日志输出格式 -->
+    <property name="PATTERN_DEFAULT"
+              value="%date{MM-dd HH:mm:ss.SSS} %X{tl} %level [%thread] %logger{40} : %message%n"/>
+    <!-- 日志文件存储路径及名称 -->
+    <property name="LOG_FILE" value="logs/app.log"/>
+
+    <!-- 控制台 Appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PATTERN_DEFAULT}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 日志文件 Appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PATTERN_DEFAULT}</pattern>
+        </encoder>
+        <!-- 日志文件名 -->
+        <file>${LOG_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 滚动后的日志文件名 -->
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <!-- 启动服务时，是否清理超过保留天数之前的历史日志 -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <!-- 日志文件，到达多少容量，进行滚动 -->
+            <maxFileSize>500MB</maxFileSize>
+            <!-- 日志文件的总大小，0 表示不限制 -->
+            <totalSizeCap>500GB</totalSizeCap>
+            <!-- 日志文件的保留天数 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+    <!-- 异步写入日志，提升性能 -->
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 指定为 0 表示不丢失日志。默认值为20,表示如果队列容量只剩下 20% 时,直接丢弃 TRACT、DEBUG、INFO 级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度，该值会影响性能。默认值为 256 -->
+        <queueSize>256</queueSize>
+        <appender-ref ref="FILE"/>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ASYNC"/>
+    </root>
+
+</configuration>
