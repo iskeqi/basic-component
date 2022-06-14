@@ -57,8 +57,7 @@ public class AccountService {
     }
 
     public PageDto<AccountDO> page(AccountPageParam param) {
-        // todo 必须手写sql来完成某些需求
-        Page<AccountDO> page = accountMapper.selectPage(param.toPage(), Wrappers.query(new AccountDO().setAccount(param.getAccount()).setPhone(param.getPhone()).setDisable(param.getDisable())));
+        Page<AccountDO> page = accountMapper.page(param.toPage(), param);
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.taoq.sso.mapper.AccountMapper">
+
+    <select id="page" resultType="tech.taoq.sso.domain.db.AccountDO">
+        select id,account,name,phone,email,gender,note,is_disable,create_time,update_time from sys_account
+        <where>
+            <if test="param.account != null and param.account !=''">
+                account = #{param.account}
+            </if>
+            <if test="param.phone != null and param.phone !=''">
+                and phone = #{param.phone}
+            </if>
+            <if test="param.disable != null and param.disable !=''">
+                and is_disable = #{param.disable}
+            </if>
+            <if test="true">
+                and account != 'admin'
+            </if>
+        </where>
+        order by update_time desc
+    </select>
+</mapper>
