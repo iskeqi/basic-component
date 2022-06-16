@@ -48,7 +48,7 @@ public class MailController {
         return mailService.getByIdentifier(identifier);
     }
 
-    @ApiOperation("分页查询邮箱服务列表")
+    @ApiOperation("查询邮箱服务列表")
     @ApiOperationSupport(ignoreParameters = {
             "records", "total", "orders", "optimizeCountSql", "isSearchCount", "hitCount",
             "countId", "maxLimit", "searchCount", "searchName", "orderFiled", "orderType",

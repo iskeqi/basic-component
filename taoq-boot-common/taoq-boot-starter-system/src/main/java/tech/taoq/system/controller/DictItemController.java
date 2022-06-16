@@ -44,7 +44,7 @@ public class DictItemController {
         return dictItemService.getById(id);
     }
 
-    @ApiOperation("分页查询字典项列表")
+    @ApiOperation("查询字典项列表")
     @GetMapping
     public PageDto<DictItemDO> page(PageParam<DictItemDO> param) {
         return dictItemService.page(param);

@@ -39,7 +39,7 @@ public class RoleController {
         roleService.updateById(param);
     }
 
-    @ApiOperation("分页查询角色列表")
+    @ApiOperation("查询角色列表")
     @GetMapping
     public PageDto<RoleDO> page(PageParam<RoleDO> param) {
         return roleService.page(param);

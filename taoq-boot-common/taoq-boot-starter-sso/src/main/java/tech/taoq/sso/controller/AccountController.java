@@ -36,7 +36,7 @@ public class AccountController {
 		accountService.updateById(param);
 	}
 
-	@ApiOperation("分页查询用户列表")
+	@ApiOperation("查询用户列表")
 	@GetMapping
 	public PageDto<AccountDO> page(AccountPageParam param) {
 		return accountService.page(param);

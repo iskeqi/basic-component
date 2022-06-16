@@ -42,7 +42,7 @@ public class DictTypeController {
         return dictTypeService.getById(id);
     }
 
-    @ApiOperation("分页查询字典类型列表")
+    @ApiOperation("查询字典类型列表")
     @GetMapping
     public PageDto<DictTypeDO> page(PageParam<DictTypeDO> param) {
         return dictTypeService.page(param);

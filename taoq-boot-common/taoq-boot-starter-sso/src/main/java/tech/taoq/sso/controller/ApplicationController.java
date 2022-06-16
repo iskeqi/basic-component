@@ -35,7 +35,7 @@ public class ApplicationController {
 		applicationService.updateById(param);
 	}
 
-	@ApiOperation("分页查询应用列表")
+	@ApiOperation("查询应用列表")
 	@GetMapping
 	public PageDto<ApplicationDO> page(PageParam<ApplicationDO> param) {
 		return applicationService.page(param);

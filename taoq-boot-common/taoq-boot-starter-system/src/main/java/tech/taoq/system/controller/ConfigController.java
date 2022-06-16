@@ -42,7 +42,7 @@ public class ConfigController {
         return configService.getById(id);
     }
 
-    @ApiOperation("分页查询配置列表")
+    @ApiOperation("查询配置列表")
     @GetMapping
     public PageDto<ConfigDO> page(PageParam<ConfigDO> param) {
         return configService.page(param);

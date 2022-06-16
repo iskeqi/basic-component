@@ -37,7 +37,7 @@ public class FuncFieldController {
         funcFieldService.updateById(param);
     }
 
-    @ApiOperation("分页查询功能字段列表")
+    @ApiOperation("查询功能字段列表")
     @GetMapping
     public PageDto<FuncFieldDO> page(PageParam<FuncFieldDO> param) {
         return funcFieldService.page(param);

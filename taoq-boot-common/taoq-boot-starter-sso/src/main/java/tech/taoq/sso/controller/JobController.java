@@ -35,7 +35,7 @@ public class JobController {
 		jobService.updateById(param);
 	}
 
-	@ApiOperation("分页查询岗位列表")
+	@ApiOperation("查询岗位列表")
 	@GetMapping
 	public PageDto<JobDO> page(@RequestBody PageParam<JobDO> param) {
 		return jobService.page(param);
