@@ -32,7 +32,11 @@ public class AuthService {
             throw new NoAuthException("用户名或密码不正确");
         }
         StpUtil.login(param.getAccount(), param.getDevice());
-        return new LoginDto().setToken(StpUtil.getTokenValue());
+        LoginDto result = new LoginDto();
+        result.setToken(StpUtil.getTokenValue());
+        result.setAccountId(accountDO.getId());
+        result.setName(accountDO.getName());
+        return result;
     }
 
     public void logout() {
