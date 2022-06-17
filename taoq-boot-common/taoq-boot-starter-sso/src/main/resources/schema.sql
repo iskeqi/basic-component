@@ -36,7 +36,8 @@ create table if not exists `sys_account` (
   `is_disable` tinyint default '0' comment '是否禁用[false:未禁用 true:已禁用]',
   `create_time` datetime default null comment '创建时间',
   `update_time` datetime default null comment '修改时间',
-  primary key (`id`)
+  primary key (`id`),
+  unique key `uk_account` (`account`)
 ) engine=innodb default charset=utf8mb4 collate=utf8mb4_0900_ai_ci comment='用户表';
 
 create table if not exists `sys_account_department` (

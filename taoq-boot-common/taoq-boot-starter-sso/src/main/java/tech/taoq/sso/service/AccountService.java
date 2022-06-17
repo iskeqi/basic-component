@@ -5,12 +5,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.sso.domain.db.AccountDO;
 import tech.taoq.sso.domain.db.AccountDepartmentDO;
 import tech.taoq.sso.domain.db.AccountJobDO;
 import tech.taoq.sso.domain.param.AccountPageParam;
 import tech.taoq.sso.domain.param.AccountParam;
+import tech.taoq.sso.domain.param.ResetPasswordParam;
 import tech.taoq.sso.mapper.AccountDepartmentMapper;
 import tech.taoq.sso.mapper.AccountJobMapper;
 import tech.taoq.sso.mapper.AccountMapper;
@@ -32,8 +34,16 @@ public class AccountService {
     @Autowired
     private AccountService accountService;
 
+    private static final String DEFAULT_PASSWORD = "123456";
+
     @Transactional
     public void insert(AccountParam param) {
+        Long count = accountMapper.selectCount(Wrappers.query(new AccountDO().setAccount(param.getAccount())));
+        if (count > 0) {
+            throw new ParamIllegalException("用户名不得重复");
+        }
+
+        param.setPassword(DEFAULT_PASSWORD);
         accountMapper.insert(param);
 
         accountService.insertAssociations(param);
@@ -77,5 +87,12 @@ public class AccountService {
                 accountDepartmentMapper.insert(new AccountDepartmentDO().setAccountId(param.getId()).setDepartmentId(departmentId));
             }
         }
+    }
+
+    public void resetPassword(ResetPasswordParam param) {
+        AccountDO accountDO = new AccountDO();
+        accountDO.setId(param.getId());
+        accountDO.setPassword(DEFAULT_PASSWORD);
+        accountMapper.updateById(accountDO);
     }
 }

@@ -6,11 +6,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.taoq.common.exception.client.NoAuthException;
+import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.sso.domain.db.AccountDO;
 import tech.taoq.sso.domain.dto.AuthenticateDto;
 import tech.taoq.sso.domain.dto.LoginDto;
 import tech.taoq.sso.domain.param.AuthenticateParam;
 import tech.taoq.sso.domain.param.LoginParam;
+import tech.taoq.sso.domain.param.UpdatePasswordParam;
 import tech.taoq.sso.mapper.AccountMapper;
 
 import java.util.Objects;
@@ -56,5 +58,19 @@ public class AuthService {
             result.setLogin(false);
         }
         return result;
+    }
+
+    public void updatePassword(UpdatePasswordParam param) {
+        String loginId = (String) StpUtil.getLoginId();
+        AccountDO accountDO = accountMapper.selectOne(Wrappers.query(new AccountDO().setAccount(loginId)));
+
+        if (Objects.equals(param.getOldPassword(), accountDO.getPassword())) {
+            AccountDO t = new AccountDO();
+            t.setId(accountDO.getId());
+            t.setPassword(param.getNewPassword());
+            accountMapper.updateById(t);
+        } else {
+            throw new ParamIllegalException("密码不正确");
+        }
     }
 }
