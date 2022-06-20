@@ -44,7 +44,7 @@ public class AccountController {
     }
 
     @ApiOperation("重置密码")
-    @PostMapping
+    @PostMapping("/resetPassword")
     public void resetPassword(@RequestBody ResetPasswordParam param) {
         accountService.resetPassword(param);
     }
