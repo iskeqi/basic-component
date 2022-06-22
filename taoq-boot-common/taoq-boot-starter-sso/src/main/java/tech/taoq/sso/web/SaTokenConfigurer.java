@@ -33,6 +33,7 @@ public class SaTokenConfigurer implements WebMvcConfigurer {
         // 注册Sa-Token的路由拦截器
         registry.addInterceptor(new SaRouteInterceptor()).addPathPatterns("/**")
                 .excludePathPatterns("/**/p")
+                .excludePathPatterns("/index.html")
                 .excludePathPatterns(KNIFE4J_PATH);
     }
 }
