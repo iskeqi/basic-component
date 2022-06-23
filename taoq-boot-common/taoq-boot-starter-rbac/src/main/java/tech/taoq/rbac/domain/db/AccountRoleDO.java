@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 public class AccountRoleDO {
 
     @ApiModelProperty("用户唯一标识符")
-    private String accountId;
+    private String account;
 
     @ApiModelProperty("角色id")
     private String roleId;

@@ -13,8 +13,8 @@ public class LoginDto {
     @ApiModelProperty("token")
     private String token;
 
-    @ApiModelProperty("用户id")
-    private String accountId;
+    @ApiModelProperty("用户名")
+    private String account;
 
     @ApiModelProperty("用户昵称")
     private String name;

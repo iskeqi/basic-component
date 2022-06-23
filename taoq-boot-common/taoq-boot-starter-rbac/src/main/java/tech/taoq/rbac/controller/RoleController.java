@@ -58,8 +58,8 @@ public class RoleController {
     }
 
     @ApiOperation("查询指定用户关联的角色")
-    @PostMapping("/listByAccountId/{accountId}")
-    public List<RoleDO> listByAccountId(@PathVariable String accountId) {
-        return roleService.listByAccountId(accountId);
+    @PostMapping("/listByAccount/{account}")
+    public List<RoleDO> listByAccount(@PathVariable String account) {
+        return roleService.listByAccount(account);
     }
 }

@@ -36,7 +36,7 @@ public class AuthService {
         StpUtil.login(param.getAccount(), param.getDevice());
         LoginDto result = new LoginDto();
         result.setToken(StpUtil.getTokenValue());
-        result.setAccountId(accountDO.getId());
+        result.setAccount(param.getAccount());
         result.setName(accountDO.getName());
         return result;
     }

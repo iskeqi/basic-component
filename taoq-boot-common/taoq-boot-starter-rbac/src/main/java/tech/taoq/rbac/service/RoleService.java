@@ -20,7 +20,7 @@ public interface RoleService {
 
     void authorizeMenu(AuthorizeMenuParam param);
 
-    List<RoleDO> listByAccountId(String accountId);
+    List<RoleDO> listByAccount(String account);
 
     void authorizeRole(AuthorizeRoleParam param);
 }

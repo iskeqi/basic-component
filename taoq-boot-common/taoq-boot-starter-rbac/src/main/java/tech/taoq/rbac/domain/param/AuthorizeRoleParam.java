@@ -12,8 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 public class AuthorizeRoleParam {
 
-    @ApiModelProperty("用户id")
-    private String accountId;
+    @ApiModelProperty("用户名")
+    private String account;
 
     @ApiModelProperty("角色id列表")
     private List<String> roleIdList;

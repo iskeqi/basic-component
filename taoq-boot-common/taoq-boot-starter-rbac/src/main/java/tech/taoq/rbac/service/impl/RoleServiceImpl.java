@@ -83,9 +83,9 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<RoleDO> listByAccountId(String accountId) {
+    public List<RoleDO> listByAccount(String account) {
         List<AccountRoleDO> list = accountRoleMapper.selectList(
-                Wrappers.query(new AccountRoleDO().setAccountId(accountId)));
+                Wrappers.query(new AccountRoleDO().setAccount(account)));
 
         Collection<String> roleIdList = list.stream().map(AccountRoleDO::getRoleId).collect(Collectors.toList());
 
@@ -96,7 +96,7 @@ public class RoleServiceImpl implements RoleService {
     public void authorizeRole(AuthorizeRoleParam param) {
         for (String roleId : param.getRoleIdList()) {
             accountRoleMapper.insert(new AccountRoleDO()
-                    .setAccountId(param.getAccountId())
+                    .setAccount(param.getAccount())
                     .setRoleId(roleId));
         }
     }

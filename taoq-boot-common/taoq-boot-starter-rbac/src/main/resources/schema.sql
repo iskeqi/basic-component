@@ -32,9 +32,9 @@ create table if not exists `sys_role_menu`  (
 ) engine = innodb character set = utf8mb4 collate = utf8mb4_0900_ai_ci comment = '角色-菜单关联表';
 
 create table if not exists `sys_account_role`  (
-  `account_id` varchar(32)  not null comment '用户唯一标识符',
+  `account` varchar(32)  not null comment '用户唯一标识符',
   `role_id` bigint unsigned not null comment '角色id',
-  primary key (`account_id`, `role_id`)
+  primary key (`account`, `role_id`)
 ) engine = innodb character set = utf8mb4 collate = utf8mb4_0900_ai_ci comment = '用户-角色关联表';
 
 create table `sys_func_field` (
