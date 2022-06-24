@@ -1,5 +1,6 @@
 package tech.taoq.sso.service;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class AccountService {
     private AccountService accountService;
 
     private static final String DEFAULT_PASSWORD = "123456";
+    private static final String ADMIN = "admin";
 
     @Transactional
     public void insert(AccountParam param) {
@@ -51,6 +53,11 @@ public class AccountService {
 
     @Transactional
     public void deleteById(String id) {
+        AccountDO accountDO = accountMapper.selectById(id);
+        if (ADMIN.equals(accountDO.getAccount())) {
+            throw new ParamIllegalException("admin 账号不允许被删除");
+        }
+
         accountMapper.deleteById(id);
 
         accountService.deleteAssociations(id);
@@ -67,6 +74,11 @@ public class AccountService {
     }
 
     public PageDto<AccountDO> page(AccountPageParam param) {
+        String account = (String) StpUtil.getLoginId();
+        if (ADMIN.equals(account)) {
+            param.setShowAdmin(true);
+        }
+
         Page<AccountDO> page = accountMapper.page(param.toPage(), param);
         return new PageDto<>(page.getTotal(), page.getRecords());
     }

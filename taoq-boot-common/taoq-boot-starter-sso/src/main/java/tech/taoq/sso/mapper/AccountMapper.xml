@@ -14,7 +14,7 @@
             <if test="param.disable != null and param.disable !=''">
                 and is_disable = #{param.disable}
             </if>
-            <if test="true">
+            <if test="!param.showAdmin">
                 and account != 'admin'
             </if>
         </where>

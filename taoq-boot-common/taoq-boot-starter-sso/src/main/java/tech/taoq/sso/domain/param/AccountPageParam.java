@@ -25,4 +25,7 @@ public class AccountPageParam extends PageParam<AccountDO> {
 
 	@ApiModelProperty("部门id")
 	private String departmentId;
+
+	@ApiModelProperty(value = "是否展示 admin 账号", hidden = true)
+	private Boolean showAdmin = false;
 }
