@@ -59,4 +59,10 @@ public class ConfigServiceImpl implements ConfigService {
         ConfigDO configDO = configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(configKey)));
         return configDO != null ? configDO.getConfigValue() : null;
     }
+
+    @Override
+    public void updateByConfigKey(String configKey, String configValue) {
+        configMapper.update(new ConfigDO().setConfigValue(configValue),
+                Wrappers.query(new ConfigDO().setConfigKey(configKey)));
+    }
 }

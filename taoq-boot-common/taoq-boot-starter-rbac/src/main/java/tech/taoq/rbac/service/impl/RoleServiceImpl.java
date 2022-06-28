@@ -19,6 +19,7 @@ import tech.taoq.rbac.mapper.RoleMenuMapper;
 import tech.taoq.rbac.service.RoleService;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -88,6 +89,9 @@ public class RoleServiceImpl implements RoleService {
                 Wrappers.query(new AccountRoleDO().setAccount(account)));
 
         Collection<String> roleIdList = list.stream().map(AccountRoleDO::getRoleId).collect(Collectors.toList());
+        if (roleIdList.size() == 0) {
+            return Collections.emptyList();
+        }
 
         return roleMapper.selectBatchIds(roleIdList);
     }
