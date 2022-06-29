@@ -13,11 +13,16 @@ import tech.taoq.system.domain.ConfigDO;
 import tech.taoq.system.mapper.ConfigMapper;
 import tech.taoq.system.service.ConfigService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class ConfigServiceImpl implements ConfigService {
 
     @Autowired
     private ConfigMapper configMapper;
+
+    private static final Map<String, ConfigDO> CONFIG_MAP = new HashMap<>();
 
     public void insert(ConfigDO param) {
         ConfigDO t = configMapper.selectOne(Wrappers.query(new ConfigDO()
@@ -35,6 +40,7 @@ public class ConfigServiceImpl implements ConfigService {
             throw new ClientErrorException("内置记录不允许被删除");
         }
         configMapper.deleteById(id);
+        CONFIG_MAP.remove(configDO.getConfigKey());
     }
 
     public void updateById(ConfigDO param) {
@@ -43,6 +49,7 @@ public class ConfigServiceImpl implements ConfigService {
         t1.setConfigKey(null);
         t1.setCreateTime(null);
         configMapper.updateById(param);
+        CONFIG_MAP.remove(t1.getConfigKey());
     }
 
     public ConfigDO getById(String id) {
@@ -56,13 +63,24 @@ public class ConfigServiceImpl implements ConfigService {
 
     @Override
     public String getByConfigKey(String configKey) {
+        ConfigDO t = CONFIG_MAP.get(configKey);
+        if (t != null) {
+            return t.getConfigValue();
+        }
+
+
         ConfigDO configDO = configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(configKey)));
-        return configDO != null ? configDO.getConfigValue() : null;
+        if (configDO != null) {
+            CONFIG_MAP.put(configKey, configDO);
+            return configDO.getConfigValue();
+        }
+        return null;
     }
 
     @Override
     public void updateByConfigKey(String configKey, String configValue) {
         configMapper.update(new ConfigDO().setConfigValue(configValue),
                 Wrappers.query(new ConfigDO().setConfigKey(configKey)));
+        CONFIG_MAP.remove(configKey);
     }
 }
