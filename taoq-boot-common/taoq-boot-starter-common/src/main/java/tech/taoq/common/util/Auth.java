@@ -25,7 +25,7 @@ public class Auth {
         data.put(authBO.getKey(), authBO);
     }
 
-    private static AuthBO getAuthBO(String key) {
+    public static AuthBO getAuthBO(String key) {
         Map<String, Object> data = threadLocal.get();
         if (data == null) {
             throw new ClientErrorException("no auth threadlocal data");

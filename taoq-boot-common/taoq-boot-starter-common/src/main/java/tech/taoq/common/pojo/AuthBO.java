@@ -12,7 +12,9 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-public class AuthBO {
+public class AuthBO<T> {
 
     private String key;
+
+    private T data;
 }

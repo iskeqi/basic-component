@@ -27,6 +27,11 @@ public class DateUtil {
     public static final String LOCAL_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
 
     /**
+     * 年月日时分秒毫秒
+     */
+    public static final String LOCAL_DATE_TIME_SSS = "yyyy-MM-dd HH:mm:ss:SSS";
+
+    /**
      * 时分秒
      */
     public static final String LOCAL_TIME = "HH:mm:ss";

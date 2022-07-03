@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 /**
  * JSON 工具类，使用 jackson-bind 封装
@@ -23,11 +24,13 @@ public class JsonUtil {
         objectMapper = new ObjectMapper();
         // 反序列化时，忽略掉名字不匹配的字段
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        objectMapper.registerModule(new JavaTimeModule());
 
         objectMapper2 = new ObjectMapper();
         objectMapper2.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         // 序列化时忽略掉值为 null 的字段
         objectMapper2.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        objectMapper2.registerModule(new JavaTimeModule());
     }
 
     /**
