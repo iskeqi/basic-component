@@ -1,4 +1,4 @@
-package tech.taoq.web.aop;
+package tech.taoq.log.aop;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;

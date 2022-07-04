@@ -1,4 +1,4 @@
-package tech.taoq.web.aop;
+package tech.taoq.log.aop;
 
 public interface UserIdentifier {
 

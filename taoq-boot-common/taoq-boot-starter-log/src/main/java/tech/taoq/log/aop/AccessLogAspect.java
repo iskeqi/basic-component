@@ -1,4 +1,4 @@
-package tech.taoq.web.aop;
+package tech.taoq.log.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -21,7 +21,7 @@ import java.time.temporal.ChronoUnit;
 @Slf4j
 @Aspect
 @Component
-@ConditionalOnProperty(prefix = "taoq.web", value = "access-log", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "taoq.log", value = "access-log", matchIfMissing = true)
 public class AccessLogAspect {
 
     private static final String ACCESS_LOG = "ACCESS_LOG";
