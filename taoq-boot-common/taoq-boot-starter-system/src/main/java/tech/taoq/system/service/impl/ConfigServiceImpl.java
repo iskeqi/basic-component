@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import tech.taoq.common.exception.client.ClientErrorException;
 import tech.taoq.common.exception.client.ParamIllegalException;
@@ -13,9 +14,13 @@ import tech.taoq.system.domain.ConfigDO;
 import tech.taoq.system.mapper.ConfigMapper;
 import tech.taoq.system.service.ConfigService;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
+@Lazy
 @Service
 public class ConfigServiceImpl implements ConfigService {
 
@@ -24,9 +29,14 @@ public class ConfigServiceImpl implements ConfigService {
 
     private static final Map<String, ConfigDO> CONFIG_MAP = new HashMap<>();
 
+    @PostConstruct
+    public void init() {
+        List<ConfigDO> configDOS = configMapper.selectList(null);
+        configDOS.forEach(configDO -> CONFIG_MAP.put(configDO.getConfigKey(), configDO));
+    }
+
     public void insert(ConfigDO param) {
-        ConfigDO t = configMapper.selectOne(Wrappers.query(new ConfigDO()
-                .setConfigKey(param.getConfigKey())));
+        ConfigDO t = configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(param.getConfigKey())));
         if (t != null) {
             throw new ParamIllegalException("configKey：" + param.getConfigKey() + " 已经存在");
         }
@@ -68,7 +78,6 @@ public class ConfigServiceImpl implements ConfigService {
             return t.getConfigValue();
         }
 
-
         ConfigDO configDO = configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(configKey)));
         if (configDO != null) {
             CONFIG_MAP.put(configKey, configDO);
@@ -79,8 +88,7 @@ public class ConfigServiceImpl implements ConfigService {
 
     @Override
     public void updateByConfigKey(String configKey, String configValue) {
-        configMapper.update(new ConfigDO().setConfigValue(configValue),
-                Wrappers.query(new ConfigDO().setConfigKey(configKey)));
+        configMapper.update(new ConfigDO().setConfigValue(configValue), Wrappers.query(new ConfigDO().setConfigKey(configKey)));
         CONFIG_MAP.remove(configKey);
     }
 }

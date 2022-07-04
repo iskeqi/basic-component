@@ -249,4 +249,16 @@ public abstract class AbstractModbusMasterTCP {
         log.error("occur modbusIOException : {}, exception message : {}", errorMsg, e.getMessage());
         throw new ModbusTCPException(errorMsg, e);
     }
+
+    public String getHost() {
+        return host;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public String getDeviceName() {
+        return deviceName;
+    }
 }

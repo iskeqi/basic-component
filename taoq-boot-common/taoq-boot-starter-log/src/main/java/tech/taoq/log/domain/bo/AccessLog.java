@@ -1,4 +1,4 @@
-package tech.taoq.log.aop;
+package tech.taoq.log.domain.bo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,6 +16,12 @@ public class AccessLog {
 
     @ApiModelProperty("用户唯一标识符")
     private String userIdentifier;
+
+    @ApiModelProperty("操作名称")
+    private String operateName;
+
+    @ApiModelProperty("请求是否成功")
+    private Boolean success;
 
     @ApiModelProperty("请求url")
     private String uri;

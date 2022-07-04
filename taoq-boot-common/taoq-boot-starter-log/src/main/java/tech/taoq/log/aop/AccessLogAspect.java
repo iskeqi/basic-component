@@ -13,6 +13,8 @@ import tech.taoq.common.exception.TaoqException;
 import tech.taoq.common.pojo.AuthBO;
 import tech.taoq.common.util.Auth;
 import tech.taoq.common.util.JsonUtil;
+import tech.taoq.log.domain.bo.AccessLog;
+import tech.taoq.log.service.UserIdentifier;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;

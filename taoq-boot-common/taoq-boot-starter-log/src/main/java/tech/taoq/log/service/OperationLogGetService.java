@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import tech.taoq.log.domain.OperateLogDO;
+import tech.taoq.log.domain.db.OperateLogDO;
 import tech.taoq.log.mapper.OperateLogMapper;
 
 /**

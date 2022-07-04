@@ -1,4 +1,4 @@
-package tech.taoq.log.domain;
+package tech.taoq.log.domain.db;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
