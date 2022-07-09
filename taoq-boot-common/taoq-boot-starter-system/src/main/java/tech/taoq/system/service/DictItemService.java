@@ -2,7 +2,7 @@ package tech.taoq.system.service;
 
 import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.mp.pojo.PageParam;
-import tech.taoq.system.domain.DictItemDO;
+import tech.taoq.system.domain.db.DictItemDO;
 import tech.taoq.web.validator.BaseDictValidate;
 
 import java.util.List;

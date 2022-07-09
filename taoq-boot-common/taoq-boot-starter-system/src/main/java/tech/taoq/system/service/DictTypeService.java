@@ -2,7 +2,7 @@ package tech.taoq.system.service;
 
 import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.mp.pojo.PageParam;
-import tech.taoq.system.domain.DictTypeDO;
+import tech.taoq.system.domain.db.DictTypeDO;
 
 public interface DictTypeService {
 

@@ -1,4 +1,4 @@
-package tech.taoq.system.domain;
+package tech.taoq.system.domain.db;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;

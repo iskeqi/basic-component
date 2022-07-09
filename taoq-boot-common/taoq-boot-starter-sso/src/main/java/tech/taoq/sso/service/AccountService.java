@@ -45,7 +45,6 @@ public class AccountService {
             throw new ParamIllegalException("用户名不得重复");
         }
 
-        param.setPassword(DEFAULT_PASSWORD);
         accountMapper.insert(param);
 
         accountService.insertAssociations(param);

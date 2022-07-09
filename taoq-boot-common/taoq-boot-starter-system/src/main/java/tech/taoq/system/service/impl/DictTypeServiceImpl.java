@@ -8,7 +8,7 @@ import tech.taoq.common.exception.client.ClientErrorException;
 import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.mp.pojo.PageParam;
-import tech.taoq.system.domain.DictTypeDO;
+import tech.taoq.system.domain.db.DictTypeDO;
 import tech.taoq.system.mapper.DictTypeMapper;
 import tech.taoq.system.service.DictTypeService;
 

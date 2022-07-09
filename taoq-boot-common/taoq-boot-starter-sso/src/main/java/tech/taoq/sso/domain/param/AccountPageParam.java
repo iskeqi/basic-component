@@ -17,6 +17,9 @@ public class AccountPageParam extends PageParam<AccountDO> {
 	@ApiModelProperty("用户名")
 	private String account;
 
+	@ApiModelProperty("用户昵称")
+	private String name;
+
 	@ApiModelProperty("手机号码")
 	private String phone;
 

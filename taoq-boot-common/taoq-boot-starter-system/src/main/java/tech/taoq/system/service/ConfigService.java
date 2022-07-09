@@ -2,7 +2,8 @@ package tech.taoq.system.service;
 
 import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.mp.pojo.PageParam;
-import tech.taoq.system.domain.ConfigDO;
+import tech.taoq.system.domain.db.ConfigDO;
+import tech.taoq.system.domain.param.ConfigPageParam;
 
 public interface ConfigService {
 
@@ -14,7 +15,7 @@ public interface ConfigService {
 
     ConfigDO getById(String id);
 
-    PageDto<ConfigDO> page(PageParam<ConfigDO> param);
+    PageDto<ConfigDO> page(ConfigPageParam param);
 
     String getByConfigKey(String configKey);
 

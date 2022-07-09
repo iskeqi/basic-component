@@ -47,6 +47,11 @@ public class RoleServiceImpl implements RoleService {
             throw new ParamIllegalException("不允许删除内置角色");
         }
 
+//        Long count = accountRoleMapper.selectCount(Wrappers.query(new AccountRoleDO().setRoleId(id)));
+//        if (count > 0) {
+//            throw new ParamIllegalException("当前角色已被其它用户关联，无法删除");
+//        }
+
         // 删除角色记录
         roleMapper.deleteById(id);
 
@@ -98,6 +103,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void authorizeRole(AuthorizeRoleParam param) {
+        accountRoleMapper.delete(Wrappers.query(new AccountRoleDO().setAccount(param.getAccount())));
+
         for (String roleId : param.getRoleIdList()) {
             accountRoleMapper.insert(new AccountRoleDO()
                     .setAccount(param.getAccount())

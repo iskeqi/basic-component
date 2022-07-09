@@ -10,7 +10,8 @@ import tech.taoq.common.exception.client.ClientErrorException;
 import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.mp.pojo.PageParam;
-import tech.taoq.system.domain.ConfigDO;
+import tech.taoq.system.domain.db.ConfigDO;
+import tech.taoq.system.domain.param.ConfigPageParam;
 import tech.taoq.system.mapper.ConfigMapper;
 import tech.taoq.system.service.ConfigService;
 
@@ -18,7 +19,6 @@ import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 @Lazy
 @Service
@@ -66,8 +66,9 @@ public class ConfigServiceImpl implements ConfigService {
         return configMapper.selectById(id);
     }
 
-    public PageDto<ConfigDO> page(PageParam<ConfigDO> param) {
-        Page<ConfigDO> page = configMapper.selectPage(param.toPage(), Wrappers.query());
+    public PageDto<ConfigDO> page(ConfigPageParam param) {
+        ConfigDO configDO = BeanUtil.copyProperties(param, ConfigDO.class);
+        Page<ConfigDO> page = configMapper.selectPage(param.toPage(), Wrappers.query(configDO));
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 

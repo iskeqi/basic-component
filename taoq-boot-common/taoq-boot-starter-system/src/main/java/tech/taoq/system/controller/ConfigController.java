@@ -7,7 +7,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.mp.pojo.PageParam;
-import tech.taoq.system.domain.ConfigDO;
+import tech.taoq.system.domain.db.ConfigDO;
+import tech.taoq.system.domain.param.ConfigPageParam;
 import tech.taoq.system.service.ConfigService;
 
 @Api(tags = "配置管理")
@@ -44,7 +45,7 @@ public class ConfigController {
 
     @ApiOperation("查询配置列表")
     @GetMapping
-    public PageDto<ConfigDO> page(PageParam<ConfigDO> param) {
+    public PageDto<ConfigDO> page(ConfigPageParam param) {
         return configService.page(param);
     }
 }
