@@ -103,7 +103,7 @@ public class AccountService {
     public void resetPassword(ResetPasswordParam param) {
         AccountDO accountDO = new AccountDO();
         accountDO.setId(param.getId());
-        accountDO.setPassword(DEFAULT_PASSWORD);
+        accountDO.setPassword(param.getPassword() != null ? param.getPassword() : DEFAULT_PASSWORD);
         accountMapper.updateById(accountDO);
     }
 }

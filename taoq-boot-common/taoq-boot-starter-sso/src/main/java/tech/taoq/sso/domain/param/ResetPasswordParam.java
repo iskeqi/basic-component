@@ -12,4 +12,7 @@ public class ResetPasswordParam {
 
     @ApiModelProperty("用户id")
     private String id;
+
+    @ApiModelProperty("密码")
+    private String password;
 }

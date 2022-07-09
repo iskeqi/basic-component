@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>taoq-boot-starter-mail</module>
         <module>taoq-boot-starter-oss</module>
         <module>taoq-boot-starter-websocket</module>
         <module>taoq-boot-starter-modbus</module>
