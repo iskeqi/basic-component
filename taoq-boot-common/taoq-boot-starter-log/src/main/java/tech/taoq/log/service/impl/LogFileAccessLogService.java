@@ -19,6 +19,10 @@ public class LogFileAccessLogService implements AccessLogService {
 
     @Override
     public void writeAccessLog(AccessLog accessLog) {
-        log.info("access log {}", JsonUtil.writeValueAsString(accessLog));
+        if (accessLog.getSuccess()) {
+            log.info("success access log {}", JsonUtil.writeValueAsString(accessLog));
+        } else {
+            log.error("error access log {}", JsonUtil.writeValueAsString(accessLog));
+        }
     }
 }
