@@ -28,7 +28,7 @@ import java.time.temporal.ChronoUnit;
 @Slf4j
 @Aspect
 @Component
-@ConditionalOnProperty(prefix = "taoq.log", value = "access-log")
+@ConditionalOnProperty(prefix = "taoq.log.access-log", value = "enable")
 public class AccessLogAspect {
 
     private static final String ACCESS_LOG = "ACCESS_LOG";

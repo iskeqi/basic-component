@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
  * @author keqi
  */
 @Component
-@ConditionalOnProperty(prefix = "taoq.log", value = "access-log")
+@ConditionalOnProperty(prefix = "taoq.log.access-log", value = "enable")
 public class AccessLogAspectService {
 
     private static final ExecutorService LOG_EXECUTOR_SERVICE = Executors.newFixedThreadPool(2);

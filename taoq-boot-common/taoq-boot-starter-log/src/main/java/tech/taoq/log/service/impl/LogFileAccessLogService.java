@@ -14,7 +14,7 @@ import tech.taoq.log.service.AccessLogService;
  */
 @Slf4j
 @Component
-@ConditionalOnProperty(prefix = "taoq.log.operate-log", value = "log-file")
+@ConditionalOnProperty(prefix = "taoq.log.access-log", value = "log-file")
 public class LogFileAccessLogService implements AccessLogService {
 
     @Override
