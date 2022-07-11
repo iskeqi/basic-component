@@ -1,9 +1,11 @@
 package tech.taoq.log.aop;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
@@ -53,19 +55,24 @@ public class AccessLogAspect {
         HttpServletRequest request = attributes.getRequest();
 
         AccessLog accessLog = new AccessLog();
+
         String uri = request.getRequestURI();
         String queryString = request.getQueryString();
-        if (queryString != null) {
-            uri = uri + "?" + queryString;
-        }
-        accessLog.setUri(uri);
+        accessLog.setUri(queryString != null ? uri + "?" + queryString : uri);
         accessLog.setMethod(request.getMethod());
-        accessLog.setClassName(joinPoint.getSignature().getDeclaringTypeName());
-        accessLog.setMethodName(joinPoint.getSignature().getName());
+        accessLog.setStartTime(LocalDateTime.now());
+
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        accessLog.setClassName(signature.getDeclaringTypeName());
+        accessLog.setMethodName(signature.getName());
+        ApiOperation apiOperation = signature.getMethod().getAnnotation(ApiOperation.class);
+        if (apiOperation != null) {
+            accessLog.setOperateName(apiOperation.value());
+        }
+
         if (joinPoint.getArgs().length > 0) {
             accessLog.setReqBody(joinPoint.getArgs()[0]);
         }
-        accessLog.setStartTime(LocalDateTime.now());
 
         AuthBO authBO = new AuthBO<>();
         authBO.setKey(ACCESS_LOG);
