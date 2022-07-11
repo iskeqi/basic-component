@@ -65,6 +65,7 @@ public class AccessLogAspect {
         if (joinPoint.getArgs().length > 0) {
             accessLog.setReqBody(joinPoint.getArgs()[0]);
         }
+        accessLog.setStartTime(LocalDateTime.now());
 
         AuthBO authBO = new AuthBO<>();
         authBO.setKey(ACCESS_LOG);
@@ -112,10 +113,6 @@ public class AccessLogAspect {
 
     @Around("accessLogPointCut()")
     public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        AuthBO authBO = Auth.getAuthBO(ACCESS_LOG);
-        AccessLog accessLog = (AccessLog) authBO.getData();
-        accessLog.setStartTime(LocalDateTime.now());
-
         return proceedingJoinPoint.proceed();
     }
 }
