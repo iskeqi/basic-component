@@ -29,7 +29,7 @@ public class WebSocketUtil {
      *
      * @param dto dto
      */
-    public void broadcast(WebSocketMessageDto dto) {
+    public static void broadcast(WebSocketMessageDto dto) {
         WRAPPER_SET.forEach(wrapper -> send(wrapper, dto));
     }
 
@@ -39,7 +39,7 @@ public class WebSocketUtil {
      * @param userIdentifier userIdentifier
      * @param dto            dto
      */
-    public void sendByUserIdentifier(String userIdentifier, WebSocketMessageDto dto) {
+    public static void sendByUserIdentifier(String userIdentifier, WebSocketMessageDto dto) {
         WRAPPER_SET.forEach(wrapper -> {
             if (Objects.equals(wrapper.getUserIdentifier(), userIdentifier)) {
                 send(wrapper, dto);
