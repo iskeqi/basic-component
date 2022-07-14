@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import tech.taoq.common.exception.client.ClientErrorException;
 import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.mp.pojo.PageDto;
-import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.system.domain.db.ConfigDO;
 import tech.taoq.system.domain.param.ConfigPageParam;
 import tech.taoq.system.mapper.ConfigMapper;
@@ -46,20 +45,23 @@ public class ConfigServiceImpl implements ConfigService {
 
     public void deleteById(String id) {
         ConfigDO configDO = configMapper.selectById(id);
+        CONFIG_MAP.remove(configDO.getConfigKey());
+
         if (configDO.getInternal()) {
             throw new ClientErrorException("内置记录不允许被删除");
         }
         configMapper.deleteById(id);
-        CONFIG_MAP.remove(configDO.getConfigKey());
+
     }
 
     public void updateById(ConfigDO param) {
+        CONFIG_MAP.remove(param.getConfigKey());
+
         ConfigDO t1 = BeanUtil.copyProperties(param, ConfigDO.class);
         // configKey 是不能修改的
         t1.setConfigKey(null);
         t1.setCreateTime(null);
         configMapper.updateById(param);
-        CONFIG_MAP.remove(t1.getConfigKey());
     }
 
     public ConfigDO getById(String id) {
@@ -89,7 +91,7 @@ public class ConfigServiceImpl implements ConfigService {
 
     @Override
     public void updateByConfigKey(String configKey, String configValue) {
-        configMapper.update(new ConfigDO().setConfigValue(configValue), Wrappers.query(new ConfigDO().setConfigKey(configKey)));
         CONFIG_MAP.remove(configKey);
+        configMapper.update(new ConfigDO().setConfigValue(configValue), Wrappers.query(new ConfigDO().setConfigKey(configKey)));
     }
 }
