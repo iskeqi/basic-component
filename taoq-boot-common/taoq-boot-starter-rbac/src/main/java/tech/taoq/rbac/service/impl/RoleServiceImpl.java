@@ -82,6 +82,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional
     public void authorizeMenu(AuthorizeMenuParam param) {
+        roleMenuMapper.delete(Wrappers.query(new RoleMenuDO().setRoleId(param.getRoleId())));
         for (String menuId : param.getMenuIdList()) {
             RoleMenuDO t1 = new RoleMenuDO().setRoleId(param.getRoleId()).setMenuId(menuId);
             roleMenuMapper.insert(t1);
