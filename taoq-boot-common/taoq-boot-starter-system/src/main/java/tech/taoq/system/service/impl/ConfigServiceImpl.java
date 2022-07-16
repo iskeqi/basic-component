@@ -14,9 +14,7 @@ import tech.taoq.system.domain.param.ConfigPageParam;
 import tech.taoq.system.mapper.ConfigMapper;
 import tech.taoq.system.service.ConfigService;
 
-import javax.annotation.PostConstruct;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Lazy
@@ -26,13 +24,7 @@ public class ConfigServiceImpl implements ConfigService {
     @Autowired
     private ConfigMapper configMapper;
 
-    private static final Map<String, ConfigDO> CONFIG_MAP = new HashMap<>();
-
-    @PostConstruct
-    public void init() {
-        List<ConfigDO> configDOS = configMapper.selectList(null);
-        configDOS.forEach(configDO -> CONFIG_MAP.put(configDO.getConfigKey(), configDO));
-    }
+    public static final Map<String, ConfigDO> CONFIG_MAP = new HashMap<>();
 
     public void insert(ConfigDO param) {
         ConfigDO t = configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(param.getConfigKey())));
