@@ -172,16 +172,11 @@
 
     <distributionManagement>
         <!--稳定版本发布到此仓库中-->
-        <repository>
-            <!--这里的 id 需要和 setting.xml 中的 server id 名称保持一致-->
-            <id>maven-releases</id>
-            <!--仓库URL访问地址-->
-            <url>http://114.132.245.130:8081/repository/maven-releases/</url>
-        </repository>
         <!--快照版本发布到此仓库中-->
-        <snapshotRepository>
-            <id>maven-snapshots</id>
-            <url>http://114.132.245.130:8081/repository/maven-snapshots/</url>
-        </snapshotRepository>
+        <repository>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/iskeqi/taoq-boot</url>
+        </repository>
     </distributionManagement>
 </project>
