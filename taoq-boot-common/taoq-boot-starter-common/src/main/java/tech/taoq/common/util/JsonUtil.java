@@ -1,10 +1,12 @@
 package tech.taoq.common.util;
 
 import cn.hutool.core.util.StrUtil;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 /**
  * JSON 工具类，使用 jackson-bind 封装
@@ -16,10 +18,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class JsonUtil {
 
     private static final ObjectMapper objectMapper;
+    private static final ObjectMapper objectMapper2;
 
     static {
         objectMapper = new ObjectMapper();
+        // 反序列化时，忽略掉名字不匹配的字段
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        objectMapper.registerModule(new JavaTimeModule());
+
+        objectMapper2 = new ObjectMapper();
+        objectMapper2.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        // 序列化时忽略掉值为 null 的字段
+        objectMapper2.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        objectMapper2.registerModule(new JavaTimeModule());
     }
 
     /**
@@ -33,6 +44,29 @@ public class JsonUtil {
         if (value != null) {
             try {
                 json = objectMapper.writeValueAsString(value);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return json;
+    }
+
+    /**
+     * 同时支持对象/数组/Map，属性值为 null 时，会忽略该属性
+     *
+     * @param value           value
+     * @param ignoreNullField 默认为 false
+     * @return r
+     */
+    public static String writeValueAsString(Object value, boolean ignoreNullField) {
+        if (ignoreNullField) {
+            throw new RuntimeException("must be false");
+        }
+
+        String json = null;
+        if (value != null) {
+            try {
+                json = objectMapper2.writeValueAsString(value);
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e.getMessage());
             }

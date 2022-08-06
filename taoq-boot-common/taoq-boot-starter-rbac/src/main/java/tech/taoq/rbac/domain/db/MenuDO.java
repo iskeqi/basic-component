@@ -8,16 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import tech.taoq.mp.pojo.BaseDO;
 
-/**
- * 菜单权限表
- *
- * @author keqi
- */
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_menu")
+@TableName("sys_menu")
 public class MenuDO extends BaseDO {
 
     @ApiModelProperty("名称")
@@ -40,6 +35,9 @@ public class MenuDO extends BaseDO {
 
     @ApiModelProperty("排序字段")
     private Integer orderNum;
+
+    @ApiModelProperty("菜单功能类型[N:内置 Z:自定义]")
+    private String funcType;
 
     public enum Type {
         C, M, B

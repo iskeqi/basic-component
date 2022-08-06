@@ -8,13 +8,10 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import tech.taoq.mp.pojo.BaseDO;
 
-/**
- * 字典表
- */
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "sys_dict_item")
+@TableName("sys_dict_item")
 public class DictItemDO extends BaseDO {
 
     @ApiModelProperty("字典项编码")
@@ -26,8 +23,8 @@ public class DictItemDO extends BaseDO {
     @ApiModelProperty("字典项值")
     private String itemValue;
 
-    @ApiModelProperty("字典类型")
-    private String dictType;
+    @ApiModelProperty("字典类型id")
+    private String dictTypeId;
 
     @ApiModelProperty("备注")
     private String note;
@@ -35,7 +32,7 @@ public class DictItemDO extends BaseDO {
     @ApiModelProperty("排序字段")
     private Integer orderNum;
 
-    @ApiModelProperty("是否禁用[false:未禁用 true:已禁用]")
-    @TableField(value = "is_disable")
-    private Boolean disable;
+    @ApiModelProperty("是否系统内置[false:否 true:是]")
+    @TableField(value = "is_internal")
+    private Boolean internal;
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.taoq.rbac.mapper.FuncFieldDataMapper">
+
+    <insert id="insert">
+        insert into ${menuPermiss}
+        <foreach open="(" close=")" collection="dataMap.entrySet()" index="key" item="value" separator=",">
+            ${key}
+        </foreach>
+        values
+        <foreach open="(" close=")" collection="dataMap.entrySet()" index="key" item="value" separator=",">
+            #{value}
+        </foreach>
+    </insert>
+
+    <delete id="deleteById">
+        delete from ${menuPermiss} where id = #{id}
+    </delete>
+
+    <update id="updateById">
+        update ${menuPermiss}
+        <foreach open="set" collection="dataMap.entrySet()" index="key" item="value" separator=",">
+            ${key} = #{value}
+        </foreach>
+        where id = #{id}
+    </update>
+
+    <select id="count" resultType="long">
+        select count(*) from ${menuPermiss}
+        <if test="paramList != null and paramList.size() > 0">
+            <foreach open="where" collection="paramList" item="item" separator="and">
+                ${item.code} = #{item.value}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="page" resultType="java.util.Map">
+        select * from ${menuPermiss}
+        <if test="paramList != null and paramList.size() > 0">
+            <foreach open="where" collection="paramList" item="item" separator="and">
+                ${item.code} = #{item.value}
+            </foreach>
+        </if>
+        order by update_time desc
+        limit ${offset},${size}
+    </select>
+
+    <update id="createTable">
+        create table if not exists ${tableName} (
+            `id` bigint unsigned not null auto_increment comment '主键id',
+            `create_time` datetime  default null comment '创建时间',
+            `update_time` datetime  default null comment '修改时间',
+            primary key (`id`)
+        ) engine = innodb character set = utf8mb4 collate = utf8mb4_0900_ai_ci comment = '${tableNameComment}';
+    </update>
+
+    <insert id="addColumn">
+        alter table ${tableName} add ${columnName} varchar(512) comment '${columnNameComment}'
+    </insert>
+
+    <insert id="dropColumn">
+        alter table ${tableName} drop ${columnName}
+    </insert>
+</mapper>

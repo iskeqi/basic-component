@@ -5,8 +5,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tech.taoq.common.pojo.PageDto;
-import tech.taoq.mp.pojo.QueryBaseParam;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.system.domain.db.DictTypeDO;
 import tech.taoq.system.service.DictTypeService;
 
@@ -37,14 +37,14 @@ public class DictTypeController {
     }
 
     @ApiOperation("查询字典类型详情")
-    @GetMapping
-    public DictTypeDO getById(String id) {
+    @GetMapping("/{id}")
+    public DictTypeDO getById(@PathVariable String id) {
         return dictTypeService.getById(id);
     }
 
-    @ApiOperation("分页查询字典类型列表")
-    @PostMapping("/page")
-    public PageDto<DictTypeDO> page(@RequestBody QueryBaseParam<DictTypeDO> param) {
+    @ApiOperation("查询字典类型列表")
+    @GetMapping
+    public PageDto<DictTypeDO> page(PageParam<DictTypeDO> param) {
         return dictTypeService.page(param);
     }
 }

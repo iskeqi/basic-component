@@ -5,8 +5,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tech.taoq.common.pojo.PageDto;
-import tech.taoq.mp.pojo.QueryBaseParam;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.system.domain.db.DictItemDO;
 import tech.taoq.system.service.DictItemService;
 
@@ -44,15 +44,15 @@ public class DictItemController {
         return dictItemService.getById(id);
     }
 
-    @ApiOperation("分页查询字典项列表")
-    @PostMapping("/page")
-    public PageDto<DictItemDO> page(@RequestBody QueryBaseParam<DictItemDO> param) {
+    @ApiOperation("查询字典项列表")
+    @GetMapping
+    public PageDto<DictItemDO> page(PageParam<DictItemDO> param) {
         return dictItemService.page(param);
     }
 
-    @ApiOperation("查询指定dictType下所有的字典项")
-    @PostMapping("/{dictType}")
-    public List<DictItemDO> listByDictType(@PathVariable String dictType) {
-        return dictItemService.listByDictType(dictType);
+    @ApiOperation("查询指定dictTypeId下所有的字典项")
+    @PostMapping("/{dictTypeId}")
+    public List<DictItemDO> listByDictTypeId(@PathVariable String dictTypeId) {
+        return dictItemService.listByDictTypeId(dictTypeId);
     }
 }

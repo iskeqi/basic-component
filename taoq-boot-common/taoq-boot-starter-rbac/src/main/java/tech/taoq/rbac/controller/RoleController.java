@@ -1,13 +1,14 @@
 package tech.taoq.rbac.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tech.taoq.common.pojo.PageDto;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.rbac.domain.db.RoleDO;
 import tech.taoq.rbac.domain.param.AuthorizeMenuParam;
+import tech.taoq.rbac.domain.param.AuthorizeRoleParam;
 import tech.taoq.rbac.service.RoleService;
 
 import java.util.List;
@@ -38,9 +39,9 @@ public class RoleController {
         roleService.updateById(param);
     }
 
-    @ApiOperation("分页查询角色列表")
-    @GetMapping("/page")
-    public PageDto<RoleDO> page(Page<RoleDO> param) {
+    @ApiOperation("查询角色列表")
+    @GetMapping
+    public PageDto<RoleDO> page(PageParam<RoleDO> param) {
         return roleService.page(param);
     }
 
@@ -50,9 +51,15 @@ public class RoleController {
         roleService.authorizeMenu(param);
     }
 
+    @ApiOperation("给指定用户赋予角色")
+    @PostMapping("/authorizeRole")
+    public void authorizeRole(@RequestBody AuthorizeRoleParam param) {
+        roleService.authorizeRole(param);
+    }
+
     @ApiOperation("查询指定用户关联的角色")
-    @PostMapping("/listByAccountId/{accountId}")
-    public List<RoleDO> listByAccountId(@PathVariable String accountId) {
-        return roleService.listByAccountId(accountId);
+    @PostMapping("/listByAccount/{account}")
+    public List<RoleDO> listByAccount(@PathVariable String account) {
+        return roleService.listByAccount(account);
     }
 }

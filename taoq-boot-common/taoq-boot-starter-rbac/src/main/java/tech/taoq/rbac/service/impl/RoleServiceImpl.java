@@ -6,17 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.taoq.common.exception.client.ParamIllegalException;
-import tech.taoq.common.pojo.PageDto;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.rbac.domain.db.AccountRoleDO;
 import tech.taoq.rbac.domain.db.RoleDO;
 import tech.taoq.rbac.domain.db.RoleMenuDO;
 import tech.taoq.rbac.domain.param.AuthorizeMenuParam;
+import tech.taoq.rbac.domain.param.AuthorizeRoleParam;
 import tech.taoq.rbac.mapper.AccountRoleMapper;
 import tech.taoq.rbac.mapper.RoleMapper;
 import tech.taoq.rbac.mapper.RoleMenuMapper;
 import tech.taoq.rbac.service.RoleService;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,6 +47,11 @@ public class RoleServiceImpl implements RoleService {
             throw new ParamIllegalException("不允许删除内置角色");
         }
 
+//        Long count = accountRoleMapper.selectCount(Wrappers.query(new AccountRoleDO().setRoleId(id)));
+//        if (count > 0) {
+//            throw new ParamIllegalException("当前角色已被其它用户关联，无法删除");
+//        }
+
         // 删除角色记录
         roleMapper.deleteById(id);
 
@@ -66,14 +74,15 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public PageDto<RoleDO> page(Page<RoleDO> param) {
-        Page<RoleDO> page = roleMapper.selectPage(param, Wrappers.query());
+    public PageDto<RoleDO> page(PageParam<RoleDO> param) {
+        Page<RoleDO> page = roleMapper.selectPage(param.toPage(), Wrappers.query());
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 
     @Override
     @Transactional
     public void authorizeMenu(AuthorizeMenuParam param) {
+        roleMenuMapper.delete(Wrappers.query(new RoleMenuDO().setRoleId(param.getRoleId())));
         for (String menuId : param.getMenuIdList()) {
             RoleMenuDO t1 = new RoleMenuDO().setRoleId(param.getRoleId()).setMenuId(menuId);
             roleMenuMapper.insert(t1);
@@ -81,12 +90,26 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<RoleDO> listByAccountId(String accountId) {
+    public List<RoleDO> listByAccount(String account) {
         List<AccountRoleDO> list = accountRoleMapper.selectList(
-                Wrappers.query(new AccountRoleDO().setAccountId(accountId)));
+                Wrappers.query(new AccountRoleDO().setAccount(account)));
 
         Collection<String> roleIdList = list.stream().map(AccountRoleDO::getRoleId).collect(Collectors.toList());
+        if (roleIdList.size() == 0) {
+            return Collections.emptyList();
+        }
 
         return roleMapper.selectBatchIds(roleIdList);
+    }
+
+    @Override
+    public void authorizeRole(AuthorizeRoleParam param) {
+        accountRoleMapper.delete(Wrappers.query(new AccountRoleDO().setAccount(param.getAccount())));
+
+        for (String roleId : param.getRoleIdList()) {
+            accountRoleMapper.insert(new AccountRoleDO()
+                    .setAccount(param.getAccount())
+                    .setRoleId(roleId));
+        }
     }
 }

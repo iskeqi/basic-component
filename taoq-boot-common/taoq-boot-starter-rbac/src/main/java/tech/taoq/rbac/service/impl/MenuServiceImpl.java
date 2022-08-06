@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import tech.taoq.rbac.domain.db.AccountRoleDO;
 import tech.taoq.rbac.domain.db.MenuDO;
 import tech.taoq.rbac.domain.db.RoleMenuDO;
-import tech.taoq.rbac.domain.dto.MenuAccountDto;
 import tech.taoq.rbac.domain.dto.MenuDto;
-import tech.taoq.rbac.domain.dto.MenuRoleDto;
 import tech.taoq.rbac.mapper.AccountRoleMapper;
 import tech.taoq.rbac.mapper.MenuMapper;
 import tech.taoq.rbac.mapper.RoleMenuMapper;
@@ -22,6 +20,7 @@ import java.util.stream.Collectors;
 public class MenuServiceImpl implements MenuService {
 
     private static final String ROOT_ID = "0";
+    private static final String ADMIN = "admin";
 
     @Autowired
     private RoleMenuMapper roleMenuMapper;
@@ -34,16 +33,16 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<MenuRoleDto> listByRoleId(String roleId) {
+    public List<MenuDto> listByRoleId(String roleId) {
         // 查询指定角色关联的所有菜单
         List<RoleMenuDO> roleMenuDOList = roleMenuMapper.selectList(Wrappers.query(new RoleMenuDO().setRoleId(roleId)));
         Set<String> menuIdSet = roleMenuDOList.stream().map(RoleMenuDO::getMenuId).collect(Collectors.toSet());
 
         // 查询所有菜单，并设置是否被占用字段对应的值
         List<MenuDO> menuDOList = menuMapper.selectList(Wrappers.query());
-        List<MenuRoleDto> nodeList = new ArrayList<>(menuDOList.size());
+        List<MenuDto> nodeList = new ArrayList<>(menuDOList.size());
         for (MenuDO menuDO : menuDOList) {
-            MenuRoleDto menuRoleDto = new MenuRoleDto();
+            MenuDto menuRoleDto = new MenuDto();
             BeanUtils.copyProperties(menuDO, menuRoleDto);
             menuRoleDto.setOccupy(menuIdSet.contains(menuDO.getId()));
             nodeList.add(menuRoleDto);
@@ -53,12 +52,12 @@ public class MenuServiceImpl implements MenuService {
         nodeList.sort(Comparator.comparing(MenuDO::getOrderNum));
 
         // 构造树形结构列表
-        List<MenuRoleDto> treeList = new ArrayList<>();
-        for (MenuRoleDto first : nodeList) {
+        List<MenuDto> treeList = new ArrayList<>();
+        for (MenuDto first : nodeList) {
             if (ROOT_ID.equals(first.getParentId())) {
                 treeList.add(first);
             }
-            for (MenuRoleDto t : nodeList) {
+            for (MenuDto t : nodeList) {
                 if (Objects.equals(t.getParentId(), first.getId())) {
                     if (first.getChildList() == null) {
                         first.setChildList(new ArrayList<>());
@@ -72,10 +71,14 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<MenuAccountDto> listByAccountId(String accountId) {
+    public List<MenuDto> listByAccount(String account) {
+        if (ADMIN.equals(account)) {
+            return listMenus();
+        }
+
         // 查询指定用户关联的所有菜单
         List<AccountRoleDO> accountRoleList = accountRoleMapper
-                .selectList(Wrappers.query(new AccountRoleDO().setAccountId(accountId)));
+                .selectList(Wrappers.query(new AccountRoleDO().setAccount(account)));
 
         List<String> menuIdList = new ArrayList<>();
         for (AccountRoleDO t : accountRoleList) {
@@ -87,9 +90,9 @@ public class MenuServiceImpl implements MenuService {
 
         // 查询所有菜单，并设置是否被占用字段对应的值
         List<MenuDO> menuDOList = menuMapper.selectList(Wrappers.query());
-        List<MenuAccountDto> nodeList = new ArrayList<>(menuDOList.size());
+        List<MenuDto> nodeList = new ArrayList<>(menuDOList.size());
         for (MenuDO menuDO : menuDOList) {
-            MenuAccountDto menuRoleDto = new MenuAccountDto();
+            MenuDto menuRoleDto = new MenuDto();
             BeanUtils.copyProperties(menuDO, menuRoleDto);
             menuRoleDto.setOccupy(menuIdSet.contains(menuDO.getId()));
             nodeList.add(menuRoleDto);
@@ -99,12 +102,12 @@ public class MenuServiceImpl implements MenuService {
         nodeList.sort(Comparator.comparing(MenuDO::getOrderNum));
 
         // 构造树形结构列表
-        List<MenuAccountDto> treeList = new ArrayList<>();
-        for (MenuAccountDto first : nodeList) {
+        List<MenuDto> treeList = new ArrayList<>();
+        for (MenuDto first : nodeList) {
             if (ROOT_ID.equals(first.getParentId())) {
                 treeList.add(first);
             }
-            for (MenuAccountDto t : nodeList) {
+            for (MenuDto t : nodeList) {
                 if (Objects.equals(t.getParentId(), first.getId())) {
                     if (first.getChildList() == null) {
                         first.setChildList(new ArrayList<>());
@@ -125,6 +128,7 @@ public class MenuServiceImpl implements MenuService {
         List<MenuDto> nodeList = new ArrayList<>(menuDOList.size());
         for (MenuDO menuDO : menuDOList) {
             MenuDto menuDto = new MenuDto();
+            menuDto.setOccupy(true);
             BeanUtils.copyProperties(menuDO, menuDto);
             nodeList.add(menuDto);
         }

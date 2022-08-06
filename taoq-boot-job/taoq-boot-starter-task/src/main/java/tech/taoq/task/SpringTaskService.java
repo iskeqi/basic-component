@@ -12,7 +12,7 @@ import java.util.concurrent.ScheduledFuture;
 /**
  * SpringTaskService
  * <p>
- * provide the ability to dynamically modify timing tasks
+ * 提供动态修改定时任务的能力
  *
  * @author keqi
  */

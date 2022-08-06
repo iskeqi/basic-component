@@ -5,9 +5,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tech.taoq.common.pojo.PageDto;
-import tech.taoq.mp.pojo.QueryBaseParam;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.system.domain.db.ConfigDO;
+import tech.taoq.system.domain.param.ConfigPageParam;
 import tech.taoq.system.service.ConfigService;
 
 @Api(tags = "配置管理")
@@ -37,14 +38,14 @@ public class ConfigController {
     }
 
     @ApiOperation("查询配置详情")
-    @GetMapping
-    public ConfigDO getById(String id) {
+    @GetMapping("/{id}")
+    public ConfigDO getById(@PathVariable String id) {
         return configService.getById(id);
     }
 
-    @ApiOperation("分页查询配置列表")
-    @PostMapping("/page")
-    public PageDto<ConfigDO> page(@RequestBody QueryBaseParam<ConfigDO> param) {
+    @ApiOperation("查询配置列表")
+    @GetMapping
+    public PageDto<ConfigDO> page(ConfigPageParam param) {
         return configService.page(param);
     }
 }

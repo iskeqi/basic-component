@@ -1,8 +1,9 @@
 package tech.taoq.system.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import tech.taoq.common.pojo.PageDto;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.system.domain.db.ConfigDO;
+import tech.taoq.system.domain.param.ConfigPageParam;
 
 public interface ConfigService {
 
@@ -14,5 +15,9 @@ public interface ConfigService {
 
     ConfigDO getById(String id);
 
-    PageDto<ConfigDO> page(Page<ConfigDO> param);
+    PageDto<ConfigDO> page(ConfigPageParam param);
+
+    String getByConfigKey(String configKey);
+
+    void updateByConfigKey(String configKey, String configValue);
 }

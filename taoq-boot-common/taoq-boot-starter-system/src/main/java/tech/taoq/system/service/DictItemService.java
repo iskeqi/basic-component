@@ -1,7 +1,7 @@
 package tech.taoq.system.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import tech.taoq.common.pojo.PageDto;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.system.domain.db.DictItemDO;
 import tech.taoq.web.validator.BaseDictValidate;
 
@@ -17,7 +17,7 @@ public interface DictItemService extends BaseDictValidate {
 
     DictItemDO getById(String id);
 
-    PageDto<DictItemDO> page(Page<DictItemDO> param);
+    PageDto<DictItemDO> page(PageParam<DictItemDO> param);
 
-    List<DictItemDO> listByDictType(String dictType);
+    List<DictItemDO> listByDictTypeId(String dictTypeId);
 }

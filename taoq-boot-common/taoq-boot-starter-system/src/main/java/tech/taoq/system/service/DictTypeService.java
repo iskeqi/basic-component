@@ -1,7 +1,7 @@
 package tech.taoq.system.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import tech.taoq.common.pojo.PageDto;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.system.domain.db.DictTypeDO;
 
 public interface DictTypeService {
@@ -14,5 +14,5 @@ public interface DictTypeService {
 
     DictTypeDO getById(String id);
 
-    PageDto<DictTypeDO> page(Page<DictTypeDO> param);
+    PageDto<DictTypeDO> page(PageParam<DictTypeDO> param);
 }

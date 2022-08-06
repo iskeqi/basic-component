@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.taoq.common.exception.client.ClientErrorException;
 import tech.taoq.common.exception.client.ParamIllegalException;
-import tech.taoq.common.pojo.PageDto;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.system.domain.db.DictTypeDO;
 import tech.taoq.system.mapper.DictTypeMapper;
 import tech.taoq.system.service.DictTypeService;
@@ -26,13 +28,15 @@ public class DictTypeServiceImpl implements DictTypeService {
     }
 
     public void deleteById(String id) {
+        DictTypeDO dictTypeDO = dictTypeMapper.selectById(id);
+        if (dictTypeDO.getInternal()) {
+            throw new ClientErrorException("内置记录不允许被删除");
+        }
         dictTypeMapper.deleteById(id);
     }
 
     public void updateById(DictTypeDO param) {
-        // configKey 是不能修改的
         param.setType(null);
-        param.setCreateTime(null);
         dictTypeMapper.updateById(param);
     }
 
@@ -40,8 +44,8 @@ public class DictTypeServiceImpl implements DictTypeService {
         return dictTypeMapper.selectById(id);
     }
 
-    public PageDto<DictTypeDO> page(Page<DictTypeDO> param) {
-        Page<DictTypeDO> page = dictTypeMapper.selectPage(param, Wrappers.query());
+    public PageDto<DictTypeDO> page(PageParam<DictTypeDO> param) {
+        Page<DictTypeDO> page = dictTypeMapper.selectPage(param.toPage(), Wrappers.query());
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 }

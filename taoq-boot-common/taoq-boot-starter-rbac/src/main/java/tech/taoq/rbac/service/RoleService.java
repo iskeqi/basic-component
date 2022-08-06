@@ -1,9 +1,10 @@
 package tech.taoq.rbac.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import tech.taoq.common.pojo.PageDto;
+import tech.taoq.mp.pojo.PageDto;
+import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.rbac.domain.db.RoleDO;
 import tech.taoq.rbac.domain.param.AuthorizeMenuParam;
+import tech.taoq.rbac.domain.param.AuthorizeRoleParam;
 
 import java.util.List;
 
@@ -15,9 +16,11 @@ public interface RoleService {
 
     void updateById(RoleDO param);
 
-    PageDto<RoleDO> page(Page<RoleDO> param);
+    PageDto<RoleDO> page(PageParam<RoleDO> param);
 
     void authorizeMenu(AuthorizeMenuParam param);
 
-    List<RoleDO> listByAccountId(String accountId);
+    List<RoleDO> listByAccount(String account);
+
+    void authorizeRole(AuthorizeRoleParam param);
 }

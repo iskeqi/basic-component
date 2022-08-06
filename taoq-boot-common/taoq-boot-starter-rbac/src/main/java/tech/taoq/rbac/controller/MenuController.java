@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.taoq.rbac.domain.dto.MenuAccountDto;
 import tech.taoq.rbac.domain.dto.MenuDto;
-import tech.taoq.rbac.domain.dto.MenuRoleDto;
 import tech.taoq.rbac.service.MenuService;
 
 import java.util.List;
@@ -24,14 +22,14 @@ public class MenuController {
 
     @ApiOperation("查询指定角色关联的菜单")
     @PostMapping("/listByRoleId/{roleId}")
-    public List<MenuRoleDto> listByRoleId(@PathVariable String roleId) {
+    public List<MenuDto> listByRoleId(@PathVariable String roleId) {
         return menuService.listByRoleId(roleId);
     }
 
     @ApiOperation("查询指定用户关联的菜单")
-    @PostMapping("/listByAccountId/{accountId}")
-    public List<MenuAccountDto> listByAccountId(@PathVariable String accountId) {
-        return menuService.listByAccountId(accountId);
+    @PostMapping("/listByAccount/{account}")
+    public List<MenuDto> listByAccount(@PathVariable String account) {
+        return menuService.listByAccount(account);
     }
 
     @ApiOperation("查询所有菜单")
