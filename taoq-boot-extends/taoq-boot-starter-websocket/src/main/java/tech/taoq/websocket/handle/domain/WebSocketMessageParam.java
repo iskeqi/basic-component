@@ -10,12 +10,12 @@ import java.util.Map;
 public class WebSocketMessageParam {
 
     /**
-     * 当前 websocket 连接代表哪个页面
+     * 当前 WebSocket 连接订阅的是哪个主题
      */
-    protected String page;
+    protected String topic;
 
     /**
-     * 当前WebSocket连接中指定页面的推送消息类型
+     * 当前 WebSocket 连接订阅的主题下的推送消息类型
      */
     protected String type;
 
@@ -31,7 +31,7 @@ public class WebSocketMessageParam {
 
     public WebSocketMessageDto transfer(Map<String, Object> data) {
         WebSocketMessageDto r = new WebSocketMessageDto();
-        r.setPage(this.getPage());
+        r.setTopic(this.getTopic());
         r.setType(this.getType());
         r.setRequestId(this.getRequestId());
         r.setParams(this.getParams());
@@ -39,12 +39,12 @@ public class WebSocketMessageParam {
         return r;
     }
 
-    public String getPage() {
-        return page;
+    public String getTopic() {
+        return topic;
     }
 
-    public void setPage(String page) {
-        this.page = page;
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public String getType() {

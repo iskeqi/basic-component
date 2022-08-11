@@ -30,7 +30,7 @@ public class SpringTaskService {
      * @param startTime 早于当前时间会立即执行，否则到了指定时间后立即执行
      * @return r
      */
-    public ScheduledFuture schedule(Runnable task, Date startTime) {
+    public ScheduledFuture<?> schedule(Runnable task, Date startTime) {
         return taskScheduler.schedule(task, startTime);
     }
 
@@ -41,7 +41,7 @@ public class SpringTaskService {
      * @param period period 单位：毫秒
      * @return r
      */
-    public ScheduledFuture scheduleAtFixedRate(Runnable task, long period) {
+    public ScheduledFuture<?> scheduleAtFixedRate(Runnable task, long period) {
         return taskScheduler.scheduleAtFixedRate(task, period);
     }
 
@@ -52,7 +52,7 @@ public class SpringTaskService {
      * @param delay period 单位：毫秒
      * @return r
      */
-    public ScheduledFuture scheduleWithFixedDelay(Runnable task, long delay) {
+    public ScheduledFuture<?> scheduleWithFixedDelay(Runnable task, long delay) {
         return taskScheduler.scheduleWithFixedDelay(task, delay);
     }
 
@@ -63,7 +63,7 @@ public class SpringTaskService {
      * @param expression cron 表达式
      * @return r
      */
-    public ScheduledFuture schedule(Runnable runnable, String expression) {
+    public ScheduledFuture<?> schedule(Runnable runnable, String expression) {
         CronTask cronTask = new CronTask(runnable, expression);
         return taskScheduler.schedule(cronTask.getRunnable(), cronTask.getTrigger());
     }

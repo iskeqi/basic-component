@@ -18,8 +18,8 @@ public class HeartbeatMessageAdapter implements HandleTextMessageAdapter {
     public static final String HEARTBEAT = "HEARTBEAT";
 
     @Override
-    public String getPageType() {
-        return this.concatPageAndType(GLOBAL, HEARTBEAT);
+    public String getTopicType() {
+        return this.concatTopicAndType(GLOBAL, HEARTBEAT);
     }
 
     @Override

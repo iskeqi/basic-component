@@ -60,13 +60,14 @@ public class WebSocketHandler extends TextWebSocketHandler {
             log.info("receive message : {}", payload);
             param = JsonUtil.readValue(payload, WebSocketMessageParam.class);
 
-            // 更新当前连接所在的页面值
-            if (!HeartbeatMessageAdapter.GLOBAL.equals(param.getPage())) {
-                WebSocketUtil.updatePageByWebSocketSessionId(webSocketSession.getId(), param.getPage());
+            // 更新当前连接所订阅的 topic
+            if (!HeartbeatMessageAdapter.GLOBAL.equals(param.getTopic())) {
+                WebSocketUtil.updateTopicByWebSocketSessionId(webSocketSession.getId(), param.getTopic());
             }
 
+            // 找到能处理指定 topic 和 type 的 HandleTextMessageAdapter 实现类对象,并进行处理
             for (HandleTextMessageAdapter messageAdapter : handleTextMessageAdapters) {
-                if (messageAdapter.supports(param.getPage(), param.getType())) {
+                if (messageAdapter.supports(param.getTopic(), param.getType())) {
                     WebSocketMessageDto dto = messageAdapter.handle(param);
                     WebSocketUtil.sendByWebSocketSessionId(webSocketSession.getId(), dto);
                     isReply = true;

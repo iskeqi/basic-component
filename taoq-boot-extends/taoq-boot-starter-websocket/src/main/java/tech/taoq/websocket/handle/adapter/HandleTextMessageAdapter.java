@@ -11,11 +11,11 @@ import tech.taoq.websocket.handle.domain.WebSocketMessageParam;
 public interface HandleTextMessageAdapter {
 
     /**
-     * 获取页面和类型值，例如：page-type
+     * 获取 topic 和类型值，例如：topic-type
      *
      * @return r
      */
-    String getPageType();
+    String getTopicType();
 
     /**
      * 消息处理逻辑
@@ -33,17 +33,17 @@ public interface HandleTextMessageAdapter {
      * @return r
      */
     default boolean supports(String page, String type) {
-        return this.getPageType().equals(this.concatPageAndType(page, type));
+        return this.getTopicType().equals(this.concatTopicAndType(page, type));
     }
 
     /**
      * 提供统一的拼接方法
      *
-     * @param page page
+     * @param topic topic
      * @param type type
      * @return r
      */
-    default String concatPageAndType(String page, String type) {
-        return page + "-" + type;
+    default String concatTopicAndType(String topic, String type) {
+        return topic + "-" + type;
     }
 }

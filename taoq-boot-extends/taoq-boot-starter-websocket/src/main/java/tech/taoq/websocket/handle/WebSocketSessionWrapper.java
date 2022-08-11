@@ -15,9 +15,9 @@ public class WebSocketSessionWrapper {
     private WebSocketSession webSocketSession;
 
     /**
-     * 当前 websocket 连接处于哪个页面上
+     * 当前 websocket 连接订阅的是哪个主题
      */
-    private String page;
+    private String topic;
 
     /**
      * 当前连接属于哪个用户
@@ -32,12 +32,12 @@ public class WebSocketSessionWrapper {
         this.webSocketSession = webSocketSession;
     }
 
-    public String getPage() {
-        return page;
+    public String getTopic() {
+        return topic;
     }
 
-    public void setPage(String page) {
-        this.page = page;
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public String getUserIdentifier() {

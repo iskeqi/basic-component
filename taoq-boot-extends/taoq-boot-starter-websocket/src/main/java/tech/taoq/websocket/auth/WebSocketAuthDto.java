@@ -7,8 +7,14 @@ package tech.taoq.websocket.auth;
  */
 public class WebSocketAuthDto {
 
+    /**
+     * 是否认证成功[true:成功 false:失败]
+     */
     private Boolean authenticate;
 
+    /**
+     * 用户唯一标识符
+     */
     private String userIdentifier;
 
     public Boolean getAuthenticate() {

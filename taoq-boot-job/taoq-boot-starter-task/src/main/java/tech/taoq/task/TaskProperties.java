@@ -23,9 +23,9 @@ public class TaskProperties {
     private Boolean waitForTasksToCompleteOnShutdown = true;
 
     /**
-     * 最多等待 5 秒后，就关闭线程池
+     * 最多等待 15 秒后，就关闭线程池
      */
-    private Integer awaitTerminationMillis = 5000;
+    private Integer awaitTerminationMillis = 15000;
 
     /**
      * 取消任务后，是否在线程池中自动移除该任务

@@ -23,7 +23,7 @@ public class WebSocketInterceptor extends HttpSessionHandshakeInterceptor {
 
     private static final Logger log = LoggerFactory.getLogger(WebSocketInterceptor.class);
 
-    @Autowired
+    @Autowired(required = false)
     private WebSocketAuth webSocketAuth;
 
     public static final String USER_IDENTIFIER = "userIdentifier";
@@ -33,12 +33,17 @@ public class WebSocketInterceptor extends HttpSessionHandshakeInterceptor {
                                    WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
         HttpServletRequest httpServletRequest = ((ServletServerHttpRequest) request).getServletRequest();
 
+        if (webSocketAuth == null) {
+            log.error("No implementation class found for WebSocketAuth");
+            return false;
+        }
+
         // 认证
         WebSocketAuthDto webSocketAuthDto = webSocketAuth.auth(httpServletRequest);
         if (!webSocketAuthDto.getAuthenticate()) {
             StringBuffer requestURL = httpServletRequest.getRequestURL().append('?');
             String queryString = httpServletRequest.getQueryString();
-            log.info("websocket authentication failed,request params : {}", requestURL.append(queryString));
+            log.error("websocket authentication failed, request params : {}", requestURL.append(queryString));
             return false;
         }
 
