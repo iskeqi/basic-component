@@ -17,6 +17,11 @@ public class LogProperties {
      */
     private Boolean operateLog = false;
 
+    /**
+     * accessLog 配置
+     */
+    private AccessLog accessLog = new AccessLog();
+
     public static class AccessLog {
 
         /**
@@ -52,5 +57,13 @@ public class LogProperties {
 
     public void setOperateLog(Boolean operateLog) {
         this.operateLog = operateLog;
+    }
+
+    public AccessLog getAccessLog() {
+        return accessLog;
+    }
+
+    public void setAccessLog(AccessLog accessLog) {
+        this.accessLog = accessLog;
     }
 }
