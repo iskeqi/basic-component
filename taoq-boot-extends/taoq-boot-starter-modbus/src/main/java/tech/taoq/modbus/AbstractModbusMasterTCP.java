@@ -7,7 +7,8 @@ import com.intelligt.modbus.jlibmodbus.exception.ModbusProtocolException;
 import com.intelligt.modbus.jlibmodbus.master.ModbusMaster;
 import com.intelligt.modbus.jlibmodbus.master.ModbusMasterFactory;
 import com.intelligt.modbus.jlibmodbus.tcp.TcpParameters;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -18,8 +19,9 @@ import java.util.Objects;
  *
  * @author keqi
  */
-@Slf4j
 public abstract class AbstractModbusMasterTCP {
+
+    private static final Logger log = LoggerFactory.getLogger(AbstractModbusMasterTCP.class);
 
     private ModbusMaster modbusMaster;
     private final int serverAddress = 1;
@@ -246,8 +248,8 @@ public abstract class AbstractModbusMasterTCP {
     }
 
     protected void handleException(Throwable e) {
-        log.error("occur modbusIOException : {}, exception message : {}", errorMsg, e.getMessage());
-        throw new ModbusTCPException(errorMsg, e);
+        log.error(errorMsg, e);
+        throw new ModbusTCPException(errorMsg);
     }
 
     public String getHost() {
