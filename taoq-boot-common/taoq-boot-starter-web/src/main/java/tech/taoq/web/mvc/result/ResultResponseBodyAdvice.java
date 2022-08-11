@@ -27,6 +27,7 @@ public class ResultResponseBodyAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
         for (Annotation annotation : returnType.getMethodAnnotations()) {
+            // 方法上有 @NoAdvice 注解时, 不替换返回值
             if (Objects.equals(NoAdvice.class, annotation.annotationType())) {
                 return false;
             }

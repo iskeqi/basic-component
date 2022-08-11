@@ -1,6 +1,7 @@
 package tech.taoq.web.mvc.converter;
 
 import org.springframework.core.convert.converter.Converter;
+import tech.taoq.common.util.DateUtil;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,6 +18,7 @@ public final class MyStringToLocalDateTimeConverter implements Converter<String,
         if (source.isEmpty() || "\"\"".equals(source)) {
             return null;
         }
-        return LocalDateTime.parse(source, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+        return LocalDateTime.parse(source, DateTimeFormatter.ofPattern(DateUtil.LOCAL_DATE_TIME));
     }
 }

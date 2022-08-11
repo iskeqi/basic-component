@@ -15,27 +15,32 @@ public class WebProperties {
     /**
      * 是否使用内置的 MappingJackson2HttpMessageConverter 对象
      */
-    private Boolean myMappingJackson2HttpMessageConverter;
+    private Boolean myMappingJackson2HttpMessageConverter = true;
 
     /**
      * 是否使用内置的 MyStringToLocalDateConverter 对象
      */
-    private Boolean myStringToLocalDateConverter;
+    private Boolean myStringToLocalDateConverter = true;
 
     /**
      * 是否使用内置的 MyStringToLocalDateTimeConverter 对象
      */
-    private Boolean myStringToLocalDateTimeConverter;
+    private Boolean myStringToLocalDateTimeConverter = true;
 
     /**
      * 是否使用内置的 MyStringToNumberConverterFactory 对象
      */
-    private Boolean myStringToNumberConverterFactory;
+    private Boolean myStringToNumberConverterFactory = true;
 
     /**
      * 是否使用内置的 CorsFilter 对象进行跨域配置
      */
-    private Boolean cors;
+    private Boolean cors = true;
+
+    /**
+     * 生产环境的 spring.profiles.active 名称
+     */
+    private String prodProfileName = "prod";
 
     public Boolean getMyMappingJackson2HttpMessageConverter() {
         return myMappingJackson2HttpMessageConverter;
@@ -75,5 +80,13 @@ public class WebProperties {
 
     public void setCors(Boolean cors) {
         this.cors = cors;
+    }
+
+    public String getProdProfileName() {
+        return prodProfileName;
+    }
+
+    public void setProdProfileName(String prodProfileName) {
+        this.prodProfileName = prodProfileName;
     }
 }

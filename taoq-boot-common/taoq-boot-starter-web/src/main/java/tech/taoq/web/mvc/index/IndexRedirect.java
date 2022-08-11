@@ -8,10 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 将 / 请求重定向到 /contextPath/index.html
+ *
+ * @author keqi
+ */
 @RestController
-public class IndexController {
+public class IndexRedirect {
 
-    @Value("${server.servlet.context-path:}")
+    @Value("${server.servlet.context-path}")
     private String contextPath;
 
     @GetMapping("/")
