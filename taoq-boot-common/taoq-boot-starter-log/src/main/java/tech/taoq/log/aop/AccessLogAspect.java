@@ -33,7 +33,7 @@ import java.time.temporal.ChronoUnit;
 @ConditionalOnProperty(prefix = "taoq.log.access-log", value = "enable")
 public class AccessLogAspect {
 
-    private static final String ACCESS_LOG = "ACCESS_LOG";
+    private static final String ACCESS_LOG = "##ACCESS##_##LOG##";
 
     @Autowired(required = false)
     private UserIdentifier userIdentifier;
