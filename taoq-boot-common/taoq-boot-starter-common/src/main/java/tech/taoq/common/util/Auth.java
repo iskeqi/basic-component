@@ -14,24 +14,24 @@ import java.util.Objects;
  */
 public class Auth {
 
-    private static final ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<Map<String, Object>> AUTH_THREAD_LOCAL = new ThreadLocal<>();
 
-    public static void setAuthBO(AuthBO authBO) {
-        Map<String, Object> data = threadLocal.get();
+    public static void setAuthBO(AuthBO<?> authBO) {
+        Map<String, Object> data = AUTH_THREAD_LOCAL.get();
         if (Objects.isNull(data)) {
             data = new HashMap<>();
-            threadLocal.set(data);
+            AUTH_THREAD_LOCAL.set(data);
         }
         data.put(authBO.getKey(), authBO);
     }
 
-    public static AuthBO getAuthBO(String key) {
-        Map<String, Object> data = threadLocal.get();
+    public static AuthBO<?> getAuthBO(String key) {
+        Map<String, Object> data = AUTH_THREAD_LOCAL.get();
         if (data == null) {
             throw new ClientErrorException("no auth threadlocal data");
         }
 
-        AuthBO obj = (AuthBO) data.get(key);
+        AuthBO<?> obj = (AuthBO<?>) data.get(key);
         if (obj == null) {
             throw new ClientErrorException("no auth threadlocal data for key ->" + key);
         }

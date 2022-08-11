@@ -13,7 +13,7 @@ public class ResultEntityBuilder {
      * @param data data
      * @return r 如果是一个空的List对象，那么 body 的值会是 []
      */
-    public static ResultEntity success(Object data) {
+    public static ResultEntity<?> success(Object data) {
         return new ResultEntity<>(ResultStatusEnum.SUCCESS.getCode(),
                 ResultStatusEnum.SUCCESS.getCodeName(), data);
     }
@@ -23,7 +23,7 @@ public class ResultEntityBuilder {
      *
      * @return r
      */
-    public static ResultEntity success() {
+    public static ResultEntity<?> success() {
         return new ResultEntity<>(ResultStatusEnum.SUCCESS.getCode(),
                 ResultStatusEnum.SUCCESS.getCodeName(), null);
     }
@@ -33,7 +33,7 @@ public class ResultEntityBuilder {
      *
      * @return r
      */
-    public static ResultEntity failure() {
+    public static ResultEntity<?> failure() {
         return new ResultEntity<>(ResultStatusEnum.SERVER_ERROR.getCode(),
                 ResultStatusEnum.SERVER_ERROR.getCodeName(), null);
     }
@@ -44,7 +44,7 @@ public class ResultEntityBuilder {
      * @param message message
      * @return r
      */
-    public static ResultEntity failure(String message) {
+    public static ResultEntity<?> failure(String message) {
         return new ResultEntity<>(ResultStatusEnum.SERVER_ERROR.getCode(), message, null);
     }
 
@@ -55,7 +55,7 @@ public class ResultEntityBuilder {
      * @param message message
      * @return r
      */
-    public static ResultEntity failure(String status, String message) {
+    public static ResultEntity<?> failure(String status, String message) {
         return new ResultEntity<>(status, message, null);
     }
 
@@ -67,7 +67,7 @@ public class ResultEntityBuilder {
      * @param data    data
      * @return r
      */
-    public static ResultEntity failure(String status, String message, String data) {
+    public static ResultEntity<?> failure(String status, String message, String data) {
         return new ResultEntity<>(status, message, data);
     }
 }
