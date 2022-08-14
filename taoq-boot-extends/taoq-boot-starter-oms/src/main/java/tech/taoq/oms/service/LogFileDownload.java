@@ -6,10 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.taoq.oms.domain.dto.LogFileListDto;
 import tech.taoq.web.mvc.result.NoAdvice;
 
@@ -30,8 +27,8 @@ import java.util.List;
 public class LogFileDownload {
 
     @ApiOperation("查询指定路径下的文件")
-    @GetMapping("/{path}")
-    public List<LogFileListDto> listLogFileByApp(@PathVariable String path) {
+    @GetMapping("/list")
+    public List<LogFileListDto> listLogFileByApp(@RequestParam String path) {
         List<String> logFileNameList = FileUtil.listFileNames(path);
         List<LogFileListDto> dtoList = new ArrayList<>();
 
@@ -50,9 +47,9 @@ public class LogFileDownload {
     }
 
     @ApiOperation("下载指定日志文件")
-    @GetMapping("/download/{path}")
+    @GetMapping("/download")
     @NoAdvice
-    public void download(@PathVariable String path, HttpServletRequest request, HttpServletResponse response) {
+    public void download(@RequestParam String path, HttpServletRequest request, HttpServletResponse response) {
         response.setCharacterEncoding(request.getCharacterEncoding());
         response.setContentType("application/octet-stream");
         InputStream fis = null;
