@@ -61,8 +61,10 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     public PageDto<ConfigDO> page(ConfigPageParam param) {
-        ConfigDO configDO = BeanUtil.copyProperties(param, ConfigDO.class);
-        Page<ConfigDO> page = configMapper.selectPage(param.toPage(), Wrappers.query(configDO));
+        Page<ConfigDO> page = configMapper.selectPage(param.toPage(), Wrappers.lambdaQuery(ConfigDO.class)
+                .eq(param.getId() != null, ConfigDO::getId, param.getId())
+                .likeRight(param.getConfigKey() != null, ConfigDO::getConfigKey, param.getConfigKey()));
+
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 

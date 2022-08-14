@@ -47,6 +47,7 @@ public class DictItemServiceImpl implements DictItemService {
 
     public void updateById(DictItemDO param) {
         param.setDictTypeId(null);
+        param.setItemCode(null);
         dictItemMapper.updateById(param);
     }
 
@@ -60,9 +61,14 @@ public class DictItemServiceImpl implements DictItemService {
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 
-    public List<DictItemDO> listByDictTypeId(String dictTypeId) {
+    public List<DictItemDO> listByDictType(String dictType) {
+        DictTypeDO dictTypeDO = dictTypeMapper.selectOne(Wrappers.query(new DictTypeDO().setType(dictType)));
+        if (dictTypeDO == null) {
+            throw new ClientErrorException("字典类型 " + dictType + " 不存在");
+        }
+
         List<DictItemDO> dictItemDOList = dictItemMapper.selectList(Wrappers.query(new DictItemDO()
-                .setDictTypeId(dictTypeId)));
+                .setDictTypeId(dictTypeDO.getId())));
         dictItemDOList.sort(Comparator.comparing(DictItemDO::getOrderNum));
         return dictItemDOList;
     }

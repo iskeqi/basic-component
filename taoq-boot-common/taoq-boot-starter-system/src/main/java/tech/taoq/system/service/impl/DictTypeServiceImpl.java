@@ -8,19 +8,25 @@ import tech.taoq.common.exception.client.ClientErrorException;
 import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.mp.pojo.PageParam;
+import tech.taoq.system.domain.db.DictItemDO;
 import tech.taoq.system.domain.db.DictTypeDO;
+import tech.taoq.system.mapper.DictItemMapper;
 import tech.taoq.system.mapper.DictTypeMapper;
 import tech.taoq.system.service.DictTypeService;
+
+import java.util.Objects;
 
 @Service
 public class DictTypeServiceImpl implements DictTypeService {
 
     @Autowired
     private DictTypeMapper dictTypeMapper;
+    @Autowired
+    private DictItemMapper dictItemMapper;
 
     public void insert(DictTypeDO param) {
         DictTypeDO t = dictTypeMapper.selectOne(Wrappers.query(new DictTypeDO().setType(param.getType())));
-        if (t != null) {
+        if (!Objects.isNull(t)) {
             throw new ParamIllegalException("type:" + param.getType() + " 已经存在");
         }
 
@@ -32,6 +38,12 @@ public class DictTypeServiceImpl implements DictTypeService {
         if (dictTypeDO.getInternal()) {
             throw new ClientErrorException("内置记录不允许被删除");
         }
+
+        Long count = dictItemMapper.selectCount(Wrappers.query(new DictItemDO().setDictTypeId(id)));
+        if (count > 0) {
+            throw new ClientErrorException("当前字典类型下存在字典项,不允许被删除");
+        }
+
         dictTypeMapper.deleteById(id);
     }
 

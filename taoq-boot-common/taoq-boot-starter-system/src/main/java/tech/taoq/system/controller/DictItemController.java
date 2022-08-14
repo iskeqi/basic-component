@@ -50,9 +50,9 @@ public class DictItemController {
         return dictItemService.page(param);
     }
 
-    @ApiOperation("查询指定dictTypeId下所有的字典项")
-    @PostMapping("/{dictTypeId}")
-    public List<DictItemDO> listByDictTypeId(@PathVariable String dictTypeId) {
-        return dictItemService.listByDictTypeId(dictTypeId);
+    @ApiOperation("查询指定dictType下所有的字典项")
+    @PostMapping("/{dictType}")
+    public List<DictItemDO> listByDictType(@PathVariable String dictType) {
+        return dictItemService.listByDictType(dictType);
     }
 }
