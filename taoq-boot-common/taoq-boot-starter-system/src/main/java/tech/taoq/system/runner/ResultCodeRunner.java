@@ -54,7 +54,7 @@ public class ResultCodeRunner implements CommandLineRunner {
                 }
             }
 
-            if (systemProperties.getResultCode()) {
+            if (systemProperties.getResultCode() && resultCodeMapper != null) {
                 // 进行增量更新
 
                 List<ResultCodeDO> resultCodeDOList = resultCodeMapper.selectList(null);
