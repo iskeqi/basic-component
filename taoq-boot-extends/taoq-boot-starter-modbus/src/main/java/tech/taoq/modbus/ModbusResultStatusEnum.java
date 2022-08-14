@@ -9,8 +9,7 @@ import tech.taoq.common.pojo.IResultStatusEnum;
  */
 public enum ModbusResultStatusEnum implements IResultStatusEnum {
 
-    // Modbus 错误码
-    MODBUS_ACCESS_ERROR("C0002", "modbus access error");
+    MODBUS_ACCESS_ERROR("C0002", "Modbus访问错误|Modbus access error|Modbusアクセスエラー|Modbus訪問錯誤");
 
     private final String code;
 

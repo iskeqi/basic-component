@@ -50,7 +50,7 @@ create table if not exists `sys_result_code`
 (
     `id`          bigint unsigned not null auto_increment comment '主键id',
     `code`   varchar(32)  default null comment '状态码',
-    `code_name`   varchar(32)  default '' comment '状态码描述',
+    `code_name`   varchar(1024)  default '' comment '状态码描述',
     `create_time` datetime     default current_timestamp comment '创建时间',
     `update_time` datetime     default current_timestamp on update current_timestamp comment '更新时间',
     primary key (`id`) using btree,
