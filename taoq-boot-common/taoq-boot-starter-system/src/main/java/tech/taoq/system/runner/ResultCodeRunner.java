@@ -29,13 +29,21 @@ public class ResultCodeRunner implements CommandLineRunner {
     @Override
     public void run(String... args) {
         try {
+            String packageName = IResultStatusEnum.class.getPackage().getName();
+            String rootPackageName = packageName.substring(0, packageName.indexOf(".", packageName.indexOf(".") + 1));
+            systemProperties.getPackages().add(rootPackageName);
+
             List<String> list = new ArrayList<>();
             Map<String, String> newCodeMap = new HashMap<>();
             Map<String, ResultCodeDO> oldCodeMap = new HashMap<>();
 
             // 找到所有实现了 IResultStatusEnum 接口的实现类的反射对象
-            Reflections reflections = new Reflections();
-            Set<Class<? extends IResultStatusEnum>> types = reflections.getSubTypesOf(IResultStatusEnum.class);
+            Set<Class<? extends IResultStatusEnum>> types = new HashSet<>();
+            for (String packageStr : systemProperties.getPackages()) {
+                Reflections reflections = new Reflections(packageStr);
+                types.addAll(reflections.getSubTypesOf(IResultStatusEnum.class));
+            }
+
             for (Class<? extends IResultStatusEnum> type : types) {
                 // 获取反射对象的所有枚举值
                 for (IResultStatusEnum constant : type.getEnumConstants()) {
@@ -45,7 +53,7 @@ public class ResultCodeRunner implements CommandLineRunner {
                     String codeName = split[1];
 
                     if (newCodeMap.get(code) != null) {
-                        log.error("存在相同 code 的响应状态枚举类 {}", type.getCanonicalName());
+                        log.error("There is a IResultStatusEnum class {} with the same code", type.getCanonicalName());
                         System.exit(1);
                     }
 

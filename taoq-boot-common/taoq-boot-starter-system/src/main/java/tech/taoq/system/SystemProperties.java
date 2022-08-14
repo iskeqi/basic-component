@@ -3,6 +3,9 @@ package tech.taoq.system;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * SystemProperties
  *
@@ -17,11 +20,24 @@ public class SystemProperties {
      */
     private Boolean resultCode = false;
 
+    /**
+     * 扫描以下这些包下实现了 IResultStatusEnum 接口的枚举类
+     */
+    private List<String> packages = new ArrayList<>();
+
     public Boolean getResultCode() {
         return resultCode;
     }
 
     public void setResultCode(Boolean resultCode) {
         this.resultCode = resultCode;
+    }
+
+    public List<String> getPackages() {
+        return packages;
+    }
+
+    public void setPackages(List<String> packages) {
+        this.packages = packages;
     }
 }
