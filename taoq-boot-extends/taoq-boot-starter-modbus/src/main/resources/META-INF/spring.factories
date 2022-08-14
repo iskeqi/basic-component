@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  tech.taoq.modbus.OmsConfiguration
+  tech.taoq.modbus.ModbusConfiguration
