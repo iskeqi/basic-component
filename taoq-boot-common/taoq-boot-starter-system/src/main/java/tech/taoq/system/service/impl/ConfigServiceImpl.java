@@ -56,8 +56,8 @@ public class ConfigServiceImpl implements ConfigService {
         configMapper.updateById(param);
     }
 
-    public ConfigDO getById(String id) {
-        return configMapper.selectById(id);
+    public ConfigDO getByConfigkey(String configKey) {
+        return configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(configKey)));
     }
 
     public PageDto<ConfigDO> page(ConfigPageParam param) {

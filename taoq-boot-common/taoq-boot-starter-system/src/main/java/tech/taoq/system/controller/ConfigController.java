@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tech.taoq.mp.pojo.PageDto;
-import tech.taoq.mp.pojo.PageParam;
 import tech.taoq.system.domain.db.ConfigDO;
 import tech.taoq.system.domain.param.ConfigPageParam;
 import tech.taoq.system.service.ConfigService;
@@ -38,9 +37,9 @@ public class ConfigController {
     }
 
     @ApiOperation("查询配置详情")
-    @GetMapping("/{id}")
-    public ConfigDO getById(@PathVariable String id) {
-        return configService.getById(id);
+    @GetMapping("/{configKey}")
+    public ConfigDO getByConfigkey(@PathVariable String configKey) {
+        return configService.getByConfigkey(configKey);
     }
 
     @ApiOperation("查询配置列表")
