@@ -7,5 +7,5 @@ package tech.taoq.common.pojo;
  */
 public interface IResultStatusEnum {
 
-    String DELIMITER = ",";
+    String DELIMITER = "#@#";
 }

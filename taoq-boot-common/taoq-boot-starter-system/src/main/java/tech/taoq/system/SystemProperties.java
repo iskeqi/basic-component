@@ -15,7 +15,7 @@ public class SystemProperties {
     /**
      * 是否启用响应状态码的存储
      */
-    private Boolean resultCode;
+    private Boolean resultCode = false;
 
     public Boolean getResultCode() {
         return resultCode;
