@@ -145,6 +145,11 @@
                 <artifactId>taoq-boot-starter-modbus</artifactId>
                 <version>1.3.0.RELEASE</version>
             </dependency>
+            <dependency>
+                <groupId>tech.taoq</groupId>
+                <artifactId>taoq-boot-starter-oms</artifactId>
+                <version>1.3.0.RELEASE</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
