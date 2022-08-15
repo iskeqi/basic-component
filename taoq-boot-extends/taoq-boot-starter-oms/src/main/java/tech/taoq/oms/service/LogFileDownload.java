@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import tech.taoq.common.exception.client.ParamIllegalException;
+import tech.taoq.oms.OmsConstant;
 import tech.taoq.oms.domain.dto.LogFileListDto;
 import tech.taoq.system.service.ConfigService;
 import tech.taoq.web.mvc.result.NoAdvice;
@@ -35,8 +36,9 @@ public class LogFileDownload {
 
     @ApiOperation("查询指定路径下的文件")
     @GetMapping("/list")
-    public List<LogFileListDto> listLogFileByApp(@RequestParam String appLogPath) {
-        // pathKey 示例值: WCS_LOG_PATH
+    public List<LogFileListDto> listLogFileByApp(@RequestParam String appKey) {
+        // 示例: WCS_LOG_PATH:/data/riot/wcs/log
+        String appLogPath = appKey.concat(OmsConstant.LOG_PATH);
         String logPath = configService.getByConfigKey(appLogPath);
         if (!StringUtils.hasText(logPath)) {
             throw new ParamIllegalException("不存在此配置 " + appLogPath);

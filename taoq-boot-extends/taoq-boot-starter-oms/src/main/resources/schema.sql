@@ -15,7 +15,7 @@ create table `sys_package_record` (
 
 create table `sys_package_file` (
   `id` bigint unsigned not null auto_increment,
-  `package_bytes` blob comment '安装包文件字节',
+  `package_bytes` longblob comment '安装包文件字节',
   `create_time` datetime default current_timestamp comment '创建时间',
   `update_time` datetime default current_timestamp on update current_timestamp comment '更新时间',
   primary key (`id`)

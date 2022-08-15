@@ -17,6 +17,7 @@ import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.common.util.JsonUtil;
 import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.mp.pojo.PageParam;
+import tech.taoq.oms.OmsConstant;
 import tech.taoq.oms.domain.db.PackageFileDO;
 import tech.taoq.oms.domain.db.PackageRecordDO;
 import tech.taoq.oms.domain.dto.AppStatus;
@@ -61,30 +62,35 @@ public class AppUpgrade {
     @ApiOperation("查询应用状态")
     @GetMapping("/status")
     @NoAdvice
-    public AppStatus status(@RequestParam(required = false) String appAccessUrl) {
+    public AppStatus status(@RequestParam(required = false) String appKey) {
         AppStatus appStatus = new AppStatus();
         appStatus.setStatus(true);
 
-        if (!StringUtils.hasText(appAccessUrl)) {
+        if (!StringUtils.hasText(appKey)) {
             return appStatus;
         }
 
         // 示例: WCS_ACCESS_URL:http://127.0.0.1:8089
-        String accessUrl = configService.getByConfigKey(appAccessUrl);
+        String accessKey = appKey.concat(OmsConstant.ACCESS_URL);
+        String accessUrl = configService.getByConfigKey(accessKey);
         if (!StringUtils.hasText(accessUrl)) {
-            throw new ParamIllegalException("不存在此配置 " + accessUrl);
+            throw new ParamIllegalException("不存在此配置 " + accessKey);
         }
 
         String[] split = accessUrl.split(":");
         if (split.length != 3) {
-            throw new ParamIllegalException("配置格式错误 " + accessUrl);
+            throw new ParamIllegalException("配置格式错误 " + accessKey);
         }
 
         if (!Objects.equals(port, split[2])) {
             // 如果查询的是自身以外的其它程序
             String respStr = HttpUtil.get(accessUrl);
-            AppStatus respAppStatus = JsonUtil.readValue(respStr, AppStatus.class);
-            appStatus.setStatus(respAppStatus.getStatus());
+            if (respStr != null) {
+                AppStatus respAppStatus = JsonUtil.readValue(respStr, AppStatus.class);
+                appStatus.setStatus(respAppStatus.getStatus());
+            } else {
+                appStatus.setStatus(false);
+            }
         }
 
         return appStatus;
@@ -95,9 +101,10 @@ public class AppUpgrade {
     public void operate(@RequestBody OperateParam param) {
         synchronized (operateObjLock) {
             // 示例: WCS_DEPLOY_SHELL:/data/riot/wcs/bin/wcs.sh
-            String deployShell = configService.getByConfigKey(param.getAppDeployShell());
+            String deployKey = param.getAppKey().concat(OmsConstant.DEPLOY_SHELL);
+            String deployShell = configService.getByConfigKey(deployKey);
             if (!StringUtils.hasText(deployShell)) {
-                throw new ParamIllegalException("不存在此配置 " + deployShell);
+                throw new ParamIllegalException("不存在此配置 " + deployKey);
             }
 
             String osName = System.getProperties().getProperty("os.name");
@@ -190,6 +197,8 @@ public class AppUpgrade {
         }
 
         if (success) {
+            packageFileMapper.setGlobalMaxAllowedPacket();
+
             // 保存二进制文件到DB中
             PackageFileDO t1 = new PackageFileDO();
             t1.setPackageBytes(bytes);
@@ -198,6 +207,7 @@ public class AppUpgrade {
             // 记录业务数据
             PackageRecordDO t2 = new PackageRecordDO();
             t2.setName(originalFilename);
+            // 示例: WCS
             t2.setType(param.getType());
             t2.setSize(bytes.length);
             t2.setFileId(t1.getId());
@@ -224,9 +234,16 @@ public class AppUpgrade {
             }
 
             // 示例: WCS_INSTALL_PATH:/data/riot/wcs
-            String installPath = configService.getByConfigKey(t1.getType());
+            String installKey = t1.getType().concat(OmsConstant.INSTALL_PATH);
+            String installPath = configService.getByConfigKey(installKey);
             if (!StringUtils.hasText(installPath)) {
-                throw new ParamIllegalException("不存在此配置 " + installPath);
+                throw new ParamIllegalException("不存在此配置 " + installKey);
+            }
+
+            // 必须保证即将要升级的程序已经处于停止状态
+            AppStatus appStatus = this.status(t1.getType());
+            if (appStatus.getStatus()) {
+                throw new ParamIllegalException("必须先停止对应程序,才可进行升级 " + t1.getType());
             }
 
             List<String> fileNames = FileUtil.listFileNames(installPath);
@@ -239,14 +256,26 @@ public class AppUpgrade {
             File tempFile = new File(installPath, RandomUtil.randomString(6));
             FileUtil.writeBytes(t2.getPackageBytes(), tempFile);
 
-            // 重命名文件
-            FileUtil.rename(tempFile, fileNames.get(0), true);
+            // 重命名文件[如果当前这个文件正处于占用状态,重命名文件是会失败的]
+            boolean success = true;
+            try {
+                FileUtil.rename(tempFile, fileNames.get(0), true);
+            } catch (Exception e) {
+                success = false;
+                log.error("failed to rename file", e);
+            }
 
-            // 将当前文件标记为正在使用的版本
-            PackageRecordDO t3 = new PackageRecordDO();
-            t3.setId(t1.getId());
-            t3.setTag(true);
-            packageRecordMapper.updateById(t3);
+            if (success) {
+                // 将当前文件标记为正在使用的版本
+                packageRecordMapper.update(new PackageRecordDO().setTag(false), null);
+
+                PackageRecordDO t3 = new PackageRecordDO();
+                t3.setId(t1.getId());
+                t3.setTag(true);
+                packageRecordMapper.updateById(t3);
+            } else {
+                FileUtil.del(tempFile);
+            }
         }
     }
 }
