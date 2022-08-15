@@ -10,8 +10,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class OperateParam {
 
-    @ApiModelProperty("shell文件所在路径")
-    private String shellFilePath;
+    @ApiModelProperty("应用部署路径Key")
+    private String appDeployShell;
 
     @ApiModelProperty("操作类型[START:启动 STOP:停止 RESTART:重启]")
     private String operate;

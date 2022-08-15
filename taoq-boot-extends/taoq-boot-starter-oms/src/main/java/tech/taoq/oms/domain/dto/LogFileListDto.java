@@ -18,6 +18,9 @@ public class LogFileListDto {
     @ApiModelProperty("文件大小[单位/字节]")
     private String size;
 
+    @ApiModelProperty("文件绝对路径")
+    private String pathName;
+
     @ApiModelProperty("文件最后更改时间")
     private LocalDateTime lastUpdateTime;
 }

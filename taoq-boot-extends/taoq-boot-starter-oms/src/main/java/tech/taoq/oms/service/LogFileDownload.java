@@ -6,8 +6,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.oms.domain.dto.LogFileListDto;
+import tech.taoq.system.service.ConfigService;
 import tech.taoq.web.mvc.result.NoAdvice;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,19 +30,30 @@ import java.util.List;
 @RequestMapping("/oms/logFile")
 public class LogFileDownload {
 
+    @Autowired
+    private ConfigService configService;
+
     @ApiOperation("查询指定路径下的文件")
     @GetMapping("/list")
-    public List<LogFileListDto> listLogFileByApp(@RequestParam String path) {
-        List<String> logFileNameList = FileUtil.listFileNames(path);
+    public List<LogFileListDto> listLogFileByApp(@RequestParam String appLogPath) {
+        // pathKey 示例值: WCS_LOG_PATH
+        String logPath = configService.getByConfigKey(appLogPath);
+        if (!StringUtils.hasText(logPath)) {
+            throw new ParamIllegalException("不存在此配置 " + appLogPath);
+        }
+
+        List<String> logFileNameList = FileUtil.listFileNames(logPath);
         List<LogFileListDto> dtoList = new ArrayList<>();
 
         for (String fileName : logFileNameList) {
-            File file = new File(path + "/" + fileName);
+            String pathName = logPath + "/" + fileName;
+            File file = new File(pathName);
 
             LogFileListDto dto = new LogFileListDto();
             dto.setFileName(fileName);
             dto.setSize(String.valueOf(file.length()));
             dto.setLastUpdateTime(DateUtil.toLocalDateTime(new Date(file.lastModified())));
+            dto.setPathName(pathName);
 
             dtoList.add(dto);
         }
@@ -49,12 +64,12 @@ public class LogFileDownload {
     @ApiOperation("下载指定日志文件")
     @GetMapping("/download")
     @NoAdvice
-    public void download(@RequestParam String path, HttpServletRequest request, HttpServletResponse response) {
+    public void download(@RequestParam String pathName, HttpServletRequest request, HttpServletResponse response) {
         response.setCharacterEncoding(request.getCharacterEncoding());
         response.setContentType("application/octet-stream");
         InputStream fis = null;
         try {
-            File file = new File(path);
+            File file = new File(pathName);
             fis = FileUtil.getInputStream(file);
 
             String fileName = URLEncoder.encode(file.getName(), request.getCharacterEncoding());

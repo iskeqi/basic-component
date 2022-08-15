@@ -14,11 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>tech.taoq</groupId>
-            <artifactId>taoq-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>tech.taoq</groupId>
-            <artifactId>taoq-boot-starter-mp</artifactId>
+            <artifactId>taoq-boot-starter-system</artifactId>
         </dependency>
     </dependencies>
 </project>

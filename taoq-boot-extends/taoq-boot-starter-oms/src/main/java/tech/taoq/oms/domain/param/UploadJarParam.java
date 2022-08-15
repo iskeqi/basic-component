@@ -13,4 +13,10 @@ public class UploadJarParam {
 
     @ApiModelProperty("文件")
     private MultipartFile uploadFile;
+
+    @ApiModelProperty("应用类型")
+    private String type;
+
+    @ApiModelProperty("备注")
+    private String note;
 }
