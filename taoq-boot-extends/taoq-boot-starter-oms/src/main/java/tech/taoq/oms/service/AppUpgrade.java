@@ -243,7 +243,7 @@ public class AppUpgrade {
             // 必须保证即将要升级的程序已经处于停止状态
             AppStatus appStatus = this.status(t1.getType());
             if (appStatus.getStatus()) {
-                throw new ParamIllegalException("必须先停止对应程序,才可进行升级 " + t1.getType());
+                throw new ParamIllegalException("必须先停止 " + t1.getType() + " 程序,才可进行升级");
             }
 
             List<String> fileNames = FileUtil.listFileNames(installPath);
