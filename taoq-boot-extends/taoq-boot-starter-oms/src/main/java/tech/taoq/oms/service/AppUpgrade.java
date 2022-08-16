@@ -25,26 +25,20 @@ import tech.taoq.oms.domain.param.OperateParam;
 import tech.taoq.oms.domain.param.UploadJarParam;
 import tech.taoq.oms.mapper.PackageFileMapper;
 import tech.taoq.oms.mapper.PackageRecordMapper;
+import tech.taoq.oms.util.RuntimeShellUtil;
 import tech.taoq.system.service.ConfigService;
 import tech.taoq.web.mvc.result.NoAdvice;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Objects;
-import java.util.StringJoiner;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 @Slf4j
 @Api(tags = "应用升级")
 @RestController
 @RequestMapping("/oms/upgrade")
 public class AppUpgrade {
-
-    private static final ExecutorService EXECUTOR_SERVICE = Executors.newFixedThreadPool(2);
 
     @Autowired
     private ConfigService configService;
@@ -115,69 +109,10 @@ public class AppUpgrade {
 
             // 构建命令,如: sudo bash /data/riot/wcs/bin/wcs.sh restart
             String command = "sudo bash " + deployShell + " " + param.getOperate().toLowerCase();
+            // 执行命令
+            RuntimeShellUtil.Result result = RuntimeShellUtil.exec(command);
 
-            Process process = null;
-            try {
-                // 执行命令
-                process = Runtime.getRuntime().exec(command);
-
-                // 获取运行成功时的输出
-                StringJoiner successResult = new StringJoiner("\n");
-                Process successProcess = process;
-                EXECUTOR_SERVICE.submit(() -> {
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(successProcess.getInputStream()));
-                    try {
-                        String line;
-                        while ((line = bufferedReader.readLine()) != null) {
-                            successResult.add(line);
-                        }
-                    } catch (IOException e) {
-                        log.error(e.getMessage(), e);
-                    } finally {
-                        try {
-                            bufferedReader.close();
-                        } catch (IOException e) {
-                            log.error(e.getMessage(), e);
-                        }
-                    }
-                });
-
-                // 获取运行失败时的输出
-                StringJoiner errorResult = new StringJoiner("\n");
-                Process errorProcess = process;
-                EXECUTOR_SERVICE.submit(() -> {
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(errorProcess.getErrorStream()));
-                    try {
-                        String line;
-                        while ((line = bufferedReader.readLine()) != null) {
-                            errorResult.add(line);
-                        }
-                    } catch (IOException e) {
-                        log.error(e.getMessage(), e);
-                    } finally {
-                        try {
-                            bufferedReader.close();
-                        } catch (IOException e) {
-                            log.error(e.getMessage(), e);
-                        }
-                    }
-                });
-
-                // 等待执行结果
-                int resultCode = process.waitFor();
-
-                if (resultCode == 0) {
-                    log.info(successResult.toString());
-                } else {
-                    log.info(errorResult.toString());
-                }
-
-            } catch (IOException | InterruptedException e) {
-                log.error(e.getMessage(), e);
-            } finally {
-                assert process != null;
-                process.destroy();
-            }
+            log.info("operate app {} command {}, result {}", param.getAppKey(), param.getOperate(), JsonUtil.writeValueAsString(result));
         }
     }
 
@@ -240,10 +175,11 @@ public class AppUpgrade {
                 throw new ParamIllegalException("不存在此配置 " + installKey);
             }
 
-            // 必须保证即将要升级的程序已经处于停止状态
-            AppStatus appStatus = this.status(t1.getType());
-            if (appStatus.getStatus()) {
-                throw new ParamIllegalException("必须先停止 " + t1.getType() + " 程序,才可进行升级");
+            // 示例: WCS_DEPLOY_SHELL:/data/riot/wcs/bin/wcs.sh
+            String deployKey = t1.getType().concat(OmsConstant.DEPLOY_SHELL);
+            String deployShell = configService.getByConfigKey(deployKey);
+            if (!StringUtils.hasText(deployShell)) {
+                throw new ParamIllegalException("不存在此配置 " + deployKey);
             }
 
             List<String> fileNames = FileUtil.listFileNames(installPath);
@@ -253,29 +189,22 @@ public class AppUpgrade {
 
             // 从DB中读取二进制数据,并写入到指定目录去
             PackageFileDO t2 = packageFileMapper.selectById(t1.getFileId());
-            File tempFile = new File(installPath, RandomUtil.randomString(6));
+            String fileName = RandomUtil.randomString(6);
+            File tempFile = new File(installPath, fileName);
             FileUtil.writeBytes(t2.getPackageBytes(), tempFile);
 
-            // 重命名文件[如果当前这个文件正处于占用状态,重命名文件是会失败的]
-            boolean success = true;
-            try {
-                FileUtil.rename(tempFile, fileNames.get(0), true);
-            } catch (Exception e) {
-                success = false;
-                log.error("failed to rename file", e);
-            }
+            // 将当前文件标记为正在使用的版本
+            packageRecordMapper.update(new PackageRecordDO().setTag(false), null);
+            PackageRecordDO t3 = new PackageRecordDO();
+            t3.setId(t1.getId());
+            t3.setTag(true);
+            packageRecordMapper.updateById(t3);
 
-            if (success) {
-                // 将当前文件标记为正在使用的版本
-                packageRecordMapper.update(new PackageRecordDO().setTag(false), null);
-
-                PackageRecordDO t3 = new PackageRecordDO();
-                t3.setId(t1.getId());
-                t3.setTag(true);
-                packageRecordMapper.updateById(t3);
-            } else {
-                FileUtil.del(tempFile);
-            }
+            // 构建命令,如: sudo bash /data/riot/wcs/bin/wcs.sh upgrade tempFileName
+            String command = "sudo bash " + deployShell + " " + OperateParam.OPERATE.UPGRADE.name().toLowerCase() + " " + fileName;
+            // 执行命令
+            RuntimeShellUtil.Result result = RuntimeShellUtil.exec(command);
+            log.info("upgrade app {}, result {}", t1.getType(), JsonUtil.writeValueAsString(result));
         }
     }
 }

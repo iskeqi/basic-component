@@ -17,6 +17,6 @@ public class OperateParam {
     private String operate;
 
     public enum OPERATE {
-        START, STOP, RESTART
+        START, STOP, RESTART, UPGRADE
     }
 }
