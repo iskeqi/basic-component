@@ -82,7 +82,7 @@ public class AppUpgrade {
             try {
                 respStr = HttpUtil.get(accessUrl);
             } catch (Exception e) {
-                log.error("get " + appKey + "status error", e);
+                log.error("get " + appKey + " status error", e);
             }
 
 
