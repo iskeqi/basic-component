@@ -78,7 +78,14 @@ public class AppUpgrade {
 
         if (!Objects.equals(port, split[2])) {
             // 如果查询的是自身以外的其它程序
-            String respStr = HttpUtil.get(accessUrl);
+            String respStr = null;
+            try {
+                respStr = HttpUtil.get(accessUrl);
+            } catch (Exception e) {
+                log.error("get " + appKey + "status error", e);
+            }
+
+
             if (respStr != null) {
                 AppStatus respAppStatus = JsonUtil.readValue(respStr, AppStatus.class);
                 appStatus.setStatus(respAppStatus.getStatus());
@@ -154,8 +161,7 @@ public class AppUpgrade {
     @ApiOperation("查询安装包文件列表")
     @GetMapping("/page")
     public PageDto<PackageRecordDO> page(PageParam<PackageRecordDO> param) {
-        Page<PackageRecordDO> page = packageRecordMapper.selectPage(param.toPage(),
-                Wrappers.lambdaQuery(PackageRecordDO.class).orderByDesc(PackageRecordDO::getId));
+        Page<PackageRecordDO> page = packageRecordMapper.selectPage(param.toPage(), Wrappers.lambdaQuery(PackageRecordDO.class).orderByDesc(PackageRecordDO::getId));
         return PageDto.build(page);
     }
 
