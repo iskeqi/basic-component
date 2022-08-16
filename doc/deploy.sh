@@ -124,7 +124,7 @@ function restart() {
     status
 }
 
-# 获取脚本参数,决定执行哪个函数。使用示例：sudo bash wms.sh start/stop/restart/status
+# 获取脚本参数,决定执行哪个函数。使用示例：sudo bash wms.sh start/stop/restart/status/upgrade
 # 特殊说明,升级命令 sudo bash wms.sh upgrade 升级包名称
 case "$1" in
     start)

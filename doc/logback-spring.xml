@@ -2,25 +2,28 @@
 <configuration scan="true">
 
     <!-- 增加如下的TLog MDC Listener -->
-    <!--<contextListener class="com.yomahub.tlog.core.enhance.logback.TLogLogbackTTLMdcListener"/>-->
+    <contextListener class="com.yomahub.tlog.core.enhance.logback.TLogLogbackTTLMdcListener"/>
     <!-- 日志输出格式 -->
-    <property name="PATTERN_DEFAULT" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger{40} : %message%n"/>
+    <property name="PATTERN_DEFAULT"
+              value="%date{MM-dd HH:mm:ss.SSS} %X{tl} %level [%thread] %logger{40} : %message%n"/>
     <!--读取 application.yml 配置文件中指定属性值-->
     <springProperty scope="context" name="APP_NAME" source="spring.application.name" defaultValue="app"/>
     <!-- 日志文件存储路径及名称 -->
-    <property name="LOG_FILE" value="logs/app.log"/>
+    <property name="LOG_FILE" value="log/${APP_NAME}.log"/>
 
     <!-- 控制台 Appender -->
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">　　　　　
-        <layout class="ch.qos.logback.classic.PatternLayout">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${PATTERN_DEFAULT}</pattern>
-        </layout>
+            <charset>UTF-8</charset>
+        </encoder>
     </appender>
 
     <!-- 日志文件 Appender -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${PATTERN_DEFAULT}</pattern>
+            <charset>UTF-8</charset>
         </encoder>
         <!-- 日志文件名 -->
         <file>${LOG_FILE}</file>
@@ -50,13 +53,23 @@
     <springProfile name="local-dev">
         <root level="INFO">
             <appender-ref ref="STDOUT"/>
+            <appender-ref ref="ASYNC"/>
         </root>
+        <logger name="com.sr.lsw">
+            <!--            <level value="DEBUG"/>-->
+            <level value="INFO"/>
+        </logger>
     </springProfile>
+
     <!-- 生产环境 -->
     <springProfile name="prod">
         <root level="INFO">
+            <appender-ref ref="STDOUT"/>
             <appender-ref ref="ASYNC"/>
         </root>
+        <logger name="com.sr.lsw">
+            <level value="INFO"/>
+        </logger>
     </springProfile>
 
 </configuration>
