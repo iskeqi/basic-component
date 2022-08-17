@@ -114,8 +114,8 @@ public class AppUpgrade {
                 throw new ParamIllegalException("当前操作仅支持在 Linux 操作系统中运行");
             }
 
-            // 构建命令,如: sudo bash /data/riot/wcs/bin/wcs.sh restart
-            String command = "sudo bash " + deployShell + " " + param.getOperate().toLowerCase();
+            // 构建命令,如: nohup sudo bash /data/riot/wcs/bin/wcs.sh restart > /dev/null 2>&1
+            String command = "nohup sudo bash " + deployShell + " " + param.getOperate().toLowerCase() + " > /dev/null 2>&1";
             // 执行命令
             RuntimeShellUtil.Result result = RuntimeShellUtil.exec(command);
 
@@ -206,8 +206,8 @@ public class AppUpgrade {
             t3.setTag(true);
             packageRecordMapper.updateById(t3);
 
-            // 构建命令,如: sudo bash /data/riot/wcs/bin/wcs.sh upgrade tempFileName
-            String command = "sudo bash " + deployShell + " " + OperateParam.OPERATE.UPGRADE.name().toLowerCase() + " " + fileName;
+            // 构建命令,如: nohup sudo bash /data/riot/wcs/bin/wcs.sh upgrade tempFileName > /dev/null 2>&1
+            String command = "nohup sudo bash " + deployShell + " " + OperateParam.OPERATE.UPGRADE.name().toLowerCase() + " " + fileName + " > /dev/null 2>&1";
             // 执行命令
             RuntimeShellUtil.Result result = RuntimeShellUtil.exec(command);
             log.info("upgrade app {}, result {}", t1.getType(), JsonUtil.writeValueAsString(result));
