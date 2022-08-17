@@ -45,12 +45,12 @@ public class RuntimeShellUtil {
                         successResult.add(line);
                     }
                 } catch (IOException e) {
-                    log.error(e.getMessage(), e);
+                    log.error("read subprocess inputStream failed", e);
                 } finally {
                     try {
                         bufferedReader.close();
                     } catch (IOException e) {
-                        log.error(e.getMessage(), e);
+                        log.error("close subprocess inputStream failed", e);
                     }
                 }
             });
@@ -66,12 +66,12 @@ public class RuntimeShellUtil {
                         errorResult.add(line);
                     }
                 } catch (IOException e) {
-                    log.error(e.getMessage(), e);
+                    log.error("read subprocess errorStream failed", e);
                 } finally {
                     try {
                         bufferedReader.close();
                     } catch (IOException e) {
-                        log.error(e.getMessage(), e);
+                        log.error("close subprocess errorStream failed", e);
                     }
                 }
             });
