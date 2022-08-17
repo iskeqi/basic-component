@@ -96,6 +96,19 @@ public class RuntimeShellUtil {
         return result;
     }
 
+    /**
+     * 开启一个子进程执行 shell 命令,不读取信息
+     *
+     * @param command shell 命令
+     */
+    public static void execute(String command) {
+        try {
+            Runtime.getRuntime().exec(command);
+        } catch (IOException e) {
+            log.error("execute command " + command + " fail", command, e);
+        }
+    }
+
     public static class Result {
 
         /**
