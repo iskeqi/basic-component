@@ -115,8 +115,8 @@ public class AppUpgrade {
             }
 
             RuntimeShellUtil.Result result = new RuntimeShellUtil.Result();
-            // 构建命令,如: nohup sudo bash /data/riot/wcs/bin/wcs.sh restart > /dev/null 2>&1
-            String command = "nohup sudo bash " + deployShell + " " + param.getOperate().toLowerCase() + " > /dev/null 2>&1";
+            // 构建命令,如: nohup sudo bash /data/riot/wcs/bin/wcs.sh restart > /dev/null 2>&1 &
+            String command = "nohup sudo bash " + deployShell + " " + param.getOperate().toLowerCase() + " > /dev/null 2>&1 &";
             // 执行命令
             log.info("start exec operate {}, command is {}", param.getOperate(), command);
             RuntimeShellUtil.execute(command);
@@ -209,8 +209,8 @@ public class AppUpgrade {
             packageRecordMapper.updateById(t3);
 
             RuntimeShellUtil.Result result = new RuntimeShellUtil.Result();
-            // 构建命令,如: nohup sudo bash /data/riot/wcs/bin/wcs.sh upgrade tempFileName > /dev/null 2>&1
-            String command = "nohup sudo bash " + deployShell + " " + OperateParam.OPERATE.UPGRADE.name().toLowerCase() + " " + fileName + " > /dev/null 2>&1";
+            // 构建命令,如: nohup sudo bash /data/riot/wcs/bin/wcs.sh upgrade tempFileName > /dev/null 2>&1 &
+            String command = "nohup sudo bash " + deployShell + " " + OperateParam.OPERATE.UPGRADE.name().toLowerCase() + " " + fileName + " > /dev/null 2>&1 &";
             // 执行命令
             log.info("start exec upgrade command : {}", command);
             RuntimeShellUtil.execute(command);
