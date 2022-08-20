@@ -1,6 +1,7 @@
 [Unit]
 Description=TAOQ-DEMO
 # 需要在 network.target 后,才启动
+# 需要在 mysql.service 后,才启动,应该这样写:After=mysql.service
 After=network.target
 
 [Service]
