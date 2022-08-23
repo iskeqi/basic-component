@@ -176,7 +176,7 @@ public class AppUpgrade {
             }
 
             // 示例: WCS_DEPLOY_SHELL:/data/riot/wcs/bin/wcs.sh
-            String deployKey = t1.getType().concat(OmsConstant.DEPLOY_COMMAND);
+            String deployKey = t1.getType().concat(OmsConstant.DEPLOY_SHELL);
             String deployShell = configService.getByConfigKey(deployKey);
             if (!StringUtils.hasText(deployShell)) {
                 throw new ParamIllegalException("不存在此配置 " + deployKey);

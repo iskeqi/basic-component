@@ -9,6 +9,6 @@ public interface OmsConstant {
 
     String LOG_PATH = "_LOG_PATH";
     String ACCESS_URL = "_ACCESS_URL";
-    String DEPLOY_COMMAND = "_DEPLOY_COMMAND";
+    String DEPLOY_SHELL = "_DEPLOY_SHELL";
     String INSTALL_PATH = "_INSTALL_PATH";
 }
