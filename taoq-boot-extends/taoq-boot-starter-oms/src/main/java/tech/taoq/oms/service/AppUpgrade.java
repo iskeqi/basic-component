@@ -101,27 +101,19 @@ public class AppUpgrade {
     @PostMapping("/operate")
     public void operate(@RequestBody OperateParam param) {
         synchronized (operateObjLock) {
-            // 示例: WCS_DEPLOY_SHELL:/data/riot/wcs/bin/wcs.sh
-            String deployKey = param.getAppKey().concat(OmsConstant.DEPLOY_SHELL);
-            String deployShell = configService.getByConfigKey(deployKey);
-            if (!StringUtils.hasText(deployShell)) {
-                throw new ParamIllegalException("不存在此配置 " + deployKey);
-            }
-
             String osName = System.getProperties().getProperty("os.name");
 
             if (!"Linux".equals(osName)) {
                 throw new ParamIllegalException("当前操作仅支持在 Linux 操作系统中运行");
             }
 
-            RuntimeShellUtil.Result result = new RuntimeShellUtil.Result();
-            // 构建命令,如: nohup sudo bash /data/riot/wcs/bin/wcs.sh restart > /dev/null 2>&1 &
-            String command = "nohup sudo bash " + deployShell + " " + param.getOperate().toLowerCase() + " > /dev/null 2>&1 &";
+            // 构建命令,如: sudo systemctl start/stop/restart wcs
+            String command = "sudo systemctl " + param.getOperate().toLowerCase() + " " + param.getAppKey().toLowerCase();
             // 执行命令
             log.info("start exec operate {}, command is {}", param.getOperate(), command);
             RuntimeShellUtil.execute(command);
 
-            log.info("operate app {} command {}, result {}", param.getAppKey(), param.getOperate(), JsonUtil.writeValueAsString(result));
+            log.info("operate app {} command {}", param.getAppKey(), param.getOperate());
         }
     }
 
@@ -184,7 +176,7 @@ public class AppUpgrade {
             }
 
             // 示例: WCS_DEPLOY_SHELL:/data/riot/wcs/bin/wcs.sh
-            String deployKey = t1.getType().concat(OmsConstant.DEPLOY_SHELL);
+            String deployKey = t1.getType().concat(OmsConstant.DEPLOY_COMMAND);
             String deployShell = configService.getByConfigKey(deployKey);
             if (!StringUtils.hasText(deployShell)) {
                 throw new ParamIllegalException("不存在此配置 " + deployKey);
@@ -208,13 +200,19 @@ public class AppUpgrade {
             t3.setTag(true);
             packageRecordMapper.updateById(t3);
 
-            RuntimeShellUtil.Result result = new RuntimeShellUtil.Result();
             // 构建命令,如: nohup sudo bash /data/riot/wcs/bin/wcs.sh upgrade tempFileName > /dev/null 2>&1 &
-            String command = "nohup sudo bash " + deployShell + " " + OperateParam.OPERATE.UPGRADE.name().toLowerCase() + " " + fileName + " > /dev/null 2>&1 &";
-            // 执行命令
-            log.info("start exec upgrade command : {}", command);
-            RuntimeShellUtil.execute(command);
-            log.info("upgrade app {}, result {}", t1.getType(), JsonUtil.writeValueAsString(result));
+            String replacePackage = "nohup sudo bash " + deployShell + " " + "upgrade" + " " + fileName + " > /dev/null 2>&1 &";
+            // 执行替换jar包命令
+            log.info("start exec replacePackage command : {}", replacePackage);
+            RuntimeShellUtil.execute(replacePackage);
+
+            // 执行重启命令
+            OperateParam param = new OperateParam();
+            param.setAppKey(t1.getType());
+            param.setOperate(OperateParam.OPERATE.RESTART.name());
+            this.operate(param);
+
+            log.info("upgrade app {}", t1.getType());
         }
     }
 }

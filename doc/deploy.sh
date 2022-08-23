@@ -109,8 +109,6 @@ function upgrade() {
     echo "[upgrade] start exec mv $BASE_PATH/$1 $BASE_PATH/$SERVER_NAME.jar"
     sudo mv $BASE_PATH/$1 $BASE_PATH/$SERVER_NAME.jar
     echo "[upgrade] exec mv $BASE_PATH/$1 $BASE_PATH/$SERVER_NAME.jar done"
-    # 重启当前程序
-    restart
 }
 
 # 重启当前程序
