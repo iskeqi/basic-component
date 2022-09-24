@@ -12,11 +12,11 @@ public interface ConfigService {
 
     void updateById(ConfigDO param);
 
-    ConfigDO getByConfigkey(String configKey);
-
     PageDto<ConfigDO> page(ConfigPageParam param);
 
     String getByConfigKey(String configKey);
+
+    ConfigDO getById(String id);
 
     void updateByConfigKey(String configKey, String configValue);
 }

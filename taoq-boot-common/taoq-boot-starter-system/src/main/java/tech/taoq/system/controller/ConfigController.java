@@ -37,9 +37,9 @@ public class ConfigController {
     }
 
     @ApiOperation("查询配置详情")
-    @GetMapping("/{configKey}")
-    public ConfigDO getByConfigkey(@PathVariable String configKey) {
-        return configService.getByConfigkey(configKey);
+    @GetMapping("/{id}")
+    public ConfigDO getById(@PathVariable String id) {
+        return configService.getById(id);
     }
 
     @ApiOperation("查询配置列表")

@@ -17,4 +17,10 @@ public class ConfigPageParam extends PageParam<ConfigDO> {
 
     @ApiModelProperty("配置key")
     private String configKey;
+
+    @ApiModelProperty("配置名称")
+    private String displayName;
+
+    @ApiModelProperty("分类名称")
+    private String categoryName;
 }

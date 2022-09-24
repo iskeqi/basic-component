@@ -6,15 +6,16 @@ create table `sys_config` (
   `config_key` varchar(32) default null comment '配置key',
   `display_name` text comment '配置名称',
   `display_description` text comment '配置描述',
-  `value_type` varchar(32) default null comment '配置值类型[INPUT:文本 NUMBER:数值 BOOL:开关 DATE:日期 DATETIME:日期时间 TIME:时间 SDICT:单字典 MDICT:多字典 HTTP:接口]',
+  `value_type` varchar(32) default null comment '配置值类型[INPUT:文本 NUMBER:数值 BOOL:开关 DATE:日期 DATETIME:日期时间 TIME:时间 SDICT:单字典 MDICT:多字典]',
   `config_value` varchar(512) default null comment '配置值',
   `default_value` varchar(512) default null comment '配置默认值',
   `value_unit` varchar(32) default null comment '配置值单位',
-  `value_range` varchar(521) default null comment '配置值取值范围',
-  `is_internal` tinyint unsigned default '0' comment '是否系统内置[false:否 true:是]',
+  `value_range` varchar(512) default null comment '配置值取值范围',
+  `deleted` tinyint unsigned default '0' comment '是否删除[false:否 true:是]',
   `create_time` datetime default current_timestamp comment '创建时间',
   `update_time` datetime default current_timestamp on update current_timestamp comment '修改时间',
-  primary key (`id`)
+  primary key (`id`) using btree,
+  unique key `uk_config_key` (`config_key`)
 ) engine=innodb default charset=utf8mb4 collate=utf8mb4_0900_ai_ci comment='系统配置表';
 
 create table if not exists `sys_dict_type`

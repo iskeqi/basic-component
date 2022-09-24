@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import tech.taoq.common.exception.client.ClientErrorException;
+import org.springframework.util.StringUtils;
 import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.system.domain.db.ConfigDO;
@@ -16,6 +16,7 @@ import tech.taoq.system.service.ConfigService;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Lazy
 @Service
@@ -26,46 +27,62 @@ public class ConfigServiceImpl implements ConfigService {
 
     public static final Map<String, ConfigDO> CONFIG_MAP = new HashMap<>();
 
+    @Override
     public void insert(ConfigDO param) {
-        ConfigDO t = configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(param.getConfigKey())));
-        if (t != null) {
-            throw new ParamIllegalException("configKey：" + param.getConfigKey() + " 已经存在");
+        Long count = configMapper.selectCount(Wrappers.query(new ConfigDO().setConfigKey(param.getConfigKey())));
+        if (count > 0) {
+            throw new ParamIllegalException("配置key: " + param.getConfigKey() + " 已经存在");
         }
 
         configMapper.insert(param);
     }
 
+    @Override
     public void deleteById(String id) {
-        ConfigDO configDO = configMapper.selectById(id);
-        CONFIG_MAP.remove(configDO.getConfigKey());
-
-        if (configDO.getInternal()) {
-            throw new ClientErrorException("内置记录不允许被删除");
+        ConfigDO t1 = configMapper.selectById(id);
+        if (t1 == null) {
+            throw new ParamIllegalException("配置ID " + id + " 不存在");
         }
-        configMapper.deleteById(id);
 
+        CONFIG_MAP.remove(t1.getConfigKey());
+
+        ConfigDO t2 = new ConfigDO();
+        t2.setId(t1.getId());
+        t2.setDeleted(true);
+        configMapper.updateById(t2);
     }
 
+    @Override
     public void updateById(ConfigDO param) {
+        ConfigDO t3 = configMapper.selectById(param.getId());
+        if (t3 == null) {
+            throw new ParamIllegalException("配置ID: " + param.getId() + " 不存在");
+        }
+
+        ConfigDO t1 = configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(param.getConfigKey())));
+        if (t1 !=null && !Objects.equals(param.getId(), t1.getId())) {
+            throw new ParamIllegalException("配置key: " + param.getConfigKey() + " 已经存在");
+        }
+
         CONFIG_MAP.remove(param.getConfigKey());
 
-        ConfigDO t1 = BeanUtil.copyProperties(param, ConfigDO.class);
+        ConfigDO t2 = BeanUtil.copyProperties(param, ConfigDO.class);
         // configKey 是不能修改的
-        t1.setConfigKey(null);
-        t1.setCreateTime(null);
+        t2.setConfigKey(null);
+        t2.setCreateTime(null);
         configMapper.updateById(param);
     }
 
-    public ConfigDO getByConfigkey(String configKey) {
-        return configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(configKey)));
-    }
-
+    @Override
     public PageDto<ConfigDO> page(ConfigPageParam param) {
         Page<ConfigDO> page = configMapper.selectPage(param.toPage(), Wrappers.lambdaQuery(ConfigDO.class)
-                .eq(param.getId() != null, ConfigDO::getId, param.getId())
-                .likeRight(param.getConfigKey() != null, ConfigDO::getConfigKey, param.getConfigKey()));
+                .eq(StringUtils.hasText(param.getId()), ConfigDO::getId, param.getId())
+                .likeRight(StringUtils.hasText(param.getConfigKey()), ConfigDO::getConfigKey, param.getConfigKey())
+                .likeRight(StringUtils.hasText(param.getCategoryName()), ConfigDO::getCategoryName, param.getCategoryName())
+                .likeRight(StringUtils.hasText(param.getDisplayName()), ConfigDO::getDisplayName, param.getDisplayName())
+                .eq(ConfigDO::getDeleted, false));
 
-        return new PageDto<>(page.getTotal(), page.getRecords());
+        return PageDto.build(page);
     }
 
     @Override
@@ -75,17 +92,35 @@ public class ConfigServiceImpl implements ConfigService {
             return t.getConfigValue();
         }
 
-        ConfigDO configDO = configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(configKey)));
+        ConfigDO configDO = configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(configKey).setDeleted(false)));
         if (configDO != null) {
             CONFIG_MAP.put(configKey, configDO);
             return configDO.getConfigValue();
         }
+
         return null;
     }
 
     @Override
+    public ConfigDO getById(String id) {
+        ConfigDO t1 = configMapper.selectById(id);
+        if (t1 == null || t1.getDeleted()) {
+            return null;
+        }
+
+        return t1;
+    }
+
+    @Override
     public void updateByConfigKey(String configKey, String configValue) {
-        CONFIG_MAP.remove(configKey);
-        configMapper.update(new ConfigDO().setConfigValue(configValue), Wrappers.query(new ConfigDO().setConfigKey(configKey)));
+        String oldValue = getByConfigKey(configKey);
+        if (oldValue == null) {
+            throw new ParamIllegalException("配置key: " + configKey + " 不存在");
+        }
+
+        ConfigDO t1 = CONFIG_MAP.get(configKey);
+        t1.setConfigValue(configValue);
+
+        updateById(t1);
     }
 }
