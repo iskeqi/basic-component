@@ -234,12 +234,12 @@ public abstract class AbstractModbusMasterTCP {
      *
      * @return true 正常 false 失败
      */
-    final public boolean isConnected() {
+    final public boolean connected() {
         return modbusMaster.isConnected();
     }
 
     /**
-     * 连接
+     * 建立连接
      *
      * @throws ModbusIOException exception
      */
@@ -247,6 +247,19 @@ public abstract class AbstractModbusMasterTCP {
         modbusMaster.connect();
     }
 
+    /**
+     * 断开连接
+     *
+     * @throws ModbusIOException exception
+     */
+    final public void disconnect() throws ModbusIOException {
+        modbusMaster.disconnect();
+    }
+
+    /**
+     * 处理异常
+     * @param e 异常
+     */
     protected void handleException(Throwable e) {
         log.error(errorMsg, e);
         throw new ModbusTCPException(errorMsg);
