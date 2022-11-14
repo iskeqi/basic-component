@@ -106,9 +106,9 @@ public class FuncFieldDataService {
                     funcFieldDataParam.setCode(entry.getKey());
                     funcFieldDataParam.setMenuId(funcFieldDO.getMenuId());
                     funcFieldDataParam.setType(funcFieldDO.getType());
-                    funcFieldDataParam.setDictTypeId(funcFieldDO.getDictTypeId());
+//                    funcFieldDataParam.setDictTypeId(funcFieldDO.getDictTypeId());
                     funcFieldDataParam.setOrderNum(funcFieldDO.getOrderNum());
-                    funcFieldDataParam.setDisable(funcFieldDO.getDisable());
+//                    funcFieldDataParam.setDisable(funcFieldDO.getDisable());
                     funcFieldDataParam.setDataValue(String.valueOf(entry.getValue()));
 
                     record.add(funcFieldDataParam);
