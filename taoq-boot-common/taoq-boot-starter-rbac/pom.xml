@@ -16,15 +16,18 @@
     <dependencies>
         <dependency>
             <groupId>tech.taoq</groupId>
+            <artifactId>taoq-boot-starter-knife4j</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>tech.taoq</groupId>
             <artifactId>taoq-boot-starter-web</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>tech.taoq</groupId>
             <artifactId>taoq-boot-starter-mp</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ejlchina</groupId>
-            <artifactId>bean-searcher-boot-starter</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

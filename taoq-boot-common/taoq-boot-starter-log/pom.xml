@@ -25,6 +25,7 @@
         <dependency>
             <groupId>tech.taoq</groupId>
             <artifactId>taoq-boot-starter-mp</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
