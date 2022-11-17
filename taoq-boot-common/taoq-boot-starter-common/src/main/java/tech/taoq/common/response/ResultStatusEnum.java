@@ -16,7 +16,7 @@ public enum ResultStatusEnum implements IResultStatusEnum {
     SUCCESS("00000", "请求成功|Success|リクエスト成功|請求成功"),
 
     // 客户端错误
-    CLINET_ERROR("A0001", "客户端错误|Client error|クライアントエラー|客戶端錯誤"),
+    CLIENT_ERROR("A0001", "客户端错误|Client error|クライアントエラー|客戶端錯誤"),
     NO_AUTH("A0002", "token失效或错误|Token invalid or error|tokenの無効化またはエラー|token失效或錯誤"),
     PARAM_ILLEGAL("A0003", "参数错误|Parameter error|パラメータエラー|參數錯誤"),
 
