@@ -18,7 +18,7 @@ public class ClientErrorException extends TaoqException {
      * @param message message
      */
     public ClientErrorException(String message) {
-        super(ResultStatusEnum.CLINET_ERROR.getCode(), message);
+        super(ResultStatusEnum.CLIENT_ERROR.getCode(), message);
     }
 
     public ClientErrorException(String status, String message) {

@@ -18,7 +18,7 @@ import java.util.List;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(DefaultExceptionHandlerAdapter.class);
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @Autowired
     private List<ExceptionHandlerAdapter> exceptionHandlerAdapterList;

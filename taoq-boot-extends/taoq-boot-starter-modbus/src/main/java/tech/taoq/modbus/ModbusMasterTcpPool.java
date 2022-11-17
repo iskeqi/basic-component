@@ -28,7 +28,7 @@ public class ModbusMasterTcpPool {
     /**
      * 保存已建立连接的 AbstractModbusMasterTCP 对象[一级Key存储不同类型的设备,同一个Key中可以存储相同类型的不同设备]
      */
-    private final Map<String, Map<String,AbstractModbusMasterTCP>> MODBUS_MASTER_TCP_MAP = new HashMap<>();
+    private final Map<String, Map<String, AbstractModbusMasterTCP>> MODBUS_MASTER_TCP_MAP = new HashMap<>();
 
     private static final ScheduledExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadScheduledExecutor();
 
@@ -66,7 +66,7 @@ public class ModbusMasterTcpPool {
      * @param masterTCP AbstractModbusMasterTCP 连接对象
      */
     public synchronized void addMaster(String type, AbstractModbusMasterTCP masterTCP) {
-        Map<String,AbstractModbusMasterTCP> modbusMasterTCPMap = MODBUS_MASTER_TCP_MAP.computeIfAbsent(type, k -> new HashMap<>());
+        Map<String, AbstractModbusMasterTCP> modbusMasterTCPMap = MODBUS_MASTER_TCP_MAP.computeIfAbsent(type, k -> new HashMap<>());
 
         AbstractModbusMasterTCP slave = modbusMasterTCPMap.get(masterTCP.getDeviceName());
         if (slave == null) {
@@ -99,13 +99,14 @@ public class ModbusMasterTcpPool {
             AbstractModbusMasterTCP masterTCP = modbusMasterTCPMap.get(deviceName);
             modbusMasterTCPMap.remove(deviceName);
             masterTCP.disconnect();
-            log.info("ModbusMasterTcpPool removeMaster type {} by deviceName, name {}", type, deviceName);
+            log.info("ModbusMasterTcpPool removeMaster type {} by deviceName {}", type, deviceName);
         }
     }
 
     /**
      * 根据类型和名称获取 AbstractModbusMasterTCP 实现类对象
-     * @param type 类型
+     *
+     * @param type       类型
      * @param deviceName 连接对象名称
      * @return AbstractModbusMasterTCP 实现类对象
      */

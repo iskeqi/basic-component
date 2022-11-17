@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 /**
@@ -257,7 +258,145 @@ public abstract class AbstractModbusMasterTCP {
     }
 
     /**
+     * 将 16 bit 的整数对应的二进制字符串转换成对应的 boolean 数组
+     *
+     * @param data data
+     * @return boolean 数组
+     */
+    final public boolean[] parseShortToBitArray(short data) {
+        return parseIntToBitArray(data, 16);
+    }
+
+    /**
+     * 将 32 bit 的整数对应的二进制字符串转换成对应的 boolean 数组
+     *
+     * @param data data
+     * @return boolean 数组
+     */
+    final public boolean[] parseIntToBitArray(int data) {
+        return parseIntToBitArray(data, 32);
+    }
+
+    /**
+     * 计算 16bit 的整数对应的 ASCII 编码的字符串表示
+     *
+     * @param param 十进制的 16bit 整数
+     * @return 十进制对应的 ASCII 编码的字符串
+     */
+    final public String shortToString(short param) {
+
+        // [高八位数据]右移8位后,取 int 类型的最低8位,其它抛弃
+        byte a = (byte) (param >> 8);
+
+        // [低八位数据]取 int 类型的最低8位,其它抛弃
+        byte b = (byte) param;
+
+        // 拼接成字符串时,低8位的数据放到前面,高8位的数据放到后面
+        byte[] bytes = {b, a};
+        return new String(bytes);
+    }
+
+    /**
+     * 计算 ASCII 编码字符串对应的二进制数据的十进制表示
+     *
+     * @param param ASCII 编码字符串
+     * @return ASCII 编码的字符串对应的十进制整数
+     */
+    final public short stringToShort(String param) {
+        if (param.length() != 2) {
+            throw new RuntimeException("本方法仅支持长度位2的字符串");
+        }
+
+        // 字符串转成对应的字节数组
+        byte[] bytes = param.getBytes(StandardCharsets.UTF_8);
+
+        // 字节转换成对应的二进制形式表示,不足8位的在前面进行补0
+        String str1 = String.format("%08d", Integer.parseInt(Integer.toString(bytes[0], 2)));
+        String str2 = String.format("%08d", Integer.parseInt(Integer.toString(bytes[1], 2)));
+
+        // 16 个 bit 的二进制字符串转成对应的 int 类型整数,低8位放在前面,高8位放到后面
+
+        return Short.parseShort(str2 + str1, 2);
+    }
+
+    /**
+     * 计算 32bit 的整数对应的 ASCII 编码的字符串表示
+     *
+     * @param param 十进制的 16bit 整数
+     * @return 十进制对应的 ASCII 编码的字符串
+     */
+    final public String intToString(int param) {
+
+        // [从右开始,第1个八位数据]取 int 类型的最低8位,其它抛弃
+        byte d = (byte) param;
+
+        // [从右开始,第2个八位数据]右移8位后,取 int 类型的最低8位,其它抛弃
+        byte c = (byte) (param >> 8);
+
+        // [从右开始,第3个八位数据]右移16位后,取 int 类型的最低16位,其它抛弃
+        byte b = (byte) (param >> 16);
+
+        // [从右开始,第4个八位数据]右移24位后,取 int 类型的最低8位,其它抛弃
+        byte a = (byte) (param >> 24);
+
+        // 拼接成字符串时,低8位的数据放到前面,高8位的数据放到后面
+        byte[] bytes = {d, c, b, a};
+
+        return new String(bytes);
+    }
+
+    /**
+     * 计算 ASCII 编码字符串对应的二进制数据的十进制表示
+     *
+     * @param param ASCII 编码字符串
+     * @return ASCII 编码的字符串对应的十进制整数
+     */
+    final public int stringToInt(String param) {
+        if (param.length() != 4) {
+            throw new RuntimeException("本方法仅支持长度位4的字符串");
+        }
+
+        // 字符串转成对应的字节数组
+        byte[] bytes = param.getBytes(StandardCharsets.UTF_8);
+
+        // 字节转换成对应的二进制形式表示,不足8位的在前面进行补0
+        String str1 = String.format("%08d", Integer.parseInt(Integer.toString(bytes[0], 2)));
+        String str2 = String.format("%08d", Integer.parseInt(Integer.toString(bytes[1], 2)));
+        String str3 = String.format("%08d", Integer.parseInt(Integer.toString(bytes[2], 2)));
+        String str4 = String.format("%08d", Integer.parseInt(Integer.toString(bytes[3], 2)));
+
+        // 16 个 bit 的二进制字符串转成对应的 int 类型整数,低8位放在前面,高8位放到后面
+
+        return Integer.parseInt(str4 + str3 + str2 + str1, 2);
+    }
+
+
+    /**
+     * 将指定数量 bit 的整数对应的二进制字符串转换成对应的 boolean 数组
+     *
+     * @param data data
+     * @return boolean 数组
+     */
+    private boolean[] parseIntToBitArray(int data, int quantity) {
+        if (data < 0) {
+            throw new RuntimeException("data smaller than 0 is not supported");
+        }
+
+        char[] chars = Integer.toBinaryString(data).toCharArray();
+
+        boolean[] result = new boolean[quantity];
+
+        for (int i = 0; i < chars.length; i++) {
+            result[quantity - chars.length + i] = Objects.equals("1", String.valueOf(chars[i]));
+        }
+
+        return result;
+    }
+
+
+    /**
      * 处理异常
+     *
      * @param e 异常
      */
     protected void handleException(Throwable e) {
