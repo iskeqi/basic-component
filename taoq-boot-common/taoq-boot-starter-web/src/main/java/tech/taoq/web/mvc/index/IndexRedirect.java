@@ -1,9 +1,9 @@
 package tech.taoq.web.mvc.index;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.io.IOException;
  *
  * @author keqi
  */
-@RestController
+@Controller
 public class IndexRedirect {
 
     @Value("${server.servlet.context-path:}")
