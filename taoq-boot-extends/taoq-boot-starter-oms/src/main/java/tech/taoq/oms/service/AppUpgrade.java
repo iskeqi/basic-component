@@ -165,7 +165,7 @@ public class AppUpgrade {
     @PostMapping("/operate/{packageRecordId}")
     public void upgrade(@PathVariable String packageRecordId) {
         /*
-            安装目录结构和压缩文件内容需满足此标准,才可以创建成功
+            安装目录结构和压缩文件内容需满足此标准,才可以升级成功
             wcs
                 wcs-bootstrap.jar
                 bin
