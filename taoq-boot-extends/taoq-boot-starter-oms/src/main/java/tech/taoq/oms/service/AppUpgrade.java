@@ -1,7 +1,7 @@
 package tech.taoq.oms.service;
 
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.ZipUtil;
 import cn.hutool.http.HttpUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tech.taoq.common.exception.client.ParamIllegalException;
+import tech.taoq.common.util.CommonUtil;
 import tech.taoq.common.util.JsonUtil;
 import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.mp.pojo.PageParam;
@@ -155,13 +156,25 @@ public class AppUpgrade {
     @ApiOperation("查询安装包文件列表")
     @GetMapping("/page")
     public PageDto<PackageRecordDO> page(PageParam<PackageRecordDO> param) {
-        Page<PackageRecordDO> page = packageRecordMapper.selectPage(param.toPage(), Wrappers.lambdaQuery(PackageRecordDO.class).orderByDesc(PackageRecordDO::getId));
+        Page<PackageRecordDO> page = packageRecordMapper.selectPage(param.toPage(),
+                Wrappers.lambdaQuery(PackageRecordDO.class).orderByDesc(PackageRecordDO::getId));
         return PageDto.build(page);
     }
 
     @ApiOperation("升级")
     @PostMapping("/operate/{packageRecordId}")
     public void upgrade(@PathVariable String packageRecordId) {
+        /*
+            安装目录结构和压缩文件内容需满足此标准,才可以创建成功
+            wcs
+                wcs-bootstrap.jar
+                bin
+                lib
+                wcs-upgrade-11171755.zip
+                    压缩文件内容为:
+                        upgrade
+                        wcs-bootstrap.jar
+         */
         synchronized (upgradeObjLock) {
             PackageRecordDO t1 = packageRecordMapper.selectById(packageRecordId);
             if (t1 == null) {
@@ -184,14 +197,24 @@ public class AppUpgrade {
 
             List<String> fileNames = FileUtil.listFileNames(installPath);
             if (fileNames.size() != 1) {
-                throw new ParamIllegalException("此目录下文件异常,请稍后重试或联系厂商技术人员处理 " + installPath);
+                throw new ParamIllegalException(CommonUtil
+                        .replacePlaceholder("目录 {} 下文件异常,请稍后重试或联系厂商技术人员处理", installKey));
             }
 
             // 从DB中读取二进制数据,并写入到指定目录去
             PackageFileDO t2 = packageFileMapper.selectById(t1.getFileId());
-            String fileName = RandomUtil.randomString(6);
-            File tempFile = new File(installPath, fileName);
-            FileUtil.writeBytes(t2.getPackageBytes(), tempFile);
+            FileUtil.writeBytes(t2.getPackageBytes(), installPath + File.separator + t1.getName());
+
+            // 解压文件
+            ZipUtil.unzip(installPath + t1.getName(), installPath);
+
+            // 拷贝 upgrade 文件夹下的 jar 包到 lib 目录下
+            FileUtil.copyFilesFromDir(new File(installPath + File.separator + "upgrade"),
+                    new File(installPath + File.separator + "lib"), true);
+
+            // 删除 upgrade 文件夹
+            FileUtil.del(new File(installPath + File.separator + t1.getName()));
+            FileUtil.del(new File(installPath + File.separator + "upgrade"));
 
             // 将当前文件标记为正在使用的版本
             packageRecordMapper.update(new PackageRecordDO().setTag(false), null);
@@ -199,12 +222,6 @@ public class AppUpgrade {
             t3.setId(t1.getId());
             t3.setTag(true);
             packageRecordMapper.updateById(t3);
-
-            // 构建命令,如: nohup sudo bash /data/riot/wcs/bin/wcs.sh upgrade tempFileName > /dev/null 2>&1 &
-            String replacePackage = "nohup sudo bash " + deployShell + " " + "upgrade" + " " + fileName + " > /dev/null 2>&1 &";
-            // 执行替换jar包命令
-            log.info("start exec replacePackage command : {}", replacePackage);
-            RuntimeShellUtil.execute(replacePackage);
 
             // 执行重启命令
             OperateParam param = new OperateParam();
