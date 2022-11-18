@@ -1,5 +1,6 @@
 package tech.taoq.system.runner;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +21,7 @@ public class ConfigInitRunner implements CommandLineRunner {
     @Override
     public void run(String... args) {
         try {
-            List<ConfigDO> configDOS = configMapper.selectList(null);
+            List<ConfigDO> configDOS = configMapper.selectList(Wrappers.query(new ConfigDO().setDeleted(false)));
             configDOS.forEach(configDO -> ConfigServiceImpl.CONFIG_MAP.put(configDO.getConfigKey(), configDO));
         } catch (Throwable e) {
             log.error("ConfigInitRunner init failure", e);
