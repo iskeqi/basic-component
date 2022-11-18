@@ -8,7 +8,6 @@ import tech.taoq.common.exception.client.ClientErrorException;
 import tech.taoq.common.exception.client.ParamIllegalException;
 import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.mp.pojo.PageParam;
-import tech.taoq.system.domain.db.DictItemDO;
 import tech.taoq.system.domain.db.DictTypeDO;
 import tech.taoq.system.mapper.DictItemMapper;
 import tech.taoq.system.mapper.DictTypeMapper;
@@ -35,16 +34,14 @@ public class DictTypeServiceImpl implements DictTypeService {
 
     public void deleteById(String id) {
         DictTypeDO dictTypeDO = dictTypeMapper.selectById(id);
-        if (dictTypeDO.getInternal()) {
-            throw new ClientErrorException("内置记录不允许被删除");
+        if (dictTypeDO == null) {
+            throw new ClientErrorException("对应记录不存在");
         }
 
-        Long count = dictItemMapper.selectCount(Wrappers.query(new DictItemDO().setDictTypeId(id)));
-        if (count > 0) {
-            throw new ClientErrorException("当前字典类型下存在字典项,不允许被删除");
-        }
-
-        dictTypeMapper.deleteById(id);
+        DictTypeDO t1 = new DictTypeDO();
+        t1.setId(dictTypeDO.getId());
+        t1.setDeleted(true);
+        dictTypeMapper.updateById(t1);
     }
 
     public void updateById(DictTypeDO param) {
@@ -57,7 +54,8 @@ public class DictTypeServiceImpl implements DictTypeService {
     }
 
     public PageDto<DictTypeDO> page(PageParam<DictTypeDO> param) {
-        Page<DictTypeDO> page = dictTypeMapper.selectPage(param.toPage(), Wrappers.query());
+        Page<DictTypeDO> page = dictTypeMapper.selectPage(param.toPage(), Wrappers.lambdaQuery(DictTypeDO.class)
+                .eq(DictTypeDO::getDeleted, false));
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 }

@@ -39,10 +39,14 @@ public class DictItemServiceImpl implements DictItemService {
 
     public void deleteById(String id) {
         DictItemDO dictItemDO = dictItemMapper.selectById(id);
-        if (dictItemDO.getInternal()) {
-            throw new ClientErrorException("内置记录不允许被删除");
+        if (dictItemDO == null) {
+            throw new ClientErrorException("对应记录不存在");
         }
-        dictItemMapper.deleteById(id);
+
+        DictItemDO t1 = new DictItemDO();
+        t1.setId(id);
+        t1.setDeleted(true);
+        dictItemMapper.updateById(t1);
     }
 
     public void updateById(DictItemDO param) {
@@ -57,12 +61,15 @@ public class DictItemServiceImpl implements DictItemService {
 
     public PageDto<DictItemDO> page(PageParam<DictItemDO> param) {
         Page<DictItemDO> page = dictItemMapper.selectPage(param.toPage(), Wrappers.lambdaQuery(DictItemDO.class)
+                .eq(DictItemDO::getDeleted, false)
                 .orderByAsc((SFunction<DictItemDO, Integer>) DictItemDO::getOrderNum));
         return new PageDto<>(page.getTotal(), page.getRecords());
     }
 
     public List<DictItemDO> listByDictType(String dictType) {
-        DictTypeDO dictTypeDO = dictTypeMapper.selectOne(Wrappers.query(new DictTypeDO().setType(dictType)));
+        DictTypeDO dictTypeDO = dictTypeMapper.selectOne(Wrappers.query(new DictTypeDO()
+                .setType(dictType)
+                .setDeleted(false)));
         if (dictTypeDO == null) {
             throw new ClientErrorException("字典类型 " + dictType + " 不存在");
         }
@@ -75,7 +82,9 @@ public class DictItemServiceImpl implements DictItemService {
 
     @Override
     public boolean existItemCode(String dictType, String itemCode) {
-        DictTypeDO dictTypeDO = dictTypeMapper.selectOne(Wrappers.query(new DictTypeDO().setType(dictType)));
+        DictTypeDO dictTypeDO = dictTypeMapper.selectOne(Wrappers.query(new DictTypeDO()
+                .setType(dictType)
+                .setDeleted(false)));
         if (dictTypeDO == null) {
             return false;
         }

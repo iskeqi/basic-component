@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tech.taoq.common.exception.client.ParamIllegalException;
+import tech.taoq.common.util.CommonUtil;
 import tech.taoq.mp.pojo.PageDto;
 import tech.taoq.system.domain.db.ConfigDO;
 import tech.taoq.system.domain.param.ConfigPageParam;
@@ -31,7 +32,7 @@ public class ConfigServiceImpl implements ConfigService {
     public void insert(ConfigDO param) {
         Long count = configMapper.selectCount(Wrappers.query(new ConfigDO().setConfigKey(param.getConfigKey())));
         if (count > 0) {
-            throw new ParamIllegalException("配置key: " + param.getConfigKey() + " 已经存在");
+            throw new ParamIllegalException(CommonUtil.replacePlaceholder("配置key {} 已存在", param.getConfigKey()));
         }
 
         configMapper.insert(param);
@@ -41,46 +42,47 @@ public class ConfigServiceImpl implements ConfigService {
     public void deleteById(String id) {
         ConfigDO t1 = configMapper.selectById(id);
         if (t1 == null) {
-            throw new ParamIllegalException("配置ID " + id + " 不存在");
+            throw new ParamIllegalException(CommonUtil.replacePlaceholder("配置ID {} 不存在", id));
         }
-
-        CONFIG_MAP.remove(t1.getConfigKey());
 
         ConfigDO t2 = new ConfigDO();
         t2.setId(t1.getId());
         t2.setDeleted(true);
         configMapper.updateById(t2);
+
+        CONFIG_MAP.remove(t1.getConfigKey());
     }
 
     @Override
     public void updateById(ConfigDO param) {
         ConfigDO t3 = configMapper.selectById(param.getId());
         if (t3 == null) {
-            throw new ParamIllegalException("配置ID: " + param.getId() + " 不存在");
+            throw new ParamIllegalException(CommonUtil.replacePlaceholder("配置ID {} 不存在", param.getId()));
         }
 
         ConfigDO t1 = configMapper.selectOne(Wrappers.query(new ConfigDO().setConfigKey(param.getConfigKey())));
-        if (t1 !=null && !Objects.equals(param.getId(), t1.getId())) {
-            throw new ParamIllegalException("配置key: " + param.getConfigKey() + " 已经存在");
+        if (t1 != null && !Objects.equals(param.getId(), t1.getId())) {
+            throw new ParamIllegalException(CommonUtil.replacePlaceholder("配置key {} 已存在", param.getConfigKey()));
         }
-
-        CONFIG_MAP.remove(param.getConfigKey());
 
         ConfigDO t2 = BeanUtil.copyProperties(param, ConfigDO.class);
         // configKey 是不能修改的
         t2.setConfigKey(null);
         t2.setCreateTime(null);
         configMapper.updateById(param);
+
+        CONFIG_MAP.remove(param.getConfigKey());
     }
 
     @Override
     public PageDto<ConfigDO> page(ConfigPageParam param) {
         Page<ConfigDO> page = configMapper.selectPage(param.toPage(), Wrappers.lambdaQuery(ConfigDO.class)
                 .eq(StringUtils.hasText(param.getId()), ConfigDO::getId, param.getId())
+                .eq(ConfigDO::getDeleted, false)
                 .likeRight(StringUtils.hasText(param.getConfigKey()), ConfigDO::getConfigKey, param.getConfigKey())
                 .likeRight(StringUtils.hasText(param.getCategoryName()), ConfigDO::getCategoryName, param.getCategoryName())
                 .likeRight(StringUtils.hasText(param.getDisplayName()), ConfigDO::getDisplayName, param.getDisplayName())
-                .eq(ConfigDO::getDeleted, false));
+        );
 
         return PageDto.build(page);
     }
@@ -115,7 +117,7 @@ public class ConfigServiceImpl implements ConfigService {
     public void updateByConfigKey(String configKey, String configValue) {
         String oldValue = getByConfigKey(configKey);
         if (oldValue == null) {
-            throw new ParamIllegalException("配置key: " + configKey + " 不存在");
+            throw new ParamIllegalException(CommonUtil.replacePlaceholder("配置ID {} 不存在", configKey));
         }
 
         ConfigDO t1 = CONFIG_MAP.get(configKey);

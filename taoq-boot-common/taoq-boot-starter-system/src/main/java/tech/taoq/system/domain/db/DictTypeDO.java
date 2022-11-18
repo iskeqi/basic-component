@@ -1,6 +1,5 @@
 package tech.taoq.system.domain.db;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -28,7 +27,6 @@ public class DictTypeDO extends BaseDO {
     @ApiModelProperty("备注")
     private String note;
 
-    @ApiModelProperty("是否系统内置[false:否 true:是]")
-    @TableField(value = "is_internal")
-    private Boolean internal;
+    @ApiModelProperty("是否删除[false:否 true:是]")
+    private Boolean deleted;
 }
