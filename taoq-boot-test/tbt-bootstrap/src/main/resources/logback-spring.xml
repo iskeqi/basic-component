@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <!-- 增加如下的TLog MDC Listener[仅使用Tlog时需要添加此配置] -->
+    <contextListener class="com.yomahub.tlog.core.enhance.logback.TLogLogbackTTLMdcListener"/>
+
+    <!--读取 application.yml 配置文件中 spring.application.name 属性的值,如果未读取到,则使用默认值 app-->
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name" defaultValue="app"/>
+
+    <!-- 日志输出格式[其中 %X{tl} 是 Tlog 特有的,如不使用Tlog,可删除] -->
+    <property name="PATTERN_DEFAULT"
+              value="%date{MM-dd HH:mm:ss.SSS} %X{tl} %level [%thread] %logger{40} : %message%n"/>
+    <!-- 日志文件存储路径及名称 -->
+    <property name="LOG_FILE" value="logs/${APP_NAME}.log"/>
+
+    <!-- 控制台 Appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PATTERN_DEFAULT}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 日志文件 Appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PATTERN_DEFAULT}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!-- 日志文件名 -->
+        <file>${LOG_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 滚动后的日志文件名 -->
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <!-- 启动服务时，是否清理超过保留天数之前的历史日志 -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <!-- 日志文件，到达多少容量，进行滚动 -->
+            <maxFileSize>500MB</maxFileSize>
+            <!-- 日志文件的总大小，0 表示不限制 -->
+            <totalSizeCap>500GB</totalSizeCap>
+            <!-- 日志文件的保留天数 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Loki Appender -->
+    <!--
+        需要引入此依赖
+        <dependency>
+            <groupId>com.github.loki4j</groupId>
+            <artifactId>loki-logback-appender-jdk8</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
+          <version>4.5.13</version>
+      </dependency>
+  -->
+
+<!--    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+        <http class="com.github.loki4j.logback.ApacheHttpSender">
+            &lt;!&ndash;使用HTTP协议发送日志信息到 Loki 服务器中&ndash;&gt;
+            <url>http://172.29.180.120:3100/loki/api/v1/push</url>
+        </http>
+        <format>
+            &lt;!&ndash;标签值[标签名称=标签值,标签名称=标签值]&ndash;&gt;
+            <label>
+                <pattern>app=wcs,logger=%logger</pattern>
+            </label>
+            <message>
+                <pattern>${PATTERN_DEFAULT}</pattern>
+            </message>
+            <sortByTime>true</sortByTime>
+        </format>
+    </appender>-->
+
+    <!-- 异步写入日志，提升性能 -->
+    <appender name="ASYNC-STDOUT" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 指定为 0 表示不丢失日志。默认值为20,表示如果队列容量只剩下 20% 时,直接丢弃 TRACT、DEBUG、INFO 级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度，该值会影响性能。默认值为 256 -->
+        <queueSize>4096</queueSize>
+        <appender-ref ref="STDOUT"/>
+    </appender>
+
+    <!-- 异步写入日志，提升性能 -->
+    <appender name="ASYNC-FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 指定为 0 表示不丢失日志。默认值为20,表示如果队列容量只剩下 20% 时,直接丢弃 TRACT、DEBUG、INFO 级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度，该值会影响性能。默认值为 256 -->
+        <queueSize>4096</queueSize>
+        <appender-ref ref="FILE"/>
+    </appender>
+
+    <!-- 异步写入日志，提升性能 -->
+<!--    <appender name="ASYNC-LOKI" class="ch.qos.logback.classic.AsyncAppender">
+        &lt;!&ndash; 指定为 0 表示不丢失日志。默认值为20,表示如果队列容量只剩下 20% 时,直接丢弃 TRACT、DEBUG、INFO 级别的日志 &ndash;&gt;
+        <discardingThreshold>0</discardingThreshold>
+        &lt;!&ndash; 更改默认的队列的深度，该值会影响性能。默认值为 256 &ndash;&gt;
+        <queueSize>4096</queueSize>
+        <appender-ref ref="LOKI"/>
+    </appender>-->
+
+    <!-- 本地开发环境 -->
+    <springProfile name="local-dev">
+        <root level="INFO">
+            <appender-ref ref="ASYNC-STDOUT"/>
+            <appender-ref ref="ASYNC-FILE"/>
+        </root>
+        <logger name="com.sr.lsw">
+            <level value="DEBUG"/>
+        </logger>
+        <logger name="tech.taoq.websocket.handle.WebSocketUtil">
+            <level value="ERROR"/>
+        </logger>
+    </springProfile>
+
+    <!-- 生产环境 -->
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="ASYNC-STDOUT"/>
+            <appender-ref ref="ASYNC-FILE"/>
+            <!--<appender-ref ref="ASYNC-LOKI"/>-->
+        </root>
+        <logger name="com.sr.lsw">
+            <level value="INFO"/>
+        </logger>
+        <logger name="tech.taoq.websocket.handle.WebSocketUtil">
+            <level value="ERROR"/>
+        </logger>
+    </springProfile>
+
+</configuration>

@@ -1,0 +1,102 @@
+# Spring 相关配置
+spring:
+  application:
+    name: tbt
+  main:
+    banner-mode: off
+  profiles:
+    active: @profileActive@
+
+# 配置端口号和应用路径
+server:
+  port: 8089
+  shutdown: graceful
+
+# knife4j 配置
+knife4j:
+  # 开启增强配置
+  enable: true
+  # 开启Swagger的Basic认证功能,默认是false
+  basic:
+    enable: true
+    # Basic认证用户名
+    username: admin
+    # Basic认证密码
+    password: admin
+  documents:
+    - group: default group
+      name: 文档使用说明
+      # 某一个文件夹下所有的.md文件
+      locations: classpath:markdown/*
+
+# forest 配置
+forest:
+  # 转换器配置，支持 json, xml, text, binary 四种数据类型的配置
+  converters:
+    # JSON转换器
+    json:
+      # JSON转换器设置为GSON转换器
+      # type: com.dtflys.forest.converter.json.ForestGsonConverter
+      # 同理，也可以设置成 Fastjson 或 Jackson 的转换器
+      # type: com.dtflys.forest.converter.json.ForestFastjsonConverter
+      type: com.dtflys.forest.converter.json.ForestJacksonConverter
+  ## 日志总开关，打开/关闭Forest请求/响应日志（默认为 true）
+  log-enabled: true
+  ## 打开/关闭Forest请求日志（默认为 true）
+  log-request: true
+  ## 打开/关闭Forest响应状态日志（默认为 true）
+  log-response-status: true
+  ## 打开/关闭Forest响应内容日志（默认为 false）
+  log-response-content: true
+
+# MyBatisPlus 配置
+mybatis-plus:
+  global-config:
+    banner: false
+
+## Sa-Token 配置
+#sa-token:
+#  # token名称 (同时也是cookie名称)
+#  token-name: token
+#  # token有效期，单位s 默认30天, -1代表永不过期
+#  timeout: 2592000
+#  # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+#  activity-timeout: -1
+#  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+#  is-concurrent: true
+#  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+#  is-share: true
+#  # token风格
+#  token-style: simple-uuid
+#  # 是否打印启动logo
+#  isPrint: false
+#  # 是否输出操作日志
+#  # is-log: true
+#  # 是否尝试从 cookie 里读取 Token
+#  # is-read-cookie: false
+
+## tlog 配置
+#tlog:
+#  pattern: $traceId
+
+
+
+# actuator 配置
+# 优雅停机 curl -X POST http://localhost:8089/lsw/monitor/shutdown
+#management:
+#  endpoint:
+#    shutdown:
+#      enabled: true
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "shutdown"
+#      base-path: /monitor
+
+#taoq:
+#  log:
+#    access-log:
+#      # 启用访问日志
+#      enable: false
+#      # 记录日志到日志文件中
+#      log-file: false
