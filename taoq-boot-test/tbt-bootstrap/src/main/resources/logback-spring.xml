@@ -123,10 +123,13 @@
             <appender-ref ref="ASYNC-FILE"/>
             <!--<appender-ref ref="ASYNC-LOKI"/>-->
         </root>
-        <logger name="com.sr.lsw">
+        <logger name="com.keqi.tbt">
             <level value="INFO"/>
         </logger>
         <logger name="tech.taoq.websocket.handle.WebSocketUtil">
+            <level value="ERROR"/>
+        </logger>
+        <logger name="springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator">
             <level value="ERROR"/>
         </logger>
     </springProfile>
