@@ -10,6 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>taoq-boot-test</artifactId>
+    <version>1.0.0</version>
+
     <packaging>pom</packaging>
 
     <properties>
@@ -20,5 +22,20 @@
         <module>tbt-bootstrap</module>
         <module>tbt-common</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>tech.taoq</groupId>
+                <artifactId>tbt-bootstrap</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.taoq</groupId>
+                <artifactId>tbt-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

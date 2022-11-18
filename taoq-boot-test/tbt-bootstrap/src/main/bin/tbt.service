@@ -1,0 +1,18 @@
+[Unit]
+Description=tbt
+# 开启自启动时,需要在 network.target 启动后再启动
+# 开启自启动时,需要在 mysql.service 后再启动,应该这样写:After=mysql.service
+After=network.target
+
+[Service]
+# 后台启动程序
+Type=forking
+# systemctl start 时,执行的命令
+ExecStart=/bin/bash /data/soft/tbt/bin/tbt.sh start
+# systemctl stop 时,执行的命令
+ExecStop=/bin/bash /data/soft/tbt/bin/tbt.sh stop
+# systemctl restart 时,执行的命令
+ExecReload=/bin/bash /data/soft/tbt/bin/tbt.sh restart
+
+[Install]
+WantedBy=multi-user.target
