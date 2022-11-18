@@ -16,11 +16,11 @@
         <module>taoq-boot-starter-common</module>
         <module>taoq-boot-starter-knife4j</module>
         <module>taoq-boot-starter-log</module>
+        <module>taoq-boot-starter-modbus</module>
         <module>taoq-boot-starter-mp</module>
-        <module>taoq-boot-starter-rbac</module>
-        <module>taoq-boot-starter-sso</module>
         <module>taoq-boot-starter-system</module>
         <module>taoq-boot-starter-web</module>
+        <module>taoq-boot-starter-websocket</module>
     </modules>
 
 </project>
