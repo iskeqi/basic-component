@@ -27,11 +27,10 @@ public class UploadFileDO extends BaseDO {
     @ApiModelProperty("文件大小[单位:字节]")
     private Long size;
 
-    @ApiModelProperty("存储类型[1:本地文件系统 2:minio]")
+    @ApiModelProperty("存储类型[LOCAL:本地文件系统 MINIO:minio]")
     private String storageType;
 
     @ApiModelProperty("是否删除[false:未删除 true:已删除]")
-    @TableField(value = "is_deleted")
     private Boolean deleted;
 
     @Getter
@@ -41,14 +40,11 @@ public class UploadFileDO extends BaseDO {
         /**
          * 存储在应用程序所在的本地文件系统中
          */
-        LOCAL_FILE_SYSTEM("1", "localFileSystem"),
+        LOCAL,
 
         /**
          * 存储在 MINIO 文件系统中
          */
-        MINIO("2", "minio");
-
-        private final String code;
-        private final String codeName;
+        MINIO;
     }
 }

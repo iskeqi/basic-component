@@ -33,7 +33,7 @@ public class MinioService implements OssService {
 
     @PostConstruct
     public void init() {
-        if (!UploadFileDO.StorageType.MINIO.getCodeName().equals(ossProperties.getStorageType())) {
+        if (!UploadFileDO.StorageType.MINIO.name().equals(ossProperties.getStorageType())) {
             return;
         }
 
@@ -120,6 +120,6 @@ public class MinioService implements OssService {
 
     @Override
     public String getStorageType() {
-        return UploadFileDO.StorageType.MINIO.getCode();
+        return UploadFileDO.StorageType.MINIO.name();
     }
 }

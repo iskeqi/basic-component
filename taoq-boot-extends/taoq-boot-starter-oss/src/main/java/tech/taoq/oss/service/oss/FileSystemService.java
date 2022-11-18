@@ -54,6 +54,6 @@ public class FileSystemService implements OssService {
 
     @Override
     public String getStorageType() {
-        return UploadFileDO.StorageType.LOCAL_FILE_SYSTEM.getCode();
+        return UploadFileDO.StorageType.LOCAL.name();
     }
 }

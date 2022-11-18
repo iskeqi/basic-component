@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
 public class OssProperties {
 
     /**
-     * 文件存储类型 [localFileSystem,minio]
+     * 存储类型[LOCAL:本地文件系统 MINIO:minio]
      */
-    private String storageType = "localFileSystem";
+    private String storageType = "LOCAL";
 
     /**
      * 是否配置 /oss 为前缀的静态资源文件映射

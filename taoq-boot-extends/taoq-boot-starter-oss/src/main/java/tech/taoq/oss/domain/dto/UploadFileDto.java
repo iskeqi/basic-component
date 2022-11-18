@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 public class UploadFileDto {
 
-    @ApiModelProperty("存储类型[1:本地文件系统 2:minio]")
+    @ApiModelProperty("存储类型[LOCAL:本地文件系统 MINIO:minio]")
     private String storageType;
 
     @ApiModelProperty("文件名称")

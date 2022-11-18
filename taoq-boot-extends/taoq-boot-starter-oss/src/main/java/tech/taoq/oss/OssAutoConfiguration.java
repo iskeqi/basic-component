@@ -33,7 +33,7 @@ public class OssAutoConfiguration {
             @Override
             public void addResourceHandlers(ResourceHandlerRegistry registry) {
                 // 使用本地文件系统存储文件时，才启用此配置
-                if (UploadFileDO.StorageType.LOCAL_FILE_SYSTEM.getCodeName().equals(ossProperties.getStorageType())) {
+                if (UploadFileDO.StorageType.LOCAL.name().equals(ossProperties.getStorageType())) {
                     String rootPath = ossProperties.getLocalFileSystem().getRootPath();
                     if (!rootPath.startsWith("/")) {
                         rootPath = "/" + rootPath;
