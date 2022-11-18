@@ -24,7 +24,17 @@
         </dependency>
         <dependency>
             <groupId>tech.taoq</groupId>
+            <artifactId>taoq-boot-starter-common</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>tech.taoq</groupId>
             <artifactId>taoq-boot-starter-mp</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>tech.taoq</groupId>
+            <artifactId>taoq-boot-starter-knife4j</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>

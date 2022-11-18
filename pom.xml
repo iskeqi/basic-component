@@ -25,6 +25,7 @@
         <module>taoq-boot-common</module>
         <module>taoq-boot-job</module>
         <module>taoq-boot-extends</module>
+        <module>taoq-boot-test</module>
     </modules>
 
     <dependencyManagement>
