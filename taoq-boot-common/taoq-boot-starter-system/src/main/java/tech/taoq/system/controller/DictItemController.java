@@ -39,7 +39,7 @@ public class DictItemController {
     }
 
     @ApiOperation("查询字典项")
-    @GetMapping("/{id}")
+    @GetMapping("/detail/{id}")
     public DictItemDO getById(@PathVariable String id) {
         return dictItemService.getById(id);
     }
