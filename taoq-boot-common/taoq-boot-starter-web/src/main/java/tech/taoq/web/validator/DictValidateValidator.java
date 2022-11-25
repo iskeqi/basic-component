@@ -19,15 +19,17 @@ public class DictValidateValidator implements ConstraintValidator<DictValidate, 
     @Override
     public void initialize(DictValidate constraintAnnotation) {
         typeCode = constraintAnnotation.value();
-
         validate = SpringUtil.getBean(BaseDictValidate.class);
-        if (validate == null) {
-            throw new RuntimeException("未找到 BaseDictValidate 的实现类");
-        }
     }
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
+        String typeCode = this.typeCode;
+        BaseDictValidate validate = this.validate;
+        if (validate == null) {
+            throw new RuntimeException("未找到 BaseDictValidate 的实现类");
+        }
+
         return validate.existItemCode(typeCode, value);
     }
 }

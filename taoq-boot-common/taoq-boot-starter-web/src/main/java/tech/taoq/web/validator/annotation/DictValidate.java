@@ -32,5 +32,4 @@ public @interface DictValidate {
     Class<? extends Payload>[] payload() default {};
 
     String value();
-
 }
