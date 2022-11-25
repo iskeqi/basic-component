@@ -33,4 +33,8 @@ public @interface EnumValidate {
 
     Class<?> value();
 
+    /**
+     * 是否采用 tech.taoq.web.validator.BaseEnumValidate 接口的 boolean existCode(String code) 方法进行验证
+     */
+    boolean useBaseEnumValidate() default false;
 }
