@@ -15,12 +15,12 @@ public class ModbusProperties {
     /**
      * ModbusMasterTcpPool 对象初始化后,第几秒钟开始执行 移除已断开连接的设备 的定时任务
      */
-    private long initialDelay = 10;
+    private long initialDelay = 5;
 
     /**
      * 定时任务每隔几秒钟开始重复执行一次
      */
-    private long period = 5;
+    private long period = 1;
 
     public long getInitialDelay() {
         return initialDelay;

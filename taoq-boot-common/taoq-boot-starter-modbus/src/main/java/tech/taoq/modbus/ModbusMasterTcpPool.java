@@ -69,7 +69,7 @@ public class ModbusMasterTcpPool {
         Map<String, AbstractModbusMasterTCP> modbusMasterTCPMap = MODBUS_MASTER_TCP_MAP.computeIfAbsent(type, k -> new HashMap<>());
 
         AbstractModbusMasterTCP slave = modbusMasterTCPMap.get(masterTCP.getDeviceName());
-        if (slave == null) {
+        if (slave != null) {
             throw new ModbusTCPException("Under the same type, deviceName cannot be the same");
         }
 
