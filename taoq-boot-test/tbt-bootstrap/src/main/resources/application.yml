@@ -12,6 +12,10 @@ server:
   port: 8089
   shutdown: graceful
 
+# tlog 配置
+tlog:
+  pattern: $traceId
+
 # knife4j 配置
 knife4j:
   # 开启增强配置
@@ -75,9 +79,7 @@ mybatis-plus:
 #  # 是否尝试从 cookie 里读取 Token
 #  # is-read-cookie: false
 
-## tlog 配置
-#tlog:
-#  pattern: $traceId
+
 
 
 

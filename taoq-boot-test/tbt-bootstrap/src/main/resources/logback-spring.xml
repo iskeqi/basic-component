@@ -66,7 +66,7 @@
         <format>
             &lt;!&ndash;标签值[标签名称=标签值,标签名称=标签值]&ndash;&gt;
             <label>
-                <pattern>app=wcs,logger=%logger</pattern>
+                <pattern>app=${APP_NAME},logger=%logger</pattern>
             </label>
             <message>
                 <pattern>${PATTERN_DEFAULT}</pattern>
@@ -114,12 +114,15 @@
         <logger name="tech.taoq.websocket.handle.WebSocketUtil">
             <level value="ERROR"/>
         </logger>
+        <logger name="springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator">
+            <level value="ERROR"/>
+        </logger>
     </springProfile>
 
     <!-- 生产环境 -->
     <springProfile name="prod">
         <root level="INFO">
-            <appender-ref ref="ASYNC-STDOUT"/>
+            <!--<appender-ref ref="ASYNC-STDOUT"/>-->
             <appender-ref ref="ASYNC-FILE"/>
             <!--<appender-ref ref="ASYNC-LOKI"/>-->
         </root>

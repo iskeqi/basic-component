@@ -71,6 +71,10 @@
             <groupId>tech.taoq</groupId>
             <artifactId>taoq-boot-starter-websocket</artifactId>
         </dependency>
+        <dependency>
+            <groupId>tech.taoq</groupId>
+            <artifactId>taoq-boot-starter-task</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
