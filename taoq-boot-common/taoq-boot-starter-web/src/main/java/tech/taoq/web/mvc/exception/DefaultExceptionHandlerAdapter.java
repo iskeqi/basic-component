@@ -8,7 +8,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import tech.taoq.common.response.ResultEntity;
 import tech.taoq.common.response.ResultEntityBuilder;
-import tech.taoq.common.response.ResultStatusEnum;
 import tech.taoq.web.WebProperties;
 
 /**
@@ -39,8 +38,7 @@ public class DefaultExceptionHandlerAdapter implements ExceptionHandlerAdapter {
         log.error("no built-in ExceptionHandlerAdapter to handle this exception", e);
 
         if (webProperties.getProdProfileName().equals(active)) {
-            // 邮件、微信、钉钉通知相关责任人
-            return ResultEntityBuilder.failure(ResultStatusEnum.SERVER_ERROR.getCode());
+            return ResultEntityBuilder.failure();
         }
 
         // 开发阶段，直接将异常信息通过接口响应出去，便于排查问题
