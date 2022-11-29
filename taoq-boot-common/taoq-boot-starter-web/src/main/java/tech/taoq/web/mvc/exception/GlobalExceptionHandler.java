@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
 
     @Autowired
     private List<ExceptionHandlerAdapter> exceptionHandlerAdapterList;
-    
+
     /**
      * TaoqException
      *
@@ -43,10 +43,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 使用 @Validated 校验方法参数中的 @RequestBody 修饰的实体类，抛出的是这种异常
-     * 使用 @Valid 校验方法参数中的 @RequestBody 修饰的实体类，抛出的是这种异常(嵌套多层次校验)
-     * <p>
-     * 总结：使用了 @RequestBody 修饰参数，抛出的就是此种异常
+     * 使用 @Validated/@Valid 校验方法参数中的 @RequestBody 修饰的实体类(包括嵌套多层次校验),抛出的是这种异常
      *
      * @param e MethodArgumentNotValidException
      * @return r
@@ -58,6 +55,7 @@ public class GlobalExceptionHandler {
             errorMsg.add(allError.getDefaultMessage());
         }
 
+        log.error("status={},message={}", ResultStatusEnum.PARAM_ILLEGAL.getCode(), errorMsg);
         return ResultEntityBuilder.failure(ResultStatusEnum.PARAM_ILLEGAL.getCode(), errorMsg.toString());
     }
 
@@ -76,6 +74,7 @@ public class GlobalExceptionHandler {
             errorMsg.add(allError.getDefaultMessage());
         }
 
+        log.error("status={},message={}", ResultStatusEnum.PARAM_ILLEGAL.getCode(), errorMsg);
         return ResultEntityBuilder.failure(ResultStatusEnum.PARAM_ILLEGAL.getCode(), errorMsg.toString());
     }
 
@@ -95,6 +94,7 @@ public class GlobalExceptionHandler {
             errorMsg.add(constraintViolation.getMessage());
         }
 
+        log.error("status={},message={}", ResultStatusEnum.PARAM_ILLEGAL.getCode(), errorMsg);
         return ResultEntityBuilder.failure(ResultStatusEnum.PARAM_ILLEGAL.getCode(), errorMsg.toString());
     }
 
