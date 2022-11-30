@@ -43,46 +43,27 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 使用 @Validated/@Valid 校验方法参数中的 @RequestBody 修饰的实体类(包括嵌套多层次校验),抛出的是这种异常
+     * 使用 @Validated 校验方法参数中使用 @RequestBody 修饰的实体类(支持多层嵌套校验,嵌套字段需使用 @Valid 修饰)
+     * 使用 @Validated 校验方法参数中未使用任何注解修饰的实体类(GET/POST均支持,抛出的是BindException)
      *
      * @param e MethodArgumentNotValidException
      * @return r
      */
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class})
     public ResultEntity<?> methodArgumentNotValidException(MethodArgumentNotValidException e) {
         StringJoiner errorMsg = new StringJoiner(";");
         for (ObjectError allError : e.getBindingResult().getAllErrors()) {
             errorMsg.add(allError.getDefaultMessage());
         }
 
-        log.error("status={},message={}", ResultStatusEnum.PARAM_ILLEGAL.getCode(), errorMsg);
+        log.error("validate invalid fields: {}", errorMsg);
         return ResultEntityBuilder.failure(ResultStatusEnum.PARAM_ILLEGAL.getCode(), errorMsg.toString());
     }
 
-    /**
-     * 使用 @Validated 校验方法参数中的实体类参数，抛出的是此种异常(无论方法是 GET 还是 POST)
-     * <p>
-     * (GET请求有多个参数时，可以使用此种方式接收参数，如果是 POST 建议还是使用 @RequestBody 的方式来接收参数)
-     *
-     * @param e BindException
-     * @return r
-     */
-    @ExceptionHandler(value = BindException.class)
-    public ResultEntity<?> bindException(BindException e) {
-        StringJoiner errorMsg = new StringJoiner(";");
-        for (ObjectError allError : e.getBindingResult().getAllErrors()) {
-            errorMsg.add(allError.getDefaultMessage());
-        }
-
-        log.error("status={},message={}", ResultStatusEnum.PARAM_ILLEGAL.getCode(), errorMsg);
-        return ResultEntityBuilder.failure(ResultStatusEnum.PARAM_ILLEGAL.getCode(), errorMsg.toString());
-    }
 
     /**
-     * 使用 @Validated 校验方法参数中的 @RequestParam 和 @PathVariable 修饰的参数，抛出的是这种异常(无论方法是 GET 还是 POST)
-     * Controller 方法中没有显式使用 @RequestParam 修饰的非实体类参数，同样抛出的是此种异常
-     * <p>
-     * 总结：使用了 @RequestParam/@PathVariable 修饰参数，抛出的就是此种异常
+     * 使用 @Validated 校验方法参数中的 @RequestParam 和 @PathVariable 修饰的参数,抛出的是这种异常(GET/POST均支持)
+     * 使用 @Validated 校验方法参数中的,没有显式使用 @RequestParam 修饰的非实体类参数,抛出的是这种异常(GET/POST均支持)
      *
      * @param e ConstraintViolationException
      * @return r
@@ -94,7 +75,7 @@ public class GlobalExceptionHandler {
             errorMsg.add(constraintViolation.getMessage());
         }
 
-        log.error("status={},message={}", ResultStatusEnum.PARAM_ILLEGAL.getCode(), errorMsg);
+        log.error("validate invalid fields: {}", errorMsg);
         return ResultEntityBuilder.failure(ResultStatusEnum.PARAM_ILLEGAL.getCode(), errorMsg.toString());
     }
 
